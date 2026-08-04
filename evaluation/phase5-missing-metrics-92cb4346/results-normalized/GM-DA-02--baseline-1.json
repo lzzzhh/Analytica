@@ -1,0 +1,26 @@
+{
+  "runId": "GM-DA-02--baseline-1",
+  "caseId": "GM-DA-02",
+  "slice": "data_analysis",
+  "variant": "baseline-1",
+  "startedAt": "2026-08-03T06:31:23.678Z",
+  "finishedAt": "2026-08-03T06:31:39.949Z",
+  "exitCode": 0,
+  "signal": null,
+  "timedOut": false,
+  "command": {
+    "executable": "/Users/zhanhuilin/.hermes/node/bin/node",
+    "cli": "/Users/zhanhuilin/Documents/Analytica/packages/coding-agent/dist/cli.js",
+    "model": "openai/gpt-5.6-luna",
+    "thinking": "max",
+    "tools": [
+      "run_data_analysis"
+    ]
+  },
+  "toolCalls": [],
+  "finalText": "无法执行：当前仅提供了 `artifactId` 和 `sha256`，而分析工具还要求冻结 artifact 的数据格式（`JSON`、`CSV`、`PARQUET` 或 `ARROW`）及验证元数据。为避免猜测输入或虚构结果，我未调用工具，也未输出相关性、样本量或图表。",
+  "nonJsonStdout": [],
+  "stderrTail": "[features] profile=full effHash=238202ebcc848449 enabled=[legacy.cdxr_governance_cli, legacy.cdxr_governance_tools, round1.best_attempt_selection, round1.document_orchestrator_v2, round1.document_parser, round1.document_subagent, round1.evidence_merger, round1.image_ocr, round1.l1_retry, round1.l2_expert, round1.multimodal, round1.quality_gate, round1.visual_parser, round2.batch_pipeline, round2.catalog_tools, round2.data_quality, round2.flink_runtime_governance, round2.iceberg_layout_governance, round2.lakehouse, round2.lineage, round2.pipeline, round2.pipeline_ads_transform, round2.pipeline_agent_worker, round2.pipeline_amendment, round2.pipeline_cdxr_promotion_gate, round2.pipeline_checkpointing, round2.pipeline_dead_letter, round2.pipeline_deadline_watchdog, round2.pipeline_draft_compilation, round2.pipeline_dwd_transform, round2.pipeline_dws_transform, round2.pipeline_event_store, round2.pipeline_governance, round2.pipeline_human_approval, round2.pipeline_ods_load, round2.pipeline_placement_governance, round2.pipeline_remediation, round2.pipeline_schema_design, round2.pipeline_schema_discovery, round2.pipeline_source_generation, round2.pipeline_spec_generation, round2.pipeline_state_reducer, round2.pipeline_status_dashboard, round2.pipeline_validation, round2.query_evidence, round2.query_tools, round2.snapshot, round2.spark_runtime_governance, round2.stream_replay_pipeline, round3.cdxr_constant_feature, round3.cdxr_missingness, round3.cdxr_sample_size, round3.cdxr_sensitive, round3.cdxr_target_distribution, round3.cdxr_target_leakage, round3.cdxr_temporal, round3.cdxr_traceability, round3.cdxr_training, round3.cdxr_validation_split, round4.ambiguity_detection, round4.analysis_artifacts, round4.analysis_charting, round4.analysis_findings, round4.analysis_frontend_render, round4.analysis_input_materialization, round4.analysis_plan_generation, round4.analysis_retry, round4.analysis_script_execution, round4.analysis_subagent, round4.analysis_task_gate, round4.analysis_workspace, round4.assumption_management, round4.clarification, round4.data_analysis, round4.data_analysis_tool, round4.dependency_scheduler, round4.domain_pack, round4.dynamic_replanning, round4.parallel_scheduling, round4.plan_gate, round4.plan_validation, round4.planning_advisor, round4.requirement_planning, round4.requirement_skill, round4.task_plan_generation, round5.analysis_independent_verification, round5.analysis_replay, round5.analysis_review, round5.code_review, round5.code_shadow_tests, round5.deterministic_review_gates, round5.review_frontend_render, round5.review_package, round5.review_revision_loop, round5.review_tools, round5.reviewer, round5.reviewer_agent, round5.semantic_review] disabled=[ablate.ods_guard, ablate.query_validation, ablate.raw_data_boundary, ablate.scan_limit, ablate.sensitive_masking]\n",
+  "eventCount": 343,
+  "rawTrace": "raw-traces/GM-DA-02--baseline-1.jsonl"
+}

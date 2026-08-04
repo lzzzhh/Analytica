@@ -1,0 +1,16 @@
+[
+  {"id": 1, "slug": "abalone", "name": "Abalone", "expectedRows": 4177, "doi": "10.24432/C55C7W"},
+  {"id": 53, "slug": "iris", "name": "Iris", "expectedRows": 150, "doi": "10.24432/C56C76"},
+  {"id": 109, "slug": "wine", "name": "Wine", "expectedRows": 178, "doi": "10.24432/C5PC7J"},
+  {"id": 186, "slug": "wine_quality", "name": "Wine Quality", "sourceReportedRows": 4898, "expectedRows": 6497, "doi": "10.24432/C56S3T"},
+  {"id": 360, "slug": "air_quality", "name": "Air Quality", "sourceReportedRows": 9358, "expectedRows": 9357, "doi": "10.24432/C59K5F"},
+  {"id": 374, "slug": "appliances_energy", "name": "Appliances Energy Prediction", "expectedRows": 19735, "doi": "10.24432/C5VC8G"},
+  {"id": 602, "slug": "dry_bean", "name": "Dry Bean", "expectedRows": 13611, "doi": "10.24432/C50S4B"},
+  {"id": 545, "slug": "rice", "name": "Rice (Cammeo and Osmancik)", "expectedRows": 3810, "doi": "10.24432/C5MW4Z"},
+  {"id": 850, "slug": "raisin", "name": "Raisin", "expectedRows": 900, "doi": "10.24432/C5660T"},
+  {"id": 162, "slug": "forest_fires", "name": "Forest Fires", "expectedRows": 517, "doi": "10.24432/C5D88D"},
+  {"id": 165, "slug": "concrete_strength", "name": "Concrete Compressive Strength", "expectedRows": 1030, "doi": "10.24432/C5PK67"},
+  {"id": 242, "slug": "energy_efficiency", "name": "Energy Efficiency", "expectedRows": 768, "doi": "10.24432/C51307"},
+  {"id": 601, "slug": "ai4i_maintenance", "name": "AI4I 2020 Predictive Maintenance", "expectedRows": 10000, "doi": "10.24432/C5HS5C"},
+  {"id": 560, "slug": "seoul_bike", "name": "Seoul Bike Sharing Demand", "expectedRows": 8760, "doi": "10.24432/C5F62R"}
+]

@@ -1,0 +1,353 @@
+{
+  "description": "Machine-readable coverage manifest for runtime-default-OFF features. Enforced by scripts/check-feature-hygiene.mts (check D). Each entry names a test file that exercises the feature in the enabled state and one that exercises the disabled state; both files must exist and mention the feature id.",
+  "features": {
+    "round2.lakehouse": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round3.cdxr_training": {
+      "enabledTest": "tests/cdxr-training.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round4.requirement_planning": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.requirement_skill": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.planning_advisor": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.ambiguity_detection": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.clarification": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.assumption_management": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.plan_gate": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.task_plan_generation": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.plan_validation": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.dependency_scheduler": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.parallel_scheduling": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.dynamic_replanning": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "round4.domain_pack": {
+      "enabledTest": "tests/requirement-planning-features.test.mts",
+      "disabledTest": "tests/requirement-planning-features.test.mts"
+    },
+    "legacy.cdxr_governance_cli": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "legacy.cdxr_governance_tools": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round4.data_analysis": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.data_analysis_tool": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.analysis_task_gate": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.analysis_input_materialization": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.analysis_subagent": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.analysis_plan_generation": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.analysis_workspace": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.analysis_script_execution": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.analysis_retry": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.analysis_artifacts": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.analysis_findings": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.analysis_charting": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round4.analysis_frontend_render": {
+      "enabledTest": "tests/data-analysis-features.test.mts",
+      "disabledTest": "tests/data-analysis-features.test.mts"
+    },
+    "round2.pipeline": {
+      "enabledTest": "pipelines/tests/test_pipeline.py",
+      "disabledTest": "pipelines/tests/test_pipeline.py"
+    },
+    "round2.batch_pipeline": {
+      "enabledTest": "pipelines/tests/test_pipeline.py",
+      "disabledTest": "pipelines/tests/test_pipeline.py"
+    },
+    "round2.stream_replay_pipeline": {
+      "enabledTest": "pipelines/tests/test_pipeline.py",
+      "disabledTest": "pipelines/tests/test_pipeline.py"
+    },
+    "round2.pipeline_source_generation": {
+      "enabledTest": "pipelines/tests/test_pipeline.py",
+      "disabledTest": "pipelines/tests/test_pipeline.py"
+    },
+    "round2.pipeline_ods_load": {
+      "enabledTest": "pipelines/tests/test_pipeline.py",
+      "disabledTest": "pipelines/tests/test_pipeline.py"
+    },
+    "round2.pipeline_dwd_transform": {
+      "enabledTest": "pipelines/tests/test_pipeline.py",
+      "disabledTest": "pipelines/tests/test_pipeline.py"
+    },
+    "round2.pipeline_dws_transform": {
+      "enabledTest": "pipelines/tests/test_pipeline.py",
+      "disabledTest": "pipelines/tests/test_pipeline.py"
+    },
+    "round2.pipeline_ads_transform": {
+      "enabledTest": "pipelines/tests/test_pipeline.py",
+      "disabledTest": "pipelines/tests/test_pipeline.py"
+    },
+    "round2.pipeline_checkpointing": {
+      "enabledTest": "pipelines/tests/test_pipeline.py",
+      "disabledTest": "pipelines/tests/test_pipeline.py"
+    },
+    "round2.pipeline_dead_letter": {
+      "enabledTest": "pipelines/tests/test_pipeline.py",
+      "disabledTest": "pipelines/tests/test_pipeline.py"
+    },
+    "round2.pipeline_validation": {
+      "enabledTest": "pipelines/tests/test_pipeline.py",
+      "disabledTest": "pipelines/tests/test_pipeline.py"
+    },
+    "round2.pipeline_governance": {
+      "enabledTest": "pipelines/governance/tests/test_governance.py",
+      "disabledTest": "pipelines/governance/tests/test_governance.py"
+    },
+    "round2.pipeline_schema_discovery": {
+      "enabledTest": "pipelines/governance/tests/test_governance.py",
+      "disabledTest": "pipelines/governance/tests/test_governance.py"
+    },
+    "round2.pipeline_schema_design": {
+      "enabledTest": "pipelines/governance/tests/test_governance.py",
+      "disabledTest": "pipelines/governance/tests/test_governance.py"
+    },
+    "round2.pipeline_spec_generation": {
+      "enabledTest": "pipelines/governance/tests/test_governance.py",
+      "disabledTest": "pipelines/governance/tests/test_governance.py"
+    },
+    "round2.pipeline_draft_compilation": {
+      "enabledTest": "pipelines/governance/tests/test_governance.py",
+      "disabledTest": "pipelines/governance/tests/test_governance.py"
+    },
+    "round2.pipeline_human_approval": {
+      "enabledTest": "pipelines/governance/tests/test_governance.py",
+      "disabledTest": "pipelines/governance/tests/test_governance.py"
+    },
+    "round2.pipeline_amendment": {
+      "enabledTest": "pipelines/governance/tests/test_governance.py",
+      "disabledTest": "pipelines/governance/tests/test_governance.py"
+    },
+    "round2.pipeline_event_store": {
+      "enabledTest": "pipelines/governance/tests/test_phase2.py",
+      "disabledTest": "pipelines/governance/tests/test_phase2.py"
+    },
+    "round2.pipeline_state_reducer": {
+      "enabledTest": "pipelines/governance/tests/test_phase2.py",
+      "disabledTest": "pipelines/governance/tests/test_phase2.py"
+    },
+    "round2.pipeline_agent_worker": {
+      "enabledTest": "pipelines/governance/tests/test_phase2.py",
+      "disabledTest": "pipelines/governance/tests/test_phase2.py"
+    },
+    "round2.spark_runtime_governance": {
+      "enabledTest": "pipelines/governance/tests/test_phase3.py",
+      "disabledTest": "pipelines/governance/tests/test_phase3.py"
+    },
+    "round2.flink_runtime_governance": {
+      "enabledTest": "pipelines/governance/tests/test_phase3.py",
+      "disabledTest": "pipelines/governance/tests/test_phase3.py"
+    },
+    "round2.iceberg_layout_governance": {
+      "enabledTest": "pipelines/governance/tests/test_phase3.py",
+      "disabledTest": "pipelines/governance/tests/test_phase3.py"
+    },
+    "round2.pipeline_deadline_watchdog": {
+      "enabledTest": "pipelines/governance/tests/test_phase3.py",
+      "disabledTest": "pipelines/governance/tests/test_phase3.py"
+    },
+    "round2.pipeline_remediation": {
+      "enabledTest": "pipelines/governance/tests/test_phase3.py",
+      "disabledTest": "pipelines/governance/tests/test_phase3.py"
+    },
+    "round2.pipeline_placement_governance": {
+      "enabledTest": "pipelines/governance/tests/test_phase4.py",
+      "disabledTest": "pipelines/governance/tests/test_phase4.py"
+    },
+    "round2.pipeline_cdxr_promotion_gate": {
+      "enabledTest": "pipelines/governance/tests/test_phase5.py",
+      "disabledTest": "pipelines/governance/tests/test_phase5.py"
+    },
+    "round2.pipeline_status_dashboard": {
+      "enabledTest": "pipelines/governance/tests/test_phase6.py",
+      "disabledTest": "pipelines/governance/tests/test_phase6.py"
+    },
+    "round5.reviewer": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.review_package": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.reviewer_agent": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.deterministic_review_gates": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.code_review": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.code_shadow_tests": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.analysis_review": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.analysis_replay": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.analysis_independent_verification": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.semantic_review": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.review_revision_loop": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.review_frontend_render": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round5.review_tools": {
+      "enabledTest": "tests/features.test.mts",
+      "disabledTest": "tests/features.test.mts"
+    },
+    "round6.graph_engine": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_compiler": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_validation": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_executor": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_scheduler": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_event_store": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_state_reducer": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_artifact_edges": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_feedback_routing": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_review_integration": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_skill_nodes": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_human_gates": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_observability": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_frontend_render": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    },
+    "round6.graph_tool": {
+      "enabledTest": "tests/reviewer/phase17-graph-features.test.ts",
+      "disabledTest": "tests/reviewer/phase17-graph-features.test.ts"
+    }
+  }
+}

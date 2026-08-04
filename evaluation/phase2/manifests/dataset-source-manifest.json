@@ -1,0 +1,544 @@
+{
+  "manifestVersion": "analytica-eval-datasets.v1",
+  "frozenAt": "2026-08-03T01:29:26.929514+00:00",
+  "datasets": [
+    {
+      "id": "chinook-v1.4.5",
+      "source": "https://github.com/lerocha/chinook-database/releases/tag/v1.4.5",
+      "download": "https://github.com/lerocha/chinook-database/releases/download/v1.4.5/Chinook_Sqlite.sqlite",
+      "version": "v1.4.5",
+      "license": "MIT-style permissive license in Chinook LICENSE.md",
+      "privacy": "sample database; only catalog and generated sales tables selected; customer and employee tables excluded"
+    },
+    {
+      "id": "uci-bike-sharing-275",
+      "source": "https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset",
+      "download": "https://archive.ics.uci.edu/static/public/275/bike+sharing+dataset.zip",
+      "version": "UCI dataset 275, donated 2013-12-19; downloaded 2026-08-03",
+      "license": "CC BY 4.0",
+      "doi": "10.24432/C5W894",
+      "privacy": "aggregate hourly/daily counts; no person-level identifiers"
+    }
+  ],
+  "downloadedFiles": [
+    {
+      "path": "downloads/Chinook-LICENSE.md",
+      "bytes": 1117,
+      "sha256": "5064d720db431474b0a0b0cef9d2b5e362b6c6f80602b35c6443b07cbc979f77"
+    },
+    {
+      "path": "downloads/Chinook_Sqlite.sqlite",
+      "bytes": 1067008,
+      "sha256": "bdf635be69850bd3be09c9a2dbeef7ddfb80036bd3ef3381383cd03b61e4a61a"
+    },
+    {
+      "path": "downloads/bike-sharing-dataset.zip",
+      "bytes": 279992,
+      "sha256": "b70182d0d0508e9abbb79306ce5c0cec34869000f8220175ac83d11dbe845401"
+    }
+  ],
+  "extractedCsvFiles": [
+    {
+      "path": "prepared/bike-sharing/day.csv",
+      "bytes": 57569,
+      "sha256": "a6bcf826782d3c0fbfdcbeead17cd0884185a0dafe8ff10cd48a874ee7ba18be",
+      "rows": 731,
+      "schema": [
+        {
+          "name": "instant",
+          "type": "int64"
+        },
+        {
+          "name": "dteday",
+          "type": "object"
+        },
+        {
+          "name": "season",
+          "type": "int64"
+        },
+        {
+          "name": "yr",
+          "type": "int64"
+        },
+        {
+          "name": "mnth",
+          "type": "int64"
+        },
+        {
+          "name": "holiday",
+          "type": "int64"
+        },
+        {
+          "name": "weekday",
+          "type": "int64"
+        },
+        {
+          "name": "workingday",
+          "type": "int64"
+        },
+        {
+          "name": "weathersit",
+          "type": "int64"
+        },
+        {
+          "name": "temp",
+          "type": "float64"
+        },
+        {
+          "name": "atemp",
+          "type": "float64"
+        },
+        {
+          "name": "hum",
+          "type": "float64"
+        },
+        {
+          "name": "windspeed",
+          "type": "float64"
+        },
+        {
+          "name": "casual",
+          "type": "int64"
+        },
+        {
+          "name": "registered",
+          "type": "int64"
+        },
+        {
+          "name": "cnt",
+          "type": "int64"
+        }
+      ]
+    },
+    {
+      "path": "prepared/bike-sharing/hour.csv",
+      "bytes": 1156736,
+      "sha256": "e03de4ee4ef4dc376ac6e04bf829673c6269e8eba5c60fa121640fa2f829504f",
+      "rows": 17379,
+      "schema": [
+        {
+          "name": "instant",
+          "type": "int64"
+        },
+        {
+          "name": "dteday",
+          "type": "object"
+        },
+        {
+          "name": "season",
+          "type": "int64"
+        },
+        {
+          "name": "yr",
+          "type": "int64"
+        },
+        {
+          "name": "mnth",
+          "type": "int64"
+        },
+        {
+          "name": "hr",
+          "type": "int64"
+        },
+        {
+          "name": "holiday",
+          "type": "int64"
+        },
+        {
+          "name": "weekday",
+          "type": "int64"
+        },
+        {
+          "name": "workingday",
+          "type": "int64"
+        },
+        {
+          "name": "weathersit",
+          "type": "int64"
+        },
+        {
+          "name": "temp",
+          "type": "float64"
+        },
+        {
+          "name": "atemp",
+          "type": "float64"
+        },
+        {
+          "name": "hum",
+          "type": "float64"
+        },
+        {
+          "name": "windspeed",
+          "type": "float64"
+        },
+        {
+          "name": "casual",
+          "type": "int64"
+        },
+        {
+          "name": "registered",
+          "type": "int64"
+        },
+        {
+          "name": "cnt",
+          "type": "int64"
+        }
+      ]
+    }
+  ],
+  "preparedTables": [
+    {
+      "name": "bike_sharing.day",
+      "path": "prepared/bike-sharing/day.parquet",
+      "rows": 731,
+      "schema": [
+        {
+          "name": "instant",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "season",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "year",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "month",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "holiday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weekday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "working_day",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weather_situation",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "feels_like_temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "humidity_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "windspeed_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "casual_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "registered_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "rental_count",
+          "type": "int64",
+          "nullable": true
+        }
+      ],
+      "sha256": "4dd1f7200333380f885ba93b3508a771a0725a0f6cf8b7fd4ae77e2441c2c7ef",
+      "bytes": 49859
+    },
+    {
+      "name": "bike_sharing.hour",
+      "path": "prepared/bike-sharing/hour.parquet",
+      "rows": 17379,
+      "schema": [
+        {
+          "name": "instant",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "season",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "year",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "month",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "hour",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "holiday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weekday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "working_day",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weather_situation",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "feels_like_temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "humidity_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "windspeed_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "casual_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "registered_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "rental_count",
+          "type": "int64",
+          "nullable": true
+        }
+      ],
+      "sha256": "5b0bc3a8a006b256c4041ae6312cfff554f1e31c0271d2472c507df0815a3aac",
+      "bytes": 248051
+    },
+    {
+      "name": "chinook.album",
+      "path": "prepared/chinook/album.parquet",
+      "rows": 347,
+      "schema": [
+        {
+          "name": "album_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "artist_id",
+          "type": "int64",
+          "nullable": true
+        }
+      ],
+      "sha256": "efca76c974ad19168ca1eb5c88d410f704ef43822aa5f1c1544c407a81dbe121",
+      "bytes": 12302
+    },
+    {
+      "name": "chinook.artist",
+      "path": "prepared/chinook/artist.parquet",
+      "rows": 275,
+      "schema": [
+        {
+          "name": "artist_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": true
+        }
+      ],
+      "sha256": "18784e955794a9b39edf70b9d921026751d643667bc4147f60321e67d033c7e0",
+      "bytes": 8421
+    },
+    {
+      "name": "chinook.genre",
+      "path": "prepared/chinook/genre.parquet",
+      "rows": 25,
+      "schema": [
+        {
+          "name": "genre_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": true
+        }
+      ],
+      "sha256": "8e59dd7c063e744cb3d8495f7d4d23cad75960a240a3cd75d1f29440d0fe8f7f",
+      "bytes": 2097
+    },
+    {
+      "name": "chinook.invoice",
+      "path": "prepared/chinook/invoice.parquet",
+      "rows": 412,
+      "schema": [
+        {
+          "name": "invoice_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "invoice_date",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "billing_country",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "total",
+          "type": "double",
+          "nullable": true
+        }
+      ],
+      "sha256": "bad5ba2d7e32934bc7889060a06ea1554f09e7129d93f339c959fa6244dec348",
+      "bytes": 8110
+    },
+    {
+      "name": "chinook.invoice_line",
+      "path": "prepared/chinook/invoice_line.parquet",
+      "rows": 2240,
+      "schema": [
+        {
+          "name": "invoice_line_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "invoice_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "track_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "unit_price",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "quantity",
+          "type": "int64",
+          "nullable": true
+        }
+      ],
+      "sha256": "0823248135dcc93602c78ce85e51aab3743a908d85fbd876ddaa73fb38083cff",
+      "bytes": 30103
+    },
+    {
+      "name": "chinook.track",
+      "path": "prepared/chinook/track.parquet",
+      "rows": 3503,
+      "schema": [
+        {
+          "name": "track_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "album_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "genre_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "milliseconds",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "bytes",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "unit_price",
+          "type": "double",
+          "nullable": true
+        }
+      ],
+      "sha256": "efb9e760e7dcb65a764a789d893f6c664d4fdc64e3ebb5deb8933c23b4e1f3eb",
+      "bytes": 123219
+    }
+  ]
+}

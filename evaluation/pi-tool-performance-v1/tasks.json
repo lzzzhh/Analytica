@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "1.0",
+  "cases": [
+    {
+      "taskId": "TC-01-VALIDATE",
+      "graphNodeId": "input",
+      "cluster": "query",
+      "userIntent": "只验证销售日报查询是否合法，不执行查询。数据集是 ads.ads_sales_daily，需要汇总 revenue。",
+      "expectedNextTools": ["validate_query"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["execute_query", "materialize_query"],
+      "requiredArgs": {"datasetId": "ads.ads_sales_daily", "select": [{"field": "revenue", "aggregation": "sum"}]},
+      "expectedNextState": "QUERY_VALIDATED"
+    },
+    {
+      "taskId": "TC-02-EXECUTE",
+      "graphNodeId": "input",
+      "cluster": "query",
+      "userIntent": "临时查看已验证查询 vq_123 的结果，不需要固定为下游分析输入。",
+      "expectedNextTools": ["execute_query"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["validate_query", "materialize_query"],
+      "requiredArgs": {"validatedQueryId": "vq_123"},
+      "expectedNextState": "QUERY_EXECUTED"
+    },
+    {
+      "taskId": "TC-03-MATERIALIZE",
+      "graphNodeId": "input",
+      "cluster": "query",
+      "userIntent": "把已经验证通过的查询 vq_123 固定下来，供数据分析节点使用，不要临时预览。",
+      "expectedNextTools": ["materialize_query"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["execute_query", "get_snapshot", "run_data_analysis"],
+      "requiredArgs": {"validatedQueryId": "vq_123"},
+      "expectedNextState": "ANALYSIS_INPUT_FROZEN"
+    },
+    {
+      "taskId": "TC-04-INSPECT",
+      "graphNodeId": "input",
+      "cluster": "data_understanding",
+      "userIntent": "查看 ads.ads_sales_daily 的字段、类型、主键和数据粒度。",
+      "expectedNextTools": ["inspect_dataset"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["get_data_quality", "get_snapshot"],
+      "requiredArgs": {"datasetId": "ads.ads_sales_daily"},
+      "expectedNextState": "DATASET_INSPECTED"
+    },
+    {
+      "taskId": "TC-05-QUALITY",
+      "graphNodeId": "input",
+      "cluster": "data_understanding",
+      "userIntent": "检查 ads.ads_sales_daily 的缺失率、重复率和异常值质量状态。",
+      "expectedNextTools": ["get_data_quality"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["inspect_dataset", "get_snapshot"],
+      "requiredArgs": {"datasetId": "ads.ads_sales_daily"},
+      "expectedNextState": "QUALITY_CHECKED"
+    },
+    {
+      "taskId": "TC-06-SNAPSHOT",
+      "graphNodeId": "input",
+      "cluster": "data_understanding",
+      "userIntent": "读取 ads.ads_sales_daily 已有的数据版本和最新快照信息。",
+      "expectedNextTools": ["get_snapshot"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["inspect_dataset", "get_data_quality"],
+      "requiredArgs": {"datasetId": "ads.ads_sales_daily"},
+      "expectedNextState": "SNAPSHOT_READ"
+    },
+    {
+      "taskId": "TC-07-REVIEW",
+      "graphNodeId": "review",
+      "cluster": "review_delivery",
+      "userIntent": "对已完成分析产物 art_1111222233334444 执行独立审核，但不要发布。",
+      "expectedNextTools": ["review_data_analysis"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["promote_analysis", "run_data_analysis"],
+      "requiredArgs": {"artifactId": "art_1111222233334444"},
+      "expectedNextState": "ANALYSIS_REVIEWED"
+    },
+    {
+      "taskId": "TC-08-PROMOTE",
+      "graphNodeId": "delivery",
+      "cluster": "review_delivery",
+      "userIntent": "检查审核结果 review_abcdef123456 是否允许正式发布报告，不要重新审核。",
+      "expectedNextTools": ["promote_analysis"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["review_data_analysis", "run_data_analysis"],
+      "requiredArgs": {"reviewId": "review_abcdef123456", "action": "PUBLISH_REPORT"},
+      "expectedNextState": "PROMOTION_AUTHORIZED"
+    },
+    {
+      "taskId": "TC-09-SEARCH",
+      "graphNodeId": "input",
+      "cluster": "discovery",
+      "userIntent": "我不知道准确的数据集名称，请查找销售日报候选，优先 ADS 层，最多 5 个。",
+      "expectedNextTools": ["search_catalog"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["inspect_dataset", "validate_query"],
+      "requiredArgs": {"q": "销售日报", "layer": "ADS", "limit": 5},
+      "expectedNextState": "CATALOG_CANDIDATES_FOUND"
+    },
+    {
+      "taskId": "TC-10-ANALYZE",
+      "graphNodeId": "analysis",
+      "cluster": "analysis",
+      "userIntent": "输入已经固定为 art_1111222233334444，请执行 revenue 趋势分析并输出折线图。",
+      "expectedNextTools": ["run_data_analysis"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["execute_query", "materialize_query", "review_data_analysis"],
+      "requiredArgs": {"objective": "分析 revenue 趋势", "analysisType": "TREND", "dataRefs": [{"artifactId": "art_1111222233334444", "sourceType": "TABULAR_ARTIFACT", "format": "JSON", "masked": true}]},
+      "expectedNextState": "ANALYSIS_COMPLETED"
+    },
+    {
+      "taskId": "TC-11-LINEAGE",
+      "graphNodeId": "input",
+      "cluster": "data_understanding",
+      "userIntent": "解释 ads.ads_sales_daily 从哪里来、经过哪些处理以及有哪些下游消费者。",
+      "expectedNextTools": ["explain_lineage"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["get_snapshot", "get_data_quality"],
+      "requiredArgs": {"datasetId": "ads.ads_sales_daily"},
+      "expectedNextState": "LINEAGE_EXPLAINED"
+    },
+    {
+      "taskId": "TC-12-PIPELINE",
+      "graphNodeId": "pipeline",
+      "cluster": "governance",
+      "userIntent": "运行已经批准的分层入仓合同 /tmp/eval-approved-contract.json，仓库路径是 /tmp/eval-warehouse。",
+      "expectedNextTools": ["pipeline_ingest"],
+      "acceptableAlternatives": [],
+      "forbiddenTools": ["materialize_query", "run_data_analysis"],
+      "requiredArgs": {"contractPath": "/tmp/eval-approved-contract.json", "warehouse": "/tmp/eval-warehouse"},
+      "expectedNextState": "PIPELINE_STARTED"
+    }
+  ]
+}

@@ -1,0 +1,954 @@
+{
+  "warehouse": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase2/warehouse",
+  "capturedAt": "2026-08-03T01:31:24.369288+00:00",
+  "tables": {
+    "eval_raw.bike_day": {
+      "rows": 731,
+      "schema": [
+        {
+          "name": "instant",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "season",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "year",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "month",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "holiday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weekday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "working_day",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weather_situation",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "feels_like_temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "humidity_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "windspeed_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "casual_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "registered_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "rental_count",
+          "type": "int64",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "6257251618097530063",
+      "snapshots": [
+        {
+          "snapshotId": "3987818899827233954",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 731
+        },
+        {
+          "snapshotId": "4252024468711396659",
+          "parentSnapshotId": "3987818899827233954",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "6257251618097530063",
+          "parentSnapshotId": "4252024468711396659",
+          "operation": "append",
+          "totalRecords": 731
+        }
+      ],
+      "dataHash": "1408abf181983970d873535b5e255a493fb6fec78e93051e88ebaa96c2e4f266",
+      "primaryKey": [
+        "instant"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    },
+    "eval_raw.bike_hour": {
+      "rows": 17379,
+      "schema": [
+        {
+          "name": "instant",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "season",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "year",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "month",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "hour",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "holiday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weekday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "working_day",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weather_situation",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "feels_like_temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "humidity_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "windspeed_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "casual_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "registered_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "rental_count",
+          "type": "int64",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "8851934314555200716",
+      "snapshots": [
+        {
+          "snapshotId": "8965281430858994219",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 17379
+        },
+        {
+          "snapshotId": "1238655649747508524",
+          "parentSnapshotId": "8965281430858994219",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "8851934314555200716",
+          "parentSnapshotId": "1238655649747508524",
+          "operation": "append",
+          "totalRecords": 17379
+        }
+      ],
+      "dataHash": "8deb762e8b33c50e017a858ab2a855329adb691692ee87a6e7bd998b839ea11b",
+      "primaryKey": [
+        "instant"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    },
+    "eval_raw.chinook_album": {
+      "rows": 347,
+      "schema": [
+        {
+          "name": "album_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "artist_id",
+          "type": "int64",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "2509588606715396415",
+      "snapshots": [
+        {
+          "snapshotId": "2421343759874067471",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 347
+        },
+        {
+          "snapshotId": "1339968412280553953",
+          "parentSnapshotId": "2421343759874067471",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "2509588606715396415",
+          "parentSnapshotId": "1339968412280553953",
+          "operation": "append",
+          "totalRecords": 347
+        }
+      ],
+      "dataHash": "f632905da33f7449a3ad8d348c2b53e7ae44c16e7a112dc2448550d51f4f3dce",
+      "primaryKey": [
+        "album_id"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    },
+    "eval_raw.chinook_artist": {
+      "rows": 275,
+      "schema": [
+        {
+          "name": "artist_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "8469663769927379985",
+      "snapshots": [
+        {
+          "snapshotId": "3463294488377813995",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 275
+        },
+        {
+          "snapshotId": "7344556051355715001",
+          "parentSnapshotId": "3463294488377813995",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "8469663769927379985",
+          "parentSnapshotId": "7344556051355715001",
+          "operation": "append",
+          "totalRecords": 275
+        }
+      ],
+      "dataHash": "80122ce2170c2829c59721aaf6f9ad89375fdb1e52dc0f8e7ca9280fbbab9024",
+      "primaryKey": [
+        "artist_id"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    },
+    "eval_raw.chinook_genre": {
+      "rows": 25,
+      "schema": [
+        {
+          "name": "genre_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "2676240407098519050",
+      "snapshots": [
+        {
+          "snapshotId": "1055658150087287470",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 25
+        },
+        {
+          "snapshotId": "3327533302371882273",
+          "parentSnapshotId": "1055658150087287470",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "2676240407098519050",
+          "parentSnapshotId": "3327533302371882273",
+          "operation": "append",
+          "totalRecords": 25
+        }
+      ],
+      "dataHash": "cf0d1edc17b3b2066d22c5e4341d23f9379812b8db3b63cb4956f48b3c31cafc",
+      "primaryKey": [
+        "genre_id"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    },
+    "eval_raw.chinook_invoice": {
+      "rows": 412,
+      "schema": [
+        {
+          "name": "invoice_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "invoice_date",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "billing_country",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "total",
+          "type": "double",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "2862982142765041483",
+      "snapshots": [
+        {
+          "snapshotId": "7423620717396606807",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 412
+        },
+        {
+          "snapshotId": "749755866530248556",
+          "parentSnapshotId": "7423620717396606807",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "2862982142765041483",
+          "parentSnapshotId": "749755866530248556",
+          "operation": "append",
+          "totalRecords": 412
+        }
+      ],
+      "dataHash": "a36563f17f870bca8529a56f0167aaaf9799b311e7c84e561d5ecf81ee94887b",
+      "primaryKey": [
+        "invoice_id"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    },
+    "eval_raw.chinook_invoice_line": {
+      "rows": 2240,
+      "schema": [
+        {
+          "name": "invoice_line_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "invoice_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "track_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "unit_price",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "quantity",
+          "type": "int64",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "2183977482374206714",
+      "snapshots": [
+        {
+          "snapshotId": "8243749181174317126",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 2240
+        },
+        {
+          "snapshotId": "393566585083422698",
+          "parentSnapshotId": "8243749181174317126",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "2183977482374206714",
+          "parentSnapshotId": "393566585083422698",
+          "operation": "append",
+          "totalRecords": 2240
+        }
+      ],
+      "dataHash": "2421a1bf284d55173c65a03aa45228b22ea496a9f16850c313f791f19e5e5084",
+      "primaryKey": [
+        "invoice_line_id"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    },
+    "eval_raw.chinook_track": {
+      "rows": 3503,
+      "schema": [
+        {
+          "name": "track_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "album_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "genre_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "milliseconds",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "bytes",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "unit_price",
+          "type": "double",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "8241598412686368081",
+      "snapshots": [
+        {
+          "snapshotId": "2208577564147054614",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 3503
+        },
+        {
+          "snapshotId": "7781596194727381105",
+          "parentSnapshotId": "2208577564147054614",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "8241598412686368081",
+          "parentSnapshotId": "7781596194727381105",
+          "operation": "append",
+          "totalRecords": 3503
+        }
+      ],
+      "dataHash": "fa44ca81be97fe7459be3ea228ce74e15bd4496f95b69353ed78da12ae2e1431",
+      "primaryKey": [
+        "track_id"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    },
+    "eval_staging.bike_hourly": {
+      "rows": 17379,
+      "schema": [
+        {
+          "name": "instant",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "season",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "year",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "month",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "hour",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "holiday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weekday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "working_day",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weather_situation",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "feels_like_temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "humidity_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "windspeed_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "casual_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "registered_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "rental_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "event_time",
+          "type": "string",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "6570872186336918310",
+      "snapshots": [
+        {
+          "snapshotId": "544026174059924503",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 17379
+        },
+        {
+          "snapshotId": "424541819608554546",
+          "parentSnapshotId": "544026174059924503",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "6570872186336918310",
+          "parentSnapshotId": "424541819608554546",
+          "operation": "append",
+          "totalRecords": 17379
+        }
+      ],
+      "dataHash": "0c9451c234cecba9093a3c15bcc01d84f32c685dda6cce00cb9e56c1d6117974",
+      "primaryKey": [
+        "instant"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    },
+    "eval_staging.chinook_sales": {
+      "rows": 2240,
+      "schema": [
+        {
+          "name": "invoice_line_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "invoice_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "invoice_date",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "invoice_month",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "billing_country",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "track_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "track_name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "album_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "album_title",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "artist_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "artist_name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "genre_id",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "genre_name",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "line_unit_price",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "quantity",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "line_total",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "invoice_total",
+          "type": "double",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "6341183508325084445",
+      "snapshots": [
+        {
+          "snapshotId": "725874174401324270",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 2240
+        },
+        {
+          "snapshotId": "8582957063951186872",
+          "parentSnapshotId": "725874174401324270",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "6341183508325084445",
+          "parentSnapshotId": "8582957063951186872",
+          "operation": "append",
+          "totalRecords": 2240
+        }
+      ],
+      "dataHash": "f40996309fd2d867ab5222985eb926c8fc3ac0cc68e6c71064e04b4d323e79bd",
+      "primaryKey": [
+        "invoice_line_id"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    },
+    "eval_mart.bike_daily_trends": {
+      "rows": 731,
+      "schema": [
+        {
+          "name": "instant",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "season",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "year",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "month",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "holiday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weekday",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "working_day",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "weather_situation",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "feels_like_temperature_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "humidity_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "windspeed_normalized",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "casual_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "registered_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "rental_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "rolling_7d_rental_mean",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "day_over_day_change",
+          "type": "int64",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "9111486675738229965",
+      "snapshots": [
+        {
+          "snapshotId": "8768172147179908819",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 731
+        },
+        {
+          "snapshotId": "4222124830137578017",
+          "parentSnapshotId": "8768172147179908819",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "9111486675738229965",
+          "parentSnapshotId": "4222124830137578017",
+          "operation": "append",
+          "totalRecords": 731
+        }
+      ],
+      "dataHash": "ef7239e5eb8e4e7e6868420453b30e9c6598ffc5adc350fce4b5af3f8b3611de",
+      "primaryKey": [
+        "date"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    },
+    "eval_mart.chinook_monthly_sales": {
+      "rows": 319,
+      "schema": [
+        {
+          "name": "invoice_month",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "billing_country",
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "name": "revenue",
+          "type": "double",
+          "nullable": true
+        },
+        {
+          "name": "units",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "line_count",
+          "type": "int64",
+          "nullable": true
+        },
+        {
+          "name": "invoice_count",
+          "type": "int64",
+          "nullable": true
+        }
+      ],
+      "currentSnapshotId": "8254507304141039247",
+      "snapshots": [
+        {
+          "snapshotId": "6284974928259471714",
+          "parentSnapshotId": null,
+          "operation": "append",
+          "totalRecords": 319
+        },
+        {
+          "snapshotId": "744992382796356874",
+          "parentSnapshotId": "6284974928259471714",
+          "operation": "delete",
+          "totalRecords": 0
+        },
+        {
+          "snapshotId": "8254507304141039247",
+          "parentSnapshotId": "744992382796356874",
+          "operation": "append",
+          "totalRecords": 319
+        }
+      ],
+      "dataHash": "739bafa99a598a05fb212f0cce99c8f20d7b4ba0f9ce7d87d649fc9c731251ea",
+      "primaryKey": [
+        "invoice_month",
+        "billing_country"
+      ],
+      "duplicatePrimaryKeyRows": 0
+    }
+  }
+}

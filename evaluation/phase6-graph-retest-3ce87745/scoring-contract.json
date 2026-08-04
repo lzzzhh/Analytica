@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "1.0",
+  "frozenCommit": "3ce87745f9b1546a10ab7fd015dc543eec8bc7ba",
+  "metricCount": 27,
+  "timingEligibility": "only scenarios satisfying every successOracle assertion",
+  "timingEmptySet": "ABSTAIN; never report zero",
+  "evidenceRule": "deterministic scorer over frozen standards and raw traces; semantic judgments require cited evidence; insufficient evidence=ABSTAIN",
+  "infrastructureRule": "infrastructure failure is INFRA_ERROR/NOT_RUN and excluded from business denominators",
+  "sourceManifest": "evaluation/phase6-graph-retest-3ce87745/design-manifest.json"
+}

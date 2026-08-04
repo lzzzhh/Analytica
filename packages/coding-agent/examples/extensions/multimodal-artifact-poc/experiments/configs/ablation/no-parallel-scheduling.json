@@ -1,0 +1,23 @@
+{
+  "experimentId": "ablation-no-parallel-scheduling",
+  "description": "Ablation: parallel scheduling disabled — one task per execution wave.",
+  "runtimeProfile": "ablation/no-parallel-scheduling",
+  "features": {
+    "round1.multimodal": true,
+    "round2.lakehouse": true,
+    "round3.cdxr_training": true,
+    "round4.requirement_planning": true,
+    "round4.requirement_skill": true,
+    "round4.planning_advisor": false,
+    "round4.ambiguity_detection": true,
+    "round4.assumption_management": true,
+    "round4.plan_validation": true,
+    "round4.dependency_scheduler": true,
+    "round4.parallel_scheduling": false,
+    "round4.clarification": true,
+    "round4.domain_pack": true,
+    "round4.plan_gate": true,
+    "round4.dynamic_replanning": true,
+    "round4.task_plan_generation": true
+  }
+}

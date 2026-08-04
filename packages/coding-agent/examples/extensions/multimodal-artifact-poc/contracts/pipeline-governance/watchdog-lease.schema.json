@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/watchdog-lease.schema.json",
+  "title": "WatchdogLease",
+  "description": "Persistent lease for one pipeline run: the deadline derived from the most recent progress/heartbeat event, with heartbeat-vs-progress separation so min-progress stalls are detected.",
+  "type": "object",
+  "required": [
+    "leaseId",
+    "runId",
+    "pipelineId",
+    "pipelineVersion",
+    "lastProgressAt",
+    "lastHeartbeatAt",
+    "deadlineAt",
+    "slaSeconds",
+    "safetyFactor",
+    "minProgressSeconds",
+    "renewCount",
+    "updatedAt"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "leaseId": {
+      "type": "string",
+      "pattern": "^wl_[A-Za-z0-9_-]+$"
+    },
+    "runId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "pipelineId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "pipelineVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "lastProgressAt": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "lastHeartbeatAt": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "deadlineAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "slaSeconds": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "safetyFactor": {
+      "type": "number",
+      "exclusiveMinimum": 1.0
+    },
+    "minProgressSeconds": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "renewCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

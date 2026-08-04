@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/governance-finding.schema.json",
+  "title": "GovernanceFinding",
+  "type": "object",
+  "required": [
+    "findingId",
+    "pipelineId",
+    "runId",
+    "category",
+    "code",
+    "severity",
+    "status",
+    "blocking",
+    "evidenceRefs",
+    "recommendedActions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "findingId": {
+      "type": "string",
+      "pattern": "^gf_[A-Za-z0-9_-]+$"
+    },
+    "pipelineId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pipelineVersion": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "enum": [
+        "RUNTIME_PERFORMANCE",
+        "DATA_QUALITY",
+        "INFRASTRUCTURE",
+        "PROCESS",
+        "SECURITY"
+      ]
+    },
+    "code": {
+      "type": "string",
+      "minLength": 1
+    },
+    "severity": {
+      "enum": [
+        "INFO",
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
+    },
+    "status": {
+      "enum": [
+        "OPEN",
+        "ACKNOWLEDGED",
+        "REMEDIATED",
+        "CLOSED"
+      ]
+    },
+    "blocking": {
+      "type": "boolean"
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommendedActions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

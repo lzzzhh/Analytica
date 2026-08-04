@@ -1,0 +1,13 @@
+{
+  "name": "requirement-planning",
+  "version": "1.0.0",
+  "description": "Business Requirement Planning plugin: clarify vague business requests, build candidate task plans, drive bounded replanning.",
+  "kind": "skill",
+  "featureId": "round4.requirement_skill",
+  "entry": "SKILL.md",
+  "requires": {
+    "tool": "prepare_business_task",
+    "toolFeatureId": "round4.task_plan_generation"
+  },
+  "portable": true
+}

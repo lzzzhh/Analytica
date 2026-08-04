@@ -1,0 +1,15 @@
+{
+  "experimentId": "ablation-no-lineage",
+  "description": "Ablation experiment: round2.lineage disabled — lineage evidence is stripped from query facts and omitted from summaries; data_quality stays on.",
+  "runtimeProfile": "ablation/no-lineage",
+  "features": {
+    "round2.lakehouse": true,
+    "round2.catalog_tools": true,
+    "round2.query_tools": true,
+    "round2.query_evidence": true,
+    "round2.lineage": false,
+    "round2.data_quality": true,
+    "round2.snapshot": true,
+    "round3.cdxr_training": false
+  }
+}

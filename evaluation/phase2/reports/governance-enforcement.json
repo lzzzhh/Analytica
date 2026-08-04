@@ -1,0 +1,30 @@
+{
+  "pipelineFunctionalPath": {
+    "status": "PASS",
+    "evidence": [
+      "governance-bypass/outputs/manifests/execution-run_1785720309484_36df9d3c.json",
+      "governance-bypass/outputs/manifests/execution-run_1785720608106_3f2e9620.json",
+      "governed-no-writegate/outputs/manifests/execution-run_1785720727775_17562c2b.json"
+    ],
+    "detail": "Local and governed Spark paths completed all fixed-schema batch stages and wrote output tables."
+  },
+  "governanceEnforcement": {
+    "status": "FAIL",
+    "result": "GOVERNANCE_BYPASS_CONFIRMED",
+    "writeGateSupplied": false,
+    "governedSparkStatus": "SUCCEEDED",
+    "governedSparkFindings": 0,
+    "detail": "The --govern Spark path wrote all eight target tables without a WriteGate. Runtime governance event processing is not write authorization enforcement."
+  },
+  "sourceEvidence": [
+    "pipelines/run.py:64 calls run_governed_batch without a gate",
+    "pipelines/batch/engine_governance.py:35 declares gate optional and passes None through",
+    "pipelines/batch/run_batch.py:119 checks approvals only when gate is not None"
+  ],
+  "environmentRetry": {
+    "status": "INFRA_ERROR",
+    "initialFailure": "Spark worker selected Python 3.14 while the driver used Conda Python 3.13",
+    "resolution": "Set PYSPARK_PYTHON and PYSPARK_DRIVER_PYTHON to /opt/anaconda3/bin/python3.13",
+    "businessFailureCounted": false
+  }
+}

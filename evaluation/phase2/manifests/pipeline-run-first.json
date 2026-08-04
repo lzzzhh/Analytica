@@ -1,0 +1,96 @@
+{
+  "runId": "public-data-first",
+  "status": "PASS",
+  "success": true,
+  "startedAt": "2026-08-03T01:29:53.566724+00:00",
+  "finishedAt": "2026-08-03T01:29:53.797498+00:00",
+  "warehouse": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase2/warehouse",
+  "executionSurface": "evaluation driver using Analytica pipeline catalog/write primitives",
+  "writeGateSupplied": false,
+  "layers": {
+    "eval_raw.chinook_artist": {
+      "status": "PASS",
+      "inputRows": 275,
+      "outputRows": 275,
+      "snapshotId": "3463294488377813995",
+      "dataHash": "80122ce2170c2829c59721aaf6f9ad89375fdb1e52dc0f8e7ca9280fbbab9024"
+    },
+    "eval_raw.chinook_album": {
+      "status": "PASS",
+      "inputRows": 347,
+      "outputRows": 347,
+      "snapshotId": "2421343759874067471",
+      "dataHash": "f632905da33f7449a3ad8d348c2b53e7ae44c16e7a112dc2448550d51f4f3dce"
+    },
+    "eval_raw.chinook_track": {
+      "status": "PASS",
+      "inputRows": 3503,
+      "outputRows": 3503,
+      "snapshotId": "2208577564147054614",
+      "dataHash": "fa44ca81be97fe7459be3ea228ce74e15bd4496f95b69353ed78da12ae2e1431"
+    },
+    "eval_raw.chinook_genre": {
+      "status": "PASS",
+      "inputRows": 25,
+      "outputRows": 25,
+      "snapshotId": "1055658150087287470",
+      "dataHash": "cf0d1edc17b3b2066d22c5e4341d23f9379812b8db3b63cb4956f48b3c31cafc"
+    },
+    "eval_raw.chinook_invoice": {
+      "status": "PASS",
+      "inputRows": 412,
+      "outputRows": 412,
+      "snapshotId": "7423620717396606807",
+      "dataHash": "a36563f17f870bca8529a56f0167aaaf9799b311e7c84e561d5ecf81ee94887b"
+    },
+    "eval_raw.chinook_invoice_line": {
+      "status": "PASS",
+      "inputRows": 2240,
+      "outputRows": 2240,
+      "snapshotId": "8243749181174317126",
+      "dataHash": "2421a1bf284d55173c65a03aa45228b22ea496a9f16850c313f791f19e5e5084"
+    },
+    "eval_raw.bike_hour": {
+      "status": "PASS",
+      "inputRows": 17379,
+      "outputRows": 17379,
+      "snapshotId": "8965281430858994219",
+      "dataHash": "8deb762e8b33c50e017a858ab2a855329adb691692ee87a6e7bd998b839ea11b"
+    },
+    "eval_raw.bike_day": {
+      "status": "PASS",
+      "inputRows": 731,
+      "outputRows": 731,
+      "snapshotId": "3987818899827233954",
+      "dataHash": "1408abf181983970d873535b5e255a493fb6fec78e93051e88ebaa96c2e4f266"
+    },
+    "eval_staging.chinook_sales": {
+      "status": "PASS",
+      "inputRows": 2240,
+      "outputRows": 2240,
+      "snapshotId": "725874174401324270",
+      "dataHash": "f40996309fd2d867ab5222985eb926c8fc3ac0cc68e6c71064e04b4d323e79bd"
+    },
+    "eval_staging.bike_hourly": {
+      "status": "PASS",
+      "inputRows": 17379,
+      "outputRows": 17379,
+      "snapshotId": "544026174059924503",
+      "dataHash": "0c9451c234cecba9093a3c15bcc01d84f32c685dda6cce00cb9e56c1d6117974"
+    },
+    "eval_mart.chinook_monthly_sales": {
+      "status": "PASS",
+      "inputRows": 319,
+      "outputRows": 319,
+      "snapshotId": "6284974928259471714",
+      "dataHash": "739bafa99a598a05fb212f0cce99c8f20d7b4ba0f9ce7d87d649fc9c731251ea"
+    },
+    "eval_mart.bike_daily_trends": {
+      "status": "PASS",
+      "inputRows": 731,
+      "outputRows": 731,
+      "snapshotId": "8768172147179908819",
+      "dataHash": "ef7239e5eb8e4e7e6868420453b30e9c6598ffc5adc350fce4b5af3f8b3611de"
+    }
+  }
+}

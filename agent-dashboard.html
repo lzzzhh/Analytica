@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graph Runtime 管理面板 · 真实数据</title>
+<style>
+  :root {
+    --bg:#0d1117; --panel:#161b22; --panel-2:#1c2330; --border:#2d3646;
+    --text:#d6dde6; --muted:#7d8aa0; --dim:#4a5568;
+    --accent:#58a6ff; --success:#3fb950; --warning:#d29922; --error:#f85149;
+    --purple:#bc8cff; --orange:#ff9e64; --teal:#39c5cf;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;font-size:13px;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+  header{padding:7px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-shrink:0}
+  header h1{font-size:14px;font-weight:600}
+  header .sub{color:var(--muted);font-size:11px}
+  .conn{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
+  .conn-dot{width:8px;height:8px;border-radius:50%;background:var(--error)}
+  .conn-dot.on{background:var(--success);animation:blink 2s infinite}
+  @keyframes blink{50%{opacity:.5}}
+  header .controls{margin-left:auto;display:flex;gap:8px;align-items:center}
+  button{background:var(--panel-2);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:4px 12px;font-family:inherit;font-size:12px;cursor:pointer}
+  button:hover{border-color:var(--accent)}
+  label.toggle{font-size:11px;color:var(--muted);display:flex;gap:5px;align-items:center;cursor:pointer}
+  .c-success{color:var(--success)}.c-accent{color:var(--accent)}.c-warning{color:var(--warning)}
+  .c-error{color:var(--error)}.c-muted{color:var(--muted)}.c-dim{color:var(--dim)}.c-purple{color:var(--purple)}.c-orange{color:var(--orange)}
+
+  /* Management status bar */
+  #mgmt-bar{border-bottom:1px solid var(--border);background:var(--panel);padding:6px 16px;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
+  .mgmt-chip{background:var(--panel-2);border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:11px;display:flex;gap:6px;align-items:center}
+  .mgmt-chip .k{color:var(--dim)}
+  .mgmt-chip.warn{border-color:var(--warning)}
+  .mgmt-chip.err{border-color:var(--error)}
+  .mgmt-chip.ok{border-color:var(--success)}
+
+  /* Layout */
+  main{flex:1;display:grid;grid-template-columns:260px 1fr 320px;min-height:0}
+  .col{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  #sidebar-left{border-right:1px solid var(--border)}
+  #sidebar-right{border-left:1px solid var(--border)}
+  .panel-title{padding:6px 12px;font-size:11px;color:var(--muted);background:var(--panel);border-bottom:1px solid var(--border);letter-spacing:1px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center}
+
+  /* Run list */
+  #run-list{overflow-y:auto;flex:1}
+  .run-item{padding:8px 10px;border-bottom:1px solid #1f2733;cursor:pointer}
+  .run-item:hover{background:var(--panel-2)}
+  .run-item.selected{background:#1a2b45;border-left:3px solid var(--accent)}
+  .ri-title{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ri-meta{font-size:10px;color:var(--dim);margin-top:3px;display:flex;gap:7px;flex-wrap:wrap}
+  .ri-nodes{font-size:9px;color:var(--muted);margin-top:3px}
+  .sess-row{padding:4px 10px 4px 22px;font-size:10px;color:var(--muted);cursor:pointer;border-bottom:1px solid #16202e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sess-row:hover{background:var(--panel-2);color:var(--text)}
+  .sess-row.selected{color:var(--accent)}
+  .empty{color:var(--dim);padding:12px;text-align:center;font-size:12px}
+
+  /* View tabs */
+  #view-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--panel);flex-shrink:0}
+  .vtab{padding:7px 18px;font-size:12px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent}
+  .vtab:hover{color:var(--text)}
+  .vtab.active{color:var(--accent);border-bottom-color:var(--accent)}
+  .vtab .layer{font-size:9px;color:var(--dim);margin-left:5px}
+  .view{display:none;flex:1;min-height:0;flex-direction:column}
+  .view.active{display:flex}
+
+  /* Project graph svg */
+  #proj-wrap{flex:1;overflow:auto;padding:4px}
+  #proj-wrap svg{width:100%;height:100%;min-height:330px;display:block}
+  .pn-rect{fill:var(--panel);stroke:var(--border);stroke-width:1.5;cursor:pointer}
+  .pn-title{fill:var(--text);font-size:10.5px;font-weight:600;font-family:inherit;pointer-events:none}
+  .pn-sub{fill:var(--muted);font-size:8.5px;font-family:inherit;pointer-events:none}
+  .pn-status{font-size:8px;font-family:inherit;pointer-events:none}
+  .pn-succeeded .pn-rect{stroke:var(--success)}
+  .pn-running .pn-rect{stroke:var(--accent);stroke-width:2;filter:drop-shadow(0 0 6px rgba(88,166,255,.5))}
+  .pn-ready .pn-rect{stroke:var(--accent);stroke-dasharray:none}
+  .pn-failed .pn-rect{stroke:var(--error);stroke-width:2}
+  .pn-blocked .pn-rect{stroke:var(--error);stroke-dasharray:5 3;opacity:.75}
+  .pn-changes_required .pn-rect{stroke:var(--warning);stroke-width:2}
+  .pn-waiting .pn-rect{stroke:var(--warning);stroke-dasharray:4 3}
+  .pn-pending{opacity:.45}
+  .pn-selected .pn-rect{stroke:var(--purple);stroke-width:2.5}
+  .pe{fill:none;stroke-width:1.6}
+  .pe-control{stroke:var(--dim)}
+  .pe-control.pe-done{stroke:var(--success)}
+  .pe-control.pe-active{stroke:var(--accent);stroke-width:2.2}
+  .pe-control.pe-blocked{stroke:var(--error);stroke-dasharray:5 3}
+  .pe-artifact{stroke:var(--accent);stroke-dasharray:6 4;opacity:.85}
+  .pe-decision{stroke:var(--dim);stroke-width:2}
+  .pe-decision.pe-passed{stroke:var(--success);stroke-width:2.4}
+  .pe-decision.pe-rejected{stroke:var(--error);stroke-width:2.4}
+  .pe-feedback{stroke:var(--orange);stroke-dasharray:7 4;opacity:.35}
+  .pe-feedback.pe-active{opacity:1;stroke-width:2.2}
+  .pe-label{fill:var(--muted);font-size:8.5px;font-family:inherit}
+  #proj-legend{padding:5px 12px;border-top:1px solid var(--border);display:flex;gap:14px;font-size:10px;color:var(--muted);flex-wrap:wrap;flex-shrink:0}
+  .lg{display:flex;align-items:center;gap:5px}
+  .lg-line{width:22px;height:0;border-top:2px solid var(--dim)}
+  .lg-box{width:12px;height:12px;border-radius:3px;border:1.5px solid var(--dim)}
+
+  /* Agent loop view (layer 2) */
+  #loop-head{padding:6px 12px;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);flex-shrink:0;display:flex;justify-content:space-between}
+  #loop-wrap{flex:0 0 auto;padding:2px 6px}
+  #loop-wrap svg{width:100%;height:300px;display:block}
+  .node-rect{fill:var(--panel);stroke:var(--border);stroke-width:1.5}
+  .node-title{fill:var(--text);font-size:12px;font-weight:600;font-family:inherit}
+  .node-sub{fill:var(--muted);font-size:9px;font-family:inherit}
+  .node-running .node-rect{stroke:var(--accent);stroke-width:2;filter:drop-shadow(0 0 6px rgba(88,166,255,.45))}
+  .node-done .node-rect{stroke:var(--success)}
+  .node-error .node-rect{stroke:var(--error)}
+  .node-data .node-rect{stroke:var(--purple);stroke-dasharray:5 3}
+  .node-inactive{opacity:.35}
+  .edge{stroke:var(--dim);stroke-width:1.5;fill:none}
+  .edge-active{stroke:var(--accent);stroke-width:2}
+  .edge-data{stroke-dasharray:5 4}
+  .edge-label{fill:var(--muted);font-size:9px;font-family:inherit}
+  .particle{fill:var(--accent)}.particle-data{fill:var(--purple)}.particle-result{fill:var(--success)}
+  .tool-chip-rect{fill:var(--panel-2);stroke:var(--border)}
+  .tool-chip-text{fill:var(--muted);font-size:10px;font-family:inherit}
+  .tool-chip-active .tool-chip-rect{stroke:var(--warning);fill:#2a2410}
+  .tool-chip-active .tool-chip-text{fill:var(--warning)}
+
+  /* Lineage view */
+  #lineage-wrap{flex:1;overflow:auto;padding:14px}
+  .lin-chain{display:flex;flex-wrap:wrap;gap:0;align-items:center}
+  .lin-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;min-width:150px;max-width:220px;cursor:pointer}
+  .lin-card:hover{border-color:var(--accent)}
+  .lin-card.selected{border-color:var(--purple)}
+  .lin-card.superseded{opacity:.55}
+  .lin-name{font-size:11px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .lin-meta{font-size:9.5px;color:var(--muted);margin-top:4px;display:flex;flex-direction:column;gap:2px}
+  .badge{display:inline-block;padding:0 6px;border-radius:4px;font-size:9px;border:1px solid var(--border);color:var(--muted)}
+  .badge.cur{border-color:var(--success);color:var(--success)}
+  .badge.old{border-color:var(--dim)}
+  .badge.rev{border-color:var(--teal);color:var(--teal)}
+  .lin-arrow{color:var(--dim);padding:0 6px;font-size:14px}
+
+  /* Timeline */
+  #timeline{border-top:1px solid var(--border);flex-shrink:0;display:flex;flex-direction:column;height:240px}
+  #tl-tabs{display:flex;background:var(--panel);border-bottom:1px solid var(--border)}
+  .tl-tab{padding:5px 14px;font-size:11px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent}
+  .tl-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+  #tl-content{flex:1;overflow-y:auto;padding:6px 12px}
+  .ev-row{display:flex;gap:8px;padding:3px 0;font-size:11px;border-bottom:1px dashed #1f2733;align-items:baseline}
+  .ev-time{color:var(--dim);font-size:10px;flex-shrink:0;width:60px}
+  .ev-kind{flex-shrink:0;font-weight:600}
+  .turn-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:7px 11px;margin-bottom:7px;cursor:pointer}
+  .turn-card:hover{border-color:var(--accent)}
+  .turn-card.replaying{border-color:var(--warning)}
+  .turn-card.fresh{animation:fresh 2s ease-out}
+  @keyframes fresh{0%{background:#2a4a2a}100%{background:transparent}}
+  .tc-head{display:flex;gap:8px;align-items:center;font-size:12px}
+  .tc-idx{color:var(--accent);font-weight:600}
+  .tc-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+  .tc-time{color:var(--dim);font-size:10px;flex-shrink:0}
+  .tc-flow{display:flex;gap:5px;align-items:center;margin-top:5px;flex-wrap:wrap;font-size:10.5px}
+  .fc{padding:2px 7px;border-radius:5px;background:var(--panel-2);border:1px solid var(--border)}
+  .fc-user{border-color:var(--accent);color:var(--accent)}
+  .fc-llm{border-color:var(--purple);color:var(--purple)}
+  .fc-tool-ok{border-color:var(--success);color:var(--success)}
+  .fc-tool-err{border-color:var(--error);color:var(--error)}
+  .fc-resp{border-color:var(--dim);color:var(--muted)}
+  .arrow{color:var(--dim)}
+  .tc-stats{font-size:10px;color:var(--dim);margin-top:4px;display:flex;gap:10px}
+
+  /* Inspector */
+  #inspector{flex:1;overflow-y:auto}
+  .insp-section{border-bottom:1px solid var(--border);padding:8px 12px}
+  .insp-h{font-size:10px;color:var(--dim);letter-spacing:1px;margin-bottom:6px}
+  .kv{display:flex;justify-content:space-between;padding:2.5px 0;font-size:11px;gap:8px}
+  .kv .k{color:var(--muted);flex-shrink:0}
+  .kv .v{text-align:right;word-break:break-all}
+  .err-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;margin:4px 0}
+  .err-seg{height:100%}
+  .pill{display:inline-block;padding:1px 7px;border-radius:9px;font-size:10px;border:1px solid var(--border);margin:1px}
+  .link-btn{background:none;border:none;color:var(--accent);font-size:11px;cursor:pointer;padding:2px 0;font-family:inherit}
+  .link-btn:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Graph Runtime 管理面板</h1>
+  <span class="sub">项目图 · 节点执行 · 调用追踪 | 数据源 ~/.pi/agent/sessions</span>
+  <span class="conn"><span class="conn-dot" id="conn-dot"></span><span id="conn-text">未连接</span></span>
+  <div class="controls">
+    <label class="toggle"><input type="checkbox" id="chk-follow" checked> 自动跟踪最新</label>
+    <button id="btn-replay">▶ 回放本轮</button>
+  </div>
+</header>
+
+<div id="mgmt-bar"><span class="mgmt-chip"><span class="k">未选择 Run</span></span></div>
+
+<main>
+  <div class="col" id="sidebar-left">
+    <div class="panel-title"><span>Graph Run 列表</span><span id="run-count"></span></div>
+    <div id="run-list"><div class="empty">加载中…</div></div>
+  </div>
+
+  <div class="col">
+    <div id="view-tabs">
+      <div class="vtab active" data-view="graph">Project Graph<span class="layer">Run View</span></div>
+      <div class="vtab" data-view="loop">Agent Loop<span class="layer">Session View</span></div>
+      <div class="vtab" data-view="lineage">Artifact Lineage<span class="layer">Run View</span></div>
+    </div>
+
+    <div class="view active" id="view-graph">
+      <div id="proj-wrap">
+        <svg id="proj-svg" viewBox="0 0 1210 380" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <marker id="parr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#4a5568"/></marker>
+            <marker id="parr-ok" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#3fb950"/></marker>
+            <marker id="parr-on" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#58a6ff"/></marker>
+            <marker id="parr-err" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#f85149"/></marker>
+            <marker id="parr-fb" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#ff9e64"/></marker>
+          </defs>
+          <g id="proj-edges"></g><g id="proj-nodes"></g>
+        </svg>
+      </div>
+      <div id="proj-legend">
+        <span class="lg"><span class="lg-line" style="border-color:var(--dim)"></span>控制依赖</span>
+        <span class="lg"><span class="lg-line" style="border-color:var(--accent);border-top-style:dashed"></span>Artifact 传递</span>
+        <span class="lg"><span class="lg-line" style="border-color:var(--success)"></span>PASS 决策路径</span>
+        <span class="lg"><span class="lg-line" style="border-color:var(--error)"></span>失败/阻断</span>
+        <span class="lg"><span class="lg-line" style="border-color:var(--orange);border-top-style:dashed"></span>返工路径</span>
+        <span class="lg"><span class="lg-box" style="border-color:var(--success)"></span>Succeeded</span>
+        <span class="lg"><span class="lg-box" style="border-color:var(--accent)"></span>Running/Ready</span>
+        <span class="lg"><span class="lg-box" style="border-color:var(--warning)"></span>Waiting/返工</span>
+        <span class="lg"><span class="lg-box" style="border-color:var(--error)"></span>Failed/Blocked</span>
+      </div>
+    </div>
+
+    <div class="view" id="view-loop">
+      <div id="loop-head"><span id="loop-title">未选择会话</span><span id="loop-model"></span></div>
+      <div id="loop-wrap">
+        <svg id="loop-svg" viewBox="0 0 1000 290" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#4a5568"/></marker>
+            <marker id="arrow-active" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#58a6ff"/></marker>
+          </defs>
+          <g id="edges"></g><g id="particles"></g><g id="nodes"></g>
+        </svg>
+      </div>
+      <div class="empty" style="flex:1;display:flex;align-items:center;justify-content:center">点击 Project Graph 节点下钻，或在左侧选择会话</div>
+    </div>
+
+    <div class="view" id="view-lineage">
+      <div id="lineage-wrap"><div class="empty">选择 Graph Run 查看 Artifact 血缘</div></div>
+    </div>
+
+    <div id="timeline">
+      <div id="tl-tabs">
+        <div class="tl-tab active" data-mode="graph">Graph 事件流</div>
+        <div class="tl-tab" data-mode="query">查询时间线</div>
+      </div>
+      <div id="tl-content"><div class="empty">—</div></div>
+    </div>
+  </div>
+
+  <div class="col" id="sidebar-right">
+    <div class="panel-title"><span id="insp-title">检查器 · Run 总览</span></div>
+    <div id="inspector"><div class="empty">选择对象查看详情</div></div>
+  </div>
+</main>
+
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const fmtTok = (n) => n < 1000 ? String(n) : n < 10000 ? (n/1000).toFixed(1)+"k" : Math.round(n/1000)+"k";
+const fmtDur = (ms) => { if (!ms || ms < 0) return "0s"; if (ms < 1000) return ms+"ms"; const s = Math.round(ms/1000); return s < 60 ? s+"s" : s < 3600 ? Math.floor(s/60)+"m"+(s%60)+"s" : Math.floor(s/3600)+"h"+Math.floor((s%3600)/60)+"m"; };
+const fmtTime = (ts) => ts ? new Date(ts).toLocaleTimeString("zh-CN",{hour12:false}) : "—";
+const fmtDate = (ts) => ts ? new Date(ts).toLocaleString("zh-CN",{month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false}) : "—";
+
+const state = {
+  runs: [], run: null, selectedRunId: null,
+  selectedNode: null, selectedArtifact: null,
+  sessionFile: null, data: null,
+  followLatest: true, knownRuns: new Set(),
+  replayTimers: [], replayingTurn: -1, timelineMode: "graph",
+};
+
+const STATUS_ZH = {
+  pending:"Pending 未开始", ready:"Ready 依赖已满足", running:"Running 执行中",
+  waiting:"Waiting 等待上游", waiting_human:"等待人工", succeeded:"Succeeded 成功",
+  failed:"Failed 执行失败", blocked:"Blocked 被阻断", changes_required:"返工中 CHANGES_REQUIRED",
+  retry_scheduled:"Retry 等待重试", skipped:"Skipped 跳过",
+};
+
+/* ================= Project Graph layout ================= */
+const PROJ_POS = {
+  req:        { x:20,   y:155 }, input:      { x:130,  y:155 }, preflight:  { x:240,  y:155 },
+  analysis:   { x:350,  y:155 }, quality:    { x:470,  y:60  }, lineage:    { x:470,  y:155 },
+  snapshot:   { x:470,  y:250 }, fanin:      { x:590,  y:155 }, review_gate:{ x:700,  y:155 },
+  reviewer:   { x:805,  y:155 }, promotion:  { x:915,  y:100 }, report:     { x:1005, y:155 },
+  verify:     { x:1110, y:155 },
+};
+const PN_W = 96, PN_H = 52;
+const svgNS = "http://www.w3.org/2000/svg";
+const svgEl = (t, a = {}) => { const e = document.createElementNS(svgNS, t); for (const [k,v] of Object.entries(a)) e.setAttribute(k, v); return e; };
+
+function projCenter(id, side) {
+  const p = PROJ_POS[id];
+  if (side === "right") return { x:p.x+PN_W, y:p.y+PN_H/2 };
+  if (side === "left")  return { x:p.x,      y:p.y+PN_H/2 };
+  if (side === "top")   return { x:p.x+PN_W/2, y:p.y };
+  return { x:p.x+PN_W/2, y:p.y+PN_H };
+}
+function projEdgePath(e) {
+  const a = PROJ_POS[e.from], b = PROJ_POS[e.to];
+  if (e.kind === "feedback") {
+    const p1 = projCenter(e.from,"top"), p2 = projCenter(e.to,"top");
+    const my = Math.min(p1.y,p2.y) - 70;
+    return `M ${p1.x} ${p1.y} C ${p1.x} ${my}, ${p2.x} ${my}, ${p2.x} ${p2.y}`;
+  }
+  if (e.from === "snapshot" && e.to === "analysis") {
+    const p1 = projCenter("snapshot","left"), p2 = projCenter("analysis","bottom");
+    return `M ${p1.x} ${p1.y} C ${p1.x-45} ${p1.y}, ${p2.x} ${p2.y+40}, ${p2.x} ${p2.y}`;
+  }
+  if (e.from === "analysis" && e.to === "report") {
+    const p1 = projCenter("analysis","bottom"), p2 = projCenter("report","bottom");
+    const my = Math.max(p1.y,p2.y) + 72;
+    return `M ${p1.x} ${p1.y} C ${p1.x} ${my}, ${p2.x} ${my}, ${p2.x} ${p2.y}`;
+  }
+  const ltr = a.x < b.x;
+  const p1 = projCenter(e.from, ltr ? "right":"left"), p2 = projCenter(e.to, ltr ? "left":"right");
+  if (Math.abs(p1.y-p2.y) < 4) return `M ${p1.x} ${p1.y} L ${p2.x} ${p2.y}`;
+  const mx = (p1.x+p2.x)/2;
+  return `M ${p1.x} ${p1.y} C ${mx} ${p1.y}, ${mx} ${p2.y}, ${p2.x} ${p2.y}`;
+}
+const EDGE_MARKER = { done:"url(#parr-ok)", active:"url(#parr-on)", blocked:"url(#parr-err)", passed:"url(#parr-ok)", rejected:"url(#parr-err)" };
+
+function renderProjectGraph() {
+  const run = state.run;
+  const gE = $("proj-edges"), gN = $("proj-nodes");
+  gE.innerHTML = ""; gN.innerHTML = "";
+  if (!run) return;
+  for (const e of run.edges) {
+    const p = svgEl("path", { d: projEdgePath(e), class: `pe pe-${e.kind}${["done","active","blocked","passed","rejected"].includes(e.state) ? " pe-"+e.state : ""}` });
+    const mk = EDGE_MARKER[e.state];
+    if (mk) p.setAttribute("marker-end", mk);
+    else p.setAttribute("marker-end", "url(#parr)");
+    if (e.kind === "feedback" && e.state === "active") p.setAttribute("marker-end", "url(#parr-fb)");
+    gE.appendChild(p);
+    if (e.label) {
+      const a = PROJ_POS[e.from], b = PROJ_POS[e.to];
+      let lx = (a.x + b.x + PN_W) / 2, ly = (a.y + b.y + PN_H) / 2 - 6;
+      if (e.kind === "feedback") { ly = a.y - 74; lx = (a.x + b.x + PN_W) / 2; }
+      if (e.from === "analysis" && e.to === "report") ly = Math.max(a.y, b.y) + PN_H + 64;
+      if (e.from === "snapshot" && e.to === "analysis") { lx = a.x - 30; ly = (a.y + b.y) / 2 + 40; }
+      const t = svgEl("text", { x:lx, y:ly, class:"pe-label", "text-anchor":"middle" });
+      t.textContent = e.label; gE.appendChild(t);
+    }
+  }
+  for (const n of run.nodes) {
+    const pos = PROJ_POS[n.id];
+    const g = svgEl("g", { class:`pn pn-${n.status}${state.selectedNode===n.id?" pn-selected":""}`, "data-id":n.id });
+    g.appendChild(svgEl("rect", { x:pos.x, y:pos.y, width:PN_W, height:PN_H, rx:8, class:"pn-rect" }));
+    const t = svgEl("text", { x:pos.x+PN_W/2, y:pos.y+18, class:"pn-title", "text-anchor":"middle" });
+    t.textContent = n.title.length > 15 ? n.title.slice(0,14)+"…" : n.title;
+    const z = svgEl("text", { x:pos.x+PN_W/2, y:pos.y+31, class:"pn-sub", "text-anchor":"middle" });
+    z.textContent = n.zh;
+    const st = svgEl("text", { x:pos.x+PN_W/2, y:pos.y+44, class:"pn-status", "text-anchor":"middle",
+      fill: { succeeded:"#3fb950", running:"#58a6ff", ready:"#58a6ff", failed:"#f85149", blocked:"#f85149",
+              changes_required:"#d29922", waiting:"#d29922" }[n.status] ?? "#4a5568" });
+    st.textContent = n.status.toUpperCase();
+    g.appendChild(t); g.appendChild(z); g.appendChild(st);
+    g.onclick = () => selectGraphNode(n.id);
+    g.ondblclick = () => drillIntoNode(n.id);
+    gN.appendChild(g);
+  }
+}
+
+function selectGraphNode(id) {
+  state.selectedNode = id;
+  renderProjectGraph();
+  renderInspectorNode(id);
+}
+
+function drillIntoNode(id) {
+  const node = state.run?.nodes.find(n => n.id === id);
+  const file = node?.evidence?.sessions?.[0];
+  if (!file) return;
+  switchView("loop");
+  selectSession(file);
+}
+
+/* ================= Management status bar ================= */
+function renderMgmtBar() {
+  const run = state.run;
+  if (!run) { $("mgmt-bar").innerHTML = '<span class="mgmt-chip"><span class="k">未选择 Run</span></span>'; return; }
+  const chip = (k, v, cls="") => `<span class="mgmt-chip ${cls}"><span class="k">${k}</span><span>${v}</span></span>`;
+  const rw = run.rework;
+  const snapshotOk = run.nodes.find(n => n.id === "snapshot")?.status === "succeeded";
+  const humanTasks = run.events.filter(e => e.kind === "human_action_required").length;
+  const stateCls = run.runState === "失败" ? "err" : run.runState === "返工中" ? "warn" : run.runState === "已完成" ? "ok" : "";
+  $("mgmt-bar").innerHTML =
+    chip("运行状态", run.runState, stateCls) +
+    chip("当前阶段", esc(run.currentPhase)) +
+    chip("图版本", "v" + run.graphVersion, run.graphVersion > 1 ? "warn" : "") +
+    chip("进度", `${run.progress.done} / ${run.progress.total}`) +
+    chip("并发", run.live ? `${run.concurrency.current} / ${run.concurrency.max}` : `峰值 ${run.concurrency.max}`) +
+    chip("审核", run.review?.verdict ?? "—", run.review?.verdict === "PASS" ? "ok" : run.review?.verdict === "CHANGES_REQUIRED" ? "warn" : "") +
+    chip("返工", `${rw.count} / ${rw.max}`, rw.count ? "warn" : "") +
+    chip("人工任务", humanTasks, humanTasks ? "warn" : "") +
+    chip("数据快照", snapshotOk ? "已固定" : "未固定", snapshotOk ? "ok" : "") +
+    chip("审计链", run.audit.chainComplete ? "完整" : "缺失", run.audit.chainComplete ? "ok" : "err") +
+    chip("成本", "$" + run.totals.cost.toFixed(4));
+}
+
+/* ================= Run list ================= */
+function renderRunList() {
+  const box = $("run-list");
+  $("run-count").textContent = state.runs.length + " runs";
+  if (!state.runs.length) { box.innerHTML = '<div class="empty">暂无 Graph Run</div>'; return; }
+  box.innerHTML = state.runs.map(r => {
+    const sel = r.id === state.selectedRunId;
+    const isNew = !state.knownRuns.has(r.id);
+    return `<div class="run-item ${sel?"selected":""}" data-run="${r.id}">
+      <div class="ri-title">${isNew && state.knownRuns.size ? '<span class="c-success">NEW </span>' : ''}${esc(r.title)}</div>
+      <div class="ri-meta">
+        <span>${fmtDate(r.start)}</span>
+        <span>${r.sessionCount} 会话</span>
+        <span>${r.toolCalls} 工具</span>
+        <span>$${r.cost.toFixed(4)}</span>
+      </div>
+      <div class="ri-nodes">${r.nodes.length ? r.nodes.map(n => `<span class="pill">${n}</span>`).join("") : '<span class="pill" style="color:var(--dim)">ad-hoc 未命中业务节点</span>'}</div>
+    </div>`;
+  }).join("");
+  box.querySelectorAll(".run-item").forEach(el => { el.onclick = () => selectRun(el.dataset.run); });
+  if (state.run && state.selectedRunId === state.run.id) renderRunSessions();
+  state.runs.forEach(r => state.knownRuns.add(r.id));
+}
+
+function renderRunSessions() {
+  document.querySelectorAll(".sess-row").forEach(e => e.remove());
+  if (!state.run) return;
+  const anchor = document.querySelector(`.run-item[data-run="${state.run.id}"]`);
+  if (!anchor) return;
+  for (const s of state.run.sessions) {
+    const div = document.createElement("div");
+    div.className = "sess-row" + (s.file === state.sessionFile ? " selected" : "");
+    div.title = s.preview;
+    div.textContent = `└ ${fmtTime(s.start)} ${s.preview.slice(0, 40)}`;
+    div.onclick = () => { switchView("loop"); selectSession(s.file); };
+    anchor.after(div);
+    // keep order: insert each after previous
+  }
+  // fix order: rebuild in order
+  document.querySelectorAll(".sess-row").forEach(e => e.remove());
+  let prev = anchor;
+  for (const s of state.run.sessions) {
+    const div = document.createElement("div");
+    div.className = "sess-row" + (s.file === state.sessionFile ? " selected" : "");
+    div.title = s.preview;
+    div.textContent = `└ ${fmtTime(s.start)} ${s.preview.slice(0, 38)} · $${s.cost.toFixed(4)}`;
+    div.onclick = () => { switchView("loop"); selectSession(s.file); };
+    prev.after(div);
+    prev = div;
+  }
+}
+
+/* ================= Select run ================= */
+async function selectRun(id) {
+  state.selectedRunId = id;
+  state.selectedNode = null;
+  try {
+    const res = await fetch("/api/graph?run=" + encodeURIComponent(id));
+    state.run = await res.json();
+  } catch (err) {
+    $("inspector").innerHTML = `<div class="empty">加载失败: ${esc(err)}</div>`;
+    return;
+  }
+  document.querySelectorAll(".run-item").forEach(el => el.classList.toggle("selected", el.dataset.run === id));
+  renderMgmtBar();
+  renderProjectGraph();
+  renderRunSessions();
+  renderLineage();
+  renderInspectorGraph();
+  renderTimeline();
+}
+
+/* ================= Views ================= */
+function switchView(v) {
+  state.selectedNode = null;
+  document.querySelectorAll(".vtab").forEach(t => t.classList.toggle("active", t.dataset.view === v));
+  document.querySelectorAll(".view").forEach(x => x.classList.toggle("active", x.id === "view-" + v));
+}
+document.querySelectorAll(".vtab").forEach(t => { t.onclick = () => switchView(t.dataset.view); });
+document.querySelectorAll(".tl-tab").forEach(t => {
+  t.onclick = () => {
+    state.timelineMode = t.dataset.mode;
+    document.querySelectorAll(".tl-tab").forEach(x => x.classList.toggle("active", x === t));
+    renderTimeline();
+  };
+});
+
+/* ================= Timeline ================= */
+const EV_LABEL = {
+  graph_created:"图创建", node_started:"节点启动", node_succeeded:"节点成功", node_failed:"节点失败",
+  review_completed:"审核完成", revision_requested:"要求返工", human_action_required:"等待人工",
+  promotion_granted:"发布授权", graph_completed:"图完成",
+};
+const EV_CLS = {
+  node_failed:"c-error", revision_requested:"c-orange", human_action_required:"c-warning",
+  node_succeeded:"c-success", review_completed:"c-purple", promotion_granted:"c-success", graph_completed:"c-success",
+};
+function renderTimeline() {
+  const box = $("tl-content");
+  if (state.timelineMode === "graph") {
+    if (!state.run?.events?.length) { box.innerHTML = '<div class="empty">选择 Graph Run 查看事件流</div>'; return; }
+    box.innerHTML = state.run.events.map(e => {
+      const node = e.node ? state.run.nodes.find(n => n.id === e.node)?.title : "";
+      const extra = e.verdict ? ` → ${e.verdict}` : e.detail ? ` · ${esc(e.detail).slice(0,60)}` : "";
+      return `<div class="ev-row"><span class="ev-time">${fmtTime(e.ts)}</span><span class="ev-kind ${EV_CLS[e.kind] ?? "c-accent"}">${EV_LABEL[e.kind] ?? e.kind}</span><span class="c-muted">${esc(node)}${extra}</span></div>`;
+    }).join("");
+  } else {
+    renderTurns();
+  }
+}
+/* ================= Inspector ================= */
+function renderInspectorGraph() {
+  const run = state.run;
+  $("insp-title").textContent = "检查器 · Run 总览";
+  if (!run) { $("inspector").innerHTML = '<div class="empty">选择 Graph Run</div>'; return; }
+  const errTotal = run.totalErrors || 0;
+  const errBars = run.errorClasses.map(ec => {
+    const pct = errTotal ? Math.max(4, Math.round(ec.count / errTotal * 100)) : 0;
+    const color = ec.fatal ? "var(--error)" : "var(--warning)";
+    return `<div class="err-seg" style="width:${pct}%;background:${color}" title="${ec.label} ×${ec.count}"></div>`;
+  }).join("");
+  const humanEv = run.events.filter(e => e.kind === "human_action_required");
+  $("inspector").innerHTML = `
+    <div class="insp-section">
+      <div class="insp-h">运行概况</div>
+      <div class="kv"><span class="k">状态</span><span class="v">${run.runState} · v${run.graphVersion}</span></div>
+      <div class="kv"><span class="k">会话数</span><span class="v">${run.sessionCount}</span></div>
+      <div class="kv"><span class="k">模型调用 / 工具</span><span class="v">${run.totals.calls} / ${run.totals.toolCalls}</span></div>
+      <div class="kv"><span class="k">总成本</span><span class="v">$${run.totals.cost.toFixed(4)}</span></div>
+      <div class="kv"><span class="k">起止</span><span class="v">${fmtDate(run.start)} → ${fmtDate(run.end)}</span></div>
+    </div>
+    <div class="insp-section">
+      <div class="insp-h">审核与返工</div>
+      <div class="kv"><span class="k">结论</span><span class="v ${run.review?.verdict === "PASS" ? "c-success" : run.review?.verdict === "CHANGES_REQUIRED" ? "c-warning" : "c-muted"}">${run.review?.verdict ?? "未到达审核"}</span></div>
+      <div class="kv"><span class="k">返工</span><span class="v">Revision ${run.rework.count} / ${run.rework.max}</span></div>
+      ${run.review?.findings?.length ? `<div class="kv"><span class="k">Findings</span><span class="v c-warning">${run.review.findings.map(esc).join("；")}</span></div>` : ""}
+    </div>
+    ${humanEv.length ? `<div class="insp-section">
+      <div class="insp-h">等待人工决定</div>
+      ${humanEv.map(e => `<div class="kv"><span class="k">•</span><span class="v c-warning">${esc(e.detail).slice(0, 90)}</span></div>`).join("")}
+      <div class="kv"><span class="k">选项</span><span class="v c-muted">接受风险发布 / 要求重新审核 / 仅探索性使用</span></div>
+    </div>` : ""}
+    <div class="insp-section">
+      <div class="insp-h">错误分类 · 共 ${errTotal} 次</div>
+      ${errTotal ? `<div class="err-bar">${errBars}</div>` : ""}
+      ${run.errorClasses.map(ec => `<div class="kv"><span class="k">${ec.label}</span><span class="v ${ec.fatal ? "c-error" : "c-warning"}">×${ec.count}${ec.fatal ? " 致命" : " 可重试"}</span></div>`).join("") || '<div class="kv"><span class="k">无错误</span></div>'}
+    </div>
+    <div class="insp-section">
+      <div class="insp-h">并发与调度</div>
+      <div class="kv"><span class="k">最大并发</span><span class="v">${run.concurrency.max}</span></div>
+      ${run.concurrency.waves.map(w => `<div class="kv"><span class="k">Wave ${w.wave}</span><span class="v">${w.sessions} 会话</span></div>`).join("")}
+    </div>
+    <div class="insp-section">
+      <div class="insp-h">恢复与审计</div>
+      <div class="kv"><span class="k">审计链</span><span class="v c-success">${run.audit.chainComplete ? "完整" : "缺失"}</span></div>
+      <div class="kv"><span class="k">最后检查点</span><span class="v">${esc(run.audit.checkpoint ?? "—")}</span></div>
+      <div class="kv"><span class="k">恢复次数</span><span class="v">${run.audit.recoverCount}</span></div>
+    </div>`;
+}
+
+function renderInspectorNode(id) {
+  const run = state.run;
+  const n = run.nodes.find(x => x.id === id);
+  if (!n) return;
+  $("insp-title").textContent = `检查器 · ${n.title}`;
+  const ev = n.evidence;
+  const bundles = run.contextBundles.filter(b => b.node === id);
+  $("inspector").innerHTML = `
+    <div class="insp-section">
+      <div class="insp-h">节点状态</div>
+      <div class="kv"><span class="k">状态</span><span class="v">${STATUS_ZH[n.status] ?? n.status}</span></div>
+      <div class="kv"><span class="k">证据</span><span class="v">${ev ? `${ev.calls} 次工具调用 · ${ev.errors} 错误` : "无真实证据（由依赖推导）"}</span></div>
+      ${ev ? `<div class="kv"><span class="k">时间</span><span class="v">${fmtTime(ev.firstTs)} → ${fmtTime(ev.lastTs)}</span></div>` : ""}
+      <button class="link-btn" onclick="drillIntoNode('${id}')">→ 下钻到 Agent Loop（双击节点亦可）</button>
+    </div>
+    ${ev ? `<div class="insp-section">
+      <div class="insp-h">执行会话</div>
+      ${ev.sessions.map(f => {
+        const s = run.sessions.find(x => x.file === f);
+        return `<div class="kv"><span class="k">${fmtTime(s?.start)}</span><span class="v"><span class="link-btn" onclick="switchView('loop');selectSession('${esc(f).replace(/'/g, "\\'")}')">${esc(s?.preview?.slice(0, 32) ?? "会话")}</span></span></div>`;
+      }).join("")}
+    </div>` : ""}
+    ${bundles.map(b => `<div class="insp-section">
+      <div class="insp-h">上下文包 · ${fmtTime(state.run.sessions.find(s => s.file === b.sessionFile)?.start)}</div>
+      <div class="kv"><span class="k">角色</span><span class="v">${esc(b.role)}</span></div>
+      <div class="kv"><span class="k">当前目标</span><span class="v">${esc(b.goal).slice(0, 60)}</span></div>
+      <div class="kv"><span class="k">允许工具</span><span class="v">${b.tools.slice(0, 8).map(t => `<span class="pill">${esc(t)}</span>`).join("")}</span></div>
+      <div class="kv"><span class="k">Token 预算</span><span class="v">${fmtTok(b.tokenBudget)}</span></div>
+      <div class="kv"><span class="k">上下文压缩</span><span class="v">${b.compactions} 次</span></div>
+      <div class="kv"><span class="k">模型</span><span class="v">${b.models.map(esc).join(", ") || "—"}</span></div>
+      ${b.reworkFeedback?.length ? `<div class="kv"><span class="k">返工意见</span><span class="v c-warning">${b.reworkFeedback.map(esc).join("；")}</span></div>` : ""}
+    </div>`).join("")}`;
+}
+
+function renderInspectorArtifact(a) {
+  $("insp-title").textContent = `检查器 · Artifact`;
+  const run = state.run;
+  const producer = run.nodes.find(n => n.id === a.producerNode);
+  const reviewed = run.review?.verdict === "PASS" && new Date(a.ts) <= new Date(run.review.ts ?? 0);
+  $("inspector").innerHTML = `
+    <div class="insp-section">
+      <div class="insp-h">Artifact 详情</div>
+      <div class="kv"><span class="k">名称</span><span class="v">${esc(a.name)}</span></div>
+      <div class="kv"><span class="k">路径</span><span class="v">${esc(a.path)}</span></div>
+      <div class="kv"><span class="k">版本</span><span class="v">v${a.version} / ${a.versionsTotal}</span></div>
+      <div class="kv"><span class="k">产生于</span><span class="v">${fmtTime(a.ts)}</span></div>
+      <div class="kv"><span class="k">产生节点</span><span class="v">${esc(producer?.title ?? a.producerNode)}</span></div>
+      <div class="kv"><span class="k">消费节点</span><span class="v">${a.consumedBy.map(c => run.nodes.find(n => n.id === c)?.title ?? c).join(", ")}</span></div>
+      <div class="kv"><span class="k">有效性</span><span class="v ${a.current ? "c-success" : "c-dim"}">${a.current ? "当前有效" : "已被新版本替代"}</span></div>
+      <div class="kv"><span class="k">审核</span><span class="v ${reviewed ? "c-success" : "c-muted"}">${reviewed ? "已通过审核" : run.review ? "审核未通过/未覆盖" : "未到达审核"}</span></div>
+    </div>`;
+}
+
+/* ================= Artifact Lineage ================= */
+function renderLineage() {
+  const wrap = $("lineage-wrap");
+  const run = state.run;
+  if (!run?.artifacts?.length) { wrap.innerHTML = '<div class="empty">该 Run 无 Artifact 产出（无 write/edit 记录）</div>'; return; }
+  wrap.innerHTML = `<div class="lin-chain">${run.artifacts.map((a, i) => {
+    const producer = run.nodes.find(n => n.id === a.producerNode);
+    return `${i ? '<span class="lin-arrow">→</span>' : ''}
+      <div class="lin-card ${a.superseded ? "superseded" : ""}" data-aidx="${i}">
+        <div class="lin-name">${esc(a.name)}</div>
+        <div class="lin-meta">
+          <span><span class="badge ${a.current ? "cur" : "old"}">v${a.version}${a.current ? " 当前正式" : " 已替代"}</span></span>
+          <span>产: ${esc(producer?.zh ?? a.producerNode)} · ${fmtTime(a.ts)}</span>
+        </div>
+      </div>`;
+  }).join("")}</div>`;
+  wrap.querySelectorAll(".lin-card").forEach(card => {
+    card.onclick = () => {
+      wrap.querySelectorAll(".lin-card").forEach(c => c.classList.remove("selected"));
+      card.classList.add("selected");
+      renderInspectorArtifact(run.artifacts[Number(card.dataset.aidx)]);
+    };
+  });
+}
+
+/* ================= Layer 2: Agent Loop ================= */
+const BASE_NODES = [
+  { id:"user",      x:50,  y:20,  w:125, h:48, title:"用户输入",   sub:"prompt",              kind:"io" },
+  { id:"prompt",    x:265, y:20,  w:125, h:48, title:"Prompt",     sub:"上下文注入",           kind:"pipe" },
+  { id:"think",     x:455, y:20,  w:145, h:48, title:"Think / LLM",sub:"(model)",             kind:"pipe" },
+  { id:"tools",     x:665, y:20,  w:125, h:48, title:"Tools",      sub:"工具执行层",           kind:"pipe" },
+  { id:"deliver",   x:865, y:20,  w:115, h:48, title:"Deliver",    sub:"结果交付",             kind:"pipe" },
+  { id:"files",     x:50,  y:130, w:125, h:48, title:"项目文件",   sub:"read/edit/bash",      kind:"data" },
+  { id:"warehouse", x:50,  y:205, w:125, h:48, title:"云上数仓",   sub:"sql/query/catalog",   kind:"data" },
+  { id:"external",  x:265, y:205, w:125, h:48, title:"外部服务",   sub:"其他工具",             kind:"data" },
+  { id:"compact",   x:455, y:205, w:145, h:48, title:"Compact",    sub:"上下文压缩",           kind:"pipe" },
+  { id:"audit",     x:865, y:205, w:115, h:48, title:"审计存储",   sub:"session.jsonl",       kind:"data" },
+];
+const BASE_EDGES = [
+  { id:"e-user-prompt",   from:"user",      to:"prompt" },
+  { id:"e-files-prompt",  from:"files",     to:"prompt",  dataFlow:true, label:"context" },
+  { id:"e-prompt-think",  from:"prompt",    to:"think" },
+  { id:"e-think-tools",   from:"think",     to:"tools",   label:"tool_calls" },
+  { id:"e-tools-think",   from:"tools",     to:"think",   curve:34, label:"results" },
+  { id:"e-files-tools",   from:"files",     to:"tools",   dataFlow:true },
+  { id:"e-warehouse-tools",from:"warehouse",to:"tools",   dataFlow:true, label:"SQL取数" },
+  { id:"e-external-tools",from:"external",  to:"tools",   dataFlow:true },
+  { id:"e-think-compact", from:"think",     to:"compact" },
+  { id:"e-think-deliver", from:"think",     to:"deliver", viaTop:true, label:"response" },
+  { id:"e-deliver-audit", from:"deliver",   to:"audit",   label:"append" },
+];
+const loopNodeById = Object.fromEntries(BASE_NODES.map(n => [n.id, n]));
+const edgeElMap = {}, nodeElMap = {}, chipElMap = {};
+let chips = [];
+function toolSource(name) {
+  const n = (name || "").toLowerCase();
+  if (["read","edit","write","bash","grep","glob","find","apply_patch","list"].includes(n)) return "files";
+  if (/(sql|query|warehouse|catalog|db|snapshot|lineage|quality|ingest|dataset)/.test(n)) return "warehouse";
+  return "external";
+}
+function center(n, side) {
+  if (side === "right") return { x:n.x+n.w, y:n.y+n.h/2 };
+  if (side === "left")  return { x:n.x,     y:n.y+n.h/2 };
+  if (side === "top")   return { x:n.x+n.w/2, y:n.y };
+  return { x:n.x+n.w/2, y:n.y+n.h };
+}
+function edgePath(e) {
+  const a = loopNodeById[e.from], b = loopNodeById[e.to];
+  if (e.viaTop) {
+    const p1 = center(a,"top"), p2 = center(b,"top"), my = Math.min(p1.y,p2.y)-30;
+    return `M ${p1.x} ${p1.y} C ${p1.x} ${my}, ${p2.x} ${my}, ${p2.x} ${p2.y}`;
+  }
+  const ltr = a.x < b.x;
+  const p1 = center(a, ltr ? "right":"left"), p2 = center(b, ltr ? "left":"right");
+  if (Math.abs(p1.y-p2.y) < 4) return `M ${p1.x} ${p1.y} L ${p2.x} ${p2.y}`;
+  const mx = (p1.x+p2.x)/2;
+  return `M ${p1.x} ${p1.y} C ${mx} ${p1.y}, ${mx} ${p2.y}, ${p2.x} ${p2.y}`;
+}
+function renderLoopBase(modelLabel) {
+  const gE = $("edges"), gN = $("nodes");
+  gE.innerHTML = ""; gN.innerHTML = "";
+  for (const k in edgeElMap) delete edgeElMap[k];
+  for (const k in nodeElMap) delete nodeElMap[k];
+  for (const e of BASE_EDGES) {
+    const p = svgEl("path", { d: edgePath(e), class: "edge" + (e.dataFlow ? " edge-data":""), "marker-end":"url(#arrow)" });
+    gE.appendChild(p); edgeElMap[e.id] = p;
+    if (e.label) {
+      const a = loopNodeById[e.from], b = loopNodeById[e.to];
+      const t = svgEl("text", { x:(a.x+a.w/2+b.x+b.w/2)/2, y:(a.y+b.y)/2 + (e.curve||0) + (e.viaTop?-34:-5), class:"edge-label", "text-anchor":"middle" });
+      t.textContent = e.label; gE.appendChild(t);
+    }
+  }
+  for (const n of BASE_NODES) {
+    const g = svgEl("g", { class:"node" + (n.kind==="data" ? " node-data":"") });
+    g.appendChild(svgEl("rect", { x:n.x, y:n.y, width:n.w, height:n.h, rx:9, class:"node-rect" }));
+    const t = svgEl("text", { x:n.x+n.w/2, y:n.y+20, class:"node-title", "text-anchor":"middle" }); t.textContent = n.title;
+    const s = svgEl("text", { x:n.x+n.w/2, y:n.y+36, class:"node-sub", "text-anchor":"middle" });
+    s.textContent = n.id === "think" && modelLabel ? modelLabel : n.sub;
+    g.appendChild(t); g.appendChild(s); gN.appendChild(g); nodeElMap[n.id] = g;
+  }
+  renderChips();
+}
+function renderChips() {
+  for (const k in chipElMap) delete chipElMap[k];
+  chips = (state.data?.tools ?? []).slice(0, 8);
+  const gN = $("nodes");
+  chips.forEach((tool, i) => {
+    const x = 640 + (i % 3) * 118, y = 100 + Math.floor(i / 3) * 26;
+    const label = `${tool.name} ×${tool.calls}`;
+    const w = Math.min(112, label.length * 6.4 + 14);
+    const g = svgEl("g", { class:"tool-chip" });
+    g.appendChild(svgEl("rect", { x, y, width:w, height:20, rx:6, class:"tool-chip-rect" }));
+    const t = svgEl("text", { x:x+w/2, y:y+13.5, class:"tool-chip-text", "text-anchor":"middle" });
+    t.textContent = label; g.appendChild(t); gN.appendChild(g);
+    chipElMap[tool.name] = g;
+  });
+}
+const particles = [];
+function emitParticles(edgeId, count = 3, cls = "particle", interval = 180) {
+  const path = edgeElMap[edgeId]; if (!path) return;
+  const len = path.getTotalLength();
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const c = svgEl("circle", { r:3.5, class:cls });
+      $("particles").appendChild(c);
+      particles.push({ el:c, path, t:0, len });
+    }, i * interval);
+  }
+}
+(function tick() {
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i]; p.t += p.len / 50;
+    if (p.t >= p.len) { p.el.remove(); particles.splice(i,1); continue; }
+    const pt = p.path.getPointAtLength(p.t);
+    p.el.setAttribute("cx", pt.x); p.el.setAttribute("cy", pt.y);
+  }
+  requestAnimationFrame(tick);
+})();
+function setNodeState(id, st) {
+  const g = nodeElMap[id]; if (!g) return;
+  g.classList.remove("node-running","node-done","node-error");
+  if (st) g.classList.add("node-" + st);
+}
+function setEdge(edgeId, on) {
+  const p = edgeElMap[edgeId]; if (!p) return;
+  p.classList.toggle("edge-active", on);
+  p.setAttribute("marker-end", on ? "url(#arrow-active)" : "url(#arrow)");
+}
+function setChip(name, on) { chipElMap[name]?.classList.toggle("tool-chip-active", on); }
+function clearAnim() {
+  state.replayTimers.forEach(clearTimeout); state.replayTimers = [];
+  Object.keys(edgeElMap).forEach(id => setEdge(id, false));
+  Object.keys(nodeElMap).forEach(id => setNodeState(id, null));
+  Object.keys(chipElMap).forEach(n => setChip(n, false));
+  document.querySelectorAll(".turn-card.replaying").forEach(c => c.classList.remove("replaying"));
+  state.replayingTurn = -1;
+}
+function replayTurn(turnIdx, cardEl) {
+  const d = state.data; if (!d || !d.turns[turnIdx]) return;
+  clearAnim();
+  state.replayingTurn = turnIdx;
+  cardEl?.classList.add("replaying");
+  const turn = d.turns[turnIdx];
+  const T = (ms, fn) => state.replayTimers.push(setTimeout(fn, ms));
+  let t = 0;
+  T(t, () => { setNodeState("user","running"); setEdge("e-user-prompt", true); emitParticles("e-user-prompt", 2); });
+  t += 700;
+  T(t, () => { setNodeState("user","done"); setNodeState("prompt","running"); setEdge("e-files-prompt", true); emitParticles("e-files-prompt", 2, "particle-data"); });
+  t += 700;
+  T(t, () => { setNodeState("prompt","done"); setNodeState("think","running"); setEdge("e-user-prompt",false); setEdge("e-files-prompt",false); setEdge("e-prompt-think", true); emitParticles("e-prompt-think", 3); });
+  t += 900;
+  for (const step of turn.steps.slice(0, 6)) {
+    if (step.kind === "assistant" && step.toolCalls?.length) {
+      for (const tc of step.toolCalls.slice(0, 4)) {
+        const src = toolSource(tc.name);
+        T(t, () => {
+          setNodeState("tools","running"); setEdge("e-think-tools", true); emitParticles("e-think-tools", 2);
+          setChip(tc.name, true);
+          const srcEdge = { files:"e-files-tools", warehouse:"e-warehouse-tools", external:"e-external-tools" }[src];
+          setEdge(srcEdge, true); emitParticles(srcEdge, 2, "particle-data");
+          setNodeState(src, "running");
+        });
+        t += 800;
+        T(t, () => { setEdge("e-tools-think", true); emitParticles("e-tools-think", 2, tc.isError ? "particle" : "particle-result"); setChip(tc.name, false); });
+        t += 600;
+      }
+      T(t, () => { ["e-think-tools","e-tools-think","e-files-tools","e-warehouse-tools","e-external-tools"].forEach(x => setEdge(x,false)); setNodeState("tools","done"); setNodeState("files",null); setNodeState("warehouse",null); setNodeState("external",null); });
+      t += 300;
+    }
+  }
+  const hasError = turn.stopReasons.includes("error");
+  T(t, () => {
+    setEdge("e-think-deliver", true); emitParticles("e-think-deliver", 3, hasError ? "particle" : "particle-result");
+    setNodeState("think", hasError ? "error" : "done"); setNodeState("deliver","running");
+  });
+  t += 900;
+  T(t, () => { setEdge("e-think-deliver", false); setNodeState("deliver","done"); setEdge("e-deliver-audit", true); emitParticles("e-deliver-audit", 2, "particle-data"); });
+  t += 800;
+  T(t, () => { setEdge("e-deliver-audit", false); setNodeState("audit","done"); });
+  if (d.events.some(e => e.kind === "compaction")) {
+    t += 400;
+    T(t, () => { setNodeState("compact","running"); setEdge("e-think-compact", true); emitParticles("e-think-compact", 2); });
+    t += 1000;
+    T(t, () => { setEdge("e-think-compact", false); setNodeState("compact","done"); });
+  }
+  T(t + 2500, clearAnim);
+}
+
+/* ================= Session selection (Layer 2/3) ================= */
+async function selectSession(file, replay = true) {
+  state.sessionFile = file;
+  document.querySelectorAll(".sess-row").forEach(r => r.classList.toggle("selected", r.textContent && false));
+  try {
+    const res = await fetch("/api/session?file=" + encodeURIComponent(file));
+    state.data = await res.json();
+  } catch (err) {
+    $("inspector").innerHTML = `<div class="empty">会话加载失败: ${esc(err)}</div>`;
+    return;
+  }
+  const d = state.data;
+  const modelLabel = d.models[d.models.length - 1] ?? "";
+  $("loop-title").textContent = `会话 · ${d.preview || "(continued)"}`;
+  $("loop-model").textContent = modelLabel;
+  document.querySelector('#view-loop .empty')?.remove();
+  renderLoopBase(modelLabel.length < 22 ? modelLabel : modelLabel.split("/")[1]);
+  const used = new Set(d.tools.map(t => toolSource(t.name)));
+  for (const src of ["files","warehouse","external"]) nodeElMap[src]?.classList.toggle("node-inactive", !used.has(src));
+  if (state.timelineMode !== "query") {
+    state.timelineMode = "query";
+    document.querySelectorAll(".tl-tab").forEach(x => x.classList.toggle("active", x.dataset.mode === "query"));
+  }
+  renderTimeline();
+  if (replay && d.turns.length) {
+    const last = d.turns.length - 1;
+    replayTurn(last, document.querySelector(`.turn-card[data-idx="${last}"]`));
+  }
+}
+
+function renderTurns() {
+  const box = $("tl-content");
+  const d = state.data;
+  if (!d) { box.innerHTML = '<div class="empty">选择会话查看查询时间线</div>'; return; }
+  box.innerHTML = d.turns.map((turn, i) => {
+    const flows = [`<span class="fc fc-user">user</span>`];
+    for (const step of turn.steps) {
+      if (step.kind === "assistant") {
+        const u = step.usage;
+        const llmTxt = u ? `LLM ↑${fmtTok(u.input)} ↓${fmtTok(u.output)} $${u.cost.toFixed(4)}` : "LLM";
+        flows.push(`<span class="arrow">→</span><span class="fc fc-llm">${llmTxt}${step.stopReason==="error"?" ✖":""}</span>`);
+        for (const tc of step.toolCalls.slice(0, 8)) {
+          flows.push(`<span class="arrow">→</span><span class="fc ${tc.isError?"fc-tool-err":"fc-tool-ok"}">${esc(tc.name)}${tc.isError?" ✖":" ✓"}</span>`);
+        }
+      }
+    }
+    const respLen = turn.steps.filter(s => s.kind==="assistant").map(s => (s.text||"").length).reduce((a,b)=>a+b,0);
+    flows.push(`<span class="arrow">→</span><span class="fc fc-resp">resp ${respLen}ch</span>`);
+    return `<div class="turn-card" data-idx="${i}">
+      <div class="tc-head">
+        <span class="tc-idx">#${i+1}</span>
+        <span class="tc-text">${esc(turn.userText || "(no input)")}</span>
+        <span class="tc-time">${fmtTime(turn.ts)} · ${fmtDur(turn.elapsedMs)}</span>
+      </div>
+      <div class="tc-flow">${flows.join("")}</div>
+      <div class="tc-stats">
+        <span>tokens: ↑${turn.tokens.input} ↓${turn.tokens.output} cache:${turn.tokens.cacheRead}</span>
+        <span>cost: $${turn.cost.toFixed(5)}</span>
+        <span>stop: ${turn.stopReasons.join(",")||"—"}</span>
+      </div>
+    </div>`;
+  }).join("") || '<div class="empty">该会话还没有查询</div>';
+  box.querySelectorAll(".turn-card").forEach(card => {
+    card.onclick = () => replayTurn(Number(card.dataset.idx), card);
+  });
+}
+
+/* ================= Live updates ================= */
+async function refreshRuns(autoFollow) {
+  try {
+    const res = await fetch("/api/graphs");
+    const prevTop = state.runs[0]?.id;
+    state.runs = await res.json();
+    renderRunList();
+    $("conn-dot").classList.add("on"); $("conn-text").textContent = "实时连接";
+    const newTop = state.runs[0]?.id;
+    if (!state.selectedRunId && state.runs.length) {
+      await selectRun(state.runs[0].id);
+    } else if (autoFollow && state.followLatest && newTop && newTop !== prevTop) {
+      await selectRun(newTop);
+    } else if (state.selectedRunId && state.runs.some(r => r.id === state.selectedRunId)) {
+      await selectRun(state.selectedRunId);
+    }
+  } catch (err) {
+    $("conn-dot").classList.remove("on"); $("conn-text").textContent = "连接断开";
+  }
+}
+
+function connectSSE() {
+  const es = new EventSource("/api/events");
+  es.onmessage = (ev) => {
+    try {
+      const msg = JSON.parse(ev.data);
+      if (msg.type === "sessions-updated") refreshRuns(true);
+    } catch { /* ignore */ }
+  };
+  es.onerror = () => { $("conn-dot").classList.remove("on"); $("conn-text").textContent = "重连中…"; };
+  es.onopen = () => { $("conn-dot").classList.add("on"); $("conn-text").textContent = "实时连接"; };
+}
+
+$("chk-follow").onchange = (e) => { state.followLatest = e.target.checked; };
+$("btn-replay").onclick = () => {
+  if (state.data?.turns.length) {
+    switchView("loop");
+    const last = state.data.turns.length - 1;
+    replayTurn(last, document.querySelector(`.turn-card[data-idx="${last}"]`));
+  }
+};
+
+renderLoopBase(null);
+refreshRuns(false);
+connectSSE();
+setInterval(() => refreshRuns(false), 30000);
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/pipeline-context-package.schema.json",
+  "title": "PipelineContextPackage",
+  "type": "object",
+  "required": [
+    "pipelineId",
+    "pipelineVersion",
+    "runId",
+    "currentState",
+    "businessPhase",
+    "openFindingRefs",
+    "pendingApprovalRef",
+    "approvedDecisionRefs",
+    "relevantEventRefs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "pipelineId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pipelineVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "currentState": {
+      "type": "string"
+    },
+    "businessPhase": {
+      "type": "string"
+    },
+    "schemaSpecRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pipelineSpecRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "currentEngineContext": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "openFindingRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pendingApprovalRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "approvedDecisionRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relevantEventRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

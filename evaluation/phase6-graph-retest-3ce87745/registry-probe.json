@@ -1,0 +1,1420 @@
+{
+  "commit": "3ce87745f9b1546a10ab7fd015dc543eec8bc7ba",
+  "count": 24,
+  "names": [
+    "parse_image",
+    "parse_visual",
+    "parse_document",
+    "analyze_document",
+    "analyze_document_v2",
+    "search_catalog",
+    "inspect_dataset",
+    "validate_query",
+    "execute_query",
+    "get_data_quality",
+    "explain_lineage",
+    "get_snapshot",
+    "assess_training_data",
+    "materialize_query",
+    "inspect_review_gate",
+    "review_data_analysis",
+    "promote_analysis",
+    "pipeline_ingest",
+    "write_gate_check",
+    "run_analysis_graph",
+    "inspect_graph_run",
+    "prepare_business_task",
+    "run_data_analysis",
+    "governance_dashboard"
+  ],
+  "snapshot": {
+    "experimentId": null,
+    "commitSha": "3ce87745f9b1546a10ab7fd015dc543eec8bc7ba",
+    "buildProfile": "full",
+    "buildFeatureHash": "2d302a43ee9d7b3e",
+    "runtimeProfile": "all-enabled",
+    "runtimeFeatureHash": "c2b1a0c281a58fe9",
+    "effectiveFeatureHash": "574bc8dd0cc5e162",
+    "effectiveFeatures": [
+      "legacy.cdxr_governance_cli",
+      "legacy.cdxr_governance_tools",
+      "round1.best_attempt_selection",
+      "round1.document_orchestrator_v2",
+      "round1.document_parser",
+      "round1.document_subagent",
+      "round1.evidence_merger",
+      "round1.image_ocr",
+      "round1.l1_retry",
+      "round1.l2_expert",
+      "round1.multimodal",
+      "round1.quality_gate",
+      "round1.visual_parser",
+      "round2.batch_pipeline",
+      "round2.catalog_tools",
+      "round2.data_quality",
+      "round2.flink_runtime_governance",
+      "round2.iceberg_layout_governance",
+      "round2.lakehouse",
+      "round2.lineage",
+      "round2.pipeline",
+      "round2.pipeline_ads_transform",
+      "round2.pipeline_agent_worker",
+      "round2.pipeline_amendment",
+      "round2.pipeline_cdxr_promotion_gate",
+      "round2.pipeline_checkpointing",
+      "round2.pipeline_dead_letter",
+      "round2.pipeline_deadline_watchdog",
+      "round2.pipeline_draft_compilation",
+      "round2.pipeline_dwd_transform",
+      "round2.pipeline_dws_transform",
+      "round2.pipeline_event_store",
+      "round2.pipeline_governance",
+      "round2.pipeline_human_approval",
+      "round2.pipeline_ods_load",
+      "round2.pipeline_placement_governance",
+      "round2.pipeline_remediation",
+      "round2.pipeline_schema_design",
+      "round2.pipeline_schema_discovery",
+      "round2.pipeline_source_generation",
+      "round2.pipeline_spec_generation",
+      "round2.pipeline_state_reducer",
+      "round2.pipeline_status_dashboard",
+      "round2.pipeline_validation",
+      "round2.query_evidence",
+      "round2.query_tools",
+      "round2.snapshot",
+      "round2.spark_runtime_governance",
+      "round2.stream_replay_pipeline",
+      "round3.cdxr_constant_feature",
+      "round3.cdxr_missingness",
+      "round3.cdxr_sample_size",
+      "round3.cdxr_sensitive",
+      "round3.cdxr_target_distribution",
+      "round3.cdxr_target_leakage",
+      "round3.cdxr_temporal",
+      "round3.cdxr_traceability",
+      "round3.cdxr_training",
+      "round3.cdxr_validation_split",
+      "round4.ambiguity_detection",
+      "round4.analysis_artifacts",
+      "round4.analysis_charting",
+      "round4.analysis_findings",
+      "round4.analysis_frontend_render",
+      "round4.analysis_input_materialization",
+      "round4.analysis_plan_generation",
+      "round4.analysis_retry",
+      "round4.analysis_script_execution",
+      "round4.analysis_subagent",
+      "round4.analysis_task_gate",
+      "round4.analysis_workspace",
+      "round4.assumption_management",
+      "round4.clarification",
+      "round4.data_analysis",
+      "round4.data_analysis_tool",
+      "round4.dependency_scheduler",
+      "round4.domain_pack",
+      "round4.dynamic_replanning",
+      "round4.parallel_scheduling",
+      "round4.plan_gate",
+      "round4.plan_validation",
+      "round4.planning_advisor",
+      "round4.requirement_planning",
+      "round4.requirement_skill",
+      "round4.task_plan_generation",
+      "round5.analysis_independent_verification",
+      "round5.analysis_replay",
+      "round5.analysis_review",
+      "round5.code_review",
+      "round5.code_shadow_tests",
+      "round5.deterministic_review_gates",
+      "round5.review_frontend_render",
+      "round5.review_package",
+      "round5.review_revision_loop",
+      "round5.review_tools",
+      "round5.reviewer",
+      "round5.reviewer_agent",
+      "round5.semantic_review",
+      "round6.graph_artifact_edges",
+      "round6.graph_compiler",
+      "round6.graph_engine",
+      "round6.graph_event_store",
+      "round6.graph_executor",
+      "round6.graph_feedback_routing",
+      "round6.graph_frontend_render",
+      "round6.graph_human_gates",
+      "round6.graph_observability",
+      "round6.graph_review_integration",
+      "round6.graph_scheduler",
+      "round6.graph_skill_nodes",
+      "round6.graph_state_reducer",
+      "round6.graph_tool",
+      "round6.graph_validation"
+    ],
+    "disabledFeatures": [
+      "ablate.ods_guard",
+      "ablate.query_validation",
+      "ablate.raw_data_boundary",
+      "ablate.scan_limit",
+      "ablate.sensitive_masking"
+    ],
+    "unsafeAblations": [],
+    "modelId": "gpt-5.6-luna",
+    "promptVersion": null,
+    "datasetSnapshot": "phase6",
+    "randomSeed": null,
+    "ruleVersion": "cdxr-training.v1",
+    "generatedAt": "2026-08-03T15:20:47.399Z"
+  },
+  "tools": [
+    {
+      "name": "parse_image",
+      "description": "Extract text from an image using PaddleOCR (local). Returns structured JSON with text blocks, positions, and confidence scores. Note: first call takes ~8s (model loading), subsequent calls are faster. Use this when the current model cannot view images directly.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to the image file (PNG, JPG, BMP, TIFF, WEBP). Absolute or project-relative."
+          }
+        }
+      }
+    },
+    {
+      "name": "parse_visual",
+      "description": "Analyze an image with a local vision model (PaddleOCR-VL). For charts (bar/line/pie), diagrams, photos, and complex layouts. Returns structured JSON with facts (exact readable values), inferences (trends/qualitative), and unverifiedClaims (estimated/uncertain — treat as NOT reliable). Slower than parse_image (~12-35s) — prefer parse_image for plain text extraction.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to the image file (PNG, JPG, BMP, WEBP). Absolute or project-relative."
+          },
+          "intent": {
+            "type": "string",
+            "description": "Optional focus: what to look for (e.g. 'trend of the line chart', 'pie slice sizes')."
+          }
+        }
+      }
+    },
+    {
+      "name": "parse_document",
+      "description": "Convert a document (PDF, DOCX, PPTX, XLSX, HTML, CSV, MD, TXT) to Markdown text using markitdown. Returns structured JSON with the full text content.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to the document file. Supports PDF, DOCX, PPTX, XLSX, HTML, CSV, MD, TXT."
+          }
+        }
+      }
+    },
+    {
+      "name": "analyze_document",
+      "description": "Analyze a document in an isolated sub-agent. The document is parsed locally (markitdown), persisted to disk, and a separate agent with its own context answers the question about it. Only the answer is returned here — the document body never enters the main context. Best for long documents. For small/quick text extraction prefer parse_document.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "path",
+          "question"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to the document file (PDF, DOCX, PPTX, XLSX, HTML, CSV, MD, TXT)."
+          },
+          "question": {
+            "type": "string",
+            "description": "What the user wants to know about the document."
+          }
+        }
+      }
+    },
+    {
+      "name": "analyze_document_v2",
+      "description": "Analyze a document with a two-tier agent pipeline: a standard agent (flash) handles the document, escalates to an expert agent (pro) only for the flagged scope, and results are merged deterministically. Returns merged evidence (facts/inferences/unknowns/conflicts). Use for long or complex documents.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "path",
+          "question"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to the document file (PDF, DOCX, PPTX, XLSX, HTML, CSV, MD, TXT)."
+          },
+          "question": {
+            "type": "string",
+            "description": "What the user wants to know about the document."
+          }
+        }
+      }
+    },
+    {
+      "name": "search_catalog",
+      "description": "Search the lakehouse dataset catalog by name / description / layer. Returns dataset ids, layers (ODS/DWD/DWS/ADS), table names, and field lists. Call this FIRST to find the dataset id for a question.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "description": "search term (dataset id / name / description)"
+          },
+          "layer": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "ODS"
+              },
+              {
+                "type": "string",
+                "const": "DWD"
+              },
+              {
+                "type": "string",
+                "const": "DWS"
+              },
+              {
+                "type": "string",
+                "const": "ADS"
+              }
+            ],
+            "description": "filter by warehouse layer"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200,
+            "default": 50
+          }
+        }
+      }
+    },
+    {
+      "name": "inspect_dataset",
+      "description": "Inspect a dataset's schema: fields, types, partition columns, layer, latest snapshot id and last update time. Use after search_catalog, before building a query plan.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "datasetId"
+        ],
+        "properties": {
+          "datasetId": {
+            "type": "string",
+            "description": "dataset id from the catalog"
+          }
+        }
+      }
+    },
+    {
+      "name": "validate_query",
+      "description": "Validate a structured QueryPlan (NO raw SQL). Checks: dataset exists, fields exist, limits, partition filters, ODS denial. On success returns a validatedQueryId for execute_query. Example plan: {\"datasetId\":\"ads_sales_daily\",\"select\":[{\"field\":\"revenue\",\"aggregation\":\"sum\",\"alias\":\"total\"}],\"dimensions\":[\"region\"],\"filters\":[{\"field\":\"event_date\",\"operator\":\"between\",\"value\":[\"2026-07-01\",\"2026-07-31\"]}],\"limit\":100}",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "datasetId",
+          "select"
+        ],
+        "properties": {
+          "datasetId": {
+            "type": "string",
+            "description": "dataset id from the catalog"
+          },
+          "select": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "field"
+              ],
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "aggregation": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "sum"
+                    },
+                    {
+                      "type": "string",
+                      "const": "count"
+                    },
+                    {
+                      "type": "string",
+                      "const": "avg"
+                    },
+                    {
+                      "type": "string",
+                      "const": "min"
+                    },
+                    {
+                      "type": "string",
+                      "const": "max"
+                    }
+                  ]
+                },
+                "alias": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "fields to project; aggregation for grouped metrics (empty = raw columns)"
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "group-by columns"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "field",
+                "operator"
+              ],
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "operator": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "eq"
+                    },
+                    {
+                      "type": "string",
+                      "const": "neq"
+                    },
+                    {
+                      "type": "string",
+                      "const": "gt"
+                    },
+                    {
+                      "type": "string",
+                      "const": "gte"
+                    },
+                    {
+                      "type": "string",
+                      "const": "lt"
+                    },
+                    {
+                      "type": "string",
+                      "const": "lte"
+                    },
+                    {
+                      "type": "string",
+                      "const": "between"
+                    },
+                    {
+                      "type": "string",
+                      "const": "in"
+                    },
+                    {
+                      "type": "string",
+                      "const": "is_null"
+                    },
+                    {
+                      "type": "string",
+                      "const": "is_not_null"
+                    }
+                  ]
+                },
+                "value": {}
+              }
+            },
+            "description": "bounded filters — partitioned datasets require a partition filter"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "default": 100
+          }
+        }
+      }
+    },
+    {
+      "name": "execute_query",
+      "description": "Execute a previously VALIDATED query by validatedQueryId (from validate_query). Returns the result with queryId, snapshot/dataVersion, qualityStatus and lineage reference. Sensitive fields are masked; large results return a summary.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "validatedQueryId"
+        ],
+        "properties": {
+          "validatedQueryId": {
+            "type": "string",
+            "description": "id returned by validate_query — never pass raw SQL"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_data_quality",
+      "description": "Get deterministic data-quality status for a dataset: PASS/WARN/FAIL checks (row count, missing rates) plus a profile (distinct counts, candidate keys, time columns).",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "datasetId"
+        ],
+        "properties": {
+          "datasetId": {
+            "type": "string",
+            "description": "dataset id from the catalog"
+          }
+        }
+      }
+    },
+    {
+      "name": "explain_lineage",
+      "description": "Explain a dataset's lineage: upstream sources (ODS/DWD/DWS chain) and downstream consumers.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "datasetId"
+        ],
+        "properties": {
+          "datasetId": {
+            "type": "string",
+            "description": "dataset id from the catalog"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_snapshot",
+      "description": "List a dataset's Iceberg snapshots (id, timestamp, manifest) — newest first. Use to report data freshness / latest snapshot.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "datasetId"
+        ],
+        "properties": {
+          "datasetId": {
+            "type": "string",
+            "description": "dataset id from the catalog"
+          }
+        }
+      }
+    },
+    {
+      "name": "assess_training_data",
+      "description": "On-demand suitability check of a dataset (or snapshot) for model training: returns a deterministic verdict (ALLOW/REVIEW/BLOCK/INSUFFICIENT_EVIDENCE) with rule findings for target leakage, future-information leakage, sensitive fields, label distribution, sample size, missingness, constant features, validation split sanity and traceability. Constraints: it is NOT a general query tool, it does NOT train or modify any model, it writes NO data and grants NO waivers, and it returns NO raw rows (aggregates only).",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "datasetId",
+          "targetField",
+          "featureFields"
+        ],
+        "properties": {
+          "datasetId": {
+            "type": "string",
+            "description": "dataset id from the catalog"
+          },
+          "targetField": {
+            "type": "string",
+            "description": "label/target field to be predicted"
+          },
+          "featureFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "candidate feature fields (must not include the target)",
+            "minItems": 1
+          },
+          "snapshotId": {
+            "type": "integer",
+            "description": "optional snapshot id to assess (default: latest)"
+          },
+          "purpose": {
+            "type": "string",
+            "const": "model_training",
+            "default": "model_training"
+          },
+          "entityIdFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "entity identity fields (for group-based validation checks)"
+          },
+          "predictionTimeField": {
+            "type": "string",
+            "description": "field holding the prediction/business time — required for future-information leakage checks"
+          },
+          "labelTimeField": {
+            "type": "string",
+            "description": "field holding the label time"
+          },
+          "trainingWindow": {
+            "type": "object",
+            "required": [
+              "start",
+              "end"
+            ],
+            "properties": {
+              "start": {
+                "type": "string",
+                "description": "training window start (ISO date)"
+              },
+              "end": {
+                "type": "string",
+                "description": "training window end (ISO date)"
+              }
+            }
+          },
+          "validationStrategy": {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "random"
+                  },
+                  {
+                    "type": "string",
+                    "const": "time"
+                  },
+                  {
+                    "type": "string",
+                    "const": "group"
+                  }
+                ],
+                "description": "train/validation split strategy"
+              },
+              "field": {
+                "type": "string",
+                "description": "split field (time/group)"
+              },
+              "cutoff": {
+                "type": "string",
+                "description": "split boundary (time, ISO date)"
+              }
+            }
+          },
+          "sensitiveFieldPolicy": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "block"
+              },
+              {
+                "type": "string",
+                "const": "review"
+              },
+              {
+                "type": "string",
+                "const": "allow"
+              }
+            ],
+            "default": "review"
+          }
+        }
+      }
+    },
+    {
+      "name": "materialize_query",
+      "description": "Materialize a VALIDATED query into an immutable analysis artifact (parquet/arrow) in the trusted artifact store. Returns metadata only (artifactId, rowCount, contentHash) — never rows. The artifact can be consumed by run_data_analysis.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "validatedQueryId"
+        ],
+        "properties": {
+          "validatedQueryId": {
+            "type": "string",
+            "description": "id returned by validate_query"
+          },
+          "format": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "parquet"
+              },
+              {
+                "type": "string",
+                "const": "arrow"
+              }
+            ],
+            "description": "artifact format"
+          }
+        }
+      }
+    },
+    {
+      "name": "inspect_review_gate",
+      "description": "Read-only explanation of a frozen review-gate decision: mode, five risk scores, hard triggers with their sources, upgrade reasons, budget, required checks and delivery restrictions. The mode is decided by the orchestrator — this tool cannot change it.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "gateDecisionId"
+        ],
+        "properties": {
+          "gateDecisionId": {
+            "type": "string",
+            "description": "frozen gate decision id (e.g. final_<id>)"
+          }
+        }
+      }
+    },
+    {
+      "name": "review_data_analysis",
+      "description": "Governed review of a completed analysis artifact: freezes an analysis proposal bound to real stored artifacts, runs the deterministic review gate, replays the stored result, applies the semantic reviewer, and returns the review verdict. The review mode is decided by the gate, not by this tool.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "artifactId"
+        ],
+        "properties": {
+          "artifactId": {
+            "type": "string",
+            "description": "analysis result artifact id (art_<16hex>)"
+          },
+          "storeRoot": {
+            "type": "string",
+            "description": "reviewer store root; defaults to REVIEWER_STORE_ROOT env"
+          },
+          "strict": {
+            "type": "boolean",
+            "description": "force STRICT review (default: gate-decided)"
+          }
+        }
+      }
+    },
+    {
+      "name": "promote_analysis",
+      "description": "Deterministic promotion authorization for a review decision: given the reviewId, loads the decision and its gate, and reports which delivery actions are allowed (PASS) or denied (CHANGES_REQUIRED / REJECT / ABSTAIN / UNREVIEWED_LOW_RISK with EXPLORATORY restrictions). This tool NEVER performs the promotion — it only authorizes.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "reviewId"
+        ],
+        "properties": {
+          "reviewId": {
+            "type": "string",
+            "description": "review decision id (e.g. review_<hash>), from review_data_analysis"
+          },
+          "action": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "MERGE_CODE"
+              },
+              {
+                "type": "string",
+                "const": "PUBLISH_REPORT"
+              },
+              {
+                "type": "string",
+                "const": "PUBLISH_PRESENTATION"
+              },
+              {
+                "type": "string",
+                "const": "PRODUCTION_WRITE"
+              },
+              {
+                "type": "string",
+                "const": "REQUEST_HUMAN_APPROVAL"
+              },
+              {
+                "type": "string",
+                "const": "DELIVER_EXPLORATORY_RESULT"
+              }
+            ],
+            "description": "single action to authorize (default: list all)"
+          },
+          "storeRoot": {
+            "type": "string",
+            "description": "reviewer store root (default REVIEWER_STORE_ROOT)"
+          }
+        }
+      }
+    },
+    {
+      "name": "pipeline_ingest",
+      "description": "Governed declarative ingestion of a frozen local CSV/Parquet file into an explicitly configured warehouse. Runs the product pipeline CLI with the contract (source path/hash/format/target/schema policy/primary key/event time/quality rules/approvalId). Write authorization is ENFORCED by the pipeline itself: without a valid sealed approval the run refuses before creating any warehouse object. dryRun validates and plans only.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "contractPath",
+          "warehouse"
+        ],
+        "properties": {
+          "contractPath": {
+            "type": "string",
+            "description": "absolute path to the frozen ingestion contract (JSON)"
+          },
+          "warehouse": {
+            "type": "string",
+            "description": "absolute local warehouse path"
+          },
+          "governanceRoot": {
+            "type": "string",
+            "description": "governance repository holding the bound approval (default PIPELINE_GOVERNANCE_ROOT)"
+          },
+          "dryRun": {
+            "type": "boolean",
+            "description": "validate + plan only; no runtime artifacts"
+          }
+        }
+      }
+    },
+    {
+      "name": "write_gate_check",
+      "description": "Read-only check whether a target table has a valid sealed approval in the governance repository (sealed spec + OPERATOR_CLI APPROVE decision + hash bindings). The actual write enforcement lives in the pipeline WriteGate — this tool only reports authorization state before a write is attempted.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "target"
+        ],
+        "properties": {
+          "target": {
+            "type": "string",
+            "description": "target table, e.g. eval_raw.sample"
+          },
+          "governanceRoot": {
+            "type": "string",
+            "description": "governance repository (default PIPELINE_GOVERNANCE_ROOT)"
+          }
+        }
+      }
+    },
+    {
+      "name": "run_analysis_graph",
+      "description": "Compile a requirement into a deterministic execution graph and run it: query/materialize -> preflight governance -> data analysis -> quality/lineage/snapshot -> reviewer -> promotion -> report. The review mode is decided by the deterministic gate, never by this tool. Feature gated by round6.graph_tool (off: not registered).",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "objective"
+        ],
+        "properties": {
+          "objective": {
+            "type": "string",
+            "description": "user goal for the analysis"
+          },
+          "dataRefs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "trusted artifact ids (art_<16hex>)"
+            },
+            "description": "trusted dataset artifact ids"
+          },
+          "format": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "markdown"
+              },
+              {
+                "type": "string",
+                "const": "html"
+              },
+              {
+                "type": "string",
+                "const": "docx"
+              },
+              {
+                "type": "string",
+                "const": "pdf"
+              }
+            ],
+            "description": "report format"
+          },
+          "runId": {
+            "type": "string",
+            "description": "existing run id to resume ([a-z0-9_-]{1,64})"
+          }
+        }
+      }
+    },
+    {
+      "name": "inspect_graph_run",
+      "description": "Read-only graph run state: node statuses, artifact refs, error codes, human actions. Cannot modify nodes, skip the reviewer, reset human gates, inject artifacts or change the review mode.",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "runId"
+        ],
+        "properties": {
+          "runId": {
+            "type": "string",
+            "description": "graph run id ([a-z0-9_-]{1,64})"
+          }
+        }
+      }
+    },
+    {
+      "name": "prepare_business_task",
+      "description": "Turns a vague business request into a structured requirement card and a candidate task plan (or clarification questions). It NEVER executes business tasks: the main agent drives execution using the returned schedule. Modes: ANALYZE (new request), CONTINUE (answer clarification questions), REPLAN (feedback after partial execution).",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "mode"
+        ],
+        "properties": {
+          "mode": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "ANALYZE"
+              },
+              {
+                "type": "string",
+                "const": "CONTINUE"
+              },
+              {
+                "type": "string",
+                "const": "REPLAN"
+              }
+            ]
+          },
+          "request": {
+            "type": "string",
+            "description": "raw business request (required for ANALYZE)"
+          },
+          "domainHint": {
+            "type": "string",
+            "description": "e.g. general / risk / sales — hint only, never forced"
+          },
+          "conversationSummary": {
+            "type": "string",
+            "description": "bounded conversation summary (not a full history)"
+          },
+          "previousState": {
+            "type": "object",
+            "required": [
+              "requestId",
+              "requirement"
+            ],
+            "properties": {
+              "requestId": {
+                "type": "string"
+              },
+              "requirement": {
+                "type": "object",
+                "properties": {}
+              },
+              "plan": {
+                "type": "object",
+                "properties": {}
+              },
+              "validation": {
+                "type": "object",
+                "properties": {}
+              },
+              "schedule": {
+                "type": "object",
+                "properties": {}
+              },
+              "replanCount": {
+                "type": "number"
+              },
+              "answeredQuestionIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "answers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "questionId",
+                "value"
+              ],
+              "properties": {
+                "questionId": {
+                  "type": "string"
+                },
+                "field": {
+                  "type": "string"
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "taskFeedback": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "taskId",
+                "status"
+              ],
+              "properties": {
+                "taskId": {
+                  "type": "string"
+                },
+                "status": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "SUCCEEDED"
+                    },
+                    {
+                      "type": "string",
+                      "const": "FAILED"
+                    },
+                    {
+                      "type": "string",
+                      "const": "EMPTY"
+                    },
+                    {
+                      "type": "string",
+                      "const": "BLOCKED"
+                    },
+                    {
+                      "type": "string",
+                      "const": "SKIPPED"
+                    }
+                  ]
+                },
+                "reasonCode": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "EMPTY_RESULT"
+                    },
+                    {
+                      "type": "string",
+                      "const": "MISSING_CAPABILITY"
+                    },
+                    {
+                      "type": "string",
+                      "const": "PRECONDITION_FAILED"
+                    },
+                    {
+                      "type": "string",
+                      "const": "CONFLICTING_EVIDENCE"
+                    },
+                    {
+                      "type": "string",
+                      "const": "DATASET_NOT_FOUND"
+                    },
+                    {
+                      "type": "string",
+                      "const": "FIELD_NOT_FOUND"
+                    },
+                    {
+                      "type": "string",
+                      "const": "USER_REQUIREMENT_CHANGED"
+                    },
+                    {
+                      "type": "string",
+                      "const": "TOOL_UNAVAILABLE"
+                    }
+                  ]
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "evidenceReferences": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "producedOutputs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "constraints": {
+            "type": "object",
+            "properties": {
+              "maxQuestions": {
+                "type": "number"
+              },
+              "maxTasks": {
+                "type": "number"
+              },
+              "maxReplans": {
+                "type": "number"
+              },
+              "maxToolCalls": {
+                "type": "number"
+              },
+              "maxSubagents": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "run_data_analysis",
+      "description": "Run complex data analysis (period comparison, trends, breakdowns, distributions, correlation, statistical tests, chart data) via an isolated Data Analysis Subagent that writes and executes a Python script under controlled conditions. Simple aggregations (single count/sum/avg/min/max) should use execute_query instead. Results are displayed directly in the UI; the tool returns only a status summary (never numeric values).",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "objective",
+          "analysisType",
+          "dataRefs"
+        ],
+        "properties": {
+          "objective": {
+            "type": "string",
+            "minLength": 1
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "analysisType": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "DESCRIPTIVE"
+              },
+              {
+                "type": "string",
+                "const": "TREND"
+              },
+              {
+                "type": "string",
+                "const": "PERIOD_COMPARISON"
+              },
+              {
+                "type": "string",
+                "const": "BREAKDOWN"
+              },
+              {
+                "type": "string",
+                "const": "DISTRIBUTION"
+              },
+              {
+                "type": "string",
+                "const": "CORRELATION"
+              },
+              {
+                "type": "string",
+                "const": "STATISTICAL_TEST"
+              },
+              {
+                "type": "string",
+                "const": "CUSTOM"
+              }
+            ]
+          },
+          "dataRefs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "artifactId",
+                "sourceType",
+                "format",
+                "masked"
+              ],
+              "properties": {
+                "artifactId": {
+                  "type": "string"
+                },
+                "sourceType": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "LAKEHOUSE_QUERY"
+                    },
+                    {
+                      "type": "string",
+                      "const": "TABULAR_ARTIFACT"
+                    },
+                    {
+                      "type": "string",
+                      "const": "DERIVED_ARTIFACT"
+                    }
+                  ]
+                },
+                "queryId": {
+                  "type": "string"
+                },
+                "snapshotId": {
+                  "type": "string"
+                },
+                "contentHash": {
+                  "type": "string"
+                },
+                "format": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "JSON"
+                    },
+                    {
+                      "type": "string",
+                      "const": "CSV"
+                    },
+                    {
+                      "type": "string",
+                      "const": "PARQUET"
+                    },
+                    {
+                      "type": "string",
+                      "const": "ARROW"
+                    }
+                  ]
+                },
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "name",
+                      "type"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "sensitive": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                },
+                "rowCount": {
+                  "type": "number"
+                },
+                "allowedColumns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "masked": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "minItems": 1
+          },
+          "metricDefinitions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "metricId",
+                "label"
+              ],
+              "properties": {
+                "metricId": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "expression": {
+                  "type": "string"
+                },
+                "aggregation": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "sum"
+                    },
+                    {
+                      "type": "string",
+                      "const": "avg"
+                    },
+                    {
+                      "type": "string",
+                      "const": "min"
+                    },
+                    {
+                      "type": "string",
+                      "const": "max"
+                    },
+                    {
+                      "type": "string",
+                      "const": "count"
+                    },
+                    {
+                      "type": "string",
+                      "const": "distinct"
+                    }
+                  ]
+                },
+                "valueType": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "NUMBER"
+                    },
+                    {
+                      "type": "string",
+                      "const": "PERCENT"
+                    },
+                    {
+                      "type": "string",
+                      "const": "CURRENCY"
+                    },
+                    {
+                      "type": "string",
+                      "const": "INTEGER"
+                    },
+                    {
+                      "type": "string",
+                      "const": "DURATION"
+                    },
+                    {
+                      "type": "string",
+                      "const": "TEXT"
+                    }
+                  ]
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "precision": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "timeField": {
+            "type": "string"
+          },
+          "timeRange": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "string"
+              },
+              "end": {
+                "type": "string"
+              },
+              "timezone": {
+                "type": "string"
+              }
+            }
+          },
+          "comparison": {
+            "type": "object",
+            "properties": {
+              "baselineStart": {
+                "type": "string"
+              },
+              "baselineEnd": {
+                "type": "string"
+              },
+              "method": {
+                "type": "string"
+              }
+            }
+          },
+          "expectedViews": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "METRIC_CARDS"
+                },
+                {
+                  "type": "string",
+                  "const": "TABLE"
+                },
+                {
+                  "type": "string",
+                  "const": "LINE_CHART"
+                },
+                {
+                  "type": "string",
+                  "const": "BAR_CHART"
+                },
+                {
+                  "type": "string",
+                  "const": "SCATTER"
+                },
+                {
+                  "type": "string",
+                  "const": "HISTOGRAM"
+                }
+              ]
+            }
+          },
+          "constraints": {
+            "type": "object",
+            "properties": {
+              "maxAttempts": {
+                "type": "number"
+              },
+              "timeoutSeconds": {
+                "type": "number"
+              },
+              "maxOutputRows": {
+                "type": "number"
+              },
+              "maxSeriesPoints": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "governance_dashboard",
+      "description": "Multi-pipeline data governance status: per-run state, business phase, open findings and pending approvals, projected from the authoritative governance event store (single source of truth). Returns a compact state/ref summary to the model; the full dashboard is rendered in the UI.",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ]
+}

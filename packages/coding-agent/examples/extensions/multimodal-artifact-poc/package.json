@@ -1,0 +1,17 @@
+{
+  "name": "multimodal-artifact-poc",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pi extension: parse_image tool with local OCR for text-only LLMs",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "test:ocr": "python3 src/ocr_server.py",
+    "check": "node --experimental-strip-types scripts/check.mts",
+    "check:feature-hygiene": "node --experimental-strip-types scripts/check-feature-hygiene.mts"
+  },
+  "dependencies": {
+    "typebox": "workspace:*"
+  },
+  "devDependencies": {}
+}

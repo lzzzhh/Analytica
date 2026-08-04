@@ -1,0 +1,21 @@
+{
+  "runtimeProfile": "no-graph-observability",
+  "description": "Graph features ON; runtime option observability=false (inspect tool reports disabled).",
+  "features": {
+    "round6.graph_engine": true,
+    "round6.graph_compiler": true,
+    "round6.graph_validation": true,
+    "round6.graph_executor": true,
+    "round6.graph_scheduler": true,
+    "round6.graph_event_store": true,
+    "round6.graph_state_reducer": true,
+    "round6.graph_artifact_edges": true,
+    "round6.graph_feedback_routing": true,
+    "round6.graph_review_integration": true,
+    "round6.graph_skill_nodes": true,
+    "round6.graph_human_gates": true,
+    "round6.graph_observability": true,
+    "round6.graph_frontend_render": true,
+    "round6.graph_tool": true
+  }
+}

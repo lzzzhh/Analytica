@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0",
+  "note": "Metrics retain their original commit binding; this is a coverage inventory, not a single-commit aggregate score.",
+  "metrics": [
+    {"category":"global","metric":"Task Success Rate","value":0.625,"numerator":30,"denominator":48,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase5-missing-metrics-92cb4346/scores.json"},
+    {"category":"global","metric":"Consistency@3","value":0.5833333333333334,"numerator":7,"denominator":12,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase5-missing-metrics-92cb4346/scores.json"},
+    {"category":"global","metric":"Hallucination Rate","value":0.020833333333333332,"numerator":1,"denominator":48,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase5-missing-metrics-92cb4346/scores.json"},
+    {"category":"global","metric":"Correct Abstention Rate","value":1,"numerator":12,"denominator":12,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase5-missing-metrics-92cb4346/scores.json"},
+    {"category":"global","metric":"Robustness Drop","value":0.08333333333333326,"baselineAccuracy":0.6666666666666666,"perturbedAccuracy":0.5833333333333334,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase5-missing-metrics-92cb4346/scores.json"},
+    {"category":"global","metric":"Worst-Slice Accuracy","value":0,"worstSlice":"data_analysis","commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase5-missing-metrics-92cb4346/scores.json"},
+    {"category":"tool_calling","metric":"Single-Tool Task Success Rate","value":0.6666666666666666,"numerator":8,"denominator":12,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase4-tool-calling-92cb4346/scores.json"},
+    {"category":"tool_calling","metric":"Argument Accuracy","value":0.3493975903614458,"numerator":116,"denominator":332,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase4-tool-calling-92cb4346/scores.json"},
+    {"category":"tool_calling","metric":"Tool Set F1","value":0.8064516129032258,"tp":50,"fp":20,"fn":4,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase4-tool-calling-92cb4346/scores.json"},
+    {"category":"tool_calling","metric":"Multi-Tool Task Success Rate","value":0.4166666666666667,"numerator":5,"denominator":12,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase4-tool-calling-92cb4346/scores.json"},
+    {"category":"tool_calling","metric":"Workflow Task Success Rate","value":0.3333333333333333,"numerator":4,"denominator":12,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase4-tool-calling-92cb4346/scores.json"},
+    {"category":"tool_calling","metric":"Orchestration Accuracy","value":0.8333333333333334,"numerator":25,"denominator":30,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase4-tool-calling-92cb4346/scores.json"},
+    {"category":"requirement","metric":"Route Accuracy","value":0.9166666666666666,"numerator":11,"denominator":12,"commit":"5356473b2746daff6007802584da3afd8dba6613","evidence":"phase3-retest-5356473b/independent-summary.json"},
+    {"category":"requirement","metric":"Constraint Recall","value":0.02564102564102564,"numerator":1,"denominator":39,"commit":"5356473b2746daff6007802584da3afd8dba6613","evidence":"phase3-retest-5356473b/independent-summary.json"},
+    {"category":"multimodal","metric":"pass@1","value":1,"numerator":4,"denominator":4,"commit":"5356473b2746daff6007802584da3afd8dba6613","evidence":"phase3-retest-5356473b/independent-summary.json"},
+    {"category":"multimodal","metric":"pass@3","value":1,"numerator":4,"denominator":4,"commit":"5356473b2746daff6007802584da3afd8dba6613","evidence":"phase3-retest-5356473b/independent-summary.json"},
+    {"category":"multimodal","metric":"Structured Extraction F1","value":1,"tp":36,"fp":0,"fn":0,"commit":"5356473b2746daff6007802584da3afd8dba6613","evidence":"phase3-retest-5356473b/independent-summary.json"},
+    {"category":"data_analysis","metric":"Analysis Task Success Rate","value":0.125,"numerator":1,"denominator":8,"commit":"5356473b2746daff6007802584da3afd8dba6613","evidence":"phase3-retest-5356473b/independent-summary.json"},
+    {"category":"data_analysis","metric":"Numerical Correctness","value":0.19230769230769232,"numerator":5,"denominator":26,"commit":"5356473b2746daff6007802584da3afd8dba6613","evidence":"phase3-retest-5356473b/independent-summary.json"},
+    {"category":"pipeline","metric":"Pipeline Run Success Rate","value":1,"numerator":14,"denominator":14,"commit":"fdaffc50f2679505d6056966111156c40363aade+recorded-worktree","evidence":"phase2-retest/retest-report.md"},
+    {"category":"pipeline","metric":"Data Correctness Rate","value":1,"numerator":70,"denominator":70,"commit":"fdaffc50f2679505d6056966111156c40363aade+recorded-worktree","evidence":"phase2-retest/retest-report.md"},
+    {"category":"pipeline","metric":"Data Quality Defect Detection F1","value":1,"precision":1,"recall":1,"commit":"fdaffc50f2679505d6056966111156c40363aade+recorded-worktree","evidence":"phase2-retest/retest-report.md"},
+    {"category":"pipeline","metric":"Idempotent Rerun Success Rate","value":1,"numerator":14,"denominator":14,"commit":"fdaffc50f2679505d6056966111156c40363aade+recorded-worktree","evidence":"phase2-retest/retest-report.md"},
+    {"category":"reviewer","metric":"High-Severity Defect Recall","value":1,"numerator":6,"denominator":6,"commit":"5356473b2746daff6007802584da3afd8dba6613","evidence":"phase3-retest-5356473b/independent-summary.json"},
+    {"category":"reviewer","metric":"Reviewer False Positive Rate","value":0,"numerator":0,"denominator":4,"commit":"5356473b2746daff6007802584da3afd8dba6613","evidence":"phase3-retest-5356473b/independent-summary.json"},
+    {"category":"hard_gate","metric":"Hard-Gate Violation Count / Rate","count":0,"denominator":20,"value":0,"commit":"92cb4346ac5f0b4edc3eefcdcb81978e570fd220","evidence":"phase5-missing-metrics-92cb4346/scores.json"}
+  ]
+}

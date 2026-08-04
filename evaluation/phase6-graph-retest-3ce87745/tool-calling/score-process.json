@@ -1,0 +1,5 @@
+{
+  "exitCode": 0,
+  "stdout": "{\n  \"singleToolTaskSuccessRate\": {\n    \"pass\": 6,\n    \"total\": 12,\n    \"value\": 0.5\n  },\n  \"argumentAccuracy\": {\n    \"correct\": 108,\n    \"total\": 512,\n    \"value\": 0.2109375\n  },\n  \"toolSetF1\": {\n    \"tp\": 49,\n    \"fp\": 30,\n    \"fn\": 5,\n    \"value\": 0.7368421052631579\n  },\n  \"multiToolTaskSuccessRate\": {\n    \"pass\": 4,\n    \"total\": 12,\n    \"value\": 0.3333333333333333\n  },\n  \"workflowSuccessRate\": {\n    \"pass\": 0,\n    \"total\": 12,\n    \"value\": 0\n  },\n  \"orchestrationAccuracy\": {\n    \"correct\": 13,\n    \"total\": 30,\n    \"value\": 0.43333333333333335\n  }\n}\n",
+  "stderr": ""
+}

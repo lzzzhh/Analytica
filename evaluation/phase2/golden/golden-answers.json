@@ -1,0 +1,31 @@
+{
+  "chinook": {
+    "sourceRows": {
+      "artist": 275,
+      "album": 347,
+      "track": 3503,
+      "genre": 25,
+      "invoice": 412,
+      "invoice_line": 2240
+    },
+    "salesRows": 2240,
+    "distinctInvoices": 412,
+    "totalLineRevenue": 2328.6,
+    "invoiceHeaderTotal": 2328.6,
+    "monthlyCountryRows": 319,
+    "topCountry": "USA",
+    "topCountryRevenue": 523.06,
+    "topGenre": "Rock",
+    "topGenreRevenue": 826.65
+  },
+  "bikeSharing": {
+    "hourRows": 17379,
+    "dayRows": 731,
+    "hourRentalTotal": 3292679,
+    "dayRentalTotal": 3292679,
+    "peakDate": "2012-09-15",
+    "peakRentalCount": 8714,
+    "firstRollingMean": 985.0
+  },
+  "generatedAt": "2026-08-03T01:31:24.231060+00:00"
+}

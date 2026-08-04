@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lakehouse-gateway"
+version = "0.1.0"
+description = "Read-only Query Gateway for cloud lakehouse (Iceberg) — data layer for data-agent"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "pydantic>=2.0",
+    "pyarrow>=15",
+    "pyiceberg[pyarrow]>=0.7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "httpx>=0.27",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-q", "--tb=short"]
+# SQLAlchemy/pyiceberg sqlite engines emit ResourceWarning at GC time — known
+# noise, not a code defect. Everything else stays strict (error).
+filterwarnings = [
+    "error",
+    "ignore:unclosed database.*:ResourceWarning",
+]

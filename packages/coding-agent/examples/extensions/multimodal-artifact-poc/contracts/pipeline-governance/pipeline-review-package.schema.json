@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/pipeline-review-package.schema.json",
+  "title": "PipelineReviewPackage",
+  "type": "object",
+  "required": [
+    "reviewId",
+    "schemaSpec",
+    "pipelineSpec",
+    "pipelineDraftArtifact",
+    "validationIssues",
+    "contentHash",
+    "createdAt",
+    "requester"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "reviewId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schemaSpec": {
+      "$ref": "schema-spec.schema.json"
+    },
+    "pipelineSpec": {
+      "$ref": "pipeline-spec.schema.json"
+    },
+    "pipelineDraftArtifact": {
+      "$ref": "pipeline-draft-artifact.schema.json"
+    },
+    "validationIssues": {
+      "type": "array",
+      "items": {
+        "$ref": "validation-issue.schema.json"
+      }
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "requester": {
+      "type": "string"
+    }
+  }
+}

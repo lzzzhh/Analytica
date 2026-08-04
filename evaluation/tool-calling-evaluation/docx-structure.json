@@ -1,0 +1,1464 @@
+{
+  "source": "/Users/zhanhuilin/Downloads/Analytica 工具调用能力评测.docx",
+  "paragraphCount": 145,
+  "tableCount": 0,
+  "blocks": [
+    {
+      "index": 1,
+      "type": "paragraph",
+      "style": "Heading 1",
+      "text": "Analytica 工具调用能力评测",
+      "runs": [
+        "Analytica ",
+        "工具调用能力评测"
+      ]
+    },
+    {
+      "index": 2,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "请基于当前仓库实际注册的工具、工具 Schema、Feature 开关和核心业务流程，设计并执行三层工具调用评测。",
+      "runs": [
+        "请基于当前仓库实际注册的工具、工具",
+        " Schema、Feature ",
+        "开关和核心业务流程，设计并执行三层工具调用评测。"
+      ]
+    },
+    {
+      "index": 3,
+      "type": "paragraph",
+      "style": "Body Text",
+      "text": "不要虚构不存在的工具。先读取工具注册表、工具定义和现有测试，再生成测试用例。",
+      "runs": [
+        "不要虚构不存在的工具。先读取工具注册表、工具定义和现有测试，再生成测试用例。"
+      ]
+    },
+    {
+      "index": 4,
+      "type": "paragraph",
+      "style": "Body Text",
+      "text": "每层至少设计 10 个测试用例，总数不少于 30 个。",
+      "runs": [
+        "每层至少设计",
+        " 10 ",
+        "个测试用例，总数不少于",
+        " 30 ",
+        "个。"
+      ]
+    },
+    {
+      "index": 5,
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": [
+        ""
+      ]
+    },
+    {
+      "index": 6,
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "第一层：单工具调用",
+      "runs": [
+        "第一层：单工具调用"
+      ]
+    },
+    {
+      "index": 7,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "场景定义：",
+      "runs": [
+        "场景定义："
+      ]
+    },
+    {
+      "index": 8,
+      "type": "paragraph",
+      "style": "Block Text",
+      "text": "用户任务可以通过一个工具独立完成，不需要其他工具的输出。",
+      "runs": [
+        "用户任务可以通过一个工具独立完成，不需要其他工具的输出。"
+      ]
+    },
+    {
+      "index": 9,
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "指标 1：Single-Tool Task Success Rate",
+      "runs": [
+        "指标",
+        " ",
+        "1：Single-Tool",
+        " Task Success Rate"
+      ]
+    },
+    {
+      "index": 10,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "同时满足以下条件才算成功：",
+      "runs": [
+        "同时满足以下条件才算成功："
+      ]
+    },
+    {
+      "index": 11,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "选择正确工具",
+      "runs": [
+        "选择正确工具"
+      ]
+    },
+    {
+      "index": 12,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "参数合法且语义正确",
+      "runs": [
+        "参数合法且语义正确"
+      ]
+    },
+    {
+      "index": 13,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "工具成功执行",
+      "runs": [
+        "工具成功执行"
+      ]
+    },
+    {
+      "index": 14,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "返回结果满足任务断言",
+      "runs": [
+        "返回结果满足任务断言"
+      ]
+    },
+    {
+      "index": 15,
+      "type": "paragraph",
+      "style": "Source Code",
+      "text": "成功任务数 / 单工具任务总数",
+      "runs": [
+        "成功任务数",
+        " / ",
+        "单工具任务总数"
+      ]
+    },
+    {
+      "index": 16,
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "指标 2：Argument Accuracy",
+      "runs": [
+        "指标",
+        " ",
+        "2：Argument",
+        " Accuracy"
+      ]
+    },
+    {
+      "index": 17,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "按工具参数字段计算正确率：",
+      "runs": [
+        "按工具参数字段计算正确率："
+      ]
+    },
+    {
+      "index": 18,
+      "type": "paragraph",
+      "style": "Source Code",
+      "text": "正确参数字段数 / 应提供参数字段总数",
+      "runs": [
+        "正确参数字段数",
+        " / ",
+        "应提供参数字段总数"
+      ]
+    },
+    {
+      "index": 19,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "需要检查：",
+      "runs": [
+        "需要检查："
+      ]
+    },
+    {
+      "index": 20,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "必填字段",
+      "runs": [
+        "必填字段"
+      ]
+    },
+    {
+      "index": 21,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "参数类型",
+      "runs": [
+        "参数类型"
+      ]
+    },
+    {
+      "index": 22,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "Artifact ID",
+      "runs": [
+        "Artifact ID"
+      ]
+    },
+    {
+      "index": 23,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "表名和字段名",
+      "runs": [
+        "表名和字段名"
+      ]
+    },
+    {
+      "index": 24,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "时间范围",
+      "runs": [
+        "时间范围"
+      ]
+    },
+    {
+      "index": 25,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "查询条件",
+      "runs": [
+        "查询条件"
+      ]
+    },
+    {
+      "index": 26,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "环境或目标对象",
+      "runs": [
+        "环境或目标对象"
+      ]
+    },
+    {
+      "index": 27,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "仅 JSON Schema 合法但业务参数错误，仍算参数错误。",
+      "runs": [
+        "仅",
+        " JSON Schema ",
+        "合法但业务参数错误，仍算参数错误。"
+      ]
+    },
+    {
+      "index": 28,
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "测试用例要求",
+      "runs": [
+        "测试用例要求"
+      ]
+    },
+    {
+      "index": 29,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "至少 10 个，覆盖：",
+      "runs": [
+        "至少",
+        " 10 ",
+        "个，覆盖："
+      ]
+    },
+    {
+      "index": 30,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "正常成功",
+      "runs": [
+        "正常成功"
+      ]
+    },
+    {
+      "index": 31,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "缺少必填参数",
+      "runs": [
+        "缺少必填参数"
+      ]
+    },
+    {
+      "index": 32,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "错误 Artifact ID",
+      "runs": [
+        "错误",
+        " Artifact ID"
+      ]
+    },
+    {
+      "index": 33,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "错误表名或字段名",
+      "runs": [
+        "错误表名或字段名"
+      ]
+    },
+    {
+      "index": 34,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "边界时间范围",
+      "runs": [
+        "边界时间范围"
+      ]
+    },
+    {
+      "index": 35,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "工具不可用",
+      "runs": [
+        "工具不可用"
+      ]
+    },
+    {
+      "index": 36,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "Feature 关闭",
+      "runs": [
+        "Feature ",
+        "关闭"
+      ]
+    },
+    {
+      "index": 37,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "用户请求本身不需要调用工具",
+      "runs": [
+        "用户请求本身不需要调用工具"
+      ]
+    },
+    {
+      "index": 38,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "相似工具之间的选择",
+      "runs": [
+        "相似工具之间的选择"
+      ]
+    },
+    {
+      "index": 39,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "工具返回错误时的处理",
+      "runs": [
+        "工具返回错误时的处理"
+      ]
+    },
+    {
+      "index": 40,
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": [
+        ""
+      ]
+    },
+    {
+      "index": 41,
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "第二层：多工具选择",
+      "runs": [
+        "第二层：多工具选择"
+      ]
+    },
+    {
+      "index": 42,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "场景定义：",
+      "runs": [
+        "场景定义："
+      ]
+    },
+    {
+      "index": 43,
+      "type": "paragraph",
+      "style": "Block Text",
+      "text": "一个任务需要多个工具能力，但工具之间不一定存在严格执行顺序。",
+      "runs": [
+        "一个任务需要多个工具能力，但工具之间不一定存在严格执行顺序。"
+      ]
+    },
+    {
+      "index": 44,
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "指标 1：Tool Set F1",
+      "runs": [
+        "指标",
+        " ",
+        "1：Tool",
+        " Set F1"
+      ]
+    },
+    {
+      "index": 45,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "比较实际调用工具集合和场景标注的必需工具集合。",
+      "runs": [
+        "比较实际调用工具集合和场景标注的必需工具集合。"
+      ]
+    },
+    {
+      "index": 46,
+      "type": "paragraph",
+      "style": "Source Code",
+      "text": "Precision = 正确调用工具数 / 实际调用工具数\nRecall    = 正确调用工具数 / 必需工具数\nF1        = 2PR / (P + R)",
+      "runs": [
+        "Precision = ",
+        "正确调用工具数",
+        " / ",
+        "实际调用工具数",
+        "\n",
+        "Recall    = ",
+        "正确调用工具数",
+        " / ",
+        "必需工具数",
+        "\n",
+        "F1        = 2PR / (P + R)"
+      ]
+    },
+    {
+      "index": 47,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "场景可以定义多个等价的可接受工具集合，不要求唯一工具组合。",
+      "runs": [
+        "场景可以定义多个等价的可接受工具集合，不要求唯一工具组合。"
+      ]
+    },
+    {
+      "index": 48,
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "指标 2：Multi-Tool Task Success Rate",
+      "runs": [
+        "指标",
+        " ",
+        "2：Multi-Tool",
+        " Task Success Rate"
+      ]
+    },
+    {
+      "index": 49,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "即使工具集合不是标准答案的逐字复刻，只要：",
+      "runs": [
+        "即使工具集合不是标准答案的逐字复刻，只要："
+      ]
+    },
+    {
+      "index": 50,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "必需信息均被获取",
+      "runs": [
+        "必需信息均被获取"
+      ]
+    },
+    {
+      "index": 51,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "最终结果正确",
+      "runs": [
+        "最终结果正确"
+      ]
+    },
+    {
+      "index": 52,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "没有遗漏关键能力",
+      "runs": [
+        "没有遗漏关键能力"
+      ]
+    },
+    {
+      "index": 53,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "没有调用禁止工具",
+      "runs": [
+        "没有调用禁止工具"
+      ]
+    },
+    {
+      "index": 54,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "即可判定成功。",
+      "runs": [
+        "即可判定成功。"
+      ]
+    },
+    {
+      "index": 55,
+      "type": "paragraph",
+      "style": "Source Code",
+      "text": "成功完成任务数 / 多工具任务总数",
+      "runs": [
+        "成功完成任务数",
+        " / ",
+        "多工具任务总数"
+      ]
+    },
+    {
+      "index": 56,
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "测试用例要求",
+      "runs": [
+        "测试用例要求"
+      ]
+    },
+    {
+      "index": 57,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "至少 10 个，覆盖：",
+      "runs": [
+        "至少",
+        " 10 ",
+        "个，覆盖："
+      ]
+    },
+    {
+      "index": 58,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "Catalog + Schema + Snapshot 获取",
+      "runs": [
+        "Catalog + Schema + Snapshot ",
+        "获取"
+      ]
+    },
+    {
+      "index": 59,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "查询结果与质量报告联合使用",
+      "runs": [
+        "查询结果与质量报告联合使用"
+      ]
+    },
+    {
+      "index": 60,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "多个独立数据源查询",
+      "runs": [
+        "多个独立数据源查询"
+      ]
+    },
+    {
+      "index": 61,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "必需工具遗漏",
+      "runs": [
+        "必需工具遗漏"
+      ]
+    },
+    {
+      "index": 62,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "调用无关工具",
+      "runs": [
+        "调用无关工具"
+      ]
+    },
+    {
+      "index": 63,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "使用等价工具组合完成任务",
+      "runs": [
+        "使用等价工具组合完成任务"
+      ]
+    },
+    {
+      "index": 64,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "重复调用同一工具",
+      "runs": [
+        "重复调用同一工具"
+      ]
+    },
+    {
+      "index": 65,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "部分工具失败",
+      "runs": [
+        "部分工具失败"
+      ]
+    },
+    {
+      "index": 66,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "Feature 开关导致候选工具变化",
+      "runs": [
+        "Feature ",
+        "开关导致候选工具变化"
+      ]
+    },
+    {
+      "index": 67,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "用户任务只需部分信息，避免过度调用",
+      "runs": [
+        "用户任务只需部分信息，避免过度调用"
+      ]
+    },
+    {
+      "index": 68,
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": [
+        ""
+      ]
+    },
+    {
+      "index": 69,
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "第三层：工具链编排",
+      "runs": [
+        "第三层：工具链编排"
+      ]
+    },
+    {
+      "index": 70,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "场景定义：",
+      "runs": [
+        "场景定义："
+      ]
+    },
+    {
+      "index": 71,
+      "type": "paragraph",
+      "style": "Block Text",
+      "text": "前一个工具的输出会成为后一个工具的输入，存在明确依赖、状态转换或条件分支。",
+      "runs": [
+        "前一个工具的输出会成为后一个工具的输入，存在明确依赖、状态转换或条件分支。"
+      ]
+    },
+    {
+      "index": 72,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "典型链路：",
+      "runs": [
+        "典型链路："
+      ]
+    },
+    {
+      "index": 73,
+      "type": "paragraph",
+      "style": "Source Code",
+      "text": "Catalog\n→ QueryPlan\n→ Validate\n→ Execute\n→ Materialize\n→ Data Analysis\n→ ReviewGate\n→ Reviewer\n→ Promotion",
+      "runs": [
+        "Catalog",
+        "\n",
+        "→ QueryPlan",
+        "\n",
+        "→ Validate",
+        "\n",
+        "→ Execute",
+        "\n",
+        "→ Materialize",
+        "\n",
+        "→ Data Analysis",
+        "\n",
+        "→ ReviewGate",
+        "\n",
+        "→ Reviewer",
+        "\n",
+        "→ Promotion"
+      ]
+    },
+    {
+      "index": 74,
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "指标 1：Workflow Task Success Rate",
+      "runs": [
+        "指标",
+        " ",
+        "1：Workflow",
+        " Task Success Rate"
+      ]
+    },
+    {
+      "index": 75,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "任务只有同时满足以下条件才成功：",
+      "runs": [
+        "任务只有同时满足以下条件才成功："
+      ]
+    },
+    {
+      "index": 76,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "必需步骤全部执行",
+      "runs": [
+        "必需步骤全部执行"
+      ]
+    },
+    {
+      "index": 77,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "中间 Artifact 正确传递",
+      "runs": [
+        "中间",
+        " Artifact ",
+        "正确传递"
+      ]
+    },
+    {
+      "index": 78,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "调用顺序满足依赖关系",
+      "runs": [
+        "调用顺序满足依赖关系"
+      ]
+    },
+    {
+      "index": 79,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "最终结果正确",
+      "runs": [
+        "最终结果正确"
+      ]
+    },
+    {
+      "index": 80,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "没有绕过 Gate、Approval 或安全边界",
+      "runs": [
+        "没有绕过",
+        " Gate、Approval ",
+        "或安全边界"
+      ]
+    },
+    {
+      "index": 81,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "失败时没有产生错误的正式交付",
+      "runs": [
+        "失败时没有产生错误的正式交付"
+      ]
+    },
+    {
+      "index": 82,
+      "type": "paragraph",
+      "style": "Source Code",
+      "text": "成功工作流数 / 工具链任务总数",
+      "runs": [
+        "成功工作流数",
+        " / ",
+        "工具链任务总数"
+      ]
+    },
+    {
+      "index": 83,
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "指标 2：Orchestration Accuracy",
+      "runs": [
+        "指标",
+        " ",
+        "2：Orchestration",
+        " Accuracy"
+      ]
+    },
+    {
+      "index": 84,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "对场景标注的关键编排断言逐项评分：",
+      "runs": [
+        "对场景标注的关键编排断言逐项评分："
+      ]
+    },
+    {
+      "index": 85,
+      "type": "paragraph",
+      "style": "Source Code",
+      "text": "正确编排断言数 / 全部编排断言数",
+      "runs": [
+        "正确编排断言数",
+        " / ",
+        "全部编排断言数"
+      ]
+    },
+    {
+      "index": 86,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "编排断言包括：",
+      "runs": [
+        "编排断言包括："
+      ]
+    },
+    {
+      "index": 87,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "正确的工具依赖边",
+      "runs": [
+        "正确的工具依赖边"
+      ]
+    },
+    {
+      "index": 88,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "正确调用顺序",
+      "runs": [
+        "正确调用顺序"
+      ]
+    },
+    {
+      "index": 89,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "正确传递 Artifact Ref",
+      "runs": [
+        "正确传递",
+        " Artifact Ref"
+      ]
+    },
+    {
+      "index": 90,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "正确条件分支",
+      "runs": [
+        "正确条件分支"
+      ]
+    },
+    {
+      "index": 91,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "正确停止或重试",
+      "runs": [
+        "正确停止或重试"
+      ]
+    },
+    {
+      "index": 92,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "正确复用已有结果",
+      "runs": [
+        "正确复用已有结果"
+      ]
+    },
+    {
+      "index": 93,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "不重复执行不可重复步骤",
+      "runs": [
+        "不重复执行不可重复步骤"
+      ]
+    },
+    {
+      "index": 94,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "不绕过 ReviewGate、WriteGate 或 Promotion Guard",
+      "runs": [
+        "不绕过",
+        " ReviewGate、WriteGate ",
+        "或",
+        " Promotion Guard"
+      ]
+    },
+    {
+      "index": 95,
+      "type": "paragraph",
+      "style": "Heading 3",
+      "text": "测试用例要求",
+      "runs": [
+        "测试用例要求"
+      ]
+    },
+    {
+      "index": 96,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "至少 10 个，覆盖：",
+      "runs": [
+        "至少",
+        " 10 ",
+        "个，覆盖："
+      ]
+    },
+    {
+      "index": 97,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "QueryPlan 验证后执行",
+      "runs": [
+        "QueryPlan ",
+        "验证后执行"
+      ]
+    },
+    {
+      "index": 98,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "Query 结果物化后进入分析",
+      "runs": [
+        "Query ",
+        "结果物化后进入分析"
+      ]
+    },
+    {
+      "index": 99,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "多模态提取结果进入数据分析",
+      "runs": [
+        "多模态提取结果进入数据分析"
+      ]
+    },
+    {
+      "index": 100,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "Pipeline 入仓后执行查询",
+      "runs": [
+        "Pipeline ",
+        "入仓后执行查询"
+      ]
+    },
+    {
+      "index": 101,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "分析结果进入 Reviewer",
+      "runs": [
+        "分析结果进入",
+        " Reviewer"
+      ]
+    },
+    {
+      "index": 102,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "STRICT Gate 启用完整审核",
+      "runs": [
+        "STRICT Gate ",
+        "启用完整审核"
+      ]
+    },
+    {
+      "index": 103,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "NONE Gate 不启动 Reviewer",
+      "runs": [
+        "NONE Gate ",
+        "不启动",
+        " Reviewer"
+      ]
+    },
+    {
+      "index": 104,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "中间 Artifact 缺失",
+      "runs": [
+        "中间",
+        " Artifact ",
+        "缺失"
+      ]
+    },
+    {
+      "index": 105,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "工具超时后的恢复或停止",
+      "runs": [
+        "工具超时后的恢复或停止"
+      ]
+    },
+    {
+      "index": 106,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "Reviewer ABSTAIN 后禁止正式发布",
+      "runs": [
+        "Reviewer ABSTAIN ",
+        "后禁止正式发布"
+      ]
+    },
+    {
+      "index": 107,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "数据质量失败后的条件分支",
+      "runs": [
+        "数据质量失败后的条件分支"
+      ]
+    },
+    {
+      "index": 108,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "重复执行时的幂等和缓存复用",
+      "runs": [
+        "重复执行时的幂等和缓存复用"
+      ]
+    },
+    {
+      "index": 109,
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": [
+        ""
+      ]
+    },
+    {
+      "index": 110,
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "测试用例生成要求",
+      "runs": [
+        "测试用例生成要求"
+      ]
+    },
+    {
+      "index": 111,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "请自行头脑风暴测试用例，但必须基于仓库中的真实业务和工具。",
+      "runs": [
+        "请自行头脑风暴测试用例，但必须基于仓库中的真实业务和工具。"
+      ]
+    },
+    {
+      "index": 112,
+      "type": "paragraph",
+      "style": "Body Text",
+      "text": "每个测试用例包含：",
+      "runs": [
+        "每个测试用例包含："
+      ]
+    },
+    {
+      "index": 113,
+      "type": "paragraph",
+      "style": "Source Code",
+      "text": "caseId\nlayer\nuserTask\nbusinessScenario\navailableTools\nrequiredCapabilities\nacceptableToolSets\nforbiddenTools\ninputArtifacts\nexpectedArguments\nrequiredDependencies\nexpectedResultAssertions\nexpectedFailureBehavior\noracle",
+      "runs": [
+        "caseId",
+        "\n",
+        "layer",
+        "\n",
+        "userTask",
+        "\n",
+        "businessScenario",
+        "\n",
+        "availableTools",
+        "\n",
+        "requiredCapabilities",
+        "\n",
+        "acceptableToolSets",
+        "\n",
+        "forbiddenTools",
+        "\n",
+        "inputArtifacts",
+        "\n",
+        "expectedArguments",
+        "\n",
+        "requiredDependencies",
+        "\n",
+        "expectedResultAssertions",
+        "\n",
+        "expectedFailureBehavior",
+        "\n",
+        "oracle"
+      ]
+    },
+    {
+      "index": 114,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "用例设计应包含：",
+      "runs": [
+        "用例设计应包含："
+      ]
+    },
+    {
+      "index": 115,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "正向与负向场景",
+      "runs": [
+        "正向与负向场景"
+      ]
+    },
+    {
+      "index": 116,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "简单与边界场景",
+      "runs": [
+        "简单与边界场景"
+      ]
+    },
+    {
+      "index": 117,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "Feature ON/OFF",
+      "runs": [
+        "Feature ON/OFF"
+      ]
+    },
+    {
+      "index": 118,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "参数错误",
+      "runs": [
+        "参数错误"
+      ]
+    },
+    {
+      "index": 119,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "工具不可用",
+      "runs": [
+        "工具不可用"
+      ]
+    },
+    {
+      "index": 120,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "等价工具路径",
+      "runs": [
+        "等价工具路径"
+      ]
+    },
+    {
+      "index": 121,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "安全与治理边界",
+      "runs": [
+        "安全与治理边界"
+      ]
+    },
+    {
+      "index": 122,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "恢复和正确停止",
+      "runs": [
+        "恢复和正确停止"
+      ]
+    },
+    {
+      "index": 123,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "不要要求模型严格复刻唯一调用序列；存在等价正确路径时，应明确列出。",
+      "runs": [
+        "不要要求模型严格复刻唯一调用序列；存在等价正确路径时，应明确列出。"
+      ]
+    },
+    {
+      "index": 124,
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": [
+        ""
+      ]
+    },
+    {
+      "index": 125,
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "评测约束",
+      "runs": [
+        "评测约束"
+      ]
+    },
+    {
+      "index": 126,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "核心指标由确定性 Scorer 计算，Codex 不得主观覆盖结果。",
+      "runs": [
+        "核心指标由确定性",
+        " Scorer ",
+        "计算，Codex",
+        " ",
+        "不得主观覆盖结果。"
+      ]
+    },
+    {
+      "index": 127,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "Codex 不得修改被测输出后再记为成功。",
+      "runs": [
+        "Codex ",
+        "不得修改被测输出后再记为成功。"
+      ]
+    },
+    {
+      "index": 128,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "不存在或未注册的工具调用记为失败。",
+      "runs": [
+        "不存在或未注册的工具调用记为失败。"
+      ]
+    },
+    {
+      "index": 129,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "Schema 合法但语义参数错误，记为参数错误。",
+      "runs": [
+        "Schema ",
+        "合法但语义参数错误，记为参数错误。"
+      ]
+    },
+    {
+      "index": 130,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "基础设施不可用标记为 INFRA_ERROR，不要混入业务失败。",
+      "runs": [
+        "基础设施不可用标记为",
+        " ",
+        "INFRA_ERROR",
+        "，不要混入业务失败。"
+      ]
+    },
+    {
+      "index": 131,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "无法判断且缺少证据时标记为 ABSTAIN。",
+      "runs": [
+        "无法判断且缺少证据时标记为",
+        " ",
+        "ABSTAIN",
+        "。"
+      ]
+    },
+    {
+      "index": 132,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "所有结论绑定 Commit SHA、Feature Snapshot、工具注册表版本和输入 Artifact Hash。",
+      "runs": [
+        "所有结论绑定",
+        " Commit SHA、Feature ",
+        "Snapshot、工具注册表版本和输入",
+        " Artifact Hash。"
+      ]
+    },
+    {
+      "index": 133,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "对每个失败用例给出工具调用 Trace 和明确失败原因。",
+      "runs": [
+        "对每个失败用例给出工具调用",
+        " Trace ",
+        "和明确失败原因。"
+      ]
+    },
+    {
+      "index": 134,
+      "type": "paragraph",
+      "style": "Normal",
+      "text": "",
+      "runs": [
+        ""
+      ]
+    },
+    {
+      "index": 135,
+      "type": "paragraph",
+      "style": "Heading 2",
+      "text": "最终输出",
+      "runs": [
+        "最终输出"
+      ]
+    },
+    {
+      "index": 136,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "分别报告三层结果：",
+      "runs": [
+        "分别报告三层结果："
+      ]
+    },
+    {
+      "index": 137,
+      "type": "paragraph",
+      "style": "Source Code",
+      "text": "第一层：\n- Single-Tool Task Success Rate\n- Argument Accuracy\n\n第二层：\n- Tool Set F1\n- Multi-Tool Task Success Rate\n\n第三层：\n- Workflow Task Success Rate\n- Orchestration Accuracy",
+      "runs": [
+        "第一层：",
+        "\n",
+        "- Single-Tool Task Success Rate",
+        "\n",
+        "- Argument Accuracy",
+        "\n",
+        "\n",
+        "第二层：",
+        "\n",
+        "- Tool Set F1",
+        "\n",
+        "- Multi-Tool Task Success Rate",
+        "\n",
+        "\n",
+        "第三层：",
+        "\n",
+        "- Workflow Task Success Rate",
+        "\n",
+        "- Orchestration Accuracy"
+      ]
+    },
+    {
+      "index": 138,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "同时输出：",
+      "runs": [
+        "同时输出："
+      ]
+    },
+    {
+      "index": 139,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "每层测试用例清单",
+      "runs": [
+        "每层测试用例清单"
+      ]
+    },
+    {
+      "index": 140,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "失败用例及原因",
+      "runs": [
+        "失败用例及原因"
+      ]
+    },
+    {
+      "index": 141,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "工具选择混淆情况",
+      "runs": [
+        "工具选择混淆情况"
+      ]
+    },
+    {
+      "index": 142,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "参数错误分布",
+      "runs": [
+        "参数错误分布"
+      ]
+    },
+    {
+      "index": 143,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "编排失败位置",
+      "runs": [
+        "编排失败位置"
+      ]
+    },
+    {
+      "index": 144,
+      "type": "paragraph",
+      "style": "Compact",
+      "text": "建议修复优先级",
+      "runs": [
+        "建议修复优先级"
+      ]
+    },
+    {
+      "index": 145,
+      "type": "paragraph",
+      "style": "First Paragraph",
+      "text": "本阶段先生成测试设计和执行计划；确认测试集合理后，再进行批量真实模型评测。",
+      "runs": [
+        "本阶段先生成测试设计和执行计划；确认测试集合理后，再进行批量真实模型评测。"
+      ]
+    }
+  ]
+}

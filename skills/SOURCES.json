@@ -1,0 +1,39 @@
+{
+  "generatedAt": "2026-08-02T12:39:51Z",
+  "sources": [
+    {
+      "repository": "antvis/chart-visualization-skills",
+      "commit": "b43ddb6543885d55ded2815b5aab75b17643f416",
+      "included": [
+        "skills/chart-visualization",
+        "skills/infographic-creator"
+      ],
+      "license": "MIT"
+    },
+    {
+      "repository": "sunbigfly/ppt-agent-skills",
+      "commit": "13e353776d0ba774eff7c423cc3e529cfe0adbeb",
+      "included": ["complete repository snapshot excluding .git"],
+      "license": "MIT"
+    },
+    {
+      "repository": "kortix-ai/suna",
+      "commit": "20a22ff65882ca305bba2c1a285f2e2be9bf5e69",
+      "included": [
+        "docx",
+        "pdf",
+        "design-foundations"
+      ],
+      "license": "Elastic License 2.0",
+      "note": "Selected for local/personal use; reassess before hosted-service use."
+    },
+    {
+      "repository": "openai/codex",
+      "commit": "2b5bdcf67547860f2e5c5a605009a70026796b2b",
+      "included": [
+        "codex-rs/skills/src/assets/samples/imagegen"
+      ],
+      "license": "Apache-2.0 repository license; retain bundled notices."
+    }
+  ]
+}

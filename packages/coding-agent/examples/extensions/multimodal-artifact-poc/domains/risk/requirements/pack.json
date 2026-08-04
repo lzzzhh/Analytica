@@ -1,0 +1,24 @@
+{
+  "packId": "risk",
+  "packVersion": "1.0.0",
+  "domainName": "risk",
+  "keywords": ["贷款", "放款", "申请", "逾期", "坏账", "风控", "信用", "信贷", "loan", "credit", "risk", "default", "通过率"],
+  "description": "Risk/credit domain pack — mirrors src/requirement-planning/domain-packs/risk.json. Kept here as the documented domain extension surface; the loader reads the canonical pack from src/requirement-planning/domain-packs/.",
+  "metrics": ["申请量", "通过率", "放款额", "逾期率", "坏账率", "AUC", "KS", "PSI"],
+  "subjects": ["个人贷款", "企业贷款", "信用卡"],
+  "commonTimeRanges": ["recent_7_days", "recent_30_days", "previous_period"],
+  "comparisonBaselines": ["previous_30_days", "previous_period"],
+  "commonAmbiguities": ["subject", "timeRange", "metrics", "comparisonBaseline", "model"],
+  "defaultRiskLevel": {
+    "timeRange": "LOW",
+    "comparisonBaseline": "LOW"
+  },
+  "constraints": {
+    "noSql": true,
+    "noTableNames": true,
+    "noToolNames": true,
+    "noFixedDatasetIds": true,
+    "noUserPermissions": true,
+    "noAutoApproval": true
+  }
+}

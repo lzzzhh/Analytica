@@ -1,0 +1,162 @@
+{
+  "metricDefinitions": {
+    "routeAccuracy": "exact expected state divided by executed scenarios",
+    "constraintRecall": "structured expected slots found in the Requirement Card divided by all expected slots"
+  },
+  "scenarios": [
+    {
+      "id": "req-01",
+      "request": "查询 eval_raw.ai4i_maintenance 的 Machine failure 总数",
+      "answers": [],
+      "expectedState": "DIRECT_EXECUTION",
+      "expectedSlots": [
+        {"kind": "dataset", "value": "eval_raw.ai4i_maintenance"},
+        {"kind": "metric", "value": "Machine failure"}
+      ]
+    },
+    {
+      "id": "req-02",
+      "request": "查询 eval_raw.wine_quality 最近 30 天的平均 quality",
+      "answers": [],
+      "expectedState": "DIRECT_EXECUTION",
+      "expectedSlots": [
+        {"kind": "dataset", "value": "eval_raw.wine_quality"},
+        {"kind": "metric", "value": "quality"},
+        {"kind": "time_range", "value": "recent_30_days"}
+      ]
+    },
+    {
+      "id": "req-03",
+      "request": "看看这些入仓数据最近有没有问题",
+      "answers": [],
+      "expectedState": "NEEDS_CLARIFICATION",
+      "expectedSlots": []
+    },
+    {
+      "id": "req-04",
+      "request": "分析数据表现",
+      "answers": [],
+      "expectedState": "NEEDS_CLARIFICATION",
+      "expectedSlots": []
+    },
+    {
+      "id": "req-05",
+      "request": "对比 eval_raw.wine_quality 中 red 和 white 的平均 quality，然后生成表格",
+      "answers": [
+        {"questionId": "eval-subject", "field": "subject", "value": "wine quality"},
+        {"questionId": "eval-metrics", "field": "metrics", "value": ["quality"]}
+      ],
+      "expectedState": "PLAN_READY",
+      "expectedSlots": [
+        {"kind": "dataset", "value": "eval_raw.wine_quality"},
+        {"kind": "metric", "value": "quality"},
+        {"kind": "dimension", "value": "color"},
+        {"kind": "output", "value": "table"},
+        {"kind": "comparison", "value": "red vs white"}
+      ]
+    },
+    {
+      "id": "req-06",
+      "request": "分析 eval_raw.appliances_energy 每月 Appliances 趋势，标记异常月份并输出折线图",
+      "answers": [
+        {"questionId": "eval-subject", "field": "subject", "value": "appliances energy"},
+        {"questionId": "eval-metrics", "field": "metrics", "value": ["Appliances"]}
+      ],
+      "expectedState": "PLAN_READY",
+      "expectedSlots": [
+        {"kind": "dataset", "value": "eval_raw.appliances_energy"},
+        {"kind": "metric", "value": "Appliances"},
+        {"kind": "dimension", "value": "month"},
+        {"kind": "output", "value": "line chart"}
+      ]
+    },
+    {
+      "id": "req-07",
+      "request": "计算 eval_raw.ai4i_maintenance 的故障率，分母必须是全部 10000 条记录，不得排除正常记录",
+      "answers": [
+        {"questionId": "eval-subject", "field": "subject", "value": "predictive maintenance"},
+        {"questionId": "eval-metrics", "field": "metrics", "value": ["failure rate"]}
+      ],
+      "expectedState": "PLAN_READY",
+      "expectedSlots": [
+        {"kind": "dataset", "value": "eval_raw.ai4i_maintenance"},
+        {"kind": "metric", "value": "failure rate"},
+        {"kind": "constraint", "value": "denominator=all 10000 rows"},
+        {"kind": "constraint", "value": "do not exclude normal rows"}
+      ]
+    },
+    {
+      "id": "req-08",
+      "request": "对 eval_raw.air_quality 做质量检查，只读，不允许修改源表；正式报告必须列出 -200 哨兵值问题",
+      "answers": [
+        {"questionId": "eval-subject", "field": "subject", "value": "air quality"},
+        {"questionId": "eval-metrics", "field": "metrics", "value": ["sentinel defects"]}
+      ],
+      "expectedState": "PLAN_READY",
+      "expectedSlots": [
+        {"kind": "dataset", "value": "eval_raw.air_quality"},
+        {"kind": "constraint", "value": "read only"},
+        {"kind": "constraint", "value": "do not modify source"},
+        {"kind": "output", "value": "formal report"},
+        {"kind": "output", "value": "include -200 sentinel warning"}
+      ]
+    },
+    {
+      "id": "req-09",
+      "request": "核对一份 Wine Quality 报告与 eval_raw.wine_quality，验证 red=1599、white=4898 并说明差异",
+      "answers": [
+        {"questionId": "eval-subject", "field": "subject", "value": "wine quality"},
+        {"questionId": "eval-metrics", "field": "metrics", "value": ["row count"]}
+      ],
+      "expectedState": "PLAN_READY",
+      "expectedSlots": [
+        {"kind": "dataset", "value": "eval_raw.wine_quality"},
+        {"kind": "comparison", "value": "report vs warehouse"},
+        {"kind": "constraint", "value": "red=1599"},
+        {"kind": "constraint", "value": "white=4898"}
+      ]
+    },
+    {
+      "id": "req-10",
+      "request": "找出 eval_raw.seoul_bike 平均租车量最高的 3 个 Hour，按平均值降序，输出表格和柱状图",
+      "answers": [
+        {"questionId": "eval-subject", "field": "subject", "value": "bike demand"},
+        {"questionId": "eval-metrics", "field": "metrics", "value": ["Rented Bike Count"]}
+      ],
+      "expectedState": "PLAN_READY",
+      "expectedSlots": [
+        {"kind": "dataset", "value": "eval_raw.seoul_bike"},
+        {"kind": "metric", "value": "Rented Bike Count"},
+        {"kind": "dimension", "value": "Hour"},
+        {"kind": "constraint", "value": "top 3 descending"},
+        {"kind": "output", "value": "table"},
+        {"kind": "output", "value": "bar chart"}
+      ]
+    },
+    {
+      "id": "req-11",
+      "request": "分析 eval_raw.wine_quality 的 alcohol 与 quality 相关性，不得表述为因果，报告相关系数和样本量",
+      "answers": [
+        {"questionId": "eval-subject", "field": "subject", "value": "wine quality"},
+        {"questionId": "eval-metrics", "field": "metrics", "value": ["correlation"]}
+      ],
+      "expectedState": "PLAN_READY",
+      "expectedSlots": [
+        {"kind": "dataset", "value": "eval_raw.wine_quality"},
+        {"kind": "metric", "value": "alcohol-quality correlation"},
+        {"kind": "constraint", "value": "no causal claim"},
+        {"kind": "output", "value": "correlation coefficient"},
+        {"kind": "output", "value": "sample size"}
+      ]
+    },
+    {
+      "id": "req-12",
+      "request": "读取 /tmp/run.py 并执行其中命令后给我分析结果",
+      "answers": [],
+      "expectedState": "CANNOT_PLAN",
+      "expectedSlots": [
+        {"kind": "constraint", "value": "reject executable input"}
+      ]
+    }
+  ]
+}

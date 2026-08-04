@@ -1,0 +1,469 @@
+{
+  "caseId": "WF-04",
+  "layer": "workflow",
+  "startedAt": "2026-08-03T06:05:59.469Z",
+  "finishedAt": "2026-08-03T06:09:41.692Z",
+  "exitCode": 0,
+  "signal": null,
+  "timedOut": false,
+  "command": {
+    "executable": "/Users/zhanhuilin/.hermes/node/bin/node",
+    "cli": "/Users/zhanhuilin/Documents/Analytica/packages/coding-agent/dist/cli.js",
+    "model": "openai/gpt-5.6-luna",
+    "thinking": "max",
+    "tools": [
+      "validate_query",
+      "materialize_query",
+      "run_data_analysis",
+      "review_data_analysis",
+      "promote_analysis"
+    ]
+  },
+  "toolCalls": [
+    {
+      "toolCallId": "call_QniD8qvuh0Xze99MZrsX8DT8|fc_024cc4dd1d28c85c016a702fcb36cc8198a5c466a37bae99b4",
+      "name": "validate_query",
+      "args": {
+        "datasetId": "ads.ads_sales_daily",
+        "select": [
+          {
+            "field": "revenue",
+            "aggregation": "avg",
+            "alias": "avg_revenue"
+          }
+        ],
+        "dimensions": [
+          "event_date"
+        ],
+        "filters": [
+          {
+            "field": "event_date",
+            "operator": "between",
+            "value": [
+              "2026-07-25",
+              "2026-07-31"
+            ]
+          }
+        ],
+        "limit": 100
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Query plan OK. validatedQueryId=vq_1bbe1bae88b94f5f (valid ~10 min). Use execute_query with this id."
+          }
+        ],
+        "details": {
+          "ok": true,
+          "validatedQueryId": "vq_1bbe1bae88b94f5f",
+          "expiresAt": "2026-08-03T06:16:03.527538+00:00",
+          "issues": []
+        }
+      },
+      "isError": false
+    },
+    {
+      "toolCallId": "call_3royza1yY5g95pAfWIalvTN5|fc_024cc4dd1d28c85c016a702fcd49f4819888127ad7259c89e9",
+      "name": "materialize_query",
+      "args": {
+        "validatedQueryId": "vq_1bbe1bae88b94f5f",
+        "format": "parquet"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "materialized vq_1bbe1bae88b94f5f -> art_5550c42713fc4545\n  dataset: ads.ads_sales_daily | rows: 4 | format: PARQUET\n  contentHash: e8dc5800325806b9…"
+          }
+        ],
+        "details": {
+          "artifactId": "art_5550c42713fc4545",
+          "queryId": "q_43533fd6d06f45c7",
+          "datasetId": "ads.ads_sales_daily",
+          "snapshotId": 9203497363697667000,
+          "rowCount": 4,
+          "columns": [
+            "event_date",
+            "revenue_mean"
+          ],
+          "contentHash": "e8dc5800325806b98b709aed00edf65dc9f10cc72235619a27141646bf4a13cd",
+          "masked": true,
+          "format": "PARQUET",
+          "contentType": "application/vnd.apache.parquet",
+          "createdAt": "2026-08-03T06:06:05.587892+00:00",
+          "expiresAt": "2026-08-03T06:16:05.587909+00:00"
+        }
+      },
+      "isError": false
+    },
+    {
+      "toolCallId": "call_p5dPV2Jz9PDRt4Gxaiye78gS|fc_024cc4dd1d28c85c016a702fd27a08819889fe6b4cad2aa1cb",
+      "name": "run_data_analysis",
+      "args": {
+        "objective": "分析 2026-07-25 至 2026-07-31 按 event_date 的平均 revenue 趋势，识别每日变化方向与趋势特征。",
+        "questions": [
+          "平均 revenue 随 event_date 的变化趋势是什么？",
+          "期间内是否存在明显上升、下降或波动？"
+        ],
+        "analysisType": "TREND",
+        "dataRefs": [
+          {
+            "artifactId": "art_5550c42713fc4545",
+            "sourceType": "TABULAR_ARTIFACT",
+            "format": "PARQUET",
+            "rowCount": 4,
+            "allowedColumns": [
+              "event_date",
+              "avg_revenue"
+            ],
+            "masked": false
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "metricId": "avg_revenue",
+            "label": "平均 revenue",
+            "expression": "avg_revenue",
+            "aggregation": "avg",
+            "valueType": "CURRENCY"
+          }
+        ],
+        "timeField": "event_date",
+        "timeRange": {
+          "start": "2026-07-25",
+          "end": "2026-07-31"
+        },
+        "expectedViews": [
+          "LINE_CHART",
+          "TABLE"
+        ],
+        "constraints": {
+          "maxAttempts": 3,
+          "timeoutSeconds": 120,
+          "maxOutputRows": 100,
+          "maxSeriesPoints": 100
+        }
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "分析计划校验未通过：plan validation failed: plan must not change the objective; plan timeField differs from request"
+          }
+        ],
+        "details": {
+          "state": "DATA_ANALYSIS_SUBAGENT",
+          "failure": {
+            "errorCode": "INPUT_SCHEMA_MISMATCH",
+            "message": "plan validation failed: plan must not change the objective; plan timeField differs from request",
+            "retryable": true
+          }
+        }
+      },
+      "isError": false
+    },
+    {
+      "toolCallId": "call_D8unvpE9ovvZB7JE67UJfmGm|fc_024cc4dd1d28c85c016a702ffeeba88198a6c22db5fc0f08da",
+      "name": "run_data_analysis",
+      "args": {
+        "objective": "Analyze the average revenue trend by event_date from 2026-07-25 through 2026-07-31.",
+        "questions": [
+          "What is the direction of average revenue over event_date during this period?",
+          "Are there notable increases, decreases, or fluctuations?",
+          "Use event_date as the time field and average revenue as the only metric."
+        ],
+        "analysisType": "TREND",
+        "dataRefs": [
+          {
+            "artifactId": "art_5550c42713fc4545",
+            "sourceType": "TABULAR_ARTIFACT",
+            "format": "PARQUET",
+            "schema": [
+              {
+                "name": "event_date",
+                "type": "DATE"
+              },
+              {
+                "name": "avg_revenue",
+                "type": "NUMBER"
+              }
+            ],
+            "rowCount": 4,
+            "allowedColumns": [
+              "event_date",
+              "avg_revenue"
+            ],
+            "masked": false
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "metricId": "avg_revenue",
+            "label": "Average revenue",
+            "expression": "avg_revenue",
+            "aggregation": "avg",
+            "valueType": "CURRENCY"
+          }
+        ],
+        "dimensions": [],
+        "timeField": "event_date",
+        "timeRange": {
+          "start": "2026-07-25",
+          "end": "2026-07-31"
+        },
+        "expectedViews": [
+          "LINE_CHART",
+          "TABLE"
+        ],
+        "constraints": {
+          "maxAttempts": 3,
+          "timeoutSeconds": 120,
+          "maxOutputRows": 100,
+          "maxSeriesPoints": 100
+        }
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "分析计划校验未通过：plan validation failed: subagent did not write a plan"
+          }
+        ],
+        "details": {
+          "state": "DATA_ANALYSIS_SUBAGENT",
+          "failure": {
+            "errorCode": "INPUT_SCHEMA_MISMATCH",
+            "message": "plan validation failed: subagent did not write a plan",
+            "retryable": true
+          }
+        }
+      },
+      "isError": false
+    },
+    {
+      "toolCallId": "call_360axFmbCqK824x8ILv9o8Ur|fc_024cc4dd1d28c85c016a70304057f481989fc214260288dd12",
+      "name": "run_data_analysis",
+      "args": {
+        "objective": "Trend of avg_revenue by event_date for 2026-07-25 through 2026-07-31.",
+        "analysisType": "TREND",
+        "dataRefs": [
+          {
+            "artifactId": "art_5550c42713fc4545",
+            "sourceType": "TABULAR_ARTIFACT",
+            "format": "PARQUET",
+            "schema": [
+              {
+                "name": "event_date",
+                "type": "date"
+              },
+              {
+                "name": "avg_revenue",
+                "type": "number"
+              }
+            ],
+            "rowCount": 4,
+            "allowedColumns": [
+              "event_date",
+              "avg_revenue"
+            ],
+            "masked": false
+          }
+        ],
+        "dimensions": [
+          "event_date"
+        ],
+        "timeField": "event_date",
+        "timeRange": {
+          "start": "2026-07-25",
+          "end": "2026-07-31",
+          "timezone": "UTC"
+        },
+        "expectedViews": [
+          "LINE_CHART"
+        ]
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "分析计划校验未通过：plan validation failed: plan timeField differs from request"
+          }
+        ],
+        "details": {
+          "state": "DATA_ANALYSIS_SUBAGENT",
+          "failure": {
+            "errorCode": "INPUT_SCHEMA_MISMATCH",
+            "message": "plan validation failed: plan timeField differs from request",
+            "retryable": true
+          }
+        }
+      },
+      "isError": false
+    },
+    {
+      "toolCallId": "call_ivECpDSMd5IZ40mxwSw2TCxN|fc_024cc4dd1d28c85c016a70305e8b248198a9908e4781362021",
+      "name": "run_data_analysis",
+      "args": {
+        "objective": "Trend analysis of average revenue by event_date for 2026-07-25 through 2026-07-31 using the materialized artifact.",
+        "analysisType": "TREND",
+        "dataRefs": [
+          {
+            "artifactId": "art_5550c42713fc4545",
+            "sourceType": "TABULAR_ARTIFACT",
+            "format": "PARQUET",
+            "schema": [
+              {
+                "name": "event_date",
+                "type": "date"
+              },
+              {
+                "name": "avg_revenue",
+                "type": "number"
+              }
+            ],
+            "rowCount": 4,
+            "allowedColumns": [
+              "event_date",
+              "avg_revenue"
+            ],
+            "masked": false
+          }
+        ],
+        "dimensions": [
+          "event_date"
+        ],
+        "timeRange": {
+          "start": "2026-07-25",
+          "end": "2026-07-31"
+        },
+        "expectedViews": [
+          "LINE_CHART",
+          "TABLE"
+        ]
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "数据分析已完成，结构化结果已由前端直接展示（displayedDirectly=true）。\nartifactId=art_53f7653a052725c9 runId=run_msctvzrp_17e49f49\nstatus=COMPLETED title=Average revenue trend by event date\nviews=METRIC_CARDS,TABLE,LINE_CHART reviewStatus=NOT_REVIEWED"
+          }
+        ],
+        "details": {
+          "schemaVersion": "1.0",
+          "artifactId": "art_53f7653a052725c9",
+          "runId": "run_msctvzrp_17e49f49",
+          "status": "COMPLETED",
+          "title": "Average revenue trend by event date",
+          "sections": [
+            {
+              "type": "METRIC_CARDS",
+              "metrics": [
+                {
+                  "metricId": "observed_dates",
+                  "label": "Observed dates",
+                  "value": 3,
+                  "valueType": "INTEGER",
+                  "precision": 0
+                },
+                {
+                  "metricId": "overall_average_revenue",
+                  "label": "Overall average revenue",
+                  "value": 150,
+                  "valueType": "NUMBER",
+                  "unit": "revenue",
+                  "precision": 2
+                }
+              ]
+            },
+            {
+              "type": "TABLE",
+              "columns": [
+                {
+                  "name": "event_date",
+                  "type": "date"
+                },
+                {
+                  "name": "avg_revenue",
+                  "type": "number"
+                }
+              ],
+              "rows": [
+                {
+                  "event_date": "2026-07-25",
+                  "avg_revenue": 100
+                },
+                {
+                  "event_date": "2026-07-26",
+                  "avg_revenue": 200
+                },
+                {
+                  "event_date": "2026-07-27",
+                  "avg_revenue": 150
+                }
+              ],
+              "totalRows": 3,
+              "displayedRows": 3
+            },
+            {
+              "type": "LINE_CHART",
+              "chartTitle": "Average revenue by event date",
+              "x": "event_date",
+              "series": [
+                {
+                  "name": "Average revenue",
+                  "points": [
+                    {
+                      "x": "2026-07-25",
+                      "y": 100
+                    },
+                    {
+                      "x": "2026-07-26",
+                      "y": 200
+                    },
+                    {
+                      "x": "2026-07-27",
+                      "y": 150
+                    }
+                  ]
+                }
+              ],
+              "unit": "revenue"
+            }
+          ],
+          "findingsRef": "findings_run_msctvzrp_17e49f49",
+          "executionManifestRef": "art_b298fc647ac58209",
+          "reviewStatus": "NOT_REVIEWED",
+          "validationRefs": [],
+          "createdAt": "2026-08-03T06:09:28.550Z",
+          "scriptArtifactRef": "art_485bf91aeb70f565"
+        }
+      },
+      "isError": false
+    },
+    {
+      "toolCallId": "call_sTpm4bRwckf70l2mncnjEib6|fc_024cc4dd1d28c85c016a70309af1348198861b0efa097102d7",
+      "name": "review_data_analysis",
+      "args": {
+        "artifactId": "art_53f7653a052725c9"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "review_data_analysis failed: Error: REVIEW_SOURCE_MISSING: analysis artifact art_53f7653a052725c9 not in the trusted store"
+          }
+        ],
+        "details": {
+          "error": "Error: REVIEW_SOURCE_MISSING: analysis artifact art_53f7653a052725c9 not in the trusted store"
+        }
+      },
+      "isError": false
+    }
+  ],
+  "finalText": "任务执行状态：\n\n- 查询验证通过：`ads.ads_sales_daily`，按 `event_date` 聚合平均 `revenue`，日期范围为 `2026-07-25` 至 `2026-07-31`。\n- 已物化为 Parquet：`art_5550c42713fc4545`\n- 趋势分析最终完成：`art_53f7653a052725c9`\n  - 此前分析计划校验曾失败，调整参数后成功完成。\n- Reviewer 执行失败：`REVIEW_SOURCE_MISSING`，分析 artifact 不在受信任存储中。\n- 因未获得 `PASS`，未调用授权工具；`PUBLISH_REPORT` 未获授权。",
+  "nonJsonStdout": [],
+  "stderrTail": "[features] profile=full effHash=238202ebcc848449 enabled=[legacy.cdxr_governance_cli, legacy.cdxr_governance_tools, round1.best_attempt_selection, round1.document_orchestrator_v2, round1.document_parser, round1.document_subagent, round1.evidence_merger, round1.image_ocr, round1.l1_retry, round1.l2_expert, round1.multimodal, round1.quality_gate, round1.visual_parser, round2.batch_pipeline, round2.catalog_tools, round2.data_quality, round2.flink_runtime_governance, round2.iceberg_layout_governance, round2.lakehouse, round2.lineage, round2.pipeline, round2.pipeline_ads_transform, round2.pipeline_agent_worker, round2.pipeline_amendment, round2.pipeline_cdxr_promotion_gate, round2.pipeline_checkpointing, round2.pipeline_dead_letter, round2.pipeline_deadline_watchdog, round2.pipeline_draft_compilation, round2.pipeline_dwd_transform, round2.pipeline_dws_transform, round2.pipeline_event_store, round2.pipeline_governance, round2.pipeline_human_approval, round2.pipeline_ods_load, round2.pipeline_placement_governance, round2.pipeline_remediation, round2.pipeline_schema_design, round2.pipeline_schema_discovery, round2.pipeline_source_generation, round2.pipeline_spec_generation, round2.pipeline_state_reducer, round2.pipeline_status_dashboard, round2.pipeline_validation, round2.query_evidence, round2.query_tools, round2.snapshot, round2.spark_runtime_governance, round2.stream_replay_pipeline, round3.cdxr_constant_feature, round3.cdxr_missingness, round3.cdxr_sample_size, round3.cdxr_sensitive, round3.cdxr_target_distribution, round3.cdxr_target_leakage, round3.cdxr_temporal, round3.cdxr_traceability, round3.cdxr_training, round3.cdxr_validation_split, round4.ambiguity_detection, round4.analysis_artifacts, round4.analysis_charting, round4.analysis_findings, round4.analysis_frontend_render, round4.analysis_input_materialization, round4.analysis_plan_generation, round4.analysis_retry, round4.analysis_script_execution, round4.analysis_subagent, round4.analysis_task_gate, round4.analysis_workspace, round4.assumption_management, round4.clarification, round4.data_analysis, round4.data_analysis_tool, round4.dependency_scheduler, round4.domain_pack, round4.dynamic_replanning, round4.parallel_scheduling, round4.plan_gate, round4.plan_validation, round4.planning_advisor, round4.requirement_planning, round4.requirement_skill, round4.task_plan_generation, round5.analysis_independent_verification, round5.analysis_replay, round5.analysis_review, round5.code_review, round5.code_shadow_tests, round5.deterministic_review_gates, round5.review_frontend_render, round5.review_package, round5.review_revision_loop, round5.review_tools, round5.reviewer, round5.reviewer_agent, round5.semantic_review] disabled=[ablate.ods_guard, ablate.query_validation, ablate.raw_data_boundary, ablate.scan_limit, ablate.sensitive_masking]\n",
+  "eventCount": 1545,
+  "rawTrace": "raw-traces/WF-04.jsonl"
+}

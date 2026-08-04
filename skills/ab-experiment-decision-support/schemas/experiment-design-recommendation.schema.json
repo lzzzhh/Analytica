@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExperimentDesignRecommendation",
+  "type": "object",
+  "required": ["phase", "dataSource", "dataVerified", "suitability", "status"],
+  "properties": {
+    "phase": {"const": "PRE_EXPERIMENT"},
+    "dataSource": {"enum": ["USER_PROVIDED", "UPLOADED_FILE", "CONTROLLED_ARTIFACT"]},
+    "dataVerified": {"type": "boolean", "const": false},
+    "suitability": {"enum": ["STANDARD_AB_SUPPORTED", "AB_WITH_CONSTRAINTS", "SPECIAL_DESIGN_REQUIRED", "NOT_CURRENTLY_TESTABLE"]},
+    "status": {"enum": ["DESIGN_READY", "DESIGN_READY_WITH_RISKS", "MORE_INFORMATION_REQUIRED", "SPECIALIST_REVIEW_REQUIRED"]},
+    "hypothesis": {"type": "string"},
+    "primaryMetric": {"type": ["object", "null"]},
+    "sampleSizePerGroup": {"type": ["integer", "null"]},
+    "durationDays": {"type": ["integer", "null"]},
+    "blockingQuestions": {"type": "array", "items": {"type": "string"}},
+    "risks": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

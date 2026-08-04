@@ -1,0 +1,10 @@
+{
+  "runtimeProfile": "ablation/no-cdxr-temporal",
+  "description": "Ablation: CDXR temporal rule group (POST_OUTCOME_FEATURE) disabled — the rule does not run and is reported in disabledRules.",
+  "features": {
+    "round1.multimodal": true,
+    "round2.lakehouse": true,
+    "round3.cdxr_training": true,
+    "round3.cdxr_temporal": false
+  }
+}

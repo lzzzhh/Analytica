@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/pipeline-amendment.schema.json",
+  "title": "PipelineAmendment",
+  "type": "object",
+  "required": [
+    "amendmentId",
+    "baseSpecVersion",
+    "changes",
+    "newSpecVersion",
+    "reason",
+    "approvedBy",
+    "amendedAt"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "amendmentId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseSpecVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "newSpecVersion": {
+      "type": "integer",
+      "minimum": 2
+    },
+    "reason": {
+      "type": "string"
+    },
+    "approvedBy": {
+      "type": "string"
+    },
+    "amendedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

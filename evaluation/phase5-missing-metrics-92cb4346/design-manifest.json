@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0",
+  "state": "FROZEN_FOR_EXECUTION",
+  "frozenAt": "2026-08-03T06:28:27.258Z",
+  "commit": "92cb4346ac5f0b4edc3eefcdcb81978e570fd220",
+  "counts": {
+    "cases": 12,
+    "baselineRuns": 36,
+    "perturbationRuns": 12,
+    "totalRuns": 48
+  },
+  "files": [
+    {
+      "name": "scenarios.json",
+      "sha256": "58de6628693600ef9de21ac80c90c7cf0f07e656d203a73e3e8badbdfe2d36ea"
+    },
+    {
+      "name": "scoring-contract.json",
+      "sha256": "a374da5148931493fbe09330c99116e8d478af414fbeb61b8936025ef4155dc2"
+    },
+    {
+      "name": "run-suite.mjs",
+      "sha256": "f5ff4c4b242366fbbab33f6e9e11620c8d1dec7caa31c29e0ca4920c33910d6d"
+    },
+    {
+      "name": "environment.json",
+      "sha256": "547f393b89c83ebadf02b973bccc477ac0ff048651906374f7fc61524561d58f"
+    },
+    {
+      "name": "validate-design.mjs",
+      "sha256": "4922a4345c9df24c96f5684b5dbe99ef881b865fceb15236796818a67a6a5be2"
+    }
+  ],
+  "combinedSha256": "a9c881a94bd211f7388384e631255462c087f9e35852953032b1fccb5f92958d"
+}

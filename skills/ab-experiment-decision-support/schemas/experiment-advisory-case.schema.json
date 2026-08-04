@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExperimentAdvisoryCase",
+  "type": "object",
+  "required": ["caseId", "phase", "dataSource", "dataVerified", "updatedAt"],
+  "properties": {
+    "caseId": {"type": "string"},
+    "phase": {"enum": ["PRE_EXPERIMENT", "IN_EXPERIMENT_REVIEW", "POST_EXPERIMENT_REVIEW"]},
+    "dataSource": {"enum": ["USER_PROVIDED", "UPLOADED_FILE", "CONTROLLED_ARTIFACT"]},
+    "dataVerified": {"type": "boolean", "const": false},
+    "knownFacts": {"type": "array", "items": {"type": "string"}},
+    "assumptions": {"type": "array", "items": {"type": "string"}},
+    "unresolvedQuestions": {"type": "array", "items": {"type": "string"}},
+    "updatedAt": {"type": "string"}
+  },
+  "additionalProperties": false
+}

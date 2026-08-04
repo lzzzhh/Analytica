@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lzzzhh/data-agent/contracts/dataset.schema.json",
+  "title": "DatasetMetadata",
+  "description": "Lakehouse dataset metadata returned by catalog search / inspect_dataset.",
+  "type": "object",
+  "required": ["datasetId", "displayName", "layer", "tableName"],
+  "properties": {
+    "datasetId": { "type": "string", "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)*$" },
+    "displayName": { "type": "string" },
+    "layer": { "enum": ["ODS", "DWD", "DWS", "ADS"] },
+    "tableName": { "type": "string" },
+    "description": { "type": "string" },
+    "version": { "type": "string" },
+    "latestSnapshotId": { "type": ["integer", "string", "null"] },
+    "lastUpdatedAt": { "type": "string" },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "sensitive": { "type": "boolean" },
+          "partition": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

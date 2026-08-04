@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/source-registration.schema.json",
+  "title": "SourceRegistration",
+  "type": "object",
+  "required": ["sourceId", "datasetId", "format", "physicalLocationRef", "registeredAt", "schemaHash"],
+  "additionalProperties": false,
+  "properties": {
+    "sourceId": { "type": "string", "minLength": 1 },
+    "datasetId": { "type": "string", "minLength": 1 },
+    "format": { "enum": ["PARQUET", "JSON", "CSV", "ARROW", "ICEBERG"] },
+    "physicalLocationRef": { "type": "string" },
+    "registeredAt": { "type": "string", "format": "date-time" },
+    "schemaHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  }
+}

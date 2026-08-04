@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0",
+  "documentVersion": "1.0",
+  "model": "openai/gpt-5.6-luna",
+  "reasoningEffort": "max",
+  "temperature": null,
+  "stage1": {
+    "repetitions": 5,
+    "conditions": ["A_UNIQUE", "B_SIMILAR", "C_IRRELEVANT_16", "D_FULL"],
+    "concurrency": 1,
+    "timeoutMs": 180000,
+    "expectedRuns": 240
+  },
+  "stage2": {
+    "repetitions": 5,
+    "resultFormats": ["M0_CURRENT", "M1_STANDARD"],
+    "concurrency": 1,
+    "timeoutMs": 240000
+  },
+  "stage3": {
+    "repetitions": 5,
+    "reviewerStrategies": ["R0_NONE", "R1_COLD_PER_ERROR", "R2_REUSED", "R3_NODE_END"],
+    "timeoutMs": 180000
+  },
+  "stage4": {
+    "groups": ["E0_CURRENT", "E1_NODE_SUBSET", "E2_SUBSET_BOUNDARIES", "E3_GRADED_REVIEW"],
+    "enabledOnlyAfterStages1To3": true
+  },
+  "errorStatuses": ["PROVIDER_ERROR", "INFRA_ERROR", "REVIEWER_TIMEOUT", "TIMEOUT"],
+  "randomSeedNamespace": "analytica-tool-performance-v1"
+}

@@ -1,0 +1,71 @@
+{
+  "packId": "generic",
+  "packVersion": "1.0.0",
+  "domainName": "general",
+  "keywords": [],
+  "description": "Generic domain pack: system-level defaults only. Applies to every request regardless of domain; never adds business-specific metrics.",
+  "metrics": [],
+  "subjects": [],
+  "commonTimeRanges": [
+    { "relative": "recent_7_days", "source": "SYSTEM_DEFAULT" },
+    { "relative": "recent_30_days", "source": "SYSTEM_DEFAULT" },
+    { "relative": "previous_period", "source": "SYSTEM_DEFAULT" }
+  ],
+  "comparisonBaselines": ["previous_period"],
+  "knownAmbiguities": [
+    {
+      "field": "timeRange",
+      "type": "VAGUE_RANGE",
+      "blocking": false,
+      "question": "Which time range should the analysis cover?",
+      "whyNeeded": "The request does not specify a time window; trend and level results depend on it.",
+      "answerType": "DATE_RANGE",
+      "defaultValue": "recent_30_days",
+      "defaultRisk": "LOW"
+    },
+    {
+      "field": "comparisonBaseline",
+      "type": "UNKNOWN_BASELINE",
+      "blocking": false,
+      "question": "Compared to which period or baseline?",
+      "whyNeeded": "A comparison request needs a reference period to be meaningful.",
+      "answerType": "TEXT",
+      "defaultValue": "previous_period",
+      "defaultRisk": "LOW"
+    },
+    {
+      "field": "subject",
+      "type": "MISSING",
+      "blocking": true,
+      "question": "Which business subject or dataset should this analysis target?",
+      "whyNeeded": "Without a subject the analysis cannot pick a data source or scope.",
+      "answerType": "TEXT"
+    },
+    {
+      "field": "businessObjective",
+      "type": "MISSING",
+      "blocking": true,
+      "question": "What business decision should this analysis support?",
+      "whyNeeded": "The objective determines the metrics, dimensions and plan shape.",
+      "answerType": "TEXT"
+    }
+  ],
+  "defaults": [
+    {
+      "field": "timeRange",
+      "value": "recent_30_days",
+      "impact": "MEDIUM",
+      "source": "DOMAIN_DEFAULT",
+      "risk": "LOW"
+    },
+    {
+      "field": "comparisonBaseline",
+      "value": "previous_period",
+      "impact": "LOW",
+      "source": "DOMAIN_DEFAULT",
+      "risk": "LOW"
+    }
+  ],
+  "adoptionPolicy": "AUTO_LOW",
+  "requiresSemanticConfirmation": false
+}

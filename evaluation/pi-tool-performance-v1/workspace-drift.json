@@ -1,0 +1,8 @@
+{
+  "initialDirtyProductDiffSha256": "af69a67b8602c151ed10684d9850d2cc93bc6e8d22a616e52292cdaa3415df74",
+  "observedDuringStage1DirtyProductDiffSha256": "cdc8223220906abcfeff1103c45a190c05f7343e794caf74087db99464b8e1bd",
+  "stage1ValidityImpact": "NONE_AFTER_FREEZE",
+  "reason": "Stage 1 reads only the frozen registry.json, tasks.json, experiment-contract.json, mock-extension.ts and the already hashed Pi CLI distribution. It does not import product source after probe-current.mts completed.",
+  "stage4Impact": "BLOCK_UNTIL_REFROZEN",
+  "status": "PRODUCT_WORKSPACE_DRIFT_DETECTED"
+}

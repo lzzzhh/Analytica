@@ -1,0 +1,10 @@
+{
+  "runtimeProfile": "ablation/no-lineage",
+  "description": "Ablation: lineage disabled — explain_lineage not registered and lineage info excluded from query Evidence.",
+  "features": {
+    "round1.multimodal": true,
+    "round2.lakehouse": true,
+    "round2.lineage": false,
+    "round3.cdxr_training": false
+  }
+}

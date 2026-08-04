@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/schema-spec.schema.json",
+  "title": "SchemaSpec",
+  "type": "object",
+  "required": ["specId", "version", "targetDataset", "businessGranularity", "fieldMappings", "types", "timeFields", "partitioning", "compatibilityStrategy", "sensitiveFields", "assumptions", "risks", "createdAt"],
+  "additionalProperties": false,
+  "properties": {
+    "specId": { "type": "string", "minLength": 1 },
+    "version": { "type": "integer", "minimum": 1 },
+    "targetDataset": { "type": "string", "minLength": 1 },
+    "businessGranularity": { "type": "string" },
+    "primaryKey": { "type": ["array", "null"], "items": { "type": "string" } },
+    "businessKeys": { "type": "array", "items": { "type": "string" } },
+    "fieldMappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sourceField", "targetField", "targetType"],
+        "additionalProperties": false,
+        "properties": {
+          "sourceField": { "type": "string" },
+          "targetField": { "type": "string" },
+          "targetType": { "type": "string" },
+          "nullability": { "enum": ["NULLABLE", "NOT_NULL"] }
+        }
+      }
+    },
+    "types": { "type": "object", "additionalProperties": { "type": "string" } },
+    "timeFields": { "type": "array", "items": { "type": "string" } },
+    "partitioning": { "type": "array", "items": { "type": "string" } },
+    "compatibilityStrategy": { "enum": ["ADDITIVE", "RELAXED", "STRICT"] },
+    "sensitiveFields": { "type": "array", "items": { "type": "string" } },
+    "assumptions": { "type": "array", "items": { "type": "string" } },
+    "risks": { "type": "array", "items": { "type": "string" } },
+    "createdAt": { "type": "string", "format": "date-time" }
+  }
+}

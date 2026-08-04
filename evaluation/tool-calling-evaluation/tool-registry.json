@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0",
+  "commitSha": "5356473b2746daff6007802584da3afd8dba6613",
+  "registryVersion": "1.0.0",
+  "registrySha256": "c551f666866b287f97b30bb6ed74577ed7e1f5ab3ea9f613447b56157f2fdfbb",
+  "runtimeProfile": "all-enabled",
+  "runtimeProfileSha256": "74b7fd1e377280de70e30d96123b1595e3844136df34105fee2a9897cf3bdb88",
+  "extensionEntrySha256": "18bf6be946458739df16c2896c2ccf3987ec5f86f4bcdd537bfa683700d26568",
+  "registrationCount": 18,
+  "tools": [
+    {"name":"parse_image","feature":"round1.image_ocr","required":["path"],"optional":[],"purpose":"OCR a text-heavy image"},
+    {"name":"parse_visual","feature":"round1.visual_parser","required":["path"],"optional":["intent"],"purpose":"Parse a chart, diagram, screenshot, or complex visual"},
+    {"name":"parse_document","feature":"round1.document_parser","required":["path"],"optional":[],"purpose":"Fast extraction from a small document"},
+    {"name":"analyze_document","feature":"round1.document_subagent","required":["path","question"],"optional":[],"purpose":"Question-focused analysis of a long document"},
+    {"name":"analyze_document_v2","feature":"round1.document_orchestrator_v2","required":["path","question"],"optional":[],"purpose":"Two-tier analysis of a complex or long document"},
+    {"name":"search_catalog","feature":"round2.catalog_tools","required":[],"optional":["q","layer","limit"],"purpose":"Discover datasets, preferring ADS then DWS then DWD"},
+    {"name":"inspect_dataset","feature":"round2.catalog_tools","required":["datasetId"],"optional":[],"purpose":"Inspect schema and dataset metadata"},
+    {"name":"validate_query","feature":"round2.query_tools","required":["datasetId","select"],"optional":["dimensions","filters","limit"],"purpose":"Validate a structured query plan; raw SQL is not accepted"},
+    {"name":"execute_query","feature":"round2.query_tools","required":["validatedQueryId"],"optional":[],"purpose":"Execute only a previously validated query"},
+    {"name":"get_data_quality","feature":"round2.data_quality","required":["datasetId"],"optional":[],"purpose":"Read data-quality status"},
+    {"name":"explain_lineage","feature":"round2.lineage","required":["datasetId"],"optional":[],"purpose":"Read upstream and downstream lineage"},
+    {"name":"get_snapshot","feature":"round2.snapshot","required":["datasetId"],"optional":[],"purpose":"Read the current snapshot and data version"},
+    {"name":"assess_training_data","feature":"round3.cdxr_training","required":["datasetId","targetField","featureFields"],"optional":["snapshotId","purpose","entityIdFields","predictionTimeField","labelTimeField","trainingWindow","validationStrategy","sensitiveFieldPolicy"],"purpose":"Assess suitability for model training, not general analytics"},
+    {"name":"inspect_review_gate","feature":"round5.deterministic_review_gates","required":["gateDecisionId"],"optional":[],"purpose":"Read and explain a frozen review-gate decision"},
+    {"name":"prepare_business_task","feature":"round4.requirement_planning","required":["mode"],"optional":["request","domainHint","conversationSummary","previousState","answers","taskFeedback","constraints"],"purpose":"Clarify and plan a vague business request; never execute it"},
+    {"name":"run_data_analysis","feature":"round4.data_analysis_tool","required":["objective","analysisType","dataRefs"],"optional":["questions","metricDefinitions","dimensions","timeField","timeRange","comparison","expectedViews","constraints"],"purpose":"Run complex analysis on trusted artifacts; simple aggregates belong in execute_query"},
+    {"name":"governance_dashboard","feature":"round2.pipeline_status_dashboard","required":[],"optional":[],"purpose":"Read the authoritative pipeline-governance dashboard"},
+    {"name":"review_data_analysis","feature":"round5.review_tools","required":["artifactId"],"optional":["storeRoot","strict"],"purpose":"Governed review of a completed analysis artifact"}
+  ],
+  "notPublicAgentTools": [
+    "pipeline_plan",
+    "pipeline_execute",
+    "materialize_query",
+    "promotion",
+    "write_gate",
+    "get_dataset_governance_profile",
+    "list_governance_findings",
+    "inspect_governance_finding",
+    "explain_governance_evidence",
+    "get_governance_review_status"
+  ],
+  "notes": [
+    "Pipeline writes remain CLI/E2E-only and are not registered as default agent tools.",
+    "Legacy governance tool implementations are intentionally excluded from DATA_TOOL_FEATURES even when legacy flags are true.",
+    "Feature-disabled tools disappear from the registry; there are no stub tools."
+  ]
+}

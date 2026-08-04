@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lzzzhh/data-agent/contracts/query-result.schema.json",
+  "title": "QueryResult",
+  "description": "Query execution result. Agent context receives a summary; large results are spilled to an artifact.",
+  "type": "object",
+  "required": ["queryId", "datasetId", "datasetLayer", "dataVersion", "dataTimestamp", "columns", "rows", "rowCount", "qualityStatus", "lineageReference", "warnings"],
+  "properties": {
+    "queryId": { "type": "string", "pattern": "^q_[a-f0-9]+$" },
+    "datasetId": { "type": "string" },
+    "datasetLayer": { "enum": ["ODS", "DWD", "DWS", "ADS"] },
+    "snapshotId": { "type": ["integer", "null"] },
+    "dataVersion": { "type": "string" },
+    "dataTimestamp": { "type": "string" },
+    "columns": { "type": "array", "items": { "type": "string" } },
+    "rows": { "type": "array", "items": { "type": "array" } },
+    "rowCount": { "type": "integer", "minimum": 0 },
+    "qualityStatus": { "enum": ["PASS", "WARN", "FAIL"] },
+    "lineageReference": { "type": "string" },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "artifactId": { "type": "string" },
+    "truncated": { "type": "boolean" }
+  }
+}

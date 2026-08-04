@@ -1,0 +1,144 @@
+{
+  "summary": {
+    "projectName": "pi-monorepo",
+    "locale": "zh-CN",
+    "modelId": "agent-work-loop-v4",
+    "reportContractVersion": 25,
+    "overview": "项目拥有成熟的多层检查管线和清晰的变更安全规则，但关键代码规则仅以散文形式存在而无机械执行，核心包缺少模块级指令，且零会话证据使学习捕获无法评估。",
+    "aiAgentPractice": {
+      "inspectedSurfaces": [
+        "Rules",
+        "Workflows"
+      ],
+      "coverageRows": [
+        {
+          "surface": "Rules",
+          "scopes": [
+            "Project"
+          ],
+          "count": 1,
+          "paths": [
+            "AGENTS.md"
+          ]
+        },
+        {
+          "surface": "Workflows",
+          "scopes": [
+            "Project"
+          ],
+          "count": 10,
+          "paths": [
+            ".github/workflows/approve-contributor.yml",
+            ".github/workflows/build-binaries.yml",
+            ".github/workflows/ci.yml",
+            ".github/workflows/issue-analysis.yml",
+            ".github/workflows/issue-gate.yml",
+            ".github/workflows/issue-triage-labels.yml",
+            ".github/workflows/npm-audit.yml",
+            ".github/workflows/pr-gate.yml",
+            ".github/workflows/publish-model-catalog.yml",
+            ".github/workflows/remove-inprogress-on-close.yml"
+          ]
+        },
+        {
+          "surface": "Custom Agents",
+          "scopes": [
+            "Project"
+          ],
+          "count": 0
+        }
+      ]
+    },
+    "assignmentSummaries": [],
+    "dimensions": [
+      {
+        "id": "task-understanding",
+        "label": "任务理解",
+        "score": 55,
+        "summary": "根 AGENTS.md 提供全局指令，但核心包（358 文件）缺少模块级上下文路由。",
+        "findingRefs": [
+          "core-packages-missing-nested-agents-md"
+        ]
+      },
+      {
+        "id": "controlled-execution",
+        "label": "可控执行",
+        "score": 68,
+        "summary": "启动和权限路由已文档化且可运行，但缺少诊断命令。",
+        "findingRefs": []
+      },
+      {
+        "id": "change-validation",
+        "label": "改动验证",
+        "score": 70,
+        "summary": "多层 biome + tsgo + CI 检查覆盖主要变更路径，但架构规则无机械执行。",
+        "findingRefs": [
+          "prose-rules-no-mechanical-enforcement"
+        ]
+      },
+      {
+        "id": "reliable-delivery",
+        "label": "可靠交付",
+        "score": 65,
+        "summary": "CI 和 PR Gate 构成完整的交付门禁，但回滚路径未被观测验证。",
+        "findingRefs": []
+      },
+      {
+        "id": "learning-capture",
+        "label": "经验沉淀",
+        "score": 35,
+        "summary": "零会话证据使学习捕获完全不可评估；无可用 Task Episode 或重复工作信号。",
+        "findingRefs": [
+          "skills-coverage-unevaluable"
+        ]
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "prose-rules-no-mechanical-enforcement",
+      "title": "关键代码规则仅以散文形式存在于 AGENTS.md 中，无机械执行",
+      "severity": "Medium",
+      "reason": "AGENTS.md 声明了多条关键约束（'No inline imports'、'erasable TypeScript syntax only'、'no hardcoded key checks'），但 biome.json 未配置对应的自定义 lint 规则，项目也无独立的架构检查工具。core-change-watch 报告 coreCodeRules.status='missing'。Agent 或贡献者违反这些规则时，仅依赖人工 review 或类型检查间接捕获，部分规则完全无机械保障。",
+      "expectedOutput": [
+        "至少一条 AGENTS.md 散文规则被转化为 biome.json 中的可执行 lint 检查",
+        "运行 `npm run check` 能自动捕获对应的违规行为"
+      ],
+      "expectedArtifact": "biome.json 自定义规则配置",
+      "aiFixPrompt": "/better-harness fix this issue\n\n在 biome.json 中为 AGENTS.md 的关键代码规则添加可机械执行的 lint 约束。\n\n## 验证\n\n- 创建一个包含 inline import 的测试文件\n- 运行 `npm run check` 确认该规则被捕获\n- 删除测试文件",
+      "dimensionRefs": [
+        "change-validation"
+      ]
+    },
+    {
+      "id": "core-packages-missing-nested-agents-md",
+      "title": "核心包缺少模块级 AGENTS.md 指令",
+      "severity": "Low",
+      "reason": "499 个源文件中仅 2 个 AGENTS.md（根目录 + POC 示例目录），nestedSourceFileCoverage=0%。packages/coding-agent（180 文件）和 packages/ai（178 文件）作为最大两个包，无任何模块级架构说明、测试约定（如 faux provider 规则）或依赖边界指引。Agent 进入这些包后只能依赖根 AGENTS.md 的通用规则。",
+      "expectedOutput": [
+        "每个核心包拥有一个本地 AGENTS.md，包含包级架构说明和测试约定",
+        "根 AGENTS.md 的通用规则不被重复，仅补充本地化上下文"
+      ],
+      "expectedArtifact": "packages/coding-agent/AGENTS.md 和 packages/ai/AGENTS.md",
+      "aiFixPrompt": "/better-harness fix this issue\n\n为 packages/coding-agent 和 packages/ai 创建嵌套 AGENTS.md，包含包级架构说明、测试约定和已知陷阱。\n\n## 验证\n\n- 确认每个新 AGENTS.md 引用了包内的关键入口和测试约定\n- 运行 `npm run check` 确认不影响现有检查管线",
+      "dimensionRefs": [
+        "task-understanding"
+      ]
+    },
+    {
+      "id": "skills-coverage-unevaluable",
+      "title": "零项目 Skills 且无会话证据支持覆盖评估",
+      "severity": "Low",
+      "reason": "项目范围内 Skills=0，且 7 天窗口内无可用会话（0 eligible sessions）。AGENTS.md 描述了多个多步骤流程（发布检查、changelog 审计、本地 smoke test），这些流程可能适合 Skill 化路由，但零会话使重复工作发现路径完全阻断。无法判断零 Skills 是正确的架构选择还是覆盖缺口。",
+      "expectedOutput": [
+        "会话采集管道无警告",
+        "基于会话证据判断是否需要创建项目级 Skills"
+      ],
+      "expectedArtifact": "会话证据收集与 Skill 覆盖评估",
+      "aiFixPrompt": "/better-harness fix this issue\n\n当会话证据可用时，重新运行 /better-harness 以评估 AGENTS.md 中描述的多步骤流程是否存在重复工作模式并适合 Skill 化。\n\n## 验证\n\n- 确认会话采集管道正常工作（无 missing-optional-root 或 disabled-source-root 警告）\n- 重新运行分析以检查重复工作模式",
+      "dimensionRefs": [
+        "learning-capture"
+      ]
+    }
+  ]
+}

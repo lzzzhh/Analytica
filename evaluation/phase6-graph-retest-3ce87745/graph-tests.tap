@@ -1,0 +1,293 @@
+TAP version 13
+# [features] profile=full effHash=574bc8dd0cc5e162 enabled=[legacy.cdxr_governance_cli, legacy.cdxr_governance_tools, round1.best_attempt_selection, round1.document_orchestrator_v2, round1.document_parser, round1.document_subagent, round1.evidence_merger, round1.image_ocr, round1.l1_retry, round1.l2_expert, round1.multimodal, round1.quality_gate, round1.visual_parser, round2.batch_pipeline, round2.catalog_tools, round2.data_quality, round2.flink_runtime_governance, round2.iceberg_layout_governance, round2.lakehouse, round2.lineage, round2.pipeline, round2.pipeline_ads_transform, round2.pipeline_agent_worker, round2.pipeline_amendment, round2.pipeline_cdxr_promotion_gate, round2.pipeline_checkpointing, round2.pipeline_dead_letter, round2.pipeline_deadline_watchdog, round2.pipeline_draft_compilation, round2.pipeline_dwd_transform, round2.pipeline_dws_transform, round2.pipeline_event_store, round2.pipeline_governance, round2.pipeline_human_approval, round2.pipeline_ods_load, round2.pipeline_placement_governance, round2.pipeline_remediation, round2.pipeline_schema_design, round2.pipeline_schema_discovery, round2.pipeline_source_generation, round2.pipeline_spec_generation, round2.pipeline_state_reducer, round2.pipeline_status_dashboard, round2.pipeline_validation, round2.query_evidence, round2.query_tools, round2.snapshot, round2.spark_runtime_governance, round2.stream_replay_pipeline, round3.cdxr_constant_feature, round3.cdxr_missingness, round3.cdxr_sample_size, round3.cdxr_sensitive, round3.cdxr_target_distribution, round3.cdxr_target_leakage, round3.cdxr_temporal, round3.cdxr_traceability, round3.cdxr_training, round3.cdxr_validation_split, round4.ambiguity_detection, round4.analysis_artifacts, round4.analysis_charting, round4.analysis_findings, round4.analysis_frontend_render, round4.analysis_input_materialization, round4.analysis_plan_generation, round4.analysis_retry, round4.analysis_script_execution, round4.analysis_subagent, round4.analysis_task_gate, round4.analysis_workspace, round4.assumption_management, round4.clarification, round4.data_analysis, round4.data_analysis_tool, round4.dependency_scheduler, round4.domain_pack, round4.dynamic_replanning, round4.parallel_scheduling, round4.plan_gate, round4.plan_validation, round4.planning_advisor, round4.requirement_planning, round4.requirement_skill, round4.task_plan_generation, round5.analysis_independent_verification, round5.analysis_replay, round5.analysis_review, round5.code_review, round5.code_shadow_tests, round5.deterministic_review_gates, round5.review_frontend_render, round5.review_package, round5.review_revision_loop, round5.review_tools, round5.reviewer, round5.reviewer_agent, round5.semantic_review, round6.graph_artifact_edges, round6.graph_compiler, round6.graph_engine, round6.graph_event_store, round6.graph_executor, round6.graph_feedback_routing, round6.graph_frontend_render, round6.graph_human_gates, round6.graph_observability, round6.graph_review_integration, round6.graph_scheduler, round6.graph_skill_nodes, round6.graph_state_reducer, round6.graph_tool, round6.graph_validation] disabled=[ablate.ods_guard, ablate.query_validation, ablate.raw_data_boundary, ablate.scan_limit, ablate.sensitive_masking]
+# [features] profile=full effHash=1900a97a922ed9de enabled=[legacy.cdxr_governance_cli, legacy.cdxr_governance_tools, round1.best_attempt_selection, round1.document_orchestrator_v2, round1.document_parser, round1.document_subagent, round1.evidence_merger, round1.image_ocr, round1.l1_retry, round1.l2_expert, round1.multimodal, round1.quality_gate, round1.visual_parser, round2.batch_pipeline, round2.catalog_tools, round2.data_quality, round2.flink_runtime_governance, round2.iceberg_layout_governance, round2.lakehouse, round2.lineage, round2.pipeline, round2.pipeline_ads_transform, round2.pipeline_agent_worker, round2.pipeline_amendment, round2.pipeline_cdxr_promotion_gate, round2.pipeline_checkpointing, round2.pipeline_dead_letter, round2.pipeline_deadline_watchdog, round2.pipeline_draft_compilation, round2.pipeline_dwd_transform, round2.pipeline_dws_transform, round2.pipeline_event_store, round2.pipeline_governance, round2.pipeline_human_approval, round2.pipeline_ods_load, round2.pipeline_placement_governance, round2.pipeline_remediation, round2.pipeline_schema_design, round2.pipeline_schema_discovery, round2.pipeline_source_generation, round2.pipeline_spec_generation, round2.pipeline_state_reducer, round2.pipeline_status_dashboard, round2.pipeline_validation, round2.query_evidence, round2.query_tools, round2.snapshot, round2.spark_runtime_governance, round2.stream_replay_pipeline, round3.cdxr_constant_feature, round3.cdxr_missingness, round3.cdxr_sample_size, round3.cdxr_sensitive, round3.cdxr_target_distribution, round3.cdxr_target_leakage, round3.cdxr_temporal, round3.cdxr_traceability, round3.cdxr_training, round3.cdxr_validation_split, round4.ambiguity_detection, round4.analysis_artifacts, round4.analysis_charting, round4.analysis_findings, round4.analysis_frontend_render, round4.analysis_input_materialization, round4.analysis_plan_generation, round4.analysis_retry, round4.analysis_script_execution, round4.analysis_subagent, round4.analysis_task_gate, round4.analysis_workspace, round4.assumption_management, round4.clarification, round4.data_analysis, round4.data_analysis_tool, round4.dependency_scheduler, round4.domain_pack, round4.dynamic_replanning, round4.parallel_scheduling, round4.plan_gate, round4.plan_validation, round4.planning_advisor, round4.requirement_planning, round4.requirement_skill, round4.task_plan_generation] disabled=[ablate.ods_guard, ablate.query_validation, ablate.raw_data_boundary, ablate.scan_limit, ablate.sensitive_masking, round5.analysis_independent_verification, round5.analysis_replay, round5.analysis_review, round5.code_review, round5.code_shadow_tests, round5.deterministic_review_gates, round5.review_frontend_render, round5.review_package, round5.review_revision_loop, round5.review_tools, round5.reviewer, round5.reviewer_agent, round5.semantic_review, round6.graph_artifact_edges, round6.graph_compiler, round6.graph_engine, round6.graph_event_store, round6.graph_executor, round6.graph_feedback_routing, round6.graph_frontend_render, round6.graph_human_gates, round6.graph_observability, round6.graph_review_integration, round6.graph_scheduler, round6.graph_skill_nodes, round6.graph_state_reducer, round6.graph_tool, round6.graph_validation]
+# Subtest: E2E happy path
+    # Subtest: requirement -> query -> analysis -> reviewer -> authorization completes
+    ok 1 - requirement -> query -> analysis -> reviewer -> authorization completes
+      ---
+      duration_ms: 431.809334
+      type: 'test'
+      ...
+    1..1
+ok 1 - E2E happy path
+  ---
+  duration_ms: 432.251625
+  type: 'suite'
+  ...
+# Subtest: feedback routing
+    # Subtest: CHANGES_REQUIRED with METHOD code routes to DATA_ANALYSIS and consumes a revision
+    ok 1 - CHANGES_REQUIRED with METHOD code routes to DATA_ANALYSIS and consumes a revision
+      ---
+      duration_ms: 0.196083
+      type: 'test'
+      ...
+    # Subtest: CHANGES_REQUIRED with QUALITY code routes to PREFLIGHT
+    ok 2 - CHANGES_REQUIRED with QUALITY code routes to PREFLIGHT
+      ---
+      duration_ms: 0.045709
+      type: 'test'
+      ...
+    # Subtest: CHANGES_REQUIRED with REPORT_QA routes to REPORT_SKILL
+    ok 3 - CHANGES_REQUIRED with REPORT_QA routes to REPORT_SKILL
+      ---
+      duration_ms: 0.042583
+      type: 'test'
+      ...
+    # Subtest: REJECT never enters an automatic revision
+    ok 4 - REJECT never enters an automatic revision
+      ---
+      duration_ms: 0.044041
+      type: 'test'
+      ...
+    # Subtest: ABSTAIN with budget code routes to HUMAN_GATE
+    ok 5 - ABSTAIN with budget code routes to HUMAN_GATE
+      ---
+      duration_ms: 0.037875
+      type: 'test'
+      ...
+    # Subtest: PASS routes nowhere
+    ok 6 - PASS routes nowhere
+      ---
+      duration_ms: 0.117458
+      type: 'test'
+      ...
+    1..6
+ok 2 - feedback routing
+  ---
+  duration_ms: 0.839916
+  type: 'suite'
+  ...
+# Subtest: reviewer verdict mapping
+    # Subtest: graph never fabricates a PASS: failing review node fails the graph
+    ok 1 - graph never fabricates a PASS: failing review node fails the graph
+      ---
+      duration_ms: 476.552459
+      type: 'test'
+      ...
+    1..1
+ok 3 - reviewer verdict mapping
+  ---
+  duration_ms: 476.748083
+  type: 'suite'
+  ...
+# Subtest: feature gating (round6.graph_tool)
+    # Subtest: enabled -> tools registered; disabled -> not registered
+    ok 1 - enabled -> tools registered; disabled -> not registered
+      ---
+      duration_ms: 344.957375
+      type: 'test'
+      ...
+    1..1
+ok 4 - feature gating (round6.graph_tool)
+  ---
+  duration_ms: 345.157416
+  type: 'suite'
+  ...
+# Subtest: P0-1: failed upstream never schedules downstream
+    # Subtest: upstream FAILED -> reviewer/report adapters invoked 0 times
+    ok 1 - upstream FAILED -> reviewer/report adapters invoked 0 times
+      ---
+      duration_ms: 128.950542
+      type: 'test'
+      ...
+    1..1
+ok 5 - P0-1: failed upstream never schedules downstream
+  ---
+  duration_ms: 129.379333
+  type: 'suite'
+  ...
+# Subtest: P0-2: verdicts gate promotion/report
+    # Subtest: REJECT -> promotion adapter invoked 0 times; graph fails
+    ok 1 - REJECT -> promotion adapter invoked 0 times; graph fails
+      ---
+      duration_ms: 399.465375
+      type: 'test'
+      ...
+    # Subtest: CHANGES_REQUIRED -> promotion/report invoked 0 times; REVISION_REQUESTED emitted
+    ok 2 - CHANGES_REQUIRED -> promotion/report invoked 0 times; REVISION_REQUESTED emitted
+      ---
+      duration_ms: 651.534625
+      type: 'test'
+      ...
+    # Subtest: ABSTAIN -> report invoked 0 times; ROUTE_SELECTED targets human
+    ok 3 - ABSTAIN -> report invoked 0 times; ROUTE_SELECTED targets human
+      ---
+      duration_ms: 198.914333
+      type: 'test'
+      ...
+    1..3
+ok 6 - P0-2: verdicts gate promotion/report
+  ---
+  duration_ms: 1250.055917
+  type: 'suite'
+  ...
+# Subtest: P0-4: human gate cannot succeed without an external resolution
+    # Subtest: gate stays pending forever without an operator artifact
+    ok 1 - gate stays pending forever without an operator artifact
+      ---
+      duration_ms: 42.552333
+      type: 'test'
+      ...
+    1..1
+ok 7 - P0-4: human gate cannot succeed without an external resolution
+  ---
+  duration_ms: 42.619916
+  type: 'suite'
+  ...
+# Subtest: P0-5: recovery is fail closed
+    # Subtest: corrupted event -> resume refuses
+    ok 1 - corrupted event -> resume refuses
+      ---
+      duration_ms: 21.071833
+      type: 'test'
+      ...
+    # Subtest: same runId + different graph hash -> resume refuses
+    ok 2 - same runId + different graph hash -> resume refuses
+      ---
+      duration_ms: 85.427584
+      type: 'test'
+      ...
+    1..2
+ok 8 - P0-5: recovery is fail closed
+  ---
+  duration_ms: 106.756417
+  type: 'suite'
+  ...
+# Subtest: P1-6: feature snapshot gating
+    # Subtest: capability feature off -> validation rejects the node
+    ok 1 - capability feature off -> validation rejects the node
+      ---
+      duration_ms: 0.185334
+      type: 'test'
+      ...
+    1..1
+ok 9 - P1-6: feature snapshot gating
+  ---
+  duration_ms: 0.228834
+  type: 'suite'
+  ...
+# Subtest: P1-8: artifact tampering fails the analysis adapter hash check
+    # Subtest: tampered artifact bytes -> HASH_MISMATCH
+    ok 1 - tampered artifact bytes -> HASH_MISMATCH
+      ---
+      duration_ms: 0.662
+      type: 'test'
+      ...
+    1..1
+ok 10 - P1-8: artifact tampering fails the analysis adapter hash check
+  ---
+  duration_ms: 0.823209
+  type: 'suite'
+  ...
+# Subtest: phase21 production path
+    # Subtest: full chain reaches REPORT_SKILL_UNAVAILABLE with exact handoffs
+    ok 1 - full chain reaches REPORT_SKILL_UNAVAILABLE with exact handoffs
+      ---
+      duration_ms: 4984.986125
+      type: 'test'
+      ...
+    # Subtest: arrow binary input keeps bytes hash + ARROW format + mask meta
+    ok 2 - arrow binary input keeps bytes hash + ARROW format + mask meta
+      ---
+      duration_ms: 256.360625
+      type: 'test'
+      ...
+    # Subtest: preflight rejects sensitive unmasked / no provenance / unknown type / unmasked external
+    ok 3 - preflight rejects sensitive unmasked / no provenance / unknown type / unmasked external
+      ---
+      duration_ms: 41.65925
+      type: 'test'
+      ...
+    # Subtest: promotion rejects tampered decision and tampered gate
+    ok 4 - promotion rejects tampered decision and tampered gate
+      ---
+      duration_ms: 8598.325542
+      type: 'test'
+      ...
+    # Subtest: ABSTAIN -> operator APPROVED -> promotion allowed (human decision)
+    ok 5 - ABSTAIN -> operator APPROVED -> promotion allowed (human decision)
+      ---
+      duration_ms: 865.304542
+      type: 'test'
+      ...
+    # Subtest: ABSTAIN without human approval denies promotion
+    ok 6 - ABSTAIN without human approval denies promotion
+      ---
+      duration_ms: 698.4935
+      type: 'test'
+      ...
+    # Subtest: CHANGES_REQUIRED drives a REAL feedback loop (revision, re-analysis, re-review)
+    ok 7 - CHANGES_REQUIRED drives a REAL feedback loop (revision, re-analysis, re-review)
+      ---
+      duration_ms: 1287.52
+      type: 'test'
+      ...
+    # Subtest: CHANGES_REQUIRED revision budget exhausted fails closed
+    ok 8 - CHANGES_REQUIRED revision budget exhausted fails closed
+      ---
+      duration_ms: 1295.484625
+      type: 'test'
+      ...
+    # Subtest: real extension host snapshot passes the executor hash recomputation
+    ok 9 - real extension host snapshot passes the executor hash recomputation
+      ---
+      duration_ms: 227.0195
+      type: 'test'
+      ...
+    # Subtest: gate crash window: gate written, claim PENDING -> resume reuses the SAME gate
+    ok 10 - gate crash window: gate written, claim PENDING -> resume reuses the SAME gate
+      ---
+      duration_ms: 7353.166875
+      type: 'test'
+      ...
+    # Subtest: human resolution with mismatched policy hash is rejected
+    ok 11 - human resolution with mismatched policy hash is rejected
+      ---
+      duration_ms: 705.266042
+      type: 'test'
+      ...
+    # Subtest: two ABSTAIN reviews never collide on one actionRef
+    ok 12 - two ABSTAIN reviews never collide on one actionRef
+      ---
+      duration_ms: 645.2325
+      type: 'test'
+      ...
+    # Subtest: revision recovery: resume loads the LATEST persisted spec
+    ok 13 - revision recovery: resume loads the LATEST persisted spec
+      ---
+      duration_ms: 1299.233917
+      type: 'test'
+      ...
+    # Subtest: forged feature snapshot hash refuses to start
+    ok 14 - forged feature snapshot hash refuses to start
+      ---
+      duration_ms: 1.294
+      type: 'test'
+      ...
+    # Subtest: maxAttempts=1 crash + resume -> ATTEMPTS_EXHAUSTED, adapter never re-executed
+    ok 15 - maxAttempts=1 crash + resume -> ATTEMPTS_EXHAUSTED, adapter never re-executed
+      ---
+      duration_ms: 42.918958
+      type: 'test'
+      ...
+    # Subtest: tampered result payload or manifest -> resolveResult null
+    ok 16 - tampered result payload or manifest -> resolveResult null
+      ---
+      duration_ms: 12.741875
+      type: 'test'
+      ...
+    1..16
+ok 11 - phase21 production path
+  ---
+  duration_ms: 28317.703334
+  type: 'suite'
+  ...
+1..11
+# tests 34
+# suites 11
+# pass 34
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 28451.512458

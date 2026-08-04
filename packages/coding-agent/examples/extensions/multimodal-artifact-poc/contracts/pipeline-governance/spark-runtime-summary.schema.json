@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/spark-runtime-summary.schema.json",
+  "title": "SparkRuntimeSummary",
+  "type": "object",
+  "required": [
+    "pipelineId",
+    "pipelineVersion",
+    "runId",
+    "engine",
+    "verified",
+    "jobId",
+    "status",
+    "durationMs",
+    "stages",
+    "taskSummary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "engine": {
+      "const": "SPARK"
+    },
+    "jobId": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "status": {
+      "enum": [
+        "RUNNING",
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELLED"
+      ]
+    },
+    "durationMs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "retries": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "stageId",
+          "status"
+        ],
+        "properties": {
+          "stageId": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "durationMs": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "shuffleReadBytes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "shuffleWriteBytes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "spillBytes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "inputRows": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "outputRows": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "taskSummary": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "verified": {
+      "const": false
+    },
+    "pipelineId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pipelineVersion": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

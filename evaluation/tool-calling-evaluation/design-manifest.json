@@ -1,0 +1,18 @@
+{
+  "schemaVersion":"1.0",
+  "state":"FROZEN_AWAITING_CONFIRMATION",
+  "repositoryCommitSha":"5356473b2746daff6007802584da3afd8dba6613",
+  "source":{"path":"/Users/zhanhuilin/Downloads/Analytica 工具调用能力评测.docx","bytes":14705,"sha256":"d3ff775834f28ce5b6385f64a9d1722a6b20b9f0608706a263d032d11a811bc3"},
+  "files":[
+    {"path":"docx-structure.json","sha256":"43ac314d3b97be325464d49a7a339e32a7edbed4593a47948d7bfa88c37a3a0b"},
+    {"path":"tool-registry.json","sha256":"9c431e6f00ff6ce759aa7282069b4d732d0f670f77ea935602f4cec52f618a88"},
+    {"path":"scenarios/single-tool.json","sha256":"fe0beba8dd261f1b48e7c128b194ddc58f59179e74ce88e506ab2f0b82c0ff73"},
+    {"path":"scenarios/multi-tool.json","sha256":"0381dd39c3dbb8dace5418e4ea8c65badca082c17b3805b17d4bf552695a423b"},
+    {"path":"scenarios/workflow.json","sha256":"3f2866e96471c98fda1243bff823da81fa2b509730b91f82c2361c12650e47d5"},
+    {"path":"scoring-contract.json","sha256":"9257f895257d1007da2357721710de6c4f3b29525ec7de3e83636246a14a74d9"},
+    {"path":"execution-plan.md","sha256":"d9a31cd38b7a215bc32fbcb11d2b8574757ebd6f950ed6a03b6b1a41218becd4"},
+    {"path":"validate-design.mjs","sha256":"9dcd6425c1edae674c76feb736ca16a467ca15f3093fa7a7d0591ece34cd4156"}
+  ],
+  "counts":{"publicTools":18,"singleToolCases":12,"multiToolCases":12,"workflowCases":12,"totalCases":36},
+  "executionStarted":false
+}

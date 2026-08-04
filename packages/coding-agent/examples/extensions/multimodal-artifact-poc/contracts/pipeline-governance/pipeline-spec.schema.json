@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/pipeline-spec.schema.json",
+  "title": "PipelineSpec",
+  "type": "object",
+  "required": ["specId", "version", "pipelineId", "sources", "target", "executionMode", "executionBackend", "updateMode", "steps", "keys", "timeSemantics", "partitioning", "schemaEvolutionPolicy", "assumptions", "risks", "createdAt"],
+  "additionalProperties": false,
+  "properties": {
+    "specId": { "type": "string", "minLength": 1 },
+    "version": { "type": "integer", "minimum": 1 },
+    "pipelineId": { "type": "string", "minLength": 1 },
+    "sources": { "type": "array", "items": { "type": "string" } },
+    "target": { "type": "string", "minLength": 1 },
+    "executionMode": { "enum": ["BATCH", "STREAMING", "HYBRID"] },
+    "executionBackend": { "enum": ["PYICEBERG_LOCAL"] },
+    "updateMode": { "enum": ["FULL", "INCREMENTAL", "APPEND", "MERGE"] },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["stepId", "operation", "input", "output"],
+        "additionalProperties": false,
+        "properties": {
+          "stepId": { "type": "string" },
+          "operation": { "type": "string" },
+          "input": { "type": "string" },
+          "output": { "type": "string" }
+        }
+      }
+    },
+    "keys": { "type": "object", "additionalProperties": { "type": "array", "items": { "type": "string" } } },
+    "dedupPolicy": { "enum": ["NONE", "DROP_DUPLICATES", "KEEP_FIRST", "KEEP_LAST"] },
+    "timeSemantics": { "enum": ["PROCESSING_TIME", "EVENT_TIME"] },
+    "watermarkPolicy": { "type": ["object", "null"], "additionalProperties": true },
+    "lateDataPolicy": { "enum": ["DROP", "DEAD_LETTER", "ACCEPT"] },
+    "partitioning": { "type": "array", "items": { "type": "string" } },
+    "schemaEvolutionPolicy": { "enum": ["ADDITIVE", "RELAXED", "STRICT"] },
+    "qualityRules": { "type": "array", "items": { "type": "string" } },
+    "assumptions": { "type": "array", "items": { "type": "string" } },
+    "risks": { "type": "array", "items": { "type": "string" } },
+    "createdAt": { "type": "string", "format": "date-time" }
+  }
+}

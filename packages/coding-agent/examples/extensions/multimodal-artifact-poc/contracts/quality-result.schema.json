@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lzzzhh/data-agent/contracts/quality-result.schema.json",
+  "title": "QualityResult",
+  "description": "Deterministic data-quality assessment (no LLM).",
+  "type": "object",
+  "required": ["datasetId", "status", "checks"],
+  "properties": {
+    "datasetId": { "type": "string" },
+    "status": { "enum": ["PASS", "WARN", "FAIL"] },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["check", "status", "detail"],
+        "properties": {
+          "check": { "type": "string" },
+          "status": { "enum": ["PASS", "WARN", "FAIL"] },
+          "detail": { "type": "string" }
+        }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "properties": {
+        "rowCount": { "type": "integer" },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["column", "missingRate", "uniqueRate", "distinctCount"],
+            "properties": {
+              "column": { "type": "string" },
+              "missingRate": { "type": "number" },
+              "uniqueRate": { "type": "number" },
+              "logicalTypes": { "type": "array", "items": { "type": "string" } },
+              "distinctCount": { "type": "integer" }
+            }
+          }
+        },
+        "candidateKeys": { "type": "array", "items": { "type": "array", "items": { "type": "string" } } },
+        "candidateTimeColumns": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

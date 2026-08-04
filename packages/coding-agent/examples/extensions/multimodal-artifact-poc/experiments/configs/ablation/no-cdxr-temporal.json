@@ -1,0 +1,18 @@
+{
+  "experimentId": "ablation-no-cdxr-temporal",
+  "description": "Ablation experiment: round3.cdxr_temporal disabled — the post_outcome rule does not run; all other CDXR rules stay on. Assessed outputs must not be used to authorize training (ALLOW is downgraded while rules are disabled).",
+  "runtimeProfile": "ablation/no-cdxr-temporal",
+  "features": {
+    "round2.lakehouse": true,
+    "round3.cdxr_training": true,
+    "round3.cdxr_target_leakage": true,
+    "round3.cdxr_temporal": false,
+    "round3.cdxr_sensitive": true,
+    "round3.cdxr_target_distribution": true,
+    "round3.cdxr_sample_size": true,
+    "round3.cdxr_missingness": true,
+    "round3.cdxr_constant_feature": true,
+    "round3.cdxr_validation_split": true,
+    "round3.cdxr_traceability": true
+  }
+}

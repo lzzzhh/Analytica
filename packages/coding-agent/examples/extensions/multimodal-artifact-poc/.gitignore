@@ -1,0 +1,5 @@
+.data/
+unused/
+__pycache__/
+*.py[cod]
+src/data-tools/*.js

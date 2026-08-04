@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MidExperimentReview",
+  "type": "object",
+  "required": ["phase", "dataSource", "dataVerified", "status"],
+  "properties": {
+    "phase": {"const": "IN_EXPERIMENT_REVIEW"},
+    "dataSource": {"enum": ["USER_PROVIDED", "UPLOADED_FILE", "CONTROLLED_ARTIFACT"]},
+    "dataVerified": {"type": "boolean", "const": false},
+    "status": {"enum": ["NO_OBVIOUS_ISSUE_REPORTED", "SRM_SUSPECTED", "DATA_QUALITY_RISK", "INSUFFICIENT_SAMPLE", "MINIMUM_DURATION_NOT_REACHED", "PAUSE_AND_INVESTIGATE_RECOMMENDED"]},
+    "srm": {"type": ["object", "null"]},
+    "sampleCompletion": {"type": ["number", "null"]},
+    "trustRisks": {"type": "array", "items": {"type": "string"}},
+    "recommendation": {"type": "string"}
+  },
+  "additionalProperties": false
+}

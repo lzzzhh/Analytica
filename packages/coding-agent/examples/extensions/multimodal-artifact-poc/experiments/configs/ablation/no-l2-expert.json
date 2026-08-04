@@ -1,0 +1,11 @@
+{
+  "experimentId": "ablation-no-l2-expert",
+  "description": "Ablation experiment: round1.l2_expert disabled — the expert agent never starts, even when escalation is warranted (escalation still recorded in the decision log).",
+  "runtimeProfile": "ablation/no-l2-expert",
+  "features": {
+    "round1.multimodal": true,
+    "round1.l2_expert": false,
+    "round2.lakehouse": false,
+    "round3.cdxr_training": false
+  }
+}

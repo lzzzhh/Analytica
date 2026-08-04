@@ -1,0 +1,1504 @@
+{
+  "registryVersion": "1.0.0",
+  "description": "Single authoritative feature registry for multimodal-artifact-poc. All feature flags (build + runtime) across rounds 1-3 and legacy/unsafe sections are defined here only. TypeScript and Python both resolve this file; never duplicate defaults in code.",
+  "features": [
+    {
+      "id": "round1.multimodal",
+      "round": 1,
+      "description": "Round 1 parent: multimodal + document agent suite (OCR, vision, docs, sub-agent, orchestration, evidence).",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_MULTIMODAL",
+      "envRuntimeName": "ENABLE_MULTIMODAL"
+    },
+    {
+      "id": "round1.image_ocr",
+      "round": 1,
+      "description": "parse_image tool (PaddleOCR).",
+      "parent": "round1.multimodal",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_IMAGE_OCR",
+      "envRuntimeName": "ENABLE_IMAGE_OCR"
+    },
+    {
+      "id": "round1.visual_parser",
+      "round": 1,
+      "description": "parse_visual tool (PaddleOCR-VL vision model). Heavy dependency: when disabled the vision model modules must not load.",
+      "parent": "round1.multimodal",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_VISUAL_PARSER",
+      "envRuntimeName": "ENABLE_VISUAL_PARSER"
+    },
+    {
+      "id": "round1.document_parser",
+      "round": 1,
+      "description": "parse_document tool (markitdown).",
+      "parent": "round1.multimodal",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_DOCUMENT_PARSER",
+      "envRuntimeName": "ENABLE_DOCUMENT_PARSER"
+    },
+    {
+      "id": "round1.document_subagent",
+      "round": 1,
+      "description": "analyze_document tool (isolated RPC sub-agent).",
+      "parent": "round1.multimodal",
+      "dependencies": [
+        "round1.document_parser"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_DOCUMENT_SUBAGENT",
+      "envRuntimeName": "ENABLE_DOCUMENT_SUBAGENT"
+    },
+    {
+      "id": "round1.document_orchestrator_v2",
+      "round": 1,
+      "description": "analyze_document_v2 tool (two-tier orchestrator).",
+      "parent": "round1.multimodal",
+      "dependencies": [
+        "round1.document_parser"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_DOCUMENT_ORCHESTRATOR_V2",
+      "envRuntimeName": "ENABLE_DOCUMENT_ORCHESTRATOR_V2"
+    },
+    {
+      "id": "round1.quality_gate",
+      "round": 1,
+      "description": "Evidence Quality Gate inside the V2 orchestrator. When disabled the gate is really skipped (no retry/escalate decision from quality scores).",
+      "parent": "round1.multimodal",
+      "dependencies": [
+        "round1.document_orchestrator_v2"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_QUALITY_GATE",
+      "envRuntimeName": "ENABLE_QUALITY_GATE"
+    },
+    {
+      "id": "round1.l1_retry",
+      "round": 1,
+      "description": "Differentiated L1 retry on quality-gate failure. When disabled no second L1 attempt is produced.",
+      "parent": "round1.multimodal",
+      "dependencies": [
+        "round1.quality_gate"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_L1_RETRY",
+      "envRuntimeName": "ENABLE_L1_RETRY"
+    },
+    {
+      "id": "round1.best_attempt_selection",
+      "round": 1,
+      "description": "Best-attempt selection (by quality score). When disabled an explicit ablation strategy is used: keep the LAST attempt.",
+      "parent": "round1.multimodal",
+      "dependencies": [
+        "round1.l1_retry"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_BEST_ATTEMPT_SELECTION",
+      "envRuntimeName": "ENABLE_BEST_ATTEMPT_SELECTION"
+    },
+    {
+      "id": "round1.l2_expert",
+      "round": 1,
+      "description": "L2 expert agent. When disabled the orchestrator never starts the expert agent.",
+      "parent": "round1.multimodal",
+      "dependencies": [
+        "round1.document_orchestrator_v2"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_L2_EXPERT",
+      "envRuntimeName": "ENABLE_L2_EXPERT"
+    },
+    {
+      "id": "round1.evidence_merger",
+      "round": 1,
+      "description": "Deterministic Evidence Merger. When disabled the orchestrator uses an explicit ablation output path (direct projection of the kept packet).",
+      "parent": "round1.multimodal",
+      "dependencies": [
+        "round1.document_orchestrator_v2"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_EVIDENCE_MERGER",
+      "envRuntimeName": "ENABLE_EVIDENCE_MERGER"
+    },
+    {
+      "id": "round2.lakehouse",
+      "round": 2,
+      "description": "Round 2 parent: lakehouse data source (query gateway client + tools + evidence). Default OFF at runtime; enable with ENABLE_LAKEHOUSE=true. LAKEHOUSE_GATEWAY_URL only configures the connection, never registration.",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_LAKEHOUSE",
+      "envRuntimeName": "ENABLE_LAKEHOUSE"
+    },
+    {
+      "id": "round2.catalog_tools",
+      "round": 2,
+      "description": "search_catalog + inspect_dataset tools.",
+      "parent": "round2.lakehouse",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_LAKEHOUSE_CATALOG_TOOLS",
+      "envRuntimeName": "ENABLE_LAKEHOUSE_CATALOG_TOOLS"
+    },
+    {
+      "id": "round2.query_tools",
+      "round": 2,
+      "description": "validate_query + execute_query tools.",
+      "parent": "round2.lakehouse",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_LAKEHOUSE_QUERY_TOOLS",
+      "envRuntimeName": "ENABLE_LAKEHOUSE_QUERY_TOOLS"
+    },
+    {
+      "id": "round2.data_quality",
+      "round": 2,
+      "description": "get_data_quality tool; quality results must not enter query Evidence when disabled.",
+      "parent": "round2.lakehouse",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_DATA_QUALITY",
+      "envRuntimeName": "ENABLE_DATA_QUALITY"
+    },
+    {
+      "id": "round2.lineage",
+      "round": 2,
+      "description": "explain_lineage tool; lineage info must not enter Evidence when disabled.",
+      "parent": "round2.lakehouse",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_LINEAGE",
+      "envRuntimeName": "ENABLE_LINEAGE"
+    },
+    {
+      "id": "round2.snapshot",
+      "round": 2,
+      "description": "get_snapshot tool. When disabled the standalone snapshot-analysis tool is not registered; query execution may still carry its required data-version identifier.",
+      "parent": "round2.lakehouse",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_SNAPSHOT",
+      "envRuntimeName": "ENABLE_SNAPSHOT"
+    },
+    {
+      "id": "round2.query_evidence",
+      "round": 2,
+      "description": "Conversion of query results into EvidenceFact(kind=query). When disabled results may still be returned to the caller but never become query Evidence.",
+      "parent": "round2.lakehouse",
+      "dependencies": [
+        "round2.query_tools"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_QUERY_EVIDENCE",
+      "envRuntimeName": "ENABLE_QUERY_EVIDENCE"
+    },
+    {
+      "id": "round2.pipeline",
+      "round": 2,
+      "description": "Round 2 parent: Lakehouse Batch/Streaming Pipeline suite (source generation, ODS load, DWD/DWS/ADS transforms, checkpointing, dead letter, validation). Writes only via explicit CLI/E2E — never exposed as a default agent tool.",
+      "parent": null,
+      "dependencies": [
+        "round2.lakehouse"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_LAKEHOUSE_PIPELINE",
+      "envRuntimeName": "ENABLE_LAKEHOUSE_PIPELINE"
+    },
+    {
+      "id": "round2.batch_pipeline",
+      "round": 2,
+      "description": "Batch pipeline: historical source files -> ODS -> DWD -> DWS -> ADS with idempotent re-run and partition-scoped writes.",
+      "parent": "round2.pipeline",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_BATCH_PIPELINE",
+      "envRuntimeName": "ENABLE_BATCH_PIPELINE"
+    },
+    {
+      "id": "round2.stream_replay_pipeline",
+      "round": 2,
+      "description": "Stream replay pipeline (deterministic local event replay): event replay with schema validation, event-time/watermark, event_id dedup, dead letter for invalid/too-late events, checkpoint/recovery.",
+      "parent": "round2.pipeline",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_STREAM_REPLAY_PIPELINE",
+      "envRuntimeName": "ENABLE_STREAM_REPLAY_PIPELINE"
+    },
+    {
+      "id": "round2.pipeline_source_generation",
+      "round": 2,
+      "description": "Deterministic source generation (batch parquet inputs + stream events.jsonl) with source manifests and content hashes.",
+      "parent": "round2.pipeline",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_SOURCE_GENERATION",
+      "envRuntimeName": "ENABLE_PIPELINE_SOURCE_GENERATION"
+    },
+    {
+      "id": "round2.pipeline_ods_load",
+      "round": 2,
+      "description": "ODS raw landing from source files/events.",
+      "parent": "round2.pipeline",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_ODS_LOAD",
+      "envRuntimeName": "ENABLE_PIPELINE_ODS_LOAD"
+    },
+    {
+      "id": "round2.pipeline_dwd_transform",
+      "round": 2,
+      "description": "DWD clean detail transform (schema mapping, time normalization, dedup, business keys, null handling).",
+      "parent": "round2.pipeline",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_DWD_TRANSFORM",
+      "envRuntimeName": "ENABLE_PIPELINE_DWD_TRANSFORM"
+    },
+    {
+      "id": "round2.pipeline_dws_transform",
+      "round": 2,
+      "description": "DWS feature/prediction subject transforms.",
+      "parent": "round2.pipeline",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_DWS_TRANSFORM",
+      "envRuntimeName": "ENABLE_PIPELINE_DWS_TRANSFORM"
+    },
+    {
+      "id": "round2.pipeline_ads_transform",
+      "round": 2,
+      "description": "ADS model metrics transform computed from DWS subjects.",
+      "parent": "round2.pipeline",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_ADS_TRANSFORM",
+      "envRuntimeName": "ENABLE_PIPELINE_ADS_TRANSFORM"
+    },
+    {
+      "id": "round2.pipeline_checkpointing",
+      "round": 2,
+      "description": "Checkpoint/recovery for streaming (and batch watermark) — restart resumes without duplicate consumption.",
+      "parent": "round2.pipeline",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_CHECKPOINTING",
+      "envRuntimeName": "ENABLE_PIPELINE_CHECKPOINTING"
+    },
+    {
+      "id": "round2.pipeline_dead_letter",
+      "round": 2,
+      "description": "Dead-letter artifact for invalid/too-late events; never pollutes fact tables.",
+      "parent": "round2.pipeline",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_DEAD_LETTER",
+      "envRuntimeName": "ENABLE_PIPELINE_DEAD_LETTER"
+    },
+    {
+      "id": "round2.pipeline_validation",
+      "round": 2,
+      "description": "Pipeline validation: idempotency checks, snapshot counts, ground-truth accuracy, execution manifests.",
+      "parent": "round2.pipeline",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_VALIDATION",
+      "envRuntimeName": "ENABLE_PIPELINE_VALIDATION"
+    },
+    {
+      "id": "round2.pipeline_governance",
+      "round": 2,
+      "description": "Phase 1 parent: Data Pipeline Governance — schema discovery, SchemaSpec/PipelineSpec design, deterministic validation, review package, human approval (OPERATOR_CLI), versioned amendment. No runtime governance, placement, CDXR gate or dashboard in Phase 1.",
+      "parent": null,
+      "dependencies": [
+        "round2.lakehouse"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_GOVERNANCE",
+      "envRuntimeName": "ENABLE_PIPELINE_GOVERNANCE"
+    },
+    {
+      "id": "round2.pipeline_schema_discovery",
+      "round": 2,
+      "description": "Deterministic source schema discovery: field profile, candidate keys with evidence/confidence, event-time and sensitive candidates.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_SCHEMA_DISCOVERY",
+      "envRuntimeName": "ENABLE_PIPELINE_SCHEMA_DISCOVERY"
+    },
+    {
+      "id": "round2.pipeline_schema_design",
+      "round": 2,
+      "description": "SchemaSpec draft generation (agent-assisted) with deterministic validation.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_SCHEMA_DESIGN",
+      "envRuntimeName": "ENABLE_PIPELINE_SCHEMA_DESIGN"
+    },
+    {
+      "id": "round2.pipeline_spec_generation",
+      "round": 2,
+      "description": "PipelineSpec draft generation (agent-assisted) with deterministic validation.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_SPEC_GENERATION",
+      "envRuntimeName": "ENABLE_PIPELINE_SPEC_GENERATION"
+    },
+    {
+      "id": "round2.pipeline_draft_compilation",
+      "round": 2,
+      "description": "Deterministic compiler: generates a NON-EXECUTABLE PipelineDraftArtifact (executable=false) from a validated PipelineSpec before human approval.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_DRAFT_COMPILATION",
+      "envRuntimeName": "ENABLE_PIPELINE_DRAFT_COMPILATION"
+    },
+    {
+      "id": "round2.pipeline_human_approval",
+      "round": 2,
+      "description": "Human approval via OPERATOR_CLI: decision binds review content hash + OS actor; approves freeze 4 content hashes; changes create new spec version + new review.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [
+        "round2.pipeline_schema_design",
+        "round2.pipeline_spec_generation",
+        "round2.pipeline_draft_compilation"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_HUMAN_APPROVAL",
+      "envRuntimeName": "ENABLE_PIPELINE_HUMAN_APPROVAL"
+    },
+    {
+      "id": "round2.pipeline_amendment",
+      "round": 2,
+      "description": "Versioned PipelineAmendment: CHANGES_REQUESTED produces new spec versions, re-compiles, re-validates and creates a new review package; old approvals never reused.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_AMENDMENT",
+      "envRuntimeName": "ENABLE_PIPELINE_AMENDMENT"
+    },
+    {
+      "id": "round2.pipeline_event_store",
+      "round": 2,
+      "description": "Append-only governance event store with idempotency, ordering and version control (Phase 2).",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_EVENT_STORE",
+      "envRuntimeName": "ENABLE_PIPELINE_EVENT_STORE"
+    },
+    {
+      "id": "round2.pipeline_state_reducer",
+      "round": 2,
+      "description": "Deterministic state reducer: events -> RunStateSnapshot; the only producer of authoritative run state (Phase 2).",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [
+        "round2.pipeline_event_store"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_STATE_REDUCER",
+      "envRuntimeName": "ENABLE_PIPELINE_STATE_REDUCER"
+    },
+    {
+      "id": "round2.pipeline_agent_worker",
+      "round": 2,
+      "description": "Event-triggered governance agent worker: reads PipelineContextPackage + RunStateSnapshot, produces findings/proposals; never resides, never writes state/approvals (Phase 2).",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [
+        "round2.pipeline_state_reducer"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_AGENT_WORKER",
+      "envRuntimeName": "ENABLE_PIPELINE_AGENT_WORKER"
+    },
+    {
+      "id": "round2.spark_runtime_governance",
+      "round": 2,
+      "description": "Spark runtime governance adapter: Job/Stage/Task structured summaries -> deterministic findings. Adapter contract + fixtures only; production Spark NOT verified.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_SPARK_RUNTIME_GOVERNANCE",
+      "envRuntimeName": "ENABLE_SPARK_RUNTIME_GOVERNANCE"
+    },
+    {
+      "id": "round2.flink_runtime_governance",
+      "round": 2,
+      "description": "Flink runtime governance adapter: Job/Operator/Checkpoint/Watermark/Backpressure structured summaries -> deterministic findings. Adapter contract + fixtures only; production Flink NOT verified.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_FLINK_RUNTIME_GOVERNANCE",
+      "envRuntimeName": "ENABLE_FLINK_RUNTIME_GOVERNANCE"
+    },
+    {
+      "id": "round2.iceberg_layout_governance",
+      "round": 2,
+      "description": "Iceberg layout governance: snapshot/data-file/manifest statistics, small files, partition skew, snapshot growth -> deterministic findings.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ICEBERG_LAYOUT_GOVERNANCE",
+      "envRuntimeName": "ENABLE_ICEBERG_LAYOUT_GOVERNANCE"
+    },
+    {
+      "id": "round2.pipeline_deadline_watchdog",
+      "round": 2,
+      "description": "Event-triggered deadline watchdog: heartbeat/progress renew leases; expiry produces anomaly events (never restarts/modifies pipelines).",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_DEADLINE_WATCHDOG",
+      "envRuntimeName": "ENABLE_PIPELINE_DEADLINE_WATCHDOG"
+    },
+    {
+      "id": "round2.pipeline_remediation",
+      "round": 2,
+      "description": "Remediation proposals (agent-suggested) requiring operator approval (APPROVE_REMEDIATION / REQUEST_CHANGES / REJECT); never auto-applied.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_REMEDIATION",
+      "envRuntimeName": "ENABLE_PIPELINE_REMEDIATION"
+    },
+    {
+      "id": "round2.pipeline_placement_governance",
+      "round": 2,
+      "description": "Data placement governance: PlacementPlan proposal, deterministic validator, operator approval; write only after approval and only to controlled local harness targets.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_PLACEMENT_GOVERNANCE",
+      "envRuntimeName": "ENABLE_PIPELINE_PLACEMENT_GOVERNANCE"
+    },
+    {
+      "id": "round2.pipeline_cdxr_promotion_gate",
+      "round": 2,
+      "description": "DWS -> ADS / Feature Store CDXR promotion gate: triggers on DWS_FEATURE_CANDIDATE_READY, runs assess_training_data, produces FeaturePromotionReviewPackage; operator decides; only APPROVED_FOR_ADS after approval.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [
+        "round3.cdxr_training"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_CDXR_PROMOTION_GATE",
+      "envRuntimeName": "ENABLE_PIPELINE_CDXR_PROMOTION_GATE"
+    },
+    {
+      "id": "round2.pipeline_status_dashboard",
+      "round": 2,
+      "description": "Multi-pipeline governance status dashboard: state projection from the reducer (single source of truth) rendered via the Pi tool UI channel (details + renderResult); never a second state store.",
+      "parent": "round2.pipeline_governance",
+      "dependencies": [
+        "round2.pipeline_state_reducer"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PIPELINE_STATUS_DASHBOARD",
+      "envRuntimeName": "ENABLE_PIPELINE_STATUS_DASHBOARD"
+    },
+    {
+      "id": "round3.cdxr_training",
+      "round": 3,
+      "description": "Round 3 parent: on-demand CDXR training-data suitability assessment (assess_training_data tool + POST /v1/cdxr/training-assessments). Default OFF at runtime. Depends on the lakehouse adapter being available.",
+      "parent": null,
+      "dependencies": [
+        "round2.lakehouse"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CDXR_TRAINING",
+      "envRuntimeName": "ENABLE_CDXR_TRAINING"
+    },
+    {
+      "id": "round3.cdxr_target_leakage",
+      "round": 3,
+      "description": "CDXR rule group: TARGET_IN_FEATURES + LABEL_DERIVED_FEATURE (target leakage).",
+      "parent": "round3.cdxr_training",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CDXR_TARGET_LEAKAGE",
+      "envRuntimeName": "ENABLE_CDXR_TARGET_LEAKAGE"
+    },
+    {
+      "id": "round3.cdxr_temporal",
+      "round": 3,
+      "description": "CDXR rule group: POST_OUTCOME_FEATURE (future-information leakage).",
+      "parent": "round3.cdxr_training",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CDXR_TEMPORAL",
+      "envRuntimeName": "ENABLE_CDXR_TEMPORAL"
+    },
+    {
+      "id": "round3.cdxr_sensitive",
+      "round": 3,
+      "description": "CDXR rule: SENSITIVE_FEATURE.",
+      "parent": "round3.cdxr_training",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CDXR_SENSITIVE",
+      "envRuntimeName": "ENABLE_CDXR_SENSITIVE"
+    },
+    {
+      "id": "round3.cdxr_target_distribution",
+      "round": 3,
+      "description": "CDXR rule: TARGET_DISTRIBUTION.",
+      "parent": "round3.cdxr_training",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CDXR_TARGET_DISTRIBUTION",
+      "envRuntimeName": "ENABLE_CDXR_TARGET_DISTRIBUTION"
+    },
+    {
+      "id": "round3.cdxr_sample_size",
+      "round": 3,
+      "description": "CDXR rule: SAMPLE_SIZE.",
+      "parent": "round3.cdxr_training",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CDXR_SAMPLE_SIZE",
+      "envRuntimeName": "ENABLE_CDXR_SAMPLE_SIZE"
+    },
+    {
+      "id": "round3.cdxr_missingness",
+      "round": 3,
+      "description": "CDXR rule: FEATURE_MISSINGNESS.",
+      "parent": "round3.cdxr_training",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CDXR_MISSINGNESS",
+      "envRuntimeName": "ENABLE_CDXR_MISSINGNESS"
+    },
+    {
+      "id": "round3.cdxr_constant_feature",
+      "round": 3,
+      "description": "CDXR rule: CONSTANT_FEATURE.",
+      "parent": "round3.cdxr_training",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CDXR_CONSTANT_FEATURE",
+      "envRuntimeName": "ENABLE_CDXR_CONSTANT_FEATURE"
+    },
+    {
+      "id": "round3.cdxr_validation_split",
+      "round": 3,
+      "description": "CDXR rule: VALIDATION_LEAKAGE (train/validation split sanity).",
+      "parent": "round3.cdxr_training",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CDXR_VALIDATION_SPLIT",
+      "envRuntimeName": "ENABLE_CDXR_VALIDATION_SPLIT"
+    },
+    {
+      "id": "round3.cdxr_traceability",
+      "round": 3,
+      "description": "CDXR rule: TRACEABILITY (snapshot reference mandatory for ALLOW).",
+      "parent": "round3.cdxr_training",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CDXR_TRACEABILITY",
+      "envRuntimeName": "ENABLE_CDXR_TRACEABILITY"
+    },
+    {
+      "id": "round4.requirement_planning",
+      "round": 4,
+      "description": "Round 4 parent: Business Requirement Planning plugin (requirement cards, ambiguity handling, plan gate, task plans, scheduling, bounded replanning). Default OFF; when disabled the plugin registers nothing and the main agent behavior is unchanged.",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_REQUIREMENT_PLANNING",
+      "envRuntimeName": "ENABLE_REQUIREMENT_PLANNING"
+    },
+    {
+      "id": "round4.requirement_skill",
+      "round": 4,
+      "description": "Requirement Planning native Pi skill (resources_discover → skill/SKILL.md injected into the system prompt).",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_REQUIREMENT_SKILL",
+      "envRuntimeName": "ENABLE_REQUIREMENT_SKILL"
+    },
+    {
+      "id": "round4.planning_advisor",
+      "round": 4,
+      "description": "Isolated Planning Advisor sub-agent (strict JSON; candidate analysis only, never the decision maker).",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PLANNING_ADVISOR",
+      "envRuntimeName": "ENABLE_PLANNING_ADVISOR"
+    },
+    {
+      "id": "round4.ambiguity_detection",
+      "round": 4,
+      "description": "Deterministic ambiguity detection (blocking vs non-blocking).",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_AMBIGUITY_DETECTION",
+      "envRuntimeName": "ENABLE_AMBIGUITY_DETECTION"
+    },
+    {
+      "id": "round4.clarification",
+      "round": 4,
+      "description": "Clarification questions to the user (max 3). Disabled: blocking ambiguity → CANNOT_PLAN, never silent guessing.",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_REQUIREMENT_CLARIFICATION",
+      "envRuntimeName": "ENABLE_REQUIREMENT_CLARIFICATION"
+    },
+    {
+      "id": "round4.assumption_management",
+      "round": 4,
+      "description": "Explicit assumption management — every default recorded with source/impact, visible to the user.",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ASSUMPTION_MANAGEMENT",
+      "envRuntimeName": "ENABLE_ASSUMPTION_MANAGEMENT"
+    },
+    {
+      "id": "round4.plan_gate",
+      "round": 4,
+      "description": "Plan gate: DIRECT / LIGHTWEIGHT / FORMAL routing.",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PLAN_GATE",
+      "envRuntimeName": "ENABLE_PLAN_GATE"
+    },
+    {
+      "id": "round4.task_plan_generation",
+      "round": 4,
+      "description": "Candidate TaskPlan generation (prepares prepare_business_task registration).",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_TASK_PLAN_GENERATION",
+      "envRuntimeName": "ENABLE_TASK_PLAN_GENERATION"
+    },
+    {
+      "id": "round4.plan_validation",
+      "round": 4,
+      "description": "Deterministic plan validation. Semantic enhancement checks ablatable; hard invariants (schema, cycles, budgets) never disabled.",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PLAN_VALIDATION",
+      "envRuntimeName": "ENABLE_PLAN_VALIDATION"
+    },
+    {
+      "id": "round4.dependency_scheduler",
+      "round": 4,
+      "description": "Dependency scheduler: ready/blocked/waves (no auto execution).",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_DEPENDENCY_SCHEDULER",
+      "envRuntimeName": "ENABLE_DEPENDENCY_SCHEDULER"
+    },
+    {
+      "id": "round4.parallel_scheduling",
+      "round": 4,
+      "description": "Parallel scheduling (multiple tasks per wave). Disabled: one task per wave.",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_PARALLEL_SCHEDULING",
+      "envRuntimeName": "ENABLE_PARALLEL_SCHEDULING"
+    },
+    {
+      "id": "round4.dynamic_replanning",
+      "round": 4,
+      "description": "Bounded dynamic replanning from task feedback (max 1 by default). Disabled: failures reported only.",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_DYNAMIC_REPLANNING",
+      "envRuntimeName": "ENABLE_DYNAMIC_REPLANNING"
+    },
+    {
+      "id": "round4.domain_pack",
+      "round": 4,
+      "description": "Domain packs (generic + risk). Disabled: generic pack only, no business defaults, more clarification questions.",
+      "parent": "round4.requirement_planning",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_REQUIREMENT_DOMAIN_PACK",
+      "envRuntimeName": "ENABLE_REQUIREMENT_DOMAIN_PACK"
+    },
+    {
+      "id": "round4.data_analysis",
+      "round": 4,
+      "description": "Round 4 parent: Data Analysis Subagent suite (task gate, materialization, subagent, script execution, artifacts, findings, charting, frontend render). Complex analysis only; simple aggregations stay on the Query Gateway.",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_DATA_ANALYSIS",
+      "envRuntimeName": "ENABLE_DATA_ANALYSIS"
+    },
+    {
+      "id": "round4.analysis_task_gate",
+      "round": 4,
+      "description": "Deterministic task gate: simple requests route to the Query Gateway; complex analysis routes to the Data Analysis Subagent.",
+      "parent": "round4.data_analysis",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_TASK_GATE",
+      "envRuntimeName": "ENABLE_ANALYSIS_TASK_GATE"
+    },
+    {
+      "id": "round4.analysis_input_materialization",
+      "round": 4,
+      "description": "Controlled artifact-only materialization of validated queries (POST /v1/query/materialize); immutable input artifacts for the analysis subagent.",
+      "parent": "round4.data_analysis",
+      "dependencies": [
+        "round2.lakehouse"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_INPUT_MATERIALIZATION",
+      "envRuntimeName": "ENABLE_ANALYSIS_INPUT_MATERIALIZATION"
+    },
+    {
+      "id": "round4.analysis_subagent",
+      "round": 4,
+      "description": "Data Analysis Subagent in an isolated context: reads input manifest, generates AnalysisPlan, writes analysis.py, runs it via the controlled runner, returns only a summary.",
+      "parent": "round4.data_analysis",
+      "dependencies": [
+        "round4.analysis_workspace",
+        "round4.analysis_script_execution"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_SUBAGENT",
+      "envRuntimeName": "ENABLE_ANALYSIS_SUBAGENT"
+    },
+    {
+      "id": "round4.analysis_plan_generation",
+      "round": 4,
+      "description": "Deterministic AnalysisPlan generation and validation before any script is written.",
+      "parent": "round4.data_analysis",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_PLAN_GENERATION",
+      "envRuntimeName": "ENABLE_ANALYSIS_PLAN_GENERATION"
+    },
+    {
+      "id": "round4.analysis_workspace",
+      "round": 4,
+      "description": "Per-run isolated workspace under ~/.pi/artifacts/data-analysis/<run-id>/ with immutable inputs/outputs.",
+      "parent": "round4.data_analysis",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_WORKSPACE",
+      "envRuntimeName": "ENABLE_ANALYSIS_WORKSPACE"
+    },
+    {
+      "id": "round4.analysis_script_execution",
+      "round": 4,
+      "description": "Controlled script runner: python3 <workspace>/analysis.py with env whitelist, timeout, output caps; no -c, no heredoc, no network, no pip install.",
+      "parent": "round4.data_analysis",
+      "dependencies": [
+        "round4.analysis_workspace"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_SCRIPT_EXECUTION",
+      "envRuntimeName": "ENABLE_ANALYSIS_SCRIPT_EXECUTION"
+    },
+    {
+      "id": "round4.analysis_retry",
+      "round": 4,
+      "description": "Bounded script retry (max 2 attempts) for fixable errors only (syntax/import/result schema/numeric).",
+      "parent": "round4.data_analysis",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_RETRY",
+      "envRuntimeName": "ENABLE_ANALYSIS_RETRY"
+    },
+    {
+      "id": "round4.analysis_artifacts",
+      "round": 4,
+      "description": "Immutable AnalysisResultArtifact + execution manifest persistence; provenance (queryId/snapshotId/scriptHash).",
+      "parent": "round4.data_analysis",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_ARTIFACTS",
+      "envRuntimeName": "ENABLE_ANALYSIS_ARTIFACTS"
+    },
+    {
+      "id": "round4.analysis_findings",
+      "round": 4,
+      "description": "Structured findings from the script (never derived by the main agent); evidenceRefs point at frontend data.",
+      "parent": "round4.data_analysis",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_FINDINGS",
+      "envRuntimeName": "ENABLE_ANALYSIS_FINDINGS"
+    },
+    {
+      "id": "round4.analysis_charting",
+      "round": 4,
+      "description": "Chart sections (line/bar/scatter/histogram) with bounded series data; disabled => no ChartSection in artifacts.",
+      "parent": "round4.data_analysis",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_CHARTING",
+      "envRuntimeName": "ENABLE_ANALYSIS_CHARTING"
+    },
+    {
+      "id": "round4.analysis_frontend_render",
+      "round": 4,
+      "description": "Frontend direct render of numeric results via the tool UI renderer (details channel). Hard boundary: when off, run_data_analysis is NOT registered and no fallback to model recitation is allowed.",
+      "parent": "round4.data_analysis",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_FRONTEND_RENDER",
+      "envRuntimeName": "ENABLE_ANALYSIS_FRONTEND_RENDER"
+    },
+    {
+      "id": "round4.data_analysis_tool",
+      "round": 4,
+      "description": "run_data_analysis public tool registration (requires subagent + script execution + artifacts + frontend render).",
+      "parent": "round4.data_analysis",
+      "dependencies": [
+        "round4.analysis_artifacts",
+        "round4.analysis_frontend_render"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_DATA_ANALYSIS_TOOL",
+      "envRuntimeName": "ENABLE_DATA_ANALYSIS_TOOL"
+    },
+    {
+      "id": "legacy.cdxr_governance_cli",
+      "round": 3,
+      "description": "Legacy CDXR governance CLI (python3 -m app.governance.cdxr.run). Code and tables stay; the CLI refuses to run when disabled.",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_LEGACY_CDXR_GOVERNANCE",
+      "envRuntimeName": "ENABLE_LEGACY_CDXR_GOVERNANCE_CLI"
+    },
+    {
+      "id": "legacy.cdxr_governance_tools",
+      "round": 3,
+      "description": "Legacy CDXR governance tools + read-only governance API (get_dataset_governance_profile etc.). Default OFF.",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": true,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_LEGACY_CDXR_GOVERNANCE",
+      "envRuntimeName": "ENABLE_LEGACY_CDXR_GOVERNANCE_TOOLS"
+    },
+    {
+      "id": "ablate.query_validation",
+      "round": 0,
+      "description": "UNSAFE ablation: disable query-plan validation. Never enabled in normal builds/runs.",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "unsafe",
+      "envBuildName": "BUILD_UNSAFE_EVALUATION_ABLATIONS",
+      "envRuntimeName": "ABLATE_QUERY_VALIDATION"
+    },
+    {
+      "id": "ablate.sensitive_masking",
+      "round": 0,
+      "description": "UNSAFE ablation: disable sensitive-field masking. Never enabled in normal builds/runs.",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "unsafe",
+      "envBuildName": "BUILD_UNSAFE_EVALUATION_ABLATIONS",
+      "envRuntimeName": "ABLATE_SENSITIVE_MASKING"
+    },
+    {
+      "id": "ablate.ods_guard",
+      "round": 0,
+      "description": "UNSAFE ablation: disable ODS access control. Never enabled in normal builds/runs.",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "unsafe",
+      "envBuildName": "BUILD_UNSAFE_EVALUATION_ABLATIONS",
+      "envRuntimeName": "ABLATE_ODS_GUARD"
+    },
+    {
+      "id": "ablate.scan_limit",
+      "round": 0,
+      "description": "UNSAFE ablation: disable scan row limits. Never enabled in normal builds/runs.",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "unsafe",
+      "envBuildName": "BUILD_UNSAFE_EVALUATION_ABLATIONS",
+      "envRuntimeName": "ABLATE_SCAN_LIMIT"
+    },
+    {
+      "id": "ablate.raw_data_boundary",
+      "round": 0,
+      "description": "UNSAFE ablation: allow raw data into the LLM context. Never enabled in normal builds/runs.",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "unsafe",
+      "envBuildName": "BUILD_UNSAFE_EVALUATION_ABLATIONS",
+      "envRuntimeName": "ABLATE_RAW_DATA_BOUNDARY"
+    },
+    {
+      "id": "round5.reviewer",
+      "round": 5,
+      "description": "Round 5 parent: independent Reviewer Agent for code and data-analysis proposals.",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_REVIEWER",
+      "envRuntimeName": "ENABLE_REVIEWER"
+    },
+    {
+      "id": "round5.review_package",
+      "round": 5,
+      "description": "Review package building (frozen proposal + policy snapshot).",
+      "parent": "round5.reviewer",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_REVIEW_PACKAGE",
+      "envRuntimeName": "ENABLE_REVIEW_PACKAGE"
+    },
+    {
+      "id": "round5.reviewer_agent",
+      "round": 5,
+      "description": "Reviewer agent runtime (isolated Pi RPC reviewer).",
+      "parent": "round5.reviewer",
+      "dependencies": [
+        "round5.review_package"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_REVIEWER_AGENT",
+      "envRuntimeName": "ENABLE_REVIEWER_AGENT"
+    },
+    {
+      "id": "round5.deterministic_review_gates",
+      "round": 5,
+      "description": "Deterministic review gates (integrity/hash/replay/verdict reducer).",
+      "parent": "round5.reviewer",
+      "dependencies": [
+        "round5.review_package"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_DETERMINISTIC_GATES",
+      "envRuntimeName": "ENABLE_DETERMINISTIC_REVIEW_GATES"
+    },
+    {
+      "id": "round5.code_review",
+      "round": 5,
+      "description": "Code review (frozen worktree, allowlist checks, shadow tests).",
+      "parent": "round5.reviewer",
+      "dependencies": [
+        "round5.reviewer_agent"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CODE_REVIEW",
+      "envRuntimeName": "ENABLE_CODE_REVIEW"
+    },
+    {
+      "id": "round5.code_shadow_tests",
+      "round": 5,
+      "description": "Reviewer shadow tests (isolated, never committed).",
+      "parent": "round5.reviewer",
+      "dependencies": [
+        "round5.code_review"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_CODE_SHADOW_TESTS",
+      "envRuntimeName": "ENABLE_CODE_SHADOW_TESTS"
+    },
+    {
+      "id": "round5.analysis_review",
+      "round": 5,
+      "description": "Analysis review (artifact checks, replay, digest).",
+      "parent": "round5.reviewer",
+      "dependencies": [
+        "round5.reviewer_agent",
+        "round4.analysis_artifacts"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_REVIEW",
+      "envRuntimeName": "ENABLE_ANALYSIS_REVIEW"
+    },
+    {
+      "id": "round5.analysis_replay",
+      "round": 5,
+      "description": "Analysis replay in isolated workspace.",
+      "parent": "round5.reviewer",
+      "dependencies": [
+        "round5.analysis_review",
+        "round4.analysis_script_execution"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_REPLAY",
+      "envRuntimeName": "ENABLE_ANALYSIS_REPLAY"
+    },
+    {
+      "id": "round5.analysis_independent_verification",
+      "round": 5,
+      "description": "Independent KPI recomputation (strict mode).",
+      "parent": "round5.reviewer",
+      "dependencies": [
+        "round5.analysis_review"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_ANALYSIS_INDEPENDENT",
+      "envRuntimeName": "ENABLE_ANALYSIS_INDEPENDENT_VERIFICATION"
+    },
+    {
+      "id": "round5.semantic_review",
+      "round": 5,
+      "description": "Semantic review via isolated LLM (findings only, no verdict).",
+      "parent": "round5.reviewer",
+      "dependencies": [
+        "round5.reviewer_agent"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_SEMANTIC_REVIEW",
+      "envRuntimeName": "ENABLE_SEMANTIC_REVIEW"
+    },
+    {
+      "id": "round5.review_revision_loop",
+      "round": 5,
+      "description": "Automatic revision loop (max 2, escalation to manual).",
+      "parent": "round5.reviewer",
+      "dependencies": [
+        "round5.code_review",
+        "round5.analysis_review"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_REVISION_LOOP",
+      "envRuntimeName": "ENABLE_REVIEW_REVISION_LOOP"
+    },
+    {
+      "id": "round5.review_frontend_render",
+      "round": 5,
+      "description": "Frontend render of review summary/findings (UI channel).",
+      "parent": "round5.reviewer",
+      "dependencies": [],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_REVIEW_FRONTEND",
+      "envRuntimeName": "ENABLE_REVIEW_FRONTEND_RENDER"
+    },
+    {
+      "id": "round5.review_tools",
+      "round": 5,
+      "description": "Public reviewer tools (review_code_change / review_data_analysis / inspect_review).",
+      "parent": "round5.reviewer",
+      "dependencies": [
+        "round5.review_frontend_render"
+      ],
+      "buildDefault": false,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_REVIEW_TOOLS",
+      "envRuntimeName": "ENABLE_REVIEW_TOOLS"
+    },
+    {
+      "id": "round6.graph_engine",
+      "round": 6,
+      "description": "Round 6 parent: deterministic Graph Engineering Runtime (compile -> execute -> review -> report).",
+      "parent": null,
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_ENGINE",
+      "envRuntimeName": "ENABLE_GRAPH_ENGINE"
+    },
+    {
+      "id": "round6.graph_compiler",
+      "round": 6,
+      "description": "Compile TaskPlan into an immutable GraphSpec with mandatory system nodes.",
+      "parent": "round6.graph_engine",
+      "dependencies": [
+        "round6.graph_validation"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_COMPILER",
+      "envRuntimeName": "ENABLE_GRAPH_COMPILER"
+    },
+    {
+      "id": "round6.graph_validation",
+      "round": 6,
+      "description": "Deterministic GraphSpec validation (schema, cycles, capability, conditions).",
+      "parent": "round6.graph_engine",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_VALIDATION",
+      "envRuntimeName": "ENABLE_GRAPH_VALIDATION"
+    },
+    {
+      "id": "round6.graph_executor",
+      "round": 6,
+      "description": "Deterministic Graph Executor (adapter dispatch, retries, idempotency, recovery).",
+      "parent": "round6.graph_engine",
+      "dependencies": [
+        "round6.graph_scheduler",
+        "round6.graph_state_reducer",
+        "round6.graph_event_store"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_EXECUTOR",
+      "envRuntimeName": "ENABLE_GRAPH_EXECUTOR"
+    },
+    {
+      "id": "round6.graph_scheduler",
+      "round": 6,
+      "description": "Deterministic wave scheduler (dependencies, artifacts, features, concurrency).",
+      "parent": "round6.graph_engine",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_SCHEDULER",
+      "envRuntimeName": "ENABLE_GRAPH_SCHEDULER"
+    },
+    {
+      "id": "round6.graph_event_store",
+      "round": 6,
+      "description": "Append-only event store with hash chain and recovery.",
+      "parent": "round6.graph_engine",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_EVENT_STORE",
+      "envRuntimeName": "ENABLE_GRAPH_EVENT_STORE"
+    },
+    {
+      "id": "round6.graph_state_reducer",
+      "round": 6,
+      "description": "GraphRunState projection from events.",
+      "parent": "round6.graph_engine",
+      "dependencies": [
+        "round6.graph_event_store"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_STATE_REDUCER",
+      "envRuntimeName": "ENABLE_GRAPH_STATE_REDUCER"
+    },
+    {
+      "id": "round6.graph_artifact_edges",
+      "round": 6,
+      "description": "ArtifactRef-only data edges with hash verification.",
+      "parent": "round6.graph_engine",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_ARTIFACT_EDGES",
+      "envRuntimeName": "ENABLE_GRAPH_ARTIFACT_EDGES"
+    },
+    {
+      "id": "round6.graph_feedback_routing",
+      "round": 6,
+      "description": "Deterministic feedback router for CHANGES_REQUIRED/ABSTAIN.",
+      "parent": "round6.graph_engine",
+      "dependencies": [
+        "round6.graph_review_integration"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_FEEDBACK_ROUTING",
+      "envRuntimeName": "ENABLE_GRAPH_FEEDBACK_ROUTING"
+    },
+    {
+      "id": "round6.graph_review_integration",
+      "round": 6,
+      "description": "Reviewer gate/execute/authorize as graph nodes.",
+      "parent": "round6.graph_engine",
+      "dependencies": [
+        "round5.reviewer"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_REVIEW_INTEGRATION",
+      "envRuntimeName": "ENABLE_GRAPH_REVIEW_INTEGRATION"
+    },
+    {
+      "id": "round6.graph_skill_nodes",
+      "round": 6,
+      "description": "Skill nodes (analysis-report) without a Report Agent.",
+      "parent": "round6.graph_engine",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_SKILL_NODES",
+      "envRuntimeName": "ENABLE_GRAPH_SKILL_NODES"
+    },
+    {
+      "id": "round6.graph_human_gates",
+      "round": 6,
+      "description": "WAITING_FOR_HUMAN state; never self-approving.",
+      "parent": "round6.graph_engine",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_HUMAN_GATES",
+      "envRuntimeName": "ENABLE_GRAPH_HUMAN_GATES"
+    },
+    {
+      "id": "round6.graph_observability",
+      "round": 6,
+      "description": "Node/run metrics, attempts, routes, budgets (no numeric leakage).",
+      "parent": "round6.graph_engine",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_OBSERVABILITY",
+      "envRuntimeName": "ENABLE_GRAPH_OBSERVABILITY"
+    },
+    {
+      "id": "round6.graph_frontend_render",
+      "round": 6,
+      "description": "UI-only graph state details channel.",
+      "parent": "round6.graph_engine",
+      "dependencies": [],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_FRONTEND_RENDER",
+      "envRuntimeName": "ENABLE_GRAPH_FRONTEND_RENDER"
+    },
+    {
+      "id": "round6.graph_tool",
+      "round": 6,
+      "description": "run_analysis_graph + inspect_graph_run public tools.",
+      "parent": "round6.graph_engine",
+      "dependencies": [
+        "round6.graph_executor"
+      ],
+      "buildDefault": true,
+      "runtimeDefault": false,
+      "safetyClass": "safe",
+      "envBuildName": "BUILD_GRAPH_TOOL",
+      "envRuntimeName": "ENABLE_GRAPH_TOOL"
+    }
+  ],
+  "featureCount": 118
+}

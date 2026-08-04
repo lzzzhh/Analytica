@@ -1,0 +1,76 @@
+{
+  "caseId": "WF-02",
+  "layer": "workflow",
+  "startedAt": "2026-08-03T15:14:54.626Z",
+  "finishedAt": "2026-08-03T15:15:11.907Z",
+  "exitCode": 0,
+  "signal": null,
+  "timedOut": false,
+  "command": {
+    "executable": "/Users/zhanhuilin/.hermes/node/bin/node",
+    "cli": "/Users/zhanhuilin/Documents/Analytica/packages/coding-agent/dist/cli.js",
+    "model": "openai/gpt-5.6-luna",
+    "thinking": "max",
+    "tools": [
+      "run_data_analysis"
+    ]
+  },
+  "toolCalls": [
+    {
+      "toolCallId": "call_S95ZETMoU5k6qnrTAnkPLJk4|fc_071a7ba0666ad784016a70b077f79c819abf7a7e1f431c1bab",
+      "name": "run_data_analysis",
+      "args": {
+        "objective": "基于冻结的 Wine Quality 产物，计算 alcohol 与 quality 的 Pearson 相关系数，并输出 alcohol（横轴）与 quality（纵轴）的散点图。仅报告相关性，不作任何因果解释或因果声称。",
+        "analysisType": "CORRELATION",
+        "dataRefs": [
+          {
+            "artifactId": "art_428bd8df7313b159",
+            "sourceType": "TABULAR_ARTIFACT",
+            "snapshotId": "5231295569116095217",
+            "contentHash": "428bd8df7313b159988405ae5e3be6d363993d73f7ffc2adedfdc1d496508191",
+            "format": "JSON",
+            "masked": false,
+            "allowedColumns": [
+              "alcohol",
+              "quality"
+            ]
+          }
+        ],
+        "dimensions": [
+          "alcohol",
+          "quality"
+        ],
+        "expectedViews": [
+          "METRIC_CARDS",
+          "SCATTER"
+        ],
+        "constraints": {
+          "maxAttempts": 1,
+          "timeoutSeconds": 120,
+          "maxSeriesPoints": 5000
+        }
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "数据分析输入不足：缺少 dataRef artifact art_428bd8df7313b159, dataRefs (none resolvable)。请补充输入后重试。"
+          }
+        ],
+        "details": {
+          "error": {
+            "errorCode": "DATA_INPUT_REQUIRED",
+            "message": "缺少输入：dataRef artifact art_428bd8df7313b159, dataRefs (none resolvable)",
+            "retryable": true
+          }
+        }
+      },
+      "isError": false
+    }
+  ],
+  "finalText": "分析工具返回 `DATA_INPUT_REQUIRED`：无法解析冻结产物 `art_428bd8df7313b159`，因此未能计算 Pearson 相关性，也未生成散点图。\n\n请提供该产物在分析工具中的可解析引用（例如有效的已物化表格/查询引用及其格式），我不能猜测或改写冻结输入。",
+  "nonJsonStdout": [],
+  "stderrTail": "[features] profile=full effHash=574bc8dd0cc5e162 enabled=[legacy.cdxr_governance_cli, legacy.cdxr_governance_tools, round1.best_attempt_selection, round1.document_orchestrator_v2, round1.document_parser, round1.document_subagent, round1.evidence_merger, round1.image_ocr, round1.l1_retry, round1.l2_expert, round1.multimodal, round1.quality_gate, round1.visual_parser, round2.batch_pipeline, round2.catalog_tools, round2.data_quality, round2.flink_runtime_governance, round2.iceberg_layout_governance, round2.lakehouse, round2.lineage, round2.pipeline, round2.pipeline_ads_transform, round2.pipeline_agent_worker, round2.pipeline_amendment, round2.pipeline_cdxr_promotion_gate, round2.pipeline_checkpointing, round2.pipeline_dead_letter, round2.pipeline_deadline_watchdog, round2.pipeline_draft_compilation, round2.pipeline_dwd_transform, round2.pipeline_dws_transform, round2.pipeline_event_store, round2.pipeline_governance, round2.pipeline_human_approval, round2.pipeline_ods_load, round2.pipeline_placement_governance, round2.pipeline_remediation, round2.pipeline_schema_design, round2.pipeline_schema_discovery, round2.pipeline_source_generation, round2.pipeline_spec_generation, round2.pipeline_state_reducer, round2.pipeline_status_dashboard, round2.pipeline_validation, round2.query_evidence, round2.query_tools, round2.snapshot, round2.spark_runtime_governance, round2.stream_replay_pipeline, round3.cdxr_constant_feature, round3.cdxr_missingness, round3.cdxr_sample_size, round3.cdxr_sensitive, round3.cdxr_target_distribution, round3.cdxr_target_leakage, round3.cdxr_temporal, round3.cdxr_traceability, round3.cdxr_training, round3.cdxr_validation_split, round4.ambiguity_detection, round4.analysis_artifacts, round4.analysis_charting, round4.analysis_findings, round4.analysis_frontend_render, round4.analysis_input_materialization, round4.analysis_plan_generation, round4.analysis_retry, round4.analysis_script_execution, round4.analysis_subagent, round4.analysis_task_gate, round4.analysis_workspace, round4.assumption_management, round4.clarification, round4.data_analysis, round4.data_analysis_tool, round4.dependency_scheduler, round4.domain_pack, round4.dynamic_replanning, round4.parallel_scheduling, round4.plan_gate, round4.plan_validation, round4.planning_advisor, round4.requirement_planning, round4.requirement_skill, round4.task_plan_generation, round5.analysis_independent_verification, round5.analysis_replay, round5.analysis_review, round5.code_review, round5.code_shadow_tests, round5.deterministic_review_gates, round5.review_frontend_render, round5.review_package, round5.review_revision_loop, round5.review_tools, round5.reviewer, round5.reviewer_agent, round5.semantic_review, round6.graph_artifact_edges, round6.graph_compiler, round6.graph_engine, round6.graph_event_store, round6.graph_executor, round6.graph_feedback_routing, round6.graph_frontend_render, round6.graph_human_gates, round6.graph_observability, round6.graph_review_integration, round6.graph_scheduler, round6.graph_skill_nodes, round6.graph_state_reducer, round6.graph_tool, round6.graph_validation] disabled=[ablate.ods_guard, ablate.query_validation, ablate.raw_data_boundary, ablate.scan_limit, ablate.sensitive_masking]\n",
+  "eventCount": 519,
+  "rawTrace": "raw-traces/WF-02.jsonl"
+}

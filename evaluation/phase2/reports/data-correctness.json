@@ -1,0 +1,152 @@
+{
+  "status": "PASS",
+  "correctAssertions": 24,
+  "totalAssertions": 24,
+  "rate": 1.0,
+  "assertions": [
+    {
+      "id": "eval_raw.bike_day.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_raw.bike_hour.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_raw.chinook_album.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_raw.chinook_artist.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_raw.chinook_genre.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_raw.chinook_invoice.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_raw.chinook_invoice_line.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_raw.chinook_track.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_staging.bike_hourly.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_staging.chinook_sales.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_mart.bike_daily_trends.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_mart.chinook_monthly_sales.primary_key_unique",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_raw.chinook_invoice_line.rows",
+      "expected": 2240,
+      "actual": 2240,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_staging.chinook_sales.rows",
+      "expected": 2240,
+      "actual": 2240,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_mart.chinook_monthly_sales.rows",
+      "expected": 319,
+      "actual": 319,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_raw.bike_hour.rows",
+      "expected": 17379,
+      "actual": 17379,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_raw.bike_day.rows",
+      "expected": 731,
+      "actual": 731,
+      "status": "PASS"
+    },
+    {
+      "id": "eval_mart.bike_daily_trends.rows",
+      "expected": 731,
+      "actual": 731,
+      "status": "PASS"
+    },
+    {
+      "id": "chinook.total_line_revenue",
+      "expected": 2328.6,
+      "actual": 2328.6,
+      "status": "PASS"
+    },
+    {
+      "id": "chinook.distinct_invoices",
+      "expected": 412,
+      "actual": 412,
+      "status": "PASS"
+    },
+    {
+      "id": "chinook.mart_revenue_matches_staging",
+      "expected": 2328.6,
+      "actual": 2328.6,
+      "status": "PASS"
+    },
+    {
+      "id": "bike.day_rental_total",
+      "expected": 3292679,
+      "actual": 3292679,
+      "status": "PASS"
+    },
+    {
+      "id": "bike.peak_date",
+      "expected": "2012-09-15",
+      "actual": "2012-09-15",
+      "status": "PASS"
+    },
+    {
+      "id": "bike.first_rolling_mean",
+      "expected": 985.0,
+      "actual": 985.0,
+      "status": "PASS"
+    }
+  ]
+}

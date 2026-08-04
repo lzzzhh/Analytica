@@ -1,0 +1,11 @@
+{
+  "name": "analytica-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Analytica Web UI: read-only adapter server + no-build SPA",
+  "dependencies": {
+    "preact": "10.26.9",
+    "htm": "3.1.1"
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/source-schema-profile.schema.json",
+  "title": "SourceSchemaProfile",
+  "type": "object",
+  "required": [
+    "datasetId",
+    "schemaHash",
+    "fields",
+    "candidateKeys",
+    "candidateEventTimes",
+    "rowCount",
+    "nullRates",
+    "cardinality",
+    "sensitiveFieldCandidates",
+    "sampleInfo",
+    "profiledAt"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "datasetId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schemaHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "nullability"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "nullability": {
+            "enum": [
+              "NULLABLE",
+              "NOT_NULL"
+            ]
+          }
+        }
+      }
+    },
+    "candidateKeys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "fields",
+          "confidence",
+          "evidence",
+          "sampleRows",
+          "fullScanVerified"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "object",
+            "required": [
+              "uniquenessRatio",
+              "nonNullRatio",
+              "cardinality"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "uniquenessRatio": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "nonNullRatio": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "cardinality": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "sampleRows": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "fullScanVerified": {
+            "type": "boolean"
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "candidateEventTimes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rowCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "nullRates": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      }
+    },
+    "cardinality": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "sensitiveFieldCandidates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "partitionStats": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "profiledAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sampleInfo": {
+      "type": "object",
+      "required": [
+        "totalRows",
+        "sampledRows",
+        "sampleLimit",
+        "fullScan",
+        "samplingMethod"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRows": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sampledRows": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sampleLimit": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "fullScan": {
+          "type": "boolean"
+        },
+        "samplingMethod": {
+          "enum": [
+            "full",
+            "head"
+          ]
+        }
+      }
+    }
+  }
+}

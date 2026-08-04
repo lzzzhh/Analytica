@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0",
+  "commit": "3ce87745f9b1546a10ab7fd015dc543eec8bc7ba",
+  "metric": "Average Successful End-to-End Task Completion Time",
+  "status": "PASS",
+  "successfulTasks": 2,
+  "totalScenarios": 5,
+  "meanMs": 4335.5,
+  "medianMs": 4335.5,
+  "p95Ms": 6226,
+  "eligibility": "only full-Oracle PASS scenarios; failed/infra durations excluded",
+  "records": [
+    {
+      "id": "E2E-PIPE-01",
+      "slice": "pipeline",
+      "status": "PASS",
+      "durationMs": 6226,
+      "boundary": "first dry-run command start -> mutation/governance/idempotency scenario terminal",
+      "evidence": "pipeline/results/abalone.json + pipeline/command-log.jsonl"
+    },
+    {
+      "id": "E2E-MM-01",
+      "slice": "multimodal",
+      "status": "PASS",
+      "durationMs": 2445,
+      "boundary": "orchestrator attempt start -> next serial attempt start",
+      "evidence": "agents/multimodal/metrics.json"
+    },
+    {
+      "id": "E2E-GRAPH-01",
+      "slice": "graph_formal_delivery",
+      "status": "FAIL",
+      "durationMs": 41035.999666,
+      "boundary": "Pi public task start -> final model response",
+      "evidence": "graph-e2e/result.json + graph-e2e/raw-trace.jsonl",
+      "terminalStatus": "FAILED"
+    },
+    {
+      "id": "E2E-WF-01",
+      "slice": "tool_workflow",
+      "status": "FAIL",
+      "durationMs": 29361,
+      "boundary": "Pi public task start -> final model response",
+      "evidence": "tool-calling/results-normalized/WF-01.json + tool-calling/scores.json"
+    },
+    {
+      "id": "E2E-DA-01",
+      "slice": "data_analysis",
+      "status": "FAIL",
+      "durationMs": 180807,
+      "boundary": "analysis task invocation -> next serial task invocation",
+      "evidence": "agents/data-analysis/da-01.json + agents/data_analysis-execution.json"
+    }
+  ]
+}

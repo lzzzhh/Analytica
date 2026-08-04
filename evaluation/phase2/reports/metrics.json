@@ -1,0 +1,384 @@
+{
+  "pipelineRunSuccessRate": {
+    "status": "PASS",
+    "successfulRuns": 4,
+    "eligibleRuns": 4,
+    "rate": 1.0,
+    "scenarios": [
+      {
+        "id": "native_cli_batch",
+        "status": "PASS"
+      },
+      {
+        "id": "public_data_first_run",
+        "status": "PASS"
+      },
+      {
+        "id": "public_data_rerun",
+        "status": "PASS"
+      },
+      {
+        "id": "governed_spark_without_writegate",
+        "status": "PASS"
+      },
+      {
+        "id": "governed_spark_initial_environment_attempt",
+        "status": "INFRA_ERROR",
+        "reason": "Spark worker selected Python 3.14 while the fixed driver used Python 3.13; corrected with explicit PYSPARK paths"
+      }
+    ],
+    "caveat": "Public runs use product catalog/write primitives through an evaluation driver because the native CLI has no arbitrary input option."
+  },
+  "dataCorrectnessRate": {
+    "status": "PASS",
+    "correctAssertions": 24,
+    "totalAssertions": 24,
+    "rate": 1.0,
+    "assertions": [
+      {
+        "id": "eval_raw.bike_day.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_raw.bike_hour.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_raw.chinook_album.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_raw.chinook_artist.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_raw.chinook_genre.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_raw.chinook_invoice.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_raw.chinook_invoice_line.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_raw.chinook_track.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_staging.bike_hourly.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_staging.chinook_sales.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_mart.bike_daily_trends.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_mart.chinook_monthly_sales.primary_key_unique",
+        "expected": 0,
+        "actual": 0,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_raw.chinook_invoice_line.rows",
+        "expected": 2240,
+        "actual": 2240,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_staging.chinook_sales.rows",
+        "expected": 2240,
+        "actual": 2240,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_mart.chinook_monthly_sales.rows",
+        "expected": 319,
+        "actual": 319,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_raw.bike_hour.rows",
+        "expected": 17379,
+        "actual": 17379,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_raw.bike_day.rows",
+        "expected": 731,
+        "actual": 731,
+        "status": "PASS"
+      },
+      {
+        "id": "eval_mart.bike_daily_trends.rows",
+        "expected": 731,
+        "actual": 731,
+        "status": "PASS"
+      },
+      {
+        "id": "chinook.total_line_revenue",
+        "expected": 2328.6,
+        "actual": 2328.6,
+        "status": "PASS"
+      },
+      {
+        "id": "chinook.distinct_invoices",
+        "expected": 412,
+        "actual": 412,
+        "status": "PASS"
+      },
+      {
+        "id": "chinook.mart_revenue_matches_staging",
+        "expected": 2328.6,
+        "actual": 2328.6,
+        "status": "PASS"
+      },
+      {
+        "id": "bike.day_rental_total",
+        "expected": 3292679,
+        "actual": 3292679,
+        "status": "PASS"
+      },
+      {
+        "id": "bike.peak_date",
+        "expected": "2012-09-15",
+        "actual": "2012-09-15",
+        "status": "PASS"
+      },
+      {
+        "id": "bike.first_rolling_mean",
+        "expected": 985.0,
+        "actual": 985.0,
+        "status": "PASS"
+      }
+    ]
+  },
+  "dataQualityDefectDetectionF1": {
+    "status": "FAIL",
+    "systemUnderTest": "app.quality.checks.assess_quality",
+    "systemResult": {
+      "status": "FAIL",
+      "checks": [
+        {
+          "check": "row_count",
+          "status": "PASS",
+          "detail": "17357 rows"
+        },
+        {
+          "check": "missing_rate.cnt",
+          "status": "FAIL",
+          "detail": "70.0% missing"
+        }
+      ],
+      "generatedAt": "2026-08-03T01:33:10.387353+00:00"
+    },
+    "injectedDefects": [
+      "duplicate_primary_key",
+      "missing_values",
+      "schema_drift",
+      "time_gap",
+      "type_error"
+    ],
+    "detectedDefects": [
+      "missing_values"
+    ],
+    "undetectedDefects": [
+      "duplicate_primary_key",
+      "schema_drift",
+      "time_gap",
+      "type_error"
+    ],
+    "falsePositiveLabels": [],
+    "confusion": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 4
+    },
+    "precision": 1.0,
+    "recall": 0.2,
+    "f1": 0.333333,
+    "note": "Profiler candidate-key changes are not counted as detections because they are not emitted as defect findings."
+  },
+  "idempotentRerunSuccessRate": {
+    "status": "FAIL",
+    "successfulDatasets": 0,
+    "eligibleDatasets": 2,
+    "rate": 0.0,
+    "scenarios": [
+      {
+        "dataset": "chinook",
+        "status": "FAIL",
+        "checks": [
+          {
+            "table": "eval_raw.chinook_artist",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          },
+          {
+            "table": "eval_raw.chinook_album",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          },
+          {
+            "table": "eval_raw.chinook_track",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          },
+          {
+            "table": "eval_raw.chinook_genre",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          },
+          {
+            "table": "eval_raw.chinook_invoice",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          },
+          {
+            "table": "eval_raw.chinook_invoice_line",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          },
+          {
+            "table": "eval_staging.chinook_sales",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          },
+          {
+            "table": "eval_mart.chinook_monthly_sales",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          }
+        ],
+        "caveat": "Expected one atomic overwrite snapshot per rerun; observed delete then append exposes an intermediate empty snapshot."
+      },
+      {
+        "dataset": "bike_sharing",
+        "status": "FAIL",
+        "checks": [
+          {
+            "table": "eval_raw.bike_hour",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          },
+          {
+            "table": "eval_raw.bike_day",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          },
+          {
+            "table": "eval_staging.bike_hourly",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          },
+          {
+            "table": "eval_mart.bike_daily_trends",
+            "dataStable": true,
+            "snapshotStateValid": false,
+            "snapshotOperations": [
+              "append",
+              "delete",
+              "append"
+            ],
+            "snapshotCount": 3
+          }
+        ],
+        "caveat": "Expected one atomic overwrite snapshot per rerun; observed delete then append exposes an intermediate empty snapshot."
+      }
+    ]
+  }
+}

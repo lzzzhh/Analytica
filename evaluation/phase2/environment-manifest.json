@@ -1,0 +1,32 @@
+{
+  "capturedAt": "2026-08-03T01:22:38.608704+00:00",
+  "repositoryRoot": "/Users/zhanhuilin/Documents/Analytica",
+  "commitSha": "fdaffc50f2679505d6056966111156c40363aade",
+  "gitStatusPorcelain": "?? evaluation/",
+  "pythonExecutable": "/opt/anaconda3/bin/python3.13",
+  "pythonVersion": "3.13.5",
+  "nodeExecutable": "/Users/zhanhuilin/.hermes/node/bin/node",
+  "nodeVersion": "v22.22.2",
+  "platform": "macOS-15.6-arm64-arm-64bit-Mach-O",
+  "dependencies": {
+    "pyarrow": "19.0.0",
+    "pyiceberg": "0.11.1",
+    "pyspark": "3.5.3",
+    "pytest": "8.3.4",
+    "pandas": "2.2.3",
+    "duckdb": "1.5.2",
+    "markitdown": "0.1.7",
+    "paddleocr": "3.7.0"
+  },
+  "packageLockSha256": "6bc412681657381c5261d6a201ebf6cef6c42865c889bbcf770706a59311ddf5",
+  "evaluationWarehouse": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase2/warehouse",
+  "pipelineTestRoot": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase2/native-pipeline",
+  "governanceBypassRoot": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase2/governance-bypass",
+  "relevantEnvironment": {
+    "PIPELINE_GOVERNANCE_PI_CLI": false,
+    "REVIEWER_STORE_ROOT": false,
+    "LAKEHOUSE_GATEWAY_URL": true,
+    "OPENAI_API_KEY": true,
+    "DEEPSEEK_API_KEY": true
+  }
+}

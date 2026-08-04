@@ -1,0 +1,90 @@
+{
+  "planVersion": "analytica-eval-pipeline.v1",
+  "status": "PASS",
+  "dryRun": true,
+  "warehouse": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase2/warehouse",
+  "namespaces": [
+    "eval_raw",
+    "eval_staging",
+    "eval_mart"
+  ],
+  "productEntrypointAssessment": {
+    "nativeCli": "python -m pipelines.run",
+    "arbitraryInputArgument": false,
+    "dryRunArgument": false,
+    "execution": "evaluation driver reuses product open_catalog/_create_table/_upsert_overwrite primitives"
+  },
+  "stages": [
+    {
+      "id": "profile",
+      "inputs": [
+        "bike_day",
+        "bike_hour",
+        "chinook_album",
+        "chinook_artist",
+        "chinook_genre",
+        "chinook_invoice",
+        "chinook_invoice_line",
+        "chinook_track"
+      ],
+      "writes": []
+    },
+    {
+      "id": "raw_load",
+      "outputs": [
+        "eval_raw.bike_day",
+        "eval_raw.bike_hour",
+        "eval_raw.chinook_album",
+        "eval_raw.chinook_artist",
+        "eval_raw.chinook_genre",
+        "eval_raw.chinook_invoice",
+        "eval_raw.chinook_invoice_line",
+        "eval_raw.chinook_track"
+      ]
+    },
+    {
+      "id": "transform",
+      "outputs": [
+        "eval_staging.bike_hourly",
+        "eval_staging.chinook_sales"
+      ]
+    },
+    {
+      "id": "mart",
+      "outputs": [
+        "eval_mart.bike_daily_trends",
+        "eval_mart.chinook_monthly_sales"
+      ]
+    },
+    {
+      "id": "quality",
+      "checks": [
+        "row_count",
+        "missing_rate"
+      ]
+    },
+    {
+      "id": "snapshot_lineage_query",
+      "writes": [
+        "warehouse-snapshot.json",
+        "lineage.json",
+        "golden-answers.json"
+      ]
+    }
+  ],
+  "plannedRows": {
+    "eval_raw.chinook_artist": 275,
+    "eval_raw.chinook_album": 347,
+    "eval_raw.chinook_track": 3503,
+    "eval_raw.chinook_genre": 25,
+    "eval_raw.chinook_invoice": 412,
+    "eval_raw.chinook_invoice_line": 2240,
+    "eval_raw.bike_hour": 17379,
+    "eval_raw.bike_day": 731,
+    "eval_staging.chinook_sales": 2240,
+    "eval_staging.bike_hourly": 17379,
+    "eval_mart.chinook_monthly_sales": 319,
+    "eval_mart.bike_daily_trends": 731
+  },
+  "generatedAt": "2026-08-03T01:29:49.246958+00:00"
+}

@@ -1,0 +1,1020 @@
+{
+  "schemaVersion": "1.0",
+  "frozenCommit": "3ce87745f9b1546a10ab7fd015dc543eec8bc7ba",
+  "cases": 36,
+  "statuses": {
+    "PASS": 10,
+    "FAIL": 26,
+    "ABSTAIN": 0,
+    "NOT_RUN": 0,
+    "INFRA_ERROR": 0
+  },
+  "metrics": {
+    "singleToolTaskSuccessRate": {
+      "pass": 6,
+      "total": 12,
+      "value": 0.5
+    },
+    "argumentAccuracy": {
+      "correct": 108,
+      "total": 512,
+      "value": 0.2109375
+    },
+    "toolSetF1": {
+      "tp": 49,
+      "fp": 30,
+      "fn": 5,
+      "value": 0.7368421052631579
+    },
+    "multiToolTaskSuccessRate": {
+      "pass": 4,
+      "total": 12,
+      "value": 0.3333333333333333
+    },
+    "workflowSuccessRate": {
+      "pass": 0,
+      "total": 12,
+      "value": 0
+    },
+    "orchestrationAccuracy": {
+      "correct": 13,
+      "total": 30,
+      "value": 0.43333333333333335
+    }
+  },
+  "casesDetail": [
+    {
+      "caseId": "ST-01",
+      "layer": "single_tool",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 4,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 2,
+        "incorrect": 13,
+        "errors": [
+          "search_catalog/q: expected \"sales daily\", got \"销售日报\"",
+          "search_catalog: unexpected call arguments (3 leaf fields)",
+          "search_catalog: unexpected call arguments (3 leaf fields)",
+          "search_catalog: unexpected call arguments (3 leaf fields)",
+          "search_catalog: unexpected call arguments (3 leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/ST-01.jsonl"
+    },
+    {
+      "caseId": "ST-02",
+      "layer": "single_tool",
+      "status": "PASS",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 1,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/ST-02.jsonl"
+    },
+    {
+      "caseId": "ST-03",
+      "layer": "single_tool",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 9,
+        "incorrect": 1,
+        "errors": [
+          "validate_query/select/0/alias: unexpected \"total_revenue\""
+        ]
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/ST-03.jsonl"
+    },
+    {
+      "caseId": "ST-04",
+      "layer": "single_tool",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 2,
+        "incorrect": 2,
+        "errors": [
+          "validate_query/datasetId: expected \"ads.ads_sales_daily\", got \"ads_sales_daily\"",
+          "validate_query/select/0/alias: unexpected \"avg_nonexistent_metric\""
+        ]
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/ST-04.jsonl"
+    },
+    {
+      "caseId": "ST-05",
+      "layer": "single_tool",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 0,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/ST-05.jsonl"
+    },
+    {
+      "caseId": "ST-06",
+      "layer": "single_tool",
+      "status": "PASS",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 1,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/ST-06.jsonl"
+    },
+    {
+      "caseId": "ST-07",
+      "layer": "single_tool",
+      "status": "PASS",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 7,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/ST-07.jsonl"
+    },
+    {
+      "caseId": "ST-08",
+      "layer": "single_tool",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 1,
+        "incorrect": 2,
+        "errors": [
+          "parse_visual/intent: expected \"extract chart series, axes, and trend\", got \"读取柱状图中的系列名称、坐标轴标签和刻度、各柱高度/数值，以及总体趋势；只报告图中可确认的信息，不要估算未标注的数值\"",
+          "parse_image: unexpected call arguments (1 leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [
+        "parse_image"
+      ],
+      "rawTrace": "raw-traces/ST-08.jsonl"
+    },
+    {
+      "caseId": "ST-09",
+      "layer": "single_tool",
+      "status": "PASS",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 1,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/ST-09.jsonl"
+    },
+    {
+      "caseId": "ST-10",
+      "layer": "single_tool",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 0,
+        "fp": 2,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 0,
+        "incorrect": 3,
+        "errors": [
+          "search_catalog: unexpected call arguments (2 leaf fields)",
+          "inspect_dataset: unexpected call arguments (1 leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/ST-10.jsonl"
+    },
+    {
+      "caseId": "ST-11",
+      "layer": "single_tool",
+      "status": "PASS",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 0,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/ST-11.jsonl"
+    },
+    {
+      "caseId": "ST-12",
+      "layer": "single_tool",
+      "status": "PASS",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 1,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/ST-12.jsonl"
+    },
+    {
+      "caseId": "MT-01",
+      "layer": "multi_tool",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 3,
+        "fp": 4,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 2,
+        "incorrect": 14,
+        "errors": [
+          "search_catalog/q: expected \"sales daily\", got \"销售日报 销售 每日 报表 sales daily report\"",
+          "search_catalog/limit: unexpected 50",
+          "search_catalog: unexpected call arguments (3 leaf fields)",
+          "search_catalog: unexpected call arguments (3 leaf fields)",
+          "search_catalog: unexpected call arguments (3 leaf fields)",
+          "search_catalog: unexpected call arguments (3 leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 2,
+        "total": 2
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-01.jsonl"
+    },
+    {
+      "caseId": "MT-02",
+      "layer": "multi_tool",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 9,
+        "incorrect": 1,
+        "errors": [
+          "validate_query/select/0/alias: unexpected \"total_revenue\""
+        ]
+      },
+      "dependencies": {
+        "correct": 1,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-02.jsonl"
+    },
+    {
+      "caseId": "MT-03",
+      "layer": "multi_tool",
+      "status": "PASS",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 3,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-03.jsonl"
+    },
+    {
+      "caseId": "MT-04",
+      "layer": "multi_tool",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 7,
+        "incorrect": 4,
+        "errors": [
+          "validate_query/datasetId: expected \"ads.ads_sales_daily\", got \"ads_sales_daily\"",
+          "validate_query/select/0/alias: unexpected \"average_revenue\"",
+          "validate_query/limit: unexpected 1",
+          "get_data_quality/datasetId: expected \"ads.ads_sales_daily\", got \"ads_sales_daily\""
+        ]
+      },
+      "dependencies": {
+        "correct": 1,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-04.jsonl"
+    },
+    {
+      "caseId": "MT-05",
+      "layer": "multi_tool",
+      "status": "PASS",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 2,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-05.jsonl"
+    },
+    {
+      "caseId": "MT-06",
+      "layer": "multi_tool",
+      "status": "PASS",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 1,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-06.jsonl"
+    },
+    {
+      "caseId": "MT-07",
+      "layer": "multi_tool",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 4,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 1,
+        "incorrect": 10,
+        "errors": [
+          "search_catalog/limit: unexpected 50",
+          "search_catalog: unexpected call arguments (2 leaf fields)",
+          "search_catalog: unexpected call arguments (2 leaf fields)",
+          "search_catalog: unexpected call arguments (2 leaf fields)",
+          "search_catalog: unexpected call arguments (3 leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-07.jsonl"
+    },
+    {
+      "caseId": "MT-08",
+      "layer": "multi_tool",
+      "status": "PASS",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 2,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 0
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-08.jsonl"
+    },
+    {
+      "caseId": "MT-09",
+      "layer": "multi_tool",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 1,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-09.jsonl"
+    },
+    {
+      "caseId": "MT-10",
+      "layer": "multi_tool",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 2,
+        "fp": 1,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 2,
+        "incorrect": 3,
+        "errors": [
+          "search_catalog/limit: unexpected 50",
+          "search_catalog: unexpected call arguments (2 leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 1,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-10.jsonl"
+    },
+    {
+      "caseId": "MT-11",
+      "layer": "multi_tool",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 1
+      },
+      "arguments": {
+        "correct": 0,
+        "incorrect": 3,
+        "errors": [
+          "search_catalog/q: expected \"sales daily\", got \"销售日报\"",
+          "search_catalog/limit: unexpected 50",
+          "inspect_dataset: missing call (1 expected leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-11.jsonl"
+    },
+    {
+      "caseId": "MT-12",
+      "layer": "multi_tool",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 1
+      },
+      "arguments": {
+        "correct": 2,
+        "incorrect": 4,
+        "errors": [
+          "pipeline_ingest: missing call (4 expected leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/MT-12.jsonl"
+    },
+    {
+      "caseId": "WF-01",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 4,
+        "fp": 1,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 10,
+        "incorrect": 5,
+        "errors": [
+          "search_catalog/q: expected \"sales daily\", got \"销售日报\"",
+          "search_catalog/limit: unexpected 50",
+          "validate_query/select/0/alias: unexpected \"total_revenue\"",
+          "search_catalog: unexpected call arguments (2 leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 3,
+        "total": 3
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/WF-01.jsonl"
+    },
+    {
+      "caseId": "WF-02",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 3,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 6,
+        "incorrect": 64,
+        "errors": [
+          "run_data_analysis/metricDefinitions/0/metricId: expected \"pearson_r\", got undefined",
+          "run_data_analysis/metricDefinitions/0/label: expected \"Pearson r\", got undefined",
+          "run_data_analysis/metricDefinitions/0/expression: expected \"pearson(alcohol, quality)\", got undefined",
+          "run_data_analysis/metricDefinitions/0/valueType: expected \"NUMBER\", got undefined",
+          "run_data_analysis/expectedViews/0: expected \"METRIC_CARDS\", got \"SCATTER\"",
+          "run_data_analysis/expectedViews/1: expected \"SCATTER\", got undefined",
+          "run_data_analysis/dataRefs/0/snapshotId: unexpected \"5231295569116095217\"",
+          "run_data_analysis/dataRefs/0/contentHash: unexpected \"428bd8df7313b159988405ae5e3be6d363993d73f7ffc2adedfdc1d496508191\"",
+          "run_data_analysis/dimensions/0: unexpected \"alcohol\"",
+          "run_data_analysis/dimensions/1: unexpected \"quality\"",
+          "run_data_analysis/constraints/maxAttempts: unexpected 1",
+          "run_data_analysis/constraints/timeoutSeconds: unexpected 120",
+          "run_data_analysis/constraints/maxOutputRows: unexpected 10000",
+          "run_data_analysis/constraints/maxSeriesPoints: unexpected 10000",
+          "run_data_analysis: unexpected call arguments (17 leaf fields)",
+          "run_data_analysis: unexpected call arguments (18 leaf fields)",
+          "run_data_analysis: unexpected call arguments (15 leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 1,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/WF-02.jsonl"
+    },
+    {
+      "caseId": "WF-03",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 1,
+        "incorrect": 11,
+        "errors": [
+          "run_data_analysis: unexpected call arguments (11 leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [
+        "run_data_analysis"
+      ],
+      "rawTrace": "raw-traces/WF-03.jsonl"
+    },
+    {
+      "caseId": "WF-04",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 3,
+        "fp": 8,
+        "fn": 2
+      },
+      "arguments": {
+        "correct": 16,
+        "incorrect": 251,
+        "errors": [
+          "run_data_analysis/dataRefs/0/artifactId: expected \"art_bf77176005c84aa7\", got \"art_b2119d82b3474a8c\"",
+          "run_data_analysis/dataRefs/0/queryId: expected \"q_0862a367e9814dba\", got \"vq_acc19ebca9d44102\"",
+          "run_data_analysis/dataRefs/0/contentHash: expected \"5f904ba32eb8a5f350f746ef7ccb79691da7d2c9131536dcfa0078df66f279d6\", got undefined",
+          "run_data_analysis/dataRefs/0/masked: expected true, got false",
+          "run_data_analysis/expectedViews/0: expected \"TABLE\", got \"LINE_CHART\"",
+          "run_data_analysis/expectedViews/1: expected \"LINE_CHART\", got undefined",
+          "run_data_analysis/dimensions/0: unexpected \"event_date\"",
+          "run_data_analysis/timeRange/start: unexpected \"2026-07-25\"",
+          "run_data_analysis/timeRange/end: unexpected \"2026-07-31\"",
+          "run_data_analysis/timeRange/timezone: unexpected \"UTC\"",
+          "review_data_analysis: missing call (1 expected leaf fields)",
+          "promote_analysis: missing call (2 expected leaf fields)",
+          "run_data_analysis: unexpected call arguments (34 leaf fields)",
+          "run_data_analysis: unexpected call arguments (34 leaf fields)",
+          "run_data_analysis: unexpected call arguments (33 leaf fields)",
+          "run_data_analysis: unexpected call arguments (33 leaf fields)",
+          "run_data_analysis: unexpected call arguments (34 leaf fields)",
+          "materialize_query: unexpected call arguments (2 leaf fields)",
+          "run_data_analysis: unexpected call arguments (33 leaf fields)",
+          "run_data_analysis: unexpected call arguments (35 leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 2,
+        "total": 5
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/WF-04.jsonl"
+    },
+    {
+      "caseId": "WF-05",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 2,
+        "incorrect": 1,
+        "errors": [
+          "inspect_review_gate/gateDecisionId: expected undefined, got \"review_4fba82f9650c\""
+        ]
+      },
+      "dependencies": {
+        "correct": 1,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/WF-05.jsonl"
+    },
+    {
+      "caseId": "WF-06",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 3,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 1,
+        "total": 2
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/WF-06.jsonl"
+    },
+    {
+      "caseId": "WF-07",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": false,
+      "toolCounts": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
+      "arguments": {
+        "correct": 0,
+        "incorrect": 7,
+        "errors": [
+          "run_data_analysis: missing call (6 expected leaf fields)",
+          "review_data_analysis: unexpected call arguments (1 leaf fields)"
+        ]
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [
+        "review_data_analysis"
+      ],
+      "rawTrace": "raw-traces/WF-07.jsonl"
+    },
+    {
+      "caseId": "WF-08",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 7,
+        "incorrect": 5,
+        "errors": [
+          "run_data_analysis/dataRefs/0/format: expected \"CSV\", got \"JSON\"",
+          "run_data_analysis/timeField: expected \"date\", got undefined",
+          "run_data_analysis/dataRefs/0/snapshotId: unexpected \"8933327714659990391\"",
+          "run_data_analysis/dataRefs/0/contentHash: unexpected \"df49e914acd72504f1109bd9fdb4a6970cb0effc8c7e977c92f95295af350e24\"",
+          "run_data_analysis/expectedViews/0: unexpected \"LINE_CHART\""
+        ]
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/WF-08.jsonl"
+    },
+    {
+      "caseId": "WF-09",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 2,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/WF-09.jsonl"
+    },
+    {
+      "caseId": "WF-10",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 1,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/WF-10.jsonl"
+    },
+    {
+      "caseId": "WF-11",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 1,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 1
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/WF-11.jsonl"
+    },
+    {
+      "caseId": "WF-12",
+      "layer": "workflow",
+      "status": "FAIL",
+      "exactTools": true,
+      "toolCounts": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "arguments": {
+        "correct": 2,
+        "incorrect": 0,
+        "errors": []
+      },
+      "dependencies": {
+        "correct": 0,
+        "total": 2
+      },
+      "resultsPass": true,
+      "resultFailure": null,
+      "forbiddenCalls": [],
+      "rawTrace": "raw-traces/WF-12.jsonl"
+    }
+  ]
+}

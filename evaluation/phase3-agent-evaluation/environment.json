@@ -1,0 +1,41 @@
+{
+  "capturedAt": "2026-08-03T13:05:00+10:00",
+  "repositoryCommitSha": "fdaffc50f2679505d6056966111156c40363aade",
+  "postRunConcurrentCommitSha": "e7368b1d47386ef4e586770859357f82ef679520",
+  "commitBindingNote": "All four metric files were written before the concurrent commit at 2026-08-03T13:10:56+10:00. Results bind to repositoryCommitSha plus the recorded worktree hashes, not to a clean checkout of the post-run commit.",
+  "trackedWorktreeDiffSha256": "8aa17a855dde5ca4988b92a4420da468c8f989d87e3190ae0537b47f557ab443",
+  "changedProductFileContentManifestSha256": "9a7e36b21ad04bdbc4a70637425232cef671b8427ad8dbbbee0a565b1ce2d04c",
+  "pythonExecutable": "/opt/anaconda3/bin/python3.13",
+  "pythonVersion": "3.13.5",
+  "nodeVersion": "v22.22.2",
+  "piVersion": "0.83.0",
+  "dependencies": {
+    "pyarrow": "19.0.0",
+    "pyiceberg": "0.11.1",
+    "pyspark": "3.5.3",
+    "pytest": "8.3.4",
+    "jsonschema": "4.23.0",
+    "pandas": "2.2.3"
+  },
+  "models": {
+    "piDefault": {"provider": "deepseek", "model": "deepseek-v4-flash", "thinking": "max"},
+    "requirementDeterministicCore": {"provider": "none", "model": "deterministic"},
+    "requirementProductionAdvisor": {"provider": "llama.cpp", "model": "default-planner-model", "baseUrl": "http://127.0.0.1:8080"},
+    "multimodalL1": {"provider": "deepseek", "model": "deepseek-v4-flash"},
+    "multimodalL2": {"provider": "deepseek", "model": "deepseek-v4-pro"},
+    "dataAnalysis": {"provider": "deepseek", "model": "deepseek-v4-flash"},
+    "reviewer": {"provider": "openai", "model": "gpt-5.6-luna"}
+  },
+  "configurationHashes": {
+    "defaultRuntimeProfile": "4e2d103a496c0cbd535fb6cb01db88631a521325d6a28a49d4a5b8075f3c5029",
+    "allEnabledRuntimeProfile": "74b7fd1e377280de70e30d96123b1595e3844136df34105fee2a9897cf3bdb88",
+    "buildFeatureManifest": "538d3e6cfac45642f69e16db893ab5b1629acd5aa6e0d47a728a73de076068ca",
+    "buildFeatureSnapshot": "780bece03f205e8809bb40e2f0c784a1eb4fb65379723cfe3dc5260fadb5cda9",
+    "phase2DatasetManifest": "0ff8d4c6dd4f08462ef3beeaf2b57197bfc78404651f7d871b88e0749c773cbe",
+    "phase2WarehouseSnapshot": "e1d67a429143a26d8b70bcb316aee7ff57045e5dc217523d550495db848fd9e1",
+    "phase3ScenarioStandard": "cf4e2727193abe12621526289f035ea33ca4f87bd6de649cc8f4e244e041bf15"
+  },
+  "phase2ArtifactRoot": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase2-retest/artifacts",
+  "evaluationRoot": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase3-agent-evaluation",
+  "credentialPolicy": "Only credential presence is checked; secret values are never recorded."
+}

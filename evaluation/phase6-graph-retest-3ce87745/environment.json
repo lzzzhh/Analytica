@@ -1,0 +1,27 @@
+{
+  "capturedAt": "2026-08-03T14:55:06.048Z",
+  "repositoryCommitSha": "3ce87745f9b1546a10ab7fd015dc543eec8bc7ba",
+  "remoteMainSha": "3ce87745f9b1546a10ab7fd015dc543eec8bc7ba",
+  "node": {
+    "executable": "/Users/zhanhuilin/.hermes/node/bin/node",
+    "version": "v22.22.2"
+  },
+  "python": {
+    "executable": "/opt/anaconda3/bin/python",
+    "version": "Python 3.13.5"
+  },
+  "npmVersion": "10.9.7",
+  "model": {
+    "provider": "openai",
+    "id": "gpt-5.6-luna",
+    "reasoningEffort": "max"
+  },
+  "runtimeProfile": "all-enabled",
+  "rpcEntry": {
+    "path": "/Users/zhanhuilin/Documents/Analytica/packages/coding-agent/dist/rpc-entry.js",
+    "sha256": "7c3b46714f2d357f8b0d5403164663b60c13e62ef14dfc360ee757bdc16e02a0"
+  },
+  "packageLockSha256": "6bc412681657381c5261d6a201ebf6cef6c42865c889bbcf770706a59311ddf5",
+  "datasetManifestSha256": "0ff8d4c6dd4f08462ef3beeaf2b57197bfc78404651f7d871b88e0749c773cbe",
+  "evaluationWarehouse": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase6-graph-retest-3ce87745/runtime/warehouse"
+}

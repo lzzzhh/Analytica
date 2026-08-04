@@ -1,0 +1,12 @@
+{
+  "runtimeProfile": "ablation/no-quality-gate",
+  "description": "Ablation: evidence quality gate disabled in the V2 orchestrator (gate is really skipped, not just logged); l1_retry and best_attempt_selection are off because they depend on the gate.",
+  "features": {
+    "round1.multimodal": true,
+    "round1.quality_gate": false,
+    "round1.l1_retry": false,
+    "round1.best_attempt_selection": false,
+    "round2.lakehouse": false,
+    "round3.cdxr_training": false
+  }
+}

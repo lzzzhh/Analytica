@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/approval-decision.schema.json",
+  "title": "ApprovalDecision",
+  "type": "object",
+  "required": [
+    "approvalId",
+    "reviewId",
+    "reviewContentHash",
+    "decision",
+    "approverSource",
+    "osActor",
+    "comment",
+    "decidedAt"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "approvalId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewContentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "decision": {
+      "enum": [
+        "APPROVE",
+        "APPROVE_REMEDIATION",
+        "ACCEPT_WITH_WAIVER",
+        "REQUEST_CHANGES",
+        "REJECT"
+      ]
+    },
+    "approverSource": {
+      "const": "OPERATOR_CLI"
+    },
+    "osActor": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "decidedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

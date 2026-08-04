@@ -1,0 +1,110 @@
+{
+  "generatedAt": "2026-08-01",
+  "seed": 42,
+  "days": 60,
+  "entities": 10,
+  "dateRange": {
+    "start": "2026-06-02",
+    "end": "2026-07-31"
+  },
+  "anomalyStartDate": "2026-07-04",
+  "missingStartDate": "2026-07-02",
+  "freshnessCutoffDate": "2026-07-28",
+  "models": [
+    "lr_v1",
+    "lgb_v2",
+    "xgb_v3"
+  ],
+  "impairedModel": "lgb_v2",
+  "features": [
+    "feature_income",
+    "feature_credit_score",
+    "feature_debt_ratio",
+    "feature_loan_amount"
+  ],
+  "rowCounts": {
+    "dwd.loan_application_detail": 434,
+    "dws.feature_values": 2268,
+    "dws.prediction_points": 570,
+    "ads.model_metrics": 180,
+    "ods.ocr_result": 50,
+    "ods.pdf_parse_result": 10,
+    "ods.streaming_events": 35
+  },
+  "snapshots": {
+    "dwd.loan_application_detail": 8578958796131460664,
+    "dws.feature_values": 7818892224248656849,
+    "dws.prediction_points": 6813626855498590255,
+    "ads.model_metrics": 8123266417553960382,
+    "ods.ocr_result": 6280193171229399526,
+    "ods.pdf_parse_result": 1092909974675978684,
+    "ods.streaming_events": 185966389744882866
+  },
+  "anomalies": {
+    "psi_above_0.25": {
+      "model": "lgb_v2",
+      "startDate": "2026-07-04",
+      "basis": "feature_debt_ratio distribution, 10 equal-width bins (deterministic)",
+      "computedValue": 0.3379,
+      "threshold": 0.25,
+      "expectation": "computedValue > 0.25"
+    },
+    "auc_drop": {
+      "model": "lgb_v2",
+      "startDate": "2026-07-04",
+      "aucBefore": {
+        "min": 0.8764,
+        "max": 0.9028,
+        "mean": 0.8906
+      },
+      "aucAfter": {
+        "min": 0.689,
+        "max": 0.73,
+        "mean": 0.7068
+      },
+      "expectation": "aucAfter.mean < aucBefore.mean - 0.10"
+    },
+    "feature_missing_rate": {
+      "feature": "feature_income",
+      "startDate": "2026-07-02",
+      "missingRateBefore": 0.0,
+      "missingRateAfter": 0.44,
+      "expectation": "missingRateAfter - missingRateBefore > 0.30"
+    },
+    "freshness": {
+      "dataset": "dws.prediction_points",
+      "lastDataDate": "2026-07-28",
+      "expectedLatestDate": "2026-07-31",
+      "staleDays": 3,
+      "expectation": "lastDataDate < expectedLatestDate (stale >= 1 day)"
+    },
+    "prediction_distribution_shift": {
+      "model": "lgb_v2",
+      "startDate": "2026-07-04",
+      "observation": "oot bad rate (label=1 share) rises after anomaly day",
+      "ootBadRateBefore": 0.3231,
+      "ootBadRateAfter": 0.475,
+      "expectation": "ootBadRateAfter - ootBadRateBefore >= 0.15"
+    }
+  },
+  "quality": {
+    "ads.model_metrics": "PASS",
+    "dws.feature_values": "WARN (feature_income elevated missing rate after 2026-07-02)",
+    "dws.prediction_points": "PASS",
+    "dwd.loan_application_detail": "PASS"
+  },
+  "blockers": [
+    {
+      "table": "ads.model_metrics",
+      "issue": "no psi column in schema; PSI provided as a derived metric from feature_debt_ratio distribution (see anomalies.psi_above_0.25). Adding a psi column requires a schema change (not done)."
+    },
+    {
+      "table": "ods.ocr_result / ods.pdf_parse_result",
+      "issue": "no parser_version / parse_status columns; only confidence (ocr_result) is expressible. parser version/status require a schema change (not done)."
+    },
+    {
+      "table": "dws.prediction_points",
+      "issue": "no prediction-score column; distribution shift observed via oot label (bad rate) and feature distributions."
+    }
+  ]
+}

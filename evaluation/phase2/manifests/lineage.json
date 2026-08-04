@@ -1,0 +1,25 @@
+{
+  "edges": [
+    {
+      "from": "eval_raw.chinook_*",
+      "to": "eval_staging.chinook_sales",
+      "transform": "PK/FK joins"
+    },
+    {
+      "from": "eval_staging.chinook_sales",
+      "to": "eval_mart.chinook_monthly_sales",
+      "transform": "month/country KPI aggregation"
+    },
+    {
+      "from": "eval_raw.bike_hour",
+      "to": "eval_staging.bike_hourly",
+      "transform": "event_time construction"
+    },
+    {
+      "from": "eval_raw.bike_day",
+      "to": "eval_mart.bike_daily_trends",
+      "transform": "7-day rolling mean and day-over-day delta"
+    }
+  ],
+  "generatedBy": "evaluation driver; product pipeline has no arbitrary-source lineage emitter"
+}

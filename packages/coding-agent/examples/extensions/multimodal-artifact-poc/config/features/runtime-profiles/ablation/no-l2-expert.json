@@ -1,0 +1,10 @@
+{
+  "runtimeProfile": "ablation/no-l2-expert",
+  "description": "Ablation: l2_expert disabled (expert agent never starts); everything else per default.",
+  "features": {
+    "round1.multimodal": true,
+    "round1.l2_expert": false,
+    "round2.lakehouse": false,
+    "round3.cdxr_training": false
+  }
+}

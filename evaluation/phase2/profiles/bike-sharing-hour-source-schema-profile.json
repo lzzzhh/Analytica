@@ -1,0 +1,161 @@
+{
+  "datasetId": "bike-sharing",
+  "schemaHash": "sha256:f9392e3b72c3d43314216d8562dcb4384be55b02eb9bff7bdafd3f842064fba1",
+  "fields": [
+    {
+      "name": "instant",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "date",
+      "type": "string",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "season",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "year",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "month",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "hour",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "holiday",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "weekday",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "working_day",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "weather_situation",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "temperature_normalized",
+      "type": "double",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "feels_like_temperature_normalized",
+      "type": "double",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "humidity_normalized",
+      "type": "double",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "windspeed_normalized",
+      "type": "double",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "casual_count",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "registered_count",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    },
+    {
+      "name": "rental_count",
+      "type": "long",
+      "nullability": "NOT_NULL"
+    }
+  ],
+  "candidateKeys": [
+    {
+      "fields": [
+        "instant"
+      ],
+      "confidence": 1.0,
+      "evidence": {
+        "uniquenessRatio": 1.0,
+        "nonNullRatio": 1.0,
+        "cardinality": 17379
+      },
+      "sampleRows": 17379,
+      "fullScanVerified": true,
+      "evidenceRefs": [
+        "sample:hour.parquet"
+      ]
+    }
+  ],
+  "candidateEventTimes": [
+    "date"
+  ],
+  "rowCount": 17379,
+  "nullRates": {
+    "instant": 0.0,
+    "date": 0.0,
+    "season": 0.0,
+    "year": 0.0,
+    "month": 0.0,
+    "hour": 0.0,
+    "holiday": 0.0,
+    "weekday": 0.0,
+    "working_day": 0.0,
+    "weather_situation": 0.0,
+    "temperature_normalized": 0.0,
+    "feels_like_temperature_normalized": 0.0,
+    "humidity_normalized": 0.0,
+    "windspeed_normalized": 0.0,
+    "casual_count": 0.0,
+    "registered_count": 0.0,
+    "rental_count": 0.0
+  },
+  "cardinality": {
+    "instant": 17379,
+    "date": 731,
+    "season": 4,
+    "year": 2,
+    "month": 12,
+    "hour": 24,
+    "holiday": 2,
+    "weekday": 7,
+    "working_day": 2,
+    "weather_situation": 4,
+    "temperature_normalized": 50,
+    "feels_like_temperature_normalized": 65,
+    "humidity_normalized": 89,
+    "windspeed_normalized": 30,
+    "casual_count": 322,
+    "registered_count": 776,
+    "rental_count": 869
+  },
+  "sensitiveFieldCandidates": [],
+  "partitionStats": {},
+  "sampleInfo": {
+    "totalRows": 17379,
+    "sampledRows": 17379,
+    "sampleLimit": 100000,
+    "fullScan": true,
+    "samplingMethod": "full"
+  },
+  "profiledAt": "2026-08-03T01:29:26.917202+00:00"
+}

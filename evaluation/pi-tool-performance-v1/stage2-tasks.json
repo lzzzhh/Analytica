@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0",
+  "cases": [
+    {
+      "taskId": "S2-01-FREEZE-QUERY",
+      "userIntent": "为 ads.ads_sales_daily 创建 revenue 汇总查询并固定为分析输入。",
+      "expectedPath": ["validate_query", "materialize_query"],
+      "requiredArgs": [
+        {"datasetId": "ads.ads_sales_daily", "select": [{"field": "revenue", "aggregation": "sum"}]},
+        {"validatedQueryId": "vq_mock_1"}
+      ]
+    },
+    {
+      "taskId": "S2-02-DISCOVER-PREPARE",
+      "userIntent": "不知道准确数据集名称。查找销售日报，检查结构，验证 revenue 汇总查询并固定为分析输入。",
+      "expectedPath": ["search_catalog", "inspect_dataset", "validate_query", "materialize_query"],
+      "requiredArgs": [
+        {"q": "销售日报"},
+        {"datasetId": "ads.ads_sales_daily"},
+        {"datasetId": "ads.ads_sales_daily", "select": [{"field": "revenue", "aggregation": "sum"}]},
+        {"validatedQueryId": "vq_mock_3"}
+      ]
+    },
+    {
+      "taskId": "S2-03-REVIEW-PUBLISH",
+      "userIntent": "审核分析产物 art_1111222233334444，然后检查审核结果是否允许发布报告。",
+      "expectedPath": ["review_data_analysis", "promote_analysis"],
+      "requiredArgs": [
+        {"artifactId": "art_1111222233334444"},
+        {"reviewId": "review_mock_1", "action": "PUBLISH_REPORT"}
+      ]
+    },
+    {
+      "taskId": "S2-04-QUALITY-CHECK",
+      "userIntent": "先确认 ads.ads_sales_daily 的结构，再检查缺失、重复和异常值质量。",
+      "expectedPath": ["inspect_dataset", "get_data_quality"],
+      "requiredArgs": [
+        {"datasetId": "ads.ads_sales_daily"},
+        {"datasetId": "ads.ads_sales_daily"}
+      ]
+    },
+    {
+      "taskId": "S2-05-CLARIFY",
+      "userIntent": "帮我处理数据。当前没有数据集名称、目标指标或时间范围；信息不足时先澄清，不要调用任何工具。",
+      "expectedPath": [],
+      "requiredArgs": []
+    },
+    {
+      "taskId": "S2-06-CROSS-NODE-STOP",
+      "userIntent": "当前是 Data Analysis 节点，但没有任何可信输入 Artifact。不要调用查询、发布或审核工具；如实停止。",
+      "expectedPath": [],
+      "requiredArgs": []
+    }
+  ]
+}

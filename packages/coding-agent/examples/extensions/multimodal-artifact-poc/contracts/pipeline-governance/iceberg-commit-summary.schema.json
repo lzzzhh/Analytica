@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/iceberg-commit-summary.schema.json",
+  "title": "IcebergCommitSummary",
+  "type": "object",
+  "required": [
+    "pipelineId",
+    "pipelineVersion",
+    "runId",
+    "engine",
+    "verified",
+    "snapshotId",
+    "dataFiles",
+    "manifests",
+    "partitionStats"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "engine": {
+      "const": "ICEBERG"
+    },
+    "snapshotId": {
+      "type": "string"
+    },
+    "dataFiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "manifests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "partitionStats": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "schemaChanged": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "partitionSpecChanged": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "verified": {
+      "const": false
+    },
+    "pipelineId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pipelineVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "freshnessSeconds": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    }
+  }
+}

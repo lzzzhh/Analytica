@@ -1,0 +1,94 @@
+{
+  "packId": "risk",
+  "packVersion": "1.0.0",
+  "domainName": "risk",
+  "keywords": ["贷款", "放款", "申请", "逾期", "坏账", "风控", "信用", "信贷", "loan", "credit", "risk", "default", "bad rate", "通过率", "审批"],
+  "description": "Risk/credit domain pack: credit application, approval, disbursement, overdue and default analytics. Only used when the request semantics clearly belong to the risk domain.",
+  "metrics": [
+    { "name": "申请量", "definition": "number of loan applications in the period", "risk": "LOW" },
+    { "name": "通过率", "definition": "approved applications / total applications", "risk": "LOW" },
+    { "name": "放款额", "definition": "total disbursed loan amount", "risk": "LOW" },
+    { "name": "逾期率", "definition": "overdue balance / outstanding balance", "risk": "MEDIUM" },
+    { "name": "坏账率", "definition": "charge-off amount / disbursed amount", "risk": "MEDIUM" },
+    { "name": "AUC", "definition": "area under the ROC curve of the credit model", "risk": "MEDIUM" },
+    { "name": "KS", "definition": "Kolmogorov-Smirnov statistic of the score distribution", "risk": "MEDIUM" },
+    { "name": "PSI", "definition": "population stability index comparing score distributions", "risk": "MEDIUM" }
+  ],
+  "subjects": [
+    { "name": "个人贷款", "description": "retail/individual loan portfolio" },
+    { "name": "企业贷款", "description": "corporate/commercial loan portfolio" },
+    { "name": "信用卡", "description": "credit card portfolio" }
+  ],
+  "commonTimeRanges": [
+    { "relative": "recent_7_days", "source": "DOMAIN_DEFAULT" },
+    { "relative": "recent_30_days", "source": "DOMAIN_DEFAULT" },
+    { "relative": "previous_period", "source": "DOMAIN_DEFAULT" }
+  ],
+  "comparisonBaselines": ["previous_30_days", "previous_period"],
+  "knownAmbiguities": [
+    {
+      "field": "subject",
+      "type": "MISSING",
+      "blocking": true,
+      "question": "Which loan portfolio (e.g. 个人贷款, 企业贷款) should this analysis target?",
+      "whyNeeded": "Different portfolios use different data sources and metrics.",
+      "answerType": "SINGLE_CHOICE",
+      "options": ["个人贷款", "企业贷款", "信用卡"]
+    },
+    {
+      "field": "timeRange",
+      "type": "VAGUE_RANGE",
+      "blocking": false,
+      "question": "Which observation window should be analyzed?",
+      "whyNeeded": "Risk metrics (approval, overdue) are period-bound.",
+      "answerType": "DATE_RANGE",
+      "defaultValue": "recent_30_days",
+      "defaultRisk": "LOW"
+    },
+    {
+      "field": "metrics",
+      "type": "UNKNOWN_METRIC",
+      "blocking": false,
+      "question": "Which risk metrics should be included (申请量 / 通过率 / 放款额 / 逾期率 / 坏账率 / AUC / KS / PSI)?",
+      "whyNeeded": "The requested metrics determine what data to query.",
+      "answerType": "MULTI_CHOICE",
+      "options": ["申请量", "通过率", "放款额", "逾期率", "坏账率", "AUC", "KS", "PSI"]
+    },
+    {
+      "field": "comparisonBaseline",
+      "type": "UNKNOWN_BASELINE",
+      "blocking": false,
+      "question": "Compared to which period or baseline?",
+      "whyNeeded": "A comparison request needs a reference period.",
+      "answerType": "TEXT",
+      "defaultValue": "previous_30_days",
+      "defaultRisk": "LOW"
+    },
+    {
+      "field": "model",
+      "type": "MISSING",
+      "blocking": true,
+      "question": "Which model (or score field) should be evaluated?",
+      "whyNeeded": "Model quality metrics (AUC/KS/PSI) require a specific model or score.",
+      "answerType": "TEXT"
+    }
+  ],
+  "defaults": [
+    {
+      "field": "timeRange",
+      "value": "recent_30_days",
+      "impact": "MEDIUM",
+      "source": "DOMAIN_DEFAULT",
+      "risk": "LOW"
+    },
+    {
+      "field": "comparisonBaseline",
+      "value": "previous_30_days",
+      "impact": "LOW",
+      "source": "DOMAIN_DEFAULT",
+      "risk": "LOW"
+    }
+  ],
+  "adoptionPolicy": "AUTO_LOW",
+  "requiresSemanticConfirmation": true
+}

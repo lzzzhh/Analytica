@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lzzzhh/data-agent/contracts/lineage-result.schema.json",
+  "title": "LineageResult",
+  "description": "Dataset lineage: upstream sources and downstream consumers.",
+  "type": "object",
+  "required": ["dataset_id", "upstream", "downstream", "manual_edges"],
+  "properties": {
+    "dataset_id": { "type": "string" },
+    "upstream": { "$ref": "#/$defs/edges" },
+    "downstream": { "$ref": "#/$defs/edges" },
+    "manual_edges": { "$ref": "#/$defs/edges" }
+  },
+  "$defs": {
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "kind"],
+        "properties": {
+          "source": { "type": "string" },
+          "target": { "type": "string" },
+          "kind": { "type": "string" }
+        }
+      }
+    }
+  }
+}

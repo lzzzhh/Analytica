@@ -1,0 +1,7 @@
+{
+  "reason": "The original GM-REV-02 runs reused a Phase 4 Reviewer store containing prior state and failed with object already exists before a clean independent attempt. This is a confirmed evaluation-fixture isolation failure.",
+  "policy": "Retry only the four affected runs with unchanged prompts, tools, model, reasoning effort, scenario Oracle, and scoring contract; use a fresh HOME, ArtifactStore, and ReviewerStore per run; preserve original traces.",
+  "scenarioHash": "58de6628693600ef9de21ac80c90c7cf0f07e656d203a73e3e8badbdfe2d36ea",
+  "scoringContractHash": "a374da5148931493fbe09330c99116e8d478af414fbeb61b8936025ef4155dc2",
+  "status": "FROZEN_BEFORE_RETRY"
+}

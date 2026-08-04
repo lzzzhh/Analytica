@@ -1,0 +1,47 @@
+{
+  "attemptsPerScenario": 3,
+  "passDefinition": "An attempt passes only when every required fact label and exact value is present in structured merged.facts and no conflicting value is emitted.",
+  "structuredExtraction": "Micro precision/recall/F1 over expected label-value pairs versus normalized structured facts.",
+  "scenarios": [
+    {
+      "id": "mm-01",
+      "document": "documents/ai4i-report.md",
+      "question": "提取总记录数、Machine failure 数量和 L 类型记录数。只返回文档中明确出现的事实。",
+      "facts": [
+        {"label": "total records", "aliases": ["总记录数", "记录数", "total records"], "value": "10000"},
+        {"label": "machine failure", "aliases": ["machine failure", "机器故障", "故障数"], "value": "339"},
+        {"label": "type l", "aliases": ["l 类型", "type l", "l type"], "value": "6000"}
+      ]
+    },
+    {
+      "id": "mm-02",
+      "document": "documents/wine-quality-report.md",
+      "question": "提取 red、white 的记录数以及总体平均 quality。",
+      "facts": [
+        {"label": "red rows", "aliases": ["red", "红葡萄酒"], "value": "1599"},
+        {"label": "white rows", "aliases": ["white", "白葡萄酒"], "value": "4898"},
+        {"label": "mean quality", "aliases": ["平均 quality", "mean quality", "quality 均值"], "value": "5.818377712790519"}
+      ]
+    },
+    {
+      "id": "mm-03",
+      "document": "documents/seoul-bike-report.md",
+      "question": "提取总租车量、平均租车量和记录数。",
+      "facts": [
+        {"label": "total rented", "aliases": ["总租车量", "total rented"], "value": "6172314"},
+        {"label": "mean rented", "aliases": ["平均租车量", "mean rented"], "value": "704.6020547945205"},
+        {"label": "row count", "aliases": ["记录数", "row count"], "value": "8760"}
+      ]
+    },
+    {
+      "id": "mm-04",
+      "document": "documents/appliances-report.md",
+      "question": "提取 Appliances 的最小值、最大值和平均值。",
+      "facts": [
+        {"label": "minimum appliances", "aliases": ["最小值", "minimum", "min"], "value": "10"},
+        {"label": "maximum appliances", "aliases": ["最大值", "maximum", "max"], "value": "1080"},
+        {"label": "mean appliances", "aliases": ["平均值", "mean", "average"], "value": "97.6949581960983"}
+      ]
+    }
+  ]
+}

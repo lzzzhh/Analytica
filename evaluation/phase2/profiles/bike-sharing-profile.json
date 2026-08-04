@@ -1,0 +1,930 @@
+{
+  "contract_version": "dataset-profile.v1",
+  "dataset_id": "uci-bike-sharing-275",
+  "source_type": "structured",
+  "content_hash": "sha256:7f1c94f36ad04cd0485098d8632b803a2fa310ec98d22269284458862dc6e358",
+  "tables": [
+    {
+      "table_id": "hour",
+      "row_count": 17379,
+      "columns": [
+        {
+          "column_name": "instant",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 1.0,
+          "value_patterns": [],
+          "masked_samples": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 17379
+        },
+        {
+          "column_name": "date",
+          "physical_type": "str",
+          "logical_type_candidates": [
+            "integer",
+            "string",
+            "date"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0421,
+          "value_patterns": [
+            "YYYY-MM-DD"
+          ],
+          "masked_samples": [
+            "2011-01-01",
+            "2011-01-01",
+            "2011-01-01",
+            "2011-01-01",
+            "2011-01-01"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 731
+        },
+        {
+          "column_name": "season",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0002,
+          "value_patterns": [],
+          "masked_samples": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 4
+        },
+        {
+          "column_name": "year",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0001,
+          "value_patterns": [],
+          "masked_samples": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 2
+        },
+        {
+          "column_name": "month",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0007,
+          "value_patterns": [],
+          "masked_samples": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 12
+        },
+        {
+          "column_name": "hour",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0014,
+          "value_patterns": [],
+          "masked_samples": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 24
+        },
+        {
+          "column_name": "holiday",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0001,
+          "value_patterns": [],
+          "masked_samples": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 2
+        },
+        {
+          "column_name": "weekday",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0004,
+          "value_patterns": [],
+          "masked_samples": [
+            "6",
+            "6",
+            "6",
+            "6",
+            "6"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 7
+        },
+        {
+          "column_name": "working_day",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0001,
+          "value_patterns": [],
+          "masked_samples": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 2
+        },
+        {
+          "column_name": "weather_situation",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0002,
+          "value_patterns": [],
+          "masked_samples": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 4
+        },
+        {
+          "column_name": "temperature_normalized",
+          "physical_type": "float",
+          "logical_type_candidates": [
+            "float"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0029,
+          "value_patterns": [
+            "decimal.2"
+          ],
+          "masked_samples": [
+            "0.24",
+            "0.22",
+            "0.22",
+            "0.24",
+            "0.24"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 50
+        },
+        {
+          "column_name": "feels_like_temperature_normalized",
+          "physical_type": "float",
+          "logical_type_candidates": [
+            "float"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0037,
+          "value_patterns": [],
+          "masked_samples": [
+            "0.2879",
+            "0.2727",
+            "0.2727",
+            "0.2879",
+            "0.2879"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 65
+        },
+        {
+          "column_name": "humidity_normalized",
+          "physical_type": "float",
+          "logical_type_candidates": [
+            "float"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0051,
+          "value_patterns": [
+            "decimal.2"
+          ],
+          "masked_samples": [
+            "0.81",
+            "0.8",
+            "0.8",
+            "0.75",
+            "0.75"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 89
+        },
+        {
+          "column_name": "windspeed_normalized",
+          "physical_type": "float",
+          "logical_type_candidates": [
+            "float"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0017,
+          "value_patterns": [],
+          "masked_samples": [
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 30
+        },
+        {
+          "column_name": "casual_count",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0185,
+          "value_patterns": [],
+          "masked_samples": [
+            "3",
+            "8",
+            "5",
+            "3",
+            "0"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 322
+        },
+        {
+          "column_name": "registered_count",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0447,
+          "value_patterns": [],
+          "masked_samples": [
+            "13",
+            "32",
+            "27",
+            "10",
+            "1"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 776
+        },
+        {
+          "column_name": "rental_count",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.05,
+          "value_patterns": [],
+          "masked_samples": [
+            "16",
+            "40",
+            "32",
+            "13",
+            "1"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 869
+        }
+      ],
+      "candidate_keys": [
+        [
+          "instant"
+        ]
+      ],
+      "candidate_time_columns": [
+        "date"
+      ],
+      "sample_rows_json": [
+        {
+          "instant": "1",
+          "date": "2011-01-01",
+          "season": "1",
+          "year": "0",
+          "month": "1",
+          "hour": "0",
+          "holiday": "0",
+          "weekday": "6",
+          "working_day": "0",
+          "weather_situation": "1",
+          "temperature_normalized": "0.24",
+          "feels_like_temperature_normalized": "0.2879",
+          "humidity_normalized": "0.81",
+          "windspeed_normalized": "0.0",
+          "casual_count": "3",
+          "registered_count": "13",
+          "rental_count": "16"
+        },
+        {
+          "instant": "2",
+          "date": "2011-01-01",
+          "season": "1",
+          "year": "0",
+          "month": "1",
+          "hour": "1",
+          "holiday": "0",
+          "weekday": "6",
+          "working_day": "0",
+          "weather_situation": "1",
+          "temperature_normalized": "0.22",
+          "feels_like_temperature_normalized": "0.2727",
+          "humidity_normalized": "0.8",
+          "windspeed_normalized": "0.0",
+          "casual_count": "8",
+          "registered_count": "32",
+          "rental_count": "40"
+        },
+        {
+          "instant": "3",
+          "date": "2011-01-01",
+          "season": "1",
+          "year": "0",
+          "month": "1",
+          "hour": "2",
+          "holiday": "0",
+          "weekday": "6",
+          "working_day": "0",
+          "weather_situation": "1",
+          "temperature_normalized": "0.22",
+          "feels_like_temperature_normalized": "0.2727",
+          "humidity_normalized": "0.8",
+          "windspeed_normalized": "0.0",
+          "casual_count": "5",
+          "registered_count": "27",
+          "rental_count": "32"
+        },
+        {
+          "instant": "4",
+          "date": "2011-01-01",
+          "season": "1",
+          "year": "0",
+          "month": "1",
+          "hour": "3",
+          "holiday": "0",
+          "weekday": "6",
+          "working_day": "0",
+          "weather_situation": "1",
+          "temperature_normalized": "0.24",
+          "feels_like_temperature_normalized": "0.2879",
+          "humidity_normalized": "0.75",
+          "windspeed_normalized": "0.0",
+          "casual_count": "3",
+          "registered_count": "10",
+          "rental_count": "13"
+        },
+        {
+          "instant": "5",
+          "date": "2011-01-01",
+          "season": "1",
+          "year": "0",
+          "month": "1",
+          "hour": "4",
+          "holiday": "0",
+          "weekday": "6",
+          "working_day": "0",
+          "weather_situation": "1",
+          "temperature_normalized": "0.24",
+          "feels_like_temperature_normalized": "0.2879",
+          "humidity_normalized": "0.75",
+          "windspeed_normalized": "0.0",
+          "casual_count": "0",
+          "registered_count": "1",
+          "rental_count": "1"
+        }
+      ]
+    },
+    {
+      "table_id": "day",
+      "row_count": 731,
+      "columns": [
+        {
+          "column_name": "instant",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 1.0,
+          "value_patterns": [],
+          "masked_samples": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 731
+        },
+        {
+          "column_name": "date",
+          "physical_type": "str",
+          "logical_type_candidates": [
+            "integer",
+            "string",
+            "date"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 1.0,
+          "value_patterns": [
+            "YYYY-MM-DD"
+          ],
+          "masked_samples": [
+            "2011-01-01",
+            "2011-01-02",
+            "2011-01-03",
+            "2011-01-04",
+            "2011-01-05"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 731
+        },
+        {
+          "column_name": "season",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0055,
+          "value_patterns": [],
+          "masked_samples": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 4
+        },
+        {
+          "column_name": "year",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0027,
+          "value_patterns": [],
+          "masked_samples": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 2
+        },
+        {
+          "column_name": "month",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0164,
+          "value_patterns": [],
+          "masked_samples": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 12
+        },
+        {
+          "column_name": "holiday",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0027,
+          "value_patterns": [],
+          "masked_samples": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 2
+        },
+        {
+          "column_name": "weekday",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0096,
+          "value_patterns": [],
+          "masked_samples": [
+            "6",
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 7
+        },
+        {
+          "column_name": "working_day",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0027,
+          "value_patterns": [],
+          "masked_samples": [
+            "0",
+            "0",
+            "1",
+            "1",
+            "1"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 2
+        },
+        {
+          "column_name": "weather_situation",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.0041,
+          "value_patterns": [],
+          "masked_samples": [
+            "2",
+            "2",
+            "1",
+            "1",
+            "1"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 3
+        },
+        {
+          "column_name": "temperature_normalized",
+          "physical_type": "float",
+          "logical_type_candidates": [
+            "float"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.6826,
+          "value_patterns": [
+            "decimal.2"
+          ],
+          "masked_samples": [
+            "0.344167",
+            "0.363478",
+            "0.196364",
+            "0.2",
+            "0.226957"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 499
+        },
+        {
+          "column_name": "feels_like_temperature_normalized",
+          "physical_type": "float",
+          "logical_type_candidates": [
+            "float"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.9439,
+          "value_patterns": [],
+          "masked_samples": [
+            "0.363625",
+            "0.353739",
+            "0.189405",
+            "0.212122",
+            "0.22927"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 690
+        },
+        {
+          "column_name": "humidity_normalized",
+          "physical_type": "float",
+          "logical_type_candidates": [
+            "float"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.814,
+          "value_patterns": [],
+          "masked_samples": [
+            "0.805833",
+            "0.696087",
+            "0.437273",
+            "0.590435",
+            "0.436957"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 595
+        },
+        {
+          "column_name": "windspeed_normalized",
+          "physical_type": "float",
+          "logical_type_candidates": [
+            "float"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.8892,
+          "value_patterns": [],
+          "masked_samples": [
+            "0.160446",
+            "0.248539",
+            "0.248309",
+            "0.160296",
+            "0.1869"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 650
+        },
+        {
+          "column_name": "casual_count",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.829,
+          "value_patterns": [],
+          "masked_samples": [
+            "331",
+            "131",
+            "120",
+            "108",
+            "82"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 606
+        },
+        {
+          "column_name": "registered_count",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.9289,
+          "value_patterns": [],
+          "masked_samples": [
+            "654",
+            "670",
+            "1229",
+            "1454",
+            "1518"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 679
+        },
+        {
+          "column_name": "rental_count",
+          "physical_type": "int",
+          "logical_type_candidates": [
+            "integer"
+          ],
+          "missing_rate": 0.0,
+          "unique_rate": 0.9521,
+          "value_patterns": [],
+          "masked_samples": [
+            "985",
+            "801",
+            "1349",
+            "1562",
+            "1600"
+          ],
+          "min_value": null,
+          "max_value": null,
+          "distinct_count": 696
+        }
+      ],
+      "candidate_keys": [
+        [
+          "instant"
+        ],
+        [
+          "date"
+        ]
+      ],
+      "candidate_time_columns": [
+        "date"
+      ],
+      "sample_rows_json": [
+        {
+          "instant": "1",
+          "date": "2011-01-01",
+          "season": "1",
+          "year": "0",
+          "month": "1",
+          "holiday": "0",
+          "weekday": "6",
+          "working_day": "0",
+          "weather_situation": "2",
+          "temperature_normalized": "0.344167",
+          "feels_like_temperature_normalized": "0.363625",
+          "humidity_normalized": "0.805833",
+          "windspeed_normalized": "0.160446",
+          "casual_count": "331",
+          "registered_count": "654",
+          "rental_count": "985"
+        },
+        {
+          "instant": "2",
+          "date": "2011-01-02",
+          "season": "1",
+          "year": "0",
+          "month": "1",
+          "holiday": "0",
+          "weekday": "0",
+          "working_day": "0",
+          "weather_situation": "2",
+          "temperature_normalized": "0.363478",
+          "feels_like_temperature_normalized": "0.353739",
+          "humidity_normalized": "0.696087",
+          "windspeed_normalized": "0.248539",
+          "casual_count": "131",
+          "registered_count": "670",
+          "rental_count": "801"
+        },
+        {
+          "instant": "3",
+          "date": "2011-01-03",
+          "season": "1",
+          "year": "0",
+          "month": "1",
+          "holiday": "0",
+          "weekday": "1",
+          "working_day": "1",
+          "weather_situation": "1",
+          "temperature_normalized": "0.196364",
+          "feels_like_temperature_normalized": "0.189405",
+          "humidity_normalized": "0.437273",
+          "windspeed_normalized": "0.248309",
+          "casual_count": "120",
+          "registered_count": "1229",
+          "rental_count": "1349"
+        },
+        {
+          "instant": "4",
+          "date": "2011-01-04",
+          "season": "1",
+          "year": "0",
+          "month": "1",
+          "holiday": "0",
+          "weekday": "2",
+          "working_day": "1",
+          "weather_situation": "1",
+          "temperature_normalized": "0.2",
+          "feels_like_temperature_normalized": "0.212122",
+          "humidity_normalized": "0.590435",
+          "windspeed_normalized": "0.160296",
+          "casual_count": "108",
+          "registered_count": "1454",
+          "rental_count": "1562"
+        },
+        {
+          "instant": "5",
+          "date": "2011-01-05",
+          "season": "1",
+          "year": "0",
+          "month": "1",
+          "holiday": "0",
+          "weekday": "3",
+          "working_day": "1",
+          "weather_situation": "1",
+          "temperature_normalized": "0.226957",
+          "feels_like_temperature_normalized": "0.22927",
+          "humidity_normalized": "0.436957",
+          "windspeed_normalized": "0.1869",
+          "casual_count": "82",
+          "registered_count": "1518",
+          "rental_count": "1600"
+        }
+      ]
+    }
+  ],
+  "relation_candidates": [
+    {
+      "table_a": "hour",
+      "table_b": "day",
+      "common_columns": [
+        "holiday",
+        "weather_situation",
+        "season",
+        "feels_like_temperature_normalized",
+        "weekday",
+        "date",
+        "year",
+        "working_day",
+        "instant",
+        "rental_count",
+        "temperature_normalized",
+        "casual_count",
+        "windspeed_normalized",
+        "humidity_normalized",
+        "registered_count",
+        "month"
+      ],
+      "relation_type": "potential_fk"
+    }
+  ],
+  "user_hints": {
+    "usage": "time-series trend and anomaly evaluation"
+  }
+}

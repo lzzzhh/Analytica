@@ -1,0 +1,29 @@
+{
+  "mutationVersion": "bike-hour-mutation.v1",
+  "baseRows": 17379,
+  "mutatedRows": 17357,
+  "defects": [
+    {
+      "id": "duplicate_primary_key",
+      "definition": "duplicate first retained instant row"
+    },
+    {
+      "id": "missing_values",
+      "definition": "set cnt to null for 70% of retained rows"
+    },
+    {
+      "id": "type_error",
+      "definition": "set one remaining cnt value to not_an_int"
+    },
+    {
+      "id": "schema_drift",
+      "definition": "add unexpected_metric column"
+    },
+    {
+      "id": "time_gap",
+      "definition": "remove all hourly rows for 2011-02-01"
+    }
+  ],
+  "file": "mutations/bike-hour-mutated.csv",
+  "sha256": "59f9e5f14a8aa30485a2a5901a6fa782a749c3e98f44b32e2ac767fc406eee9a"
+}

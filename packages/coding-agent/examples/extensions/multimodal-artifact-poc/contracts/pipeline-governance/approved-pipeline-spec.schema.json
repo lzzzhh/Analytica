@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/approved-pipeline-spec.schema.json",
+  "title": "ApprovedPipelineSpec",
+  "type": "object",
+  "required": [
+    "specId",
+    "version",
+    "approvalId",
+    "schemaSpecHash",
+    "pipelineSpecHash",
+    "draftArtifactHash",
+    "reviewPackageHash",
+    "sealedAt"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "specId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "approvalId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schemaSpecHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "pipelineSpecHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "draftArtifactHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "reviewPackageHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "sealedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

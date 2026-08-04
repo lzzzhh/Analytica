@@ -1,0 +1,108 @@
+{
+  "caseId": "WF-06",
+  "layer": "workflow",
+  "startedAt": "2026-08-03T06:07:43.367Z",
+  "finishedAt": "2026-08-03T06:07:57.295Z",
+  "exitCode": 0,
+  "signal": null,
+  "timedOut": false,
+  "command": {
+    "executable": "/Users/zhanhuilin/.hermes/node/bin/node",
+    "cli": "/Users/zhanhuilin/Documents/Analytica/packages/coding-agent/dist/cli.js",
+    "model": "openai/gpt-5.6-luna",
+    "thinking": "max",
+    "tools": [
+      "inspect_review_gate",
+      "promote_analysis",
+      "review_data_analysis"
+    ]
+  },
+  "toolCalls": [
+    {
+      "toolCallId": "call_d0zUhzOpNQfSGeBpTyGsxUdS|fc_0855dbb7528d8fc8016a7030322ff4819aae87f71ce2f35155",
+      "name": "inspect_review_gate",
+      "args": {
+        "gateDecisionId": "none_tool_eval"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Review gate none_tool_eval [FINAL] — mode NONE\n  subject: ANALYSIS_PROPOSAL analysis-none (hash aaaaaaaaaaaa…)\n  scores: impact 0 / reversibility 0 / complexity 0 / uncertainty 0 / autonomy 0 (total 0)\n  triggers: none\n  delivery: EXPLORATORY_UNREVIEWED (restrictions: NO_MERGE, NO_EXTERNAL_PUBLICATION, NO_PRODUCTION_WRITE, NO_FORMAL_REPORT, NO_GOVERNANCE_APPROVAL)\n  required checks: (none — NONE mode)\n  budget: input 0 tok / semantic calls 0 / files 0 / diff 0 lines\n  policyVersion 1.0.0 | ref gate/none_tool_eval.json"
+          }
+        ],
+        "details": {
+          "dashboardType": "REVIEW_GATE",
+          "gate": {
+            "schemaVersion": "1.0",
+            "gateDecisionId": "none_tool_eval",
+            "stage": "FINAL",
+            "subjectType": "ANALYSIS_PROPOSAL",
+            "subjectId": "analysis-none",
+            "subjectContentHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "profile": "ANALYSIS",
+            "reviewMode": "NONE",
+            "scores": {
+              "impact": 0,
+              "reversibility": 0,
+              "complexity": 0,
+              "uncertainty": 0,
+              "autonomy": 0,
+              "total": 0
+            },
+            "triggers": [],
+            "triggerSources": [],
+            "deliveryMode": "EXPLORATORY_UNREVIEWED",
+            "restrictions": [
+              "NO_MERGE",
+              "NO_EXTERNAL_PUBLICATION",
+              "NO_PRODUCTION_WRITE",
+              "NO_FORMAL_REPORT",
+              "NO_GOVERNANCE_APPROVAL"
+            ],
+            "requiredChecks": [],
+            "budget": {
+              "maxInputTokens": 0,
+              "maxSemanticCalls": 0,
+              "maxFiles": 0,
+              "maxDiffLines": 0
+            },
+            "policyVersion": "1.0.0",
+            "createdAt": "2026-08-03T00:00:00.000Z",
+            "contentHash": "abb41d0557b650b2b398d582ad301aaac05aa3b6e1da07fde2f263e9706e665c"
+          },
+          "explanation": [
+            "score tier NONE (total 0)",
+            "delivery EXPLORATORY_UNREVIEWED -> NONE with restrictions"
+          ]
+        }
+      },
+      "isError": false
+    },
+    {
+      "toolCallId": "call_8DpB2qb07U3FLNTKnbbbTCQj|fc_0855dbb7528d8fc8016a703033cd80819a92b88fa8ef1a3f8b",
+      "name": "promote_analysis",
+      "args": {
+        "reviewId": "review_none_eval",
+        "action": "PUBLISH_REPORT"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "promote_analysis failed: Error: Cannot find module './review-gate.ts'\nRequire stack:\n- /private/tmp/analytica-tool92.IH2rVI/checkout/packages/coding-agent/examples/extensions/multimodal-artifact-poc/src/pipelines/delivery-tools.ts"
+          }
+        ],
+        "details": {
+          "error": "Error: Cannot find module './review-gate.ts'\nRequire stack:\n- /private/tmp/analytica-tool92.IH2rVI/checkout/packages/coding-agent/examples/extensions/multimodal-artifact-poc/src/pipelines/delivery-tools.ts"
+        }
+      },
+      "isError": false
+    }
+  ],
+  "finalText": "- **Gate `none_tool_eval`**：决策模式为 `NONE`。五项风险评分均为 `0`，无触发器、无必需检查，预算为零。\n- 该决策仅允许 **`EXPLORATORY_UNREVIEWED`** 交付，并明确禁止：\n  - `PUBLISH_REPORT`（正式报告）\n  - 外部发布\n  - 合并代码\n  - 生产写入\n  - 治理审批\n\n因此，按 gate 限制，`review_none_eval` **不能执行 `PUBLISH_REPORT`**。\n\n我随后仅调用了 `promote_analysis(review_none_eval, PUBLISH_REPORT)`，但工具失败，原因是缺少模块：\n\n```text\nCannot find module './review-gate.ts'\n```\n\n所以没有获得成功的授权结果，也没有启动 Reviewer。",
+  "nonJsonStdout": [],
+  "stderrTail": "[features] profile=full effHash=238202ebcc848449 enabled=[legacy.cdxr_governance_cli, legacy.cdxr_governance_tools, round1.best_attempt_selection, round1.document_orchestrator_v2, round1.document_parser, round1.document_subagent, round1.evidence_merger, round1.image_ocr, round1.l1_retry, round1.l2_expert, round1.multimodal, round1.quality_gate, round1.visual_parser, round2.batch_pipeline, round2.catalog_tools, round2.data_quality, round2.flink_runtime_governance, round2.iceberg_layout_governance, round2.lakehouse, round2.lineage, round2.pipeline, round2.pipeline_ads_transform, round2.pipeline_agent_worker, round2.pipeline_amendment, round2.pipeline_cdxr_promotion_gate, round2.pipeline_checkpointing, round2.pipeline_dead_letter, round2.pipeline_deadline_watchdog, round2.pipeline_draft_compilation, round2.pipeline_dwd_transform, round2.pipeline_dws_transform, round2.pipeline_event_store, round2.pipeline_governance, round2.pipeline_human_approval, round2.pipeline_ods_load, round2.pipeline_placement_governance, round2.pipeline_remediation, round2.pipeline_schema_design, round2.pipeline_schema_discovery, round2.pipeline_source_generation, round2.pipeline_spec_generation, round2.pipeline_state_reducer, round2.pipeline_status_dashboard, round2.pipeline_validation, round2.query_evidence, round2.query_tools, round2.snapshot, round2.spark_runtime_governance, round2.stream_replay_pipeline, round3.cdxr_constant_feature, round3.cdxr_missingness, round3.cdxr_sample_size, round3.cdxr_sensitive, round3.cdxr_target_distribution, round3.cdxr_target_leakage, round3.cdxr_temporal, round3.cdxr_traceability, round3.cdxr_training, round3.cdxr_validation_split, round4.ambiguity_detection, round4.analysis_artifacts, round4.analysis_charting, round4.analysis_findings, round4.analysis_frontend_render, round4.analysis_input_materialization, round4.analysis_plan_generation, round4.analysis_retry, round4.analysis_script_execution, round4.analysis_subagent, round4.analysis_task_gate, round4.analysis_workspace, round4.assumption_management, round4.clarification, round4.data_analysis, round4.data_analysis_tool, round4.dependency_scheduler, round4.domain_pack, round4.dynamic_replanning, round4.parallel_scheduling, round4.plan_gate, round4.plan_validation, round4.planning_advisor, round4.requirement_planning, round4.requirement_skill, round4.task_plan_generation, round5.analysis_independent_verification, round5.analysis_replay, round5.analysis_review, round5.code_review, round5.code_shadow_tests, round5.deterministic_review_gates, round5.review_frontend_render, round5.review_package, round5.review_revision_loop, round5.review_tools, round5.reviewer, round5.reviewer_agent, round5.semantic_review] disabled=[ablate.ods_guard, ablate.query_validation, ablate.raw_data_boundary, ablate.scan_limit, ablate.sensitive_masking]\n",
+  "eventCount": 241,
+  "rawTrace": "raw-traces/WF-06.jsonl"
+}

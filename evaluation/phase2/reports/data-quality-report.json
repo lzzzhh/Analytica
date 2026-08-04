@@ -1,0 +1,46 @@
+{
+  "status": "FAIL",
+  "systemUnderTest": "app.quality.checks.assess_quality",
+  "systemResult": {
+    "status": "FAIL",
+    "checks": [
+      {
+        "check": "row_count",
+        "status": "PASS",
+        "detail": "17357 rows"
+      },
+      {
+        "check": "missing_rate.cnt",
+        "status": "FAIL",
+        "detail": "70.0% missing"
+      }
+    ],
+    "generatedAt": "2026-08-03T01:33:10.387353+00:00"
+  },
+  "injectedDefects": [
+    "duplicate_primary_key",
+    "missing_values",
+    "schema_drift",
+    "time_gap",
+    "type_error"
+  ],
+  "detectedDefects": [
+    "missing_values"
+  ],
+  "undetectedDefects": [
+    "duplicate_primary_key",
+    "schema_drift",
+    "time_gap",
+    "type_error"
+  ],
+  "falsePositiveLabels": [],
+  "confusion": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 4
+  },
+  "precision": 1.0,
+  "recall": 0.2,
+  "f1": 0.333333,
+  "note": "Profiler candidate-key changes are not counted as detections because they are not emitted as defect findings."
+}

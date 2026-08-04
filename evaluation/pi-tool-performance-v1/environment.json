@@ -1,0 +1,53 @@
+{
+  "capturedAt": "2026-08-04T05:16:15.423Z",
+  "repository": "/Users/zhanhuilin/Documents/Analytica",
+  "commit": "3ce87745f9b1546a10ab7fd015dc543eec8bc7ba",
+  "dirtyProductDiffSha256": "af69a67b8602c151ed10684d9850d2cc93bc6e8d22a616e52292cdaa3415df74",
+  "dirtyProductFiles": [
+    "packages/coding-agent/examples/extensions/multimodal-artifact-poc/services/lakehouse-gateway/app/query/executor.py",
+    "packages/coding-agent/examples/extensions/multimodal-artifact-poc/src/data-analysis/index.ts",
+    "packages/coding-agent/examples/extensions/multimodal-artifact-poc/src/data-analysis/subagent-prompt.ts",
+    "packages/coding-agent/examples/extensions/multimodal-artifact-poc/src/pipelines/delivery-tools.ts",
+    "packages/coding-agent/examples/extensions/multimodal-artifact-poc/src/reviewer/adapters/pi-reviewer.ts",
+    "packages/coding-agent/examples/extensions/multimodal-artifact-poc/src/reviewer/adapters/review-data-analysis-tool.ts",
+    "packages/coding-agent/examples/extensions/multimodal-artifact-poc/src/reviewer/store.ts"
+  ],
+  "document": {
+    "path": "/Users/zhanhuilin/.hermes/skills/agent-frameworks/pi-agent/Analytica_工具调用性能实验方案_v1.0.docx",
+    "sha256": "291b9e1429096bd5f9660a7f19f1af060e10e05c69eaaa9237ce6775d8a9bd03"
+  },
+  "registry": {
+    "path": "/Users/zhanhuilin/Documents/Analytica/evaluation/pi-tool-performance-v1/registry.json",
+    "sha256": "949d3b0b59f77cb9e780dd50fa8c338fdf4695c66da91e0ff4021dbe55c6da82"
+  },
+  "contract": {
+    "path": "/Users/zhanhuilin/Documents/Analytica/evaluation/pi-tool-performance-v1/experiment-contract.json",
+    "sha256": "67bbd068eb6ed2ae0a397547d9e8ea907af9ebed5b3b0163808f461fdac0ef2c"
+  },
+  "tasks": {
+    "path": "/Users/zhanhuilin/Documents/Analytica/evaluation/pi-tool-performance-v1/tasks.json",
+    "sha256": "8ff0336ee68d3af54e38c4814c8b2bb7ac125b18cf6eb094b8b6d7e75379b4b9"
+  },
+  "cli": {
+    "path": "/Users/zhanhuilin/Documents/Analytica/packages/coding-agent/dist/cli.js",
+    "sha256": "af302f231437eaf6f37691bce4b34234fcb626bcb5eb3910d4fc3f6519bf78ca"
+  },
+  "node": {
+    "path": "/Users/zhanhuilin/.hermes/node/bin/node",
+    "version": "v22.22.2"
+  },
+  "python": {
+    "path": "/opt/anaconda3/bin/python3",
+    "version": "Python 3.13.5"
+  },
+  "model": "openai/gpt-5.6-luna",
+  "reasoningEffort": "max",
+  "openAiKeyPresent": true,
+  "commands": {
+    "probe": "node --import tsx evaluation/pi-tool-performance-v1/probe-current.mts",
+    "stage1": "node evaluation/pi-tool-performance-v1/run-stage1.mjs"
+  },
+  "platform": "Darwin ZhanhuideMacBook-Air.local 24.6.0 Darwin Kernel Version 24.6.0: Mon Jul 14 11:30:40 PDT 2025; root:xnu-11417.140.69~1/RELEASE_ARM64_T8132 arm64",
+  "npmVersion": "10.9.7",
+  "nodeModulesLockSha256": "6bc412681657381c5261d6a201ebf6cef6c42865c889bbcf770706a59311ddf5"
+}

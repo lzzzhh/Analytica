@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/pipeline-draft-artifact.schema.json",
+  "title": "PipelineDraftArtifact",
+  "type": "object",
+  "required": ["artifactId", "specVersion", "executable", "compiledPreview", "contentHash", "compiler", "compiledAt"],
+  "additionalProperties": false,
+  "properties": {
+    "artifactId": { "type": "string", "minLength": 1 },
+    "specVersion": { "type": "integer", "minimum": 1 },
+    "executable": { "const": false },
+    "compiledPreview": { "type": "string" },
+    "contentHash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "compiler": { "enum": ["DETERMINISTIC_PYICEBERG_COMPILER"] },
+    "compiledAt": { "type": "string", "format": "date-time" }
+  }
+}

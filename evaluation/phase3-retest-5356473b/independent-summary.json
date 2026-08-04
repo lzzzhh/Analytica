@@ -1,0 +1,24 @@
+{
+  "commit": "5356473b2746daff6007802584da3afd8dba6613",
+  "requirement": {
+    "routeAccuracy": {"numerator": 11, "denominator": 12, "value": 0.9166666666666666, "status": "FAIL"},
+    "constraintRecall": {"numerator": 1, "denominator": 39, "value": 0.02564102564102564, "status": "FAIL"},
+    "advisorCanary": {"status": "INFRA_ERROR", "reason": "product resolves packages/coding-agent/examples/dist/rpc-entry.js, which does not exist"}
+  },
+  "multimodal": {
+    "passAt1": {"numerator": 4, "denominator": 4, "value": 1, "status": "PASS"},
+    "passAt3": {"numerator": 4, "denominator": 4, "value": 1, "status": "PASS"},
+    "structuredExtractionF1": {"truePositive": 36, "falsePositive": 0, "falseNegative": 0, "value": 1, "status": "PASS"}
+  },
+  "dataAnalysis": {
+    "taskSuccessRate": {"numerator": 1, "denominator": 8, "value": 0.125, "status": "FAIL"},
+    "numericalCorrectness": {"numerator": 5, "denominator": 26, "value": 0.19230769230769232, "status": "FAIL"},
+    "infraErrors": 0
+  },
+  "reviewer": {
+    "publicRegistration": {"status": "PASS", "evidence": "reviewer-public-registration-test.log"},
+    "highSeverityDefectRecall": {"numerator": 6, "denominator": 6, "value": 1, "status": "PASS"},
+    "falsePositiveRate": {"numerator": 0, "denominator": 4, "value": 0, "status": "PASS"}
+  },
+  "overall": "NEEDS_AGENT_FIXES"
+}

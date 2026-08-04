@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/placement-plan.schema.json",
+  "title": "PlacementPlan",
+  "type": "object",
+  "required": [
+    "placementPlanId",
+    "version",
+    "sourceDataset",
+    "targetLayer",
+    "targetDataset",
+    "rationale",
+    "targetSchemaRef",
+    "primaryKey",
+    "partitioning",
+    "writeMode",
+    "schemaEvolutionPolicy",
+    "retentionPolicy",
+    "backfillRequired",
+    "affectedDownstream",
+    "qualityGateRefs",
+    "assumptions",
+    "risks",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "placementPlanId": {
+      "type": "string",
+      "pattern": "^pp_[A-Za-z0-9_-]+$"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sourceDataset": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targetLayer": {
+      "enum": [
+        "ODS",
+        "DWD",
+        "DWS",
+        "ADS",
+        "FEATURE_STORE"
+      ]
+    },
+    "targetDataset": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "grainDetail": {
+      "description": "Structured business grain declaration (e.g. \"per loan application\") — required for detail layers (DWD, FEATURE_STORE); a present-but-vague grain is rejected.",
+      "type": "string"
+    },
+    "derivation": {
+      "description": "Structured derivation declaration — ODS must be RAW (derived metrics are never ODS).",
+      "enum": [
+        "RAW",
+        "DERIVED"
+      ]
+    },
+    "targetSchemaRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "primaryKey": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "partitioning": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "writeMode": {
+      "enum": [
+        "FULL",
+        "INCREMENTAL",
+        "APPEND",
+        "MERGE"
+      ]
+    },
+    "schemaEvolutionPolicy": {
+      "enum": [
+        "ADDITIVE",
+        "RELAXED",
+        "STRICT"
+      ]
+    },
+    "retentionPolicy": {
+      "type": "string"
+    },
+    "backfillRequired": {
+      "type": "boolean"
+    },
+    "affectedDownstream": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "qualityGateRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "PENDING_APPROVAL",
+        "APPROVED",
+        "REJECTED"
+      ]
+    }
+  }
+}

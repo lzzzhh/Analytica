@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/feature-promotion-review.schema.json",
+  "title": "FeaturePromotionReviewPackage",
+  "type": "object",
+  "required": [
+    "reviewId",
+    "pipelineId",
+    "runId",
+    "datasetAndSnapshot",
+    "trainingUse",
+    "cdxrAssessment",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "reviewId": {
+      "type": "string",
+      "pattern": "^fp_[A-Za-z0-9_-]+$"
+    },
+    "pipelineId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "datasetAndSnapshot": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trainingUse": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "cdxrAssessment": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "status": {
+      "enum": [
+        "PENDING_DECISION",
+        "APPROVED_FOR_ADS",
+        "REJECTED",
+        "CHANGES_REQUESTED"
+      ]
+    },
+    "decidedBy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decidedAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "comment": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "changeReason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

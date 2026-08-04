@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0",
+  "frozenCommit": "3ce87745f9b1546a10ab7fd015dc543eec8bc7ba",
+  "frozenAt": "2026-08-03T14:55:05.990Z",
+  "state": "FROZEN_BEFORE_EXECUTION",
+  "metrics": [
+    "Task Success Rate",
+    "Consistency@3",
+    "Hallucination Rate",
+    "Correct Abstention Rate",
+    "Robustness Drop",
+    "Worst-Slice Accuracy",
+    "Single-Tool Task Success Rate",
+    "Argument Accuracy",
+    "Tool Set F1",
+    "Multi-Tool Task Success Rate",
+    "Workflow Task Success Rate",
+    "Orchestration Accuracy",
+    "Route Accuracy",
+    "Constraint Recall",
+    "pass@1",
+    "pass@3",
+    "Structured Extraction F1",
+    "Analysis Task Success Rate",
+    "Numerical Correctness",
+    "Pipeline Run Success Rate",
+    "Data Correctness Rate",
+    "Data Quality Defect Detection F1",
+    "Idempotent Rerun Success Rate",
+    "High-Severity Defect Recall",
+    "Reviewer False Positive Rate",
+    "Hard-Gate Violation Count / Rate",
+    "Average Successful End-to-End Task Completion Time"
+  ],
+  "files": [
+    {
+      "path": "evaluation/phase2-retest/dataset-candidates.json",
+      "sha256": "261a0b526b3b6d1b796319d357ce41a32aa94bee71050b00e49bb8c65aac7425",
+      "size": 1638
+    },
+    {
+      "path": "evaluation/phase2-retest/run_blind_retest.py",
+      "sha256": "b1e7eff5b08f83b5e9b1985bd969dbad177be73a1c6eaf4bcc6e621f806b9f61",
+      "size": 24815
+    },
+    {
+      "path": "evaluation/phase3-retest-5356473b/scenarios/requirement.json",
+      "sha256": "c2edfe3f754731a631baffd04cd29313309ba52f5d7e640342ddf0fa1c3a5737",
+      "size": 6535
+    },
+    {
+      "path": "evaluation/phase3-retest-5356473b/scenarios/multimodal.json",
+      "sha256": "14c003029699b2e7aee59ad04b2f7c16e150acb9b1e618f7c97f21793358444d",
+      "size": 2378
+    },
+    {
+      "path": "evaluation/phase3-retest-5356473b/scenarios/data-analysis.json",
+      "sha256": "1a2ca5234fbb313bb7c9a2d34a5b347cb38a270bc9010c7c70747cd3441b9149",
+      "size": 8271
+    },
+    {
+      "path": "evaluation/phase3-retest-5356473b/scenarios/reviewer.json",
+      "sha256": "b99c442f05d70ca366a5a4e00bfbf3dc4ec06db45ef161a12f08c9c12c4fd8c5",
+      "size": 4540
+    },
+    {
+      "path": "evaluation/phase4-tool-calling-92cb4346/resolved-scenarios/single-tool.json",
+      "sha256": "c93b9e38c442161129d20fe9eef2448454be7628df94d4f4b6230e505d56f635",
+      "size": 13806
+    },
+    {
+      "path": "evaluation/phase4-tool-calling-92cb4346/resolved-scenarios/multi-tool.json",
+      "sha256": "bc92f130f5bbb0e7c9f2ce9f2065268f11d17db693895a15e3f2b57e1e88909d",
+      "size": 17866
+    },
+    {
+      "path": "evaluation/phase4-tool-calling-92cb4346/resolved-scenarios/workflow.json",
+      "sha256": "9b0fb3d3da5923935817a5d9af2184e96552275ca92684a95fdb5ec70b2f3d42",
+      "size": 21860
+    },
+    {
+      "path": "evaluation/phase4-tool-calling-92cb4346/scoring-contract.json",
+      "sha256": "7a931241922440be4b0c1003787fd6395f131419c753846008c6b743079790e9",
+      "size": 2863
+    },
+    {
+      "path": "evaluation/phase5-missing-metrics-92cb4346/scenarios.json",
+      "sha256": "58de6628693600ef9de21ac80c90c7cf0f07e656d203a73e3e8badbdfe2d36ea",
+      "size": 11716
+    },
+    {
+      "path": "evaluation/phase5-missing-metrics-92cb4346/scoring-contract.json",
+      "sha256": "a374da5148931493fbe09330c99116e8d478af414fbeb61b8936025ef4155dc2",
+      "size": 2194
+    },
+    {
+      "path": "packages/coding-agent/examples/extensions/multimodal-artifact-poc/src/graph-engine/tool-runner.ts",
+      "sha256": "21b6d7a612da9a435214b62928f1148875891d74943b6032656f9e4a93cc99b7",
+      "size": 8833
+    },
+    {
+      "path": "packages/coding-agent/examples/extensions/multimodal-artifact-poc/src/graph-engine/adapters/report.ts",
+      "sha256": "e1dc5f585509367f3e6243d20ec4794b5c83639ee5f61cafa7aca86d9739187a",
+      "size": 2927
+    }
+  ],
+  "latencyScenarios": [
+    {
+      "id": "E2E-GRAPH-01",
+      "slice": "graph_formal_delivery",
+      "entry": "run_analysis_graph",
+      "successOracle": [
+        "status=COMPLETED",
+        "GRAPH_COMPLETED event",
+        "analysis value=450",
+        "review verdict=PASS",
+        "promotion authorization exists",
+        "report ref exists",
+        "deliverable verification exists"
+      ]
+    },
+    {
+      "id": "E2E-PIPE-01",
+      "slice": "pipeline",
+      "entry": "pipeline_cli",
+      "successOracle": [
+        "dry-run success",
+        "all required stages SUCCEEDED",
+        "output table exists",
+        "row/hash/aggregate assertions pass",
+        "governance gate enforced"
+      ]
+    },
+    {
+      "id": "E2E-DA-01",
+      "slice": "data_analysis",
+      "entry": "data_analysis_agent",
+      "successOracle": [
+        "analysis Artifact COMPLETED",
+        "all task assertions pass",
+        "all numeric assertions within frozen tolerance",
+        "no unsupported claims"
+      ]
+    },
+    {
+      "id": "E2E-MM-01",
+      "slice": "multimodal",
+      "entry": "document_orchestrator",
+      "successOracle": [
+        "parse/orchestration returns",
+        "all frozen fields extracted",
+        "no false-positive fields",
+        "no unresolved conflicts"
+      ]
+    },
+    {
+      "id": "E2E-WF-01",
+      "slice": "tool_workflow",
+      "entry": "agent_tool_workflow",
+      "successOracle": [
+        "required workflow tool set used",
+        "dependency order correct",
+        "Artifact refs handed off",
+        "final business assertions pass",
+        "no hard-gate violation"
+      ]
+    }
+  ],
+  "statusVocabulary": [
+    "PASS",
+    "FAIL",
+    "ABSTAIN",
+    "NOT_RUN",
+    "INFRA_ERROR"
+  ],
+  "latency": {
+    "clock": "monotonic wall clock at public-entry invocation and terminal return",
+    "eligible": "only scenarios satisfying every successOracle assertion",
+    "primary": "arithmetic mean milliseconds across eligible successful scenarios",
+    "secondary": [
+      "median",
+      "p95",
+      "per-slice",
+      "failed-run duration",
+      "infra-run duration"
+    ],
+    "emptySet": "ABSTAIN; never report zero"
+  },
+  "noGoldenMutationAfterFreeze": true,
+  "combinedSha256": "9fb3762703b5c4c6b2fb3dfffe3bbd8773e0c5be81d748c3df7131a947483583"
+}

@@ -1,0 +1,25 @@
+{
+  "chart": {
+    "path": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase4-tool-calling-92cb4346/runtime/bar-chart.png",
+    "sha256": "08d3f417f85f139a7280e98e9b6c0d403d59094efd1e687a1dd1b452cae5554a"
+  },
+  "commitSha": "92cb4346ac5f0b4edc3eefcdcb81978e570fd220",
+  "gatewayCatalogSha256": "8b59bdd485b60f7e672c58752d63e54263eeb399bf8df9945afcbe97485f5875",
+  "gatewayWarehouse": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase4-tool-calling-92cb4346/runtime/gateway-warehouse",
+  "hashes": {
+    "approvedContract": "dfab773fdcc785ef0e12c67be0bcca8cbfe24654b6d67960c3de2ea555890c36",
+    "approvedLedger": "a9754829f588b8286592462d3fc45cd32656f46f4f9a5a644559bd5c082b407f",
+    "source": "542dfd1bdaf0ceb81162f4717d195cb0784e0630e278dde5c72baa5a9f9c1e5c",
+    "unapprovedContract": "b0ef41bbc698b991b413c191e39a82cf92de73829aebbc34110ce468ecbde414"
+  },
+  "home": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase4-tool-calling-92cb4346/runtime/home",
+  "pipeline": {
+    "approvedContract": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase4-tool-calling-92cb4346/runtime/approved-contract.json",
+    "approvedGovernanceRoot": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase4-tool-calling-92cb4346/runtime/approved-governance",
+    "pipelineWarehouse": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase4-tool-calling-92cb4346/runtime/pipeline-warehouse",
+    "source": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase4-tool-calling-92cb4346/runtime/pipeline-source.csv",
+    "unapprovedContract": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase4-tool-calling-92cb4346/runtime/unapproved-contract.json",
+    "unapprovedGovernanceRoot": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase4-tool-calling-92cb4346/runtime/unapproved-governance"
+  },
+  "runtimeRoot": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase4-tool-calling-92cb4346/runtime"
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/governance-event.schema.json",
+  "title": "GovernanceEvent",
+  "type": "object",
+  "required": [
+    "eventId",
+    "eventType",
+    "pipelineId",
+    "pipelineVersion",
+    "runId",
+    "source",
+    "sequenceNumber",
+    "occurredAt",
+    "payloadHash"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "pattern": "^evt_[A-Za-z0-9_-]+$"
+    },
+    "eventType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pipelineId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pipelineVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "enum": [
+        "PIPELINE_GOVERNANCE",
+        "SPARK_ADAPTER",
+        "FLINK_ADAPTER",
+        "ICEBERG_ADAPTER",
+        "APPROVAL_API",
+        "WATCHDOG",
+        "AGENT_WORKER"
+      ]
+    },
+    "sequenceNumber": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "payloadHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "payloadRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supersedesEventId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "payload": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  }
+}

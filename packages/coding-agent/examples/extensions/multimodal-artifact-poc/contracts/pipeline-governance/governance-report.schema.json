@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GovernanceReport",
+  "type": "object",
+  "required": ["reportId", "pipelineId", "runId", "findingRefs", "summary", "createdAt"],
+  "properties": {
+    "reportId": {"type": "string", "minLength": 1},
+    "pipelineId": {"type": "string"},
+    "pipelineVersion": {"type": "integer", "minimum": 1},
+    "runId": {"type": "string"},
+    "findingRefs": {"type": "array", "items": {"type": "string"}},
+    "blocking": {"type": "boolean"},
+    "summary": {"type": "string"},
+    "createdAt": {"type": "string"}
+  },
+  "additionalProperties": false
+}

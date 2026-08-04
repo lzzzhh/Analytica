@@ -1,0 +1,125 @@
+{
+  "asOf": "2026-07-31T12:00:00Z",
+  "description": "CDXR governance demo scenarios (round 3) — deterministic ground truths. Run via: python3 -m app.governance.cdxr.run --dataset-id <id> --time-column <col> --as-of 2026-07-31T12:00:00Z (risk-domain vocabulary injected by default). Same inputs produce identical run/finding ids (fixed seed + fixed as-of).",
+  "ocrConfidenceThreshold": 0.9,
+  "policy": "standard",
+  "reproducibility": {
+    "note": "run/finding ids are sha1-based over (dataset, snapshot, as-of); re-running with the same as-of reproduces identical ids (verified).",
+    "runIds": {
+      "ads.model_metrics": "run_46f62d931335f69e",
+      "dws.prediction_points": "run_db4a6e6c9ee5636f",
+      "ods.ocr_result": "run_406131a54a4e8934"
+    },
+    "sameInputsSameOutputs": true
+  },
+  "rules": [
+    "empty_dataset_check",
+    "freshness_check",
+    "sensitive_field_check",
+    "domain_field_check",
+    "quality_reference_check",
+    "schema_confidence_check",
+    "leakage_check",
+    "ocr_confidence_check"
+  ],
+  "scenarios": {
+    "ads.model_metrics": {
+      "description": "risk-domain model metrics table (auc/ks fields) — domain marker finding",
+      "findings": [
+        {
+          "evidence": "domain vocabulary (risk) matched field names auc/ks",
+          "fields": [
+            "auc",
+            "ks"
+          ],
+          "reasonCodes": [
+            "DOMAIN_FIELD"
+          ],
+          "riskType": "DOMAIN_FIELD",
+          "ruleId": "domain_field_check",
+          "severity": "MEDIUM"
+        }
+      ],
+      "governanceScore": 90.0,
+      "highestSeverity": "MEDIUM",
+      "qualityStatus": "PASS",
+      "reviewQueueItems": 1,
+      "snapshotId": "8123266417553960382",
+      "status": "TRUSTED",
+      "timeColumn": "created_at"
+    },
+    "dws.prediction_points": {
+      "description": "stale prediction data + risk-domain markers — schema exists but no fresh data (spec: schema != health); prediction_* columns match the risk domain vocabulary",
+      "findings": [
+        {
+          "ageHours": 84.0,
+          "evidence": "max prediction_time 2026-07-28 vs as-of 2026-07-31T12:00:00Z = 84h",
+          "reasonCodes": [
+            "NO_FRESH_DATA"
+          ],
+          "riskType": "NO_FRESH_DATA",
+          "ruleId": "freshness_check",
+          "severity": "HIGH",
+          "thresholdHours": 48.0
+        },
+        {
+          "evidence": "risk domain vocabulary matched prediction_* column names",
+          "fields": [
+            "prediction_id",
+            "prediction_time"
+          ],
+          "reasonCodes": [
+            "DOMAIN_FIELD"
+          ],
+          "riskType": "DOMAIN_FIELD",
+          "ruleId": "domain_field_check",
+          "severity": "MEDIUM"
+        }
+      ],
+      "governanceScore": 65.0,
+      "highestSeverity": "HIGH",
+      "qualityStatus": "PASS",
+      "reviewQueueItems": 2,
+      "snapshotId": "6813626855498590255",
+      "status": "UNTRUSTED",
+      "timeColumn": "prediction_time"
+    },
+    "ods.ocr_result": {
+      "description": "EAV OCR table with sensitive values + low parser confidence",
+      "findings": [
+        {
+          "evidence": "EAV labels id_number/account_number matched in field_name column",
+          "fields": [
+            "id_number",
+            "account_number"
+          ],
+          "reasonCodes": [
+            "SENSITIVE_FIELD"
+          ],
+          "riskType": "SENSITIVE_FIELD",
+          "ruleId": "sensitive_field_check",
+          "severity": "HIGH"
+        },
+        {
+          "evidence": "lowest confidence 0.82 < 0.90 threshold",
+          "minParserConfidence": 0.82,
+          "reasonCodes": [
+            "OCR_LOW_CONFIDENCE"
+          ],
+          "riskType": "OCR_LOW_CONFIDENCE",
+          "ruleId": "ocr_confidence_check",
+          "severity": "MEDIUM"
+        }
+      ],
+      "governanceScore": 65.0,
+      "highestSeverity": "HIGH",
+      "odsAgentDenied": true,
+      "qualityStatus": "PASS",
+      "reviewQueueItems": 2,
+      "snapshotId": "6280193171229399526",
+      "status": "UNTRUSTED",
+      "timeColumn": "processed_at"
+    }
+  },
+  "stalenessSeconds": 172800
+}

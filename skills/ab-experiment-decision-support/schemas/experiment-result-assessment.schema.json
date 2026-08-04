@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExperimentResultAssessment",
+  "type": "object",
+  "required": ["phase", "dataSource", "dataVerified", "trust", "evidence"],
+  "properties": {
+    "phase": {"const": "POST_EXPERIMENT_REVIEW"},
+    "dataSource": {"enum": ["USER_PROVIDED", "UPLOADED_FILE", "CONTROLLED_ARTIFACT"]},
+    "dataVerified": {"type": "boolean", "const": false},
+    "trust": {"enum": ["TRUSTED", "TRUSTED_WITH_LIMITATIONS", "ANALYSIS_BLOCKED", "INVALID_EXPERIMENT"]},
+    "evidence": {"enum": ["CLEAR_POSITIVE", "CLEAR_NEGATIVE", "PRACTICALLY_NEGLIGIBLE", "POSITIVE_BUT_BELOW_THRESHOLD", "NEGATIVE_BUT_BELOW_THRESHOLD", "INCONCLUSIVE", "UNDERPOWERED", "INVALID"]},
+    "recommendation": {"enum": ["EVIDENCE_SUPPORTS_SHIP", "EVIDENCE_SUPPORTS_NO_SHIP", "CONTINUE_OR_COLLECT_MORE", "RERUN_RECOMMENDED", "FOLLOW_UP_EXPERIMENT_RECOMMENDED", "RESULTS_NOT_TRUSTWORTHY"]},
+    "calculations": {"type": ["object", "null"]},
+    "segmentAnalyses": {"type": "array", "items": {"type": "object"}}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "arbitrary-source-pipeline.schema.json",
+  "title": "Arbitrary Source Pipeline Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source", "target", "schemaPolicy", "primaryKey", "qualityRules", "approvalId"],
+  "properties": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "format"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^(sha256:)?[a-fA-F0-9]{64}$" },
+        "format": { "enum": ["csv", "parquet"] }
+      }
+    },
+    "target": { "type": "string", "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$" },
+    "schemaPolicy": { "enum": ["strict", "compatible", "infer"] },
+    "expectedSchema": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "type": { "enum": ["string", "int64", "integer", "float64", "double", "boolean", "date", "timestamp"] },
+          "required": { "type": "boolean", "default": false }
+        }
+      }
+    },
+    "primaryKey": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "eventTime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field"],
+      "properties": {
+        "field": { "type": "string", "minLength": 1 },
+        "frequencySeconds": { "type": "integer", "minimum": 1 },
+        "toleranceSeconds": { "type": "integer", "minimum": 0, "default": 0 }
+      }
+    },
+    "qualityRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "minRows": { "type": "integer", "minimum": 0, "default": 1 },
+        "maxRows": { "type": "integer", "minimum": 1 },
+        "requiredColumns": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "approvalId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_-]+$"
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "schemaPolicy": { "const": "infer" } } },
+      "else": { "required": ["expectedSchema"] }
+    }
+  ]
+}

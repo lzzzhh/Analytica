@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "pipeline-governance/pipeline-run-state-snapshot.schema.json",
+  "title": "PipelineRunStateSnapshot",
+  "type": "object",
+  "required": [
+    "pipelineId",
+    "pipelineVersion",
+    "runId",
+    "state",
+    "businessPhase",
+    "engine",
+    "latestEventId",
+    "lastSequenceNumber",
+    "updatedAt"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "pipelineId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pipelineVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "DRAFT",
+        "WAITING_SCHEMA_APPROVAL",
+        "APPROVED",
+        "QUEUED",
+        "RUNNING",
+        "ISSUE_DETECTED",
+        "WAITING_REMEDIATION_APPROVAL",
+        "PROCESSING_COMPLETED",
+        "WAITING_PLACEMENT_APPROVAL",
+        "WAITING_CDXR_APPROVAL",
+        "PUBLISHING",
+        "PUBLISHED",
+        "BLOCKED",
+        "FAILED",
+        "CANCELLED"
+      ]
+    },
+    "businessPhase": {
+      "type": "string"
+    },
+    "engine": {
+      "enum": [
+        "PYICEBERG_LOCAL",
+        "SPARK",
+        "FLINK",
+        "UNKNOWN"
+      ]
+    },
+    "engineRunRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "currentJob": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "currentStage": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "lastHeartbeatAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "lastProgressAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "activeDeadline": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "schemaSpecVersion": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "pipelineSpecVersion": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "placementPlanVersion": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "openFindingRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pendingApprovalRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latestEventId": {
+      "type": "string"
+    },
+    "lastSequenceNumber": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

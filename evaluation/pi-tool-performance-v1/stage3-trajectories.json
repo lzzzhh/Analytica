@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0",
+  "trajectories": [
+    {
+      "trajectoryId": "T0_CORRECT",
+      "steps": ["validate_query", "materialize_query", "run_data_analysis"],
+      "errorIndexes": []
+    },
+    {
+      "trajectoryId": "T1_ONE_WRONG_TOOL",
+      "steps": ["execute_query", "materialize_query", "run_data_analysis"],
+      "errorIndexes": [0]
+    },
+    {
+      "trajectoryId": "T2_TWO_WRONG_TOOLS",
+      "steps": ["execute_query", "get_snapshot", "materialize_query", "run_data_analysis"],
+      "errorIndexes": [0, 1]
+    },
+    {
+      "trajectoryId": "T3_INVALID_ARGS",
+      "steps": ["materialize_query_invalid", "materialize_query", "run_data_analysis"],
+      "errorIndexes": [0]
+    }
+  ]
+}

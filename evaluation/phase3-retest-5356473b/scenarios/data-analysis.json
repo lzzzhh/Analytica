@@ -1,0 +1,142 @@
+{
+  "taskSuccessDefinition": "PASS requires the expected route, a COMPLETED immutable result artifact, a successful execution manifest, all required views, and all task-specific assertions. A QUERY_GATEWAY route without a completed gateway result is not success.",
+  "numericalCorrectnessDefinition": "Deterministic comparison of named metric values, keyed table rows, or chart points against frozen values with the declared absolute tolerance.",
+  "artifactSource": "Frozen Phase 2 CSV bytes registered in an isolated ArtifactStore with source SHA-256 and Phase 2 snapshot ID.",
+  "scenarios": [
+    {
+      "id": "da-01",
+      "category": "KPI summary",
+      "dataset": "ai4i_maintenance",
+      "objective": "Calculate overall Machine failure count and failure rate using every record as the denominator; produce metric cards.",
+      "analysisType": "CUSTOM",
+      "metricDefinitions": [
+        {"metricId": "failure_count", "label": "Machine failure count", "expression": "sum(Machine failure)", "aggregation": "sum", "valueType": "INTEGER", "precision": 0},
+        {"metricId": "failure_rate", "label": "Machine failure rate", "expression": "sum(Machine failure)/count(*)", "valueType": "PERCENT", "precision": 6}
+      ],
+      "expectedViews": ["METRIC_CARDS"],
+      "expectedNumbers": [
+        {"label": "failure_count", "value": 339, "tolerance": 0},
+        {"label": "failure_rate", "value": 0.0339, "tolerance": 0.000001},
+        {"label": "denominator", "value": 10000, "tolerance": 0}
+      ]
+    },
+    {
+      "id": "da-02",
+      "category": "group comparison",
+      "dataset": "wine_quality",
+      "objective": "Compare mean quality between red and white wines and return a keyed table.",
+      "analysisType": "BREAKDOWN",
+      "metricDefinitions": [{"metricId": "mean_quality", "label": "Mean quality", "expression": "avg(quality)", "aggregation": "avg", "valueType": "NUMBER", "precision": 8}],
+      "dimensions": ["color"],
+      "expectedViews": ["TABLE"],
+      "expectedRows": [
+        {"keyField": "color", "key": "red", "value": 5.6360225140712945, "tolerance": 0.00000001},
+        {"keyField": "color", "key": "white", "value": 5.87790935075541, "tolerance": 0.00000001}
+      ]
+    },
+    {
+      "id": "da-03",
+      "category": "trend analysis",
+      "dataset": "appliances_energy",
+      "objective": "Analyze the monthly trend of mean Appliances from January through May 2016 and produce a line chart and table.",
+      "analysisType": "TREND",
+      "metricDefinitions": [{"metricId": "monthly_mean_appliances", "label": "Monthly mean Appliances", "expression": "avg(Appliances) by month", "aggregation": "avg", "valueType": "NUMBER", "precision": 8}],
+      "timeField": "date",
+      "expectedViews": ["LINE_CHART", "TABLE"],
+      "expectedSeries": [
+        {"x": "2016-01", "y": 97.02600958247776, "tolerance": 0.00000001},
+        {"x": "2016-02", "y": 100.94588122605364, "tolerance": 0.00000001},
+        {"x": "2016-03", "y": 96.95340501792114, "tolerance": 0.00000001},
+        {"x": "2016-04", "y": 98.88888888888889, "tolerance": 0.00000001},
+        {"x": "2016-05", "y": 94.19932520114197, "tolerance": 0.00000001}
+      ]
+    },
+    {
+      "id": "da-04",
+      "category": "Top-N",
+      "dataset": "seoul_bike",
+      "objective": "Find the top 3 Hour values by mean Rented Bike Count, sorted descending, and return a table and bar chart.",
+      "analysisType": "BREAKDOWN",
+      "metricDefinitions": [{"metricId": "mean_rented", "label": "Mean rented bike count", "expression": "avg(Rented Bike Count) by Hour", "aggregation": "avg", "valueType": "NUMBER", "precision": 8}],
+      "dimensions": ["Hour"],
+      "expectedViews": ["TABLE", "BAR_CHART"],
+      "expectedRows": [
+        {"keyField": "Hour", "key": 18, "value": 1502.9260273972602, "tolerance": 0.00000001},
+        {"keyField": "Hour", "key": 19, "value": 1195.1479452054793, "tolerance": 0.00000001},
+        {"keyField": "Hour", "key": 17, "value": 1138.509589041096, "tolerance": 0.00000001}
+      ]
+    },
+    {
+      "id": "da-05",
+      "category": "proportion and denominator",
+      "dataset": "ai4i_maintenance",
+      "objective": "Compute the proportion of TWF, HDF, PWF, OSF, and RNF flags using all 10000 rows as the denominator; explicitly warn that flags can overlap.",
+      "analysisType": "CUSTOM",
+      "metricDefinitions": [
+        {"metricId": "twf_rate", "label": "TWF rate", "expression": "sum(TWF)/10000", "valueType": "PERCENT", "precision": 6},
+        {"metricId": "hdf_rate", "label": "HDF rate", "expression": "sum(HDF)/10000", "valueType": "PERCENT", "precision": 6},
+        {"metricId": "pwf_rate", "label": "PWF rate", "expression": "sum(PWF)/10000", "valueType": "PERCENT", "precision": 6},
+        {"metricId": "osf_rate", "label": "OSF rate", "expression": "sum(OSF)/10000", "valueType": "PERCENT", "precision": 6},
+        {"metricId": "rnf_rate", "label": "RNF rate", "expression": "sum(RNF)/10000", "valueType": "PERCENT", "precision": 6}
+      ],
+      "expectedViews": ["METRIC_CARDS"],
+      "expectedNumbers": [
+        {"label": "twf_rate", "value": 0.0046, "tolerance": 0.000001},
+        {"label": "hdf_rate", "value": 0.0115, "tolerance": 0.000001},
+        {"label": "pwf_rate", "value": 0.0095, "tolerance": 0.000001},
+        {"label": "osf_rate", "value": 0.0098, "tolerance": 0.000001},
+        {"label": "rnf_rate", "value": 0.0019, "tolerance": 0.000001},
+        {"label": "denominator", "value": 10000, "tolerance": 0}
+      ],
+      "requiredWarning": "failure mode flags can overlap"
+    },
+    {
+      "id": "da-06",
+      "category": "correlation or statistics",
+      "dataset": "wine_quality",
+      "objective": "Calculate Pearson correlation between alcohol and quality with sample size; describe association without a causal claim and produce a scatter plot.",
+      "analysisType": "CORRELATION",
+      "metricDefinitions": [
+        {"metricId": "pearson_r", "label": "Pearson r", "expression": "pearson(alcohol, quality)", "valueType": "NUMBER", "precision": 8},
+        {"metricId": "sample_size", "label": "Sample size", "expression": "count(*)", "aggregation": "count", "valueType": "INTEGER", "precision": 0}
+      ],
+      "expectedViews": ["METRIC_CARDS", "SCATTER"],
+      "expectedNumbers": [
+        {"label": "pearson_r", "value": 0.44431852000751776, "tolerance": 0.00000001},
+        {"label": "sample_size", "value": 6497, "tolerance": 0}
+      ],
+      "forbidCausalClaim": true
+    },
+    {
+      "id": "da-07",
+      "category": "data quality warning",
+      "dataset": "air_quality",
+      "objective": "Detect -200 sentinel values as data-quality defects, report the total occurrence count and the worst affected column, and do not treat -200 as a valid measurement.",
+      "analysisType": "DISTRIBUTION",
+      "metricDefinitions": [{"metricId": "sentinel_count", "label": "-200 sentinel occurrences", "expression": "count every numeric cell equal to -200", "valueType": "INTEGER", "precision": 0}],
+      "expectedViews": ["METRIC_CARDS", "TABLE"],
+      "expectedNumbers": [
+        {"label": "sentinel_count", "value": 16701, "tolerance": 0},
+        {"label": "worst_column_count", "value": 8443, "tolerance": 0}
+      ],
+      "requiredWarning": "NMHC(GT) has 8443 sentinel values"
+    },
+    {
+      "id": "da-08",
+      "category": "formal report or visualization delivery",
+      "dataset": "seoul_bike",
+      "objective": "Prepare a formal monthly bike-demand report with a metric card, a complete month table, a line chart, provenance, and limitations.",
+      "analysisType": "TREND",
+      "metricDefinitions": [{"metricId": "monthly_mean_rented", "label": "Monthly mean rented bike count", "expression": "avg(Rented Bike Count) by month", "aggregation": "avg", "valueType": "NUMBER", "precision": 8}],
+      "timeField": "Date",
+      "expectedViews": ["METRIC_CARDS", "TABLE", "LINE_CHART"],
+      "expectedSeries": [
+        {"x": "2017-12", "y": 249.0994623655914, "tolerance": 0.00000001},
+        {"x": "2018-06", "y": 1245.6763888888888, "tolerance": 0.00000001},
+        {"x": "2018-11", "y": 646.8263888888889, "tolerance": 0.00000001}
+      ],
+      "requiredProvenance": true,
+      "requiredLimitations": true
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "repositoryCommitSha": "5356473b2746daff6007802584da3afd8dba6613",
+  "remoteMainVerified": true,
+  "runtimeProfile": "all-enabled",
+  "effectiveFeatureHash": "238202ebcc848449",
+  "scenarioStandardRelativeManifestSha256": "d5c6af0fdae349d56469850c2fb3fb69e239c71165b611e210b02d7e9c3a788d",
+  "pythonExecutable": "/opt/anaconda3/bin/python3.13",
+  "pythonVersion": "3.13.5",
+  "nodeVersion": "v22.22.2",
+  "piVersion": "0.83.0",
+  "isolatedWorktree": "/tmp/analytica-phase3-5356473b.H5gsVv/checkout",
+  "runtimeArtifact": {
+    "path": "/Users/zhanhuilin/Documents/Analytica/packages/coding-agent/dist/rpc-entry.js",
+    "sha256": "7c3b46714f2d357f8b0d5403164663b60c13e62ef14dfc360ee757bdc16e02a0",
+    "reason": "The clean source worktree does not contain gitignored dist output. The existing fixed-hash evaluation runtime was linked without rebuilding."
+  },
+  "models": {
+    "requirementCore": "deterministic",
+    "requirementAdvisorCanary": "openai/default-planner-model",
+    "multimodalL1": "deepseek/deepseek-v4-flash",
+    "multimodalL2": "deepseek/deepseek-v4-pro",
+    "dataAnalysis": "deepseek/deepseek-v4-flash",
+    "reviewer": "openai/gpt-5.6-luna"
+  },
+  "credentialPolicy": "Credential presence was used by product processes; no secret value was recorded."
+}

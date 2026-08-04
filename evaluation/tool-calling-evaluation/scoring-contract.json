@@ -1,0 +1,32 @@
+{
+  "schemaVersion":"1.0",
+  "frozenAtCommit":"5356473b2746daff6007802584da3afd8dba6613",
+  "statuses":["PASS","FAIL","ABSTAIN","NOT_RUN","INFRA_ERROR"],
+  "attemptPolicy":{"attemptsPerCase":1,"retryOnlyForConfirmedInfrastructureFailure":true,"modelFailureIsNotRetried":true},
+  "normalization":{"toolNames":"exact case-sensitive match","toolSet":"multiset; duplicate calls count as false positives unless explicitly expected","argumentObjects":"extra fields are incorrect unless schema-default-equivalent","arrays":"ordered except featureFields/select sets where the case declares semantic set equality","dynamicReferences":"must equal the exact value emitted by the named upstream call","finalClaims":"must be supported by recorded tool results"},
+  "argumentFieldScoring":{"unit":"leaf field","correct":"expected field exists with correct type and semantic value","incorrect":"missing, wrong type, wrong value, fabricated identifier, wrong dataset/field/time/filter/environment","denominator":"all expected leaf fields plus every unexpected supplied leaf field"},
+  "metrics":{
+    "singleToolTaskSuccessRate":"PASS single-tool cases / all determinately scored single-tool cases",
+    "argumentAccuracy":"correct argument leaf fields / all scored argument leaf fields",
+    "toolSetF1":"micro 2TP/(2TP+FP+FN), using the best matching explicitly acceptable multiset per case",
+    "multiToolTaskSuccessRate":"PASS multi-tool cases / all determinately scored multi-tool cases",
+    "workflowSuccessRate":"PASS workflow cases / all determinately scored workflow cases",
+    "orchestrationAccuracy":"correct required dependency edges and conditional branches / all scored required edges and branches"
+  },
+  "casePassRules":[
+    "Observed tool multiset matches one acceptableToolSets entry.",
+    "No forbidden tool is called.",
+    "Every deterministically checkable expected argument and result assertion passes.",
+    "Every required dependency edge and branch is satisfied.",
+    "No failed or ABSTAIN review is represented as formal delivery."
+  ],
+  "statusRules":{
+    "PASS":"all case pass rules hold",
+    "FAIL":"model chose/called incorrectly, supplied wrong arguments, violated dependency/safety rules, or made an unsupported final claim",
+    "ABSTAIN":"evidence is insufficient to decide a required semantic assertion and no deterministic failure is already present",
+    "INFRA_ERROR":"registered tool/runtime/service/credential/fixture failed independently of model behavior",
+    "NOT_RUN":"case was not launched"
+  },
+  "failureEvidenceRequired":["caseId","raw transcript path","normalized tool-call trace","tool result or runtime error","failed oracle assertion"],
+  "antiLeakage":["scenario and oracle hashes frozen before execution","no Golden edits after first model launch","raw model output never repaired","Pi never decides PASS/FAIL"]
+}

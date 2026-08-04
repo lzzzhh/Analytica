@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExperimentDecisionMemo",
+  "type": "object",
+  "required": ["phase", "dataSource", "dataVerified", "recommendation", "assumptions", "missingEvidence"],
+  "properties": {
+    "phase": {"enum": ["PRE_EXPERIMENT", "IN_EXPERIMENT_REVIEW", "POST_EXPERIMENT_REVIEW"]},
+    "dataSource": {"enum": ["USER_PROVIDED", "UPLOADED_FILE", "CONTROLLED_ARTIFACT"]},
+    "dataVerified": {"type": "boolean", "const": false},
+    "recommendation": {"type": "string"},
+    "keyRisks": {"type": "array", "items": {"type": "string"}},
+    "assumptions": {"type": "array", "items": {"type": "string"}},
+    "missingEvidence": {"type": "array", "items": {"type": "string"}},
+    "contentHash": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

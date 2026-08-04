@@ -1,0 +1,13 @@
+{
+  "experimentId": "ablation-no-quality-gate",
+  "description": "Ablation experiment: round1.quality_gate disabled — attempt1 passes through without gate assessment; l1_retry and best_attempt_selection cascade off (they depend on the gate).",
+  "runtimeProfile": "ablation/no-quality-gate",
+  "features": {
+    "round1.multimodal": true,
+    "round1.quality_gate": false,
+    "round1.l1_retry": false,
+    "round1.best_attempt_selection": false,
+    "round2.lakehouse": false,
+    "round3.cdxr_training": false
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0",
+  "state": "FROZEN_FOR_EXECUTION",
+  "executionStarted": false,
+  "repositoryCommitSha": "92cb4346ac5f0b4edc3eefcdcb81978e570fd220",
+  "frozenAt": "2026-08-03T06:02:24.461Z",
+  "counts": {
+    "publicTools": 22,
+    "singleToolCases": 12,
+    "multiToolCases": 12,
+    "workflowCases": 12,
+    "totalCases": 36
+  },
+  "files": [
+    {
+      "path": "environment.json",
+      "sha256": "6086f1b57caf6f5e8e9d7ee49346aa639705a34c1271588f30a32a06c7ec1ca8"
+    },
+    {
+      "path": "registry-probe.json",
+      "sha256": "964b8b6fa3d203c0f46677724d44bbd0e2470ece4578167766c31cfc3b33d186"
+    },
+    {
+      "path": "scoring-contract.json",
+      "sha256": "7a931241922440be4b0c1003787fd6395f131419c753846008c6b743079790e9"
+    },
+    {
+      "path": "validate-design.mjs",
+      "sha256": "6a2c4c0bc8eb0a22cb2d027838fab295e5dba477bfb10e79ba763a68c70355b8"
+    },
+    {
+      "path": "run-cases.mjs",
+      "sha256": "74bdb9bb45aaa3dcb2016cedcc9cd647b40babf368e1c5bcddb35ea657047a09"
+    },
+    {
+      "path": "resolve-scenarios.mjs",
+      "sha256": "1f0c4147d0aef917cbd8977b10a5537786e90017de37c7d535dc13c79b8f00a3"
+    },
+    {
+      "path": "capture-environment.mjs",
+      "sha256": "e09cff4939202babedd06ef6775360c62a8b814a5e1dbb40a470c7bbbc8b9f8f"
+    },
+    {
+      "path": "scenarios/single-tool.json",
+      "sha256": "2cd5cd52107b4f5ba72f029190c12a72e9578bb460afd0912658c2a5e9cad855"
+    },
+    {
+      "path": "scenarios/multi-tool.json",
+      "sha256": "3b67f78f3ffa52974e98dc87acf0a45a2750c5a01aa86380b6dea436c849fb8d"
+    },
+    {
+      "path": "scenarios/workflow.json",
+      "sha256": "26e30051e7db867771ec6a1258292ba51f4e97b3af56ec6f2b319da88346115c"
+    },
+    {
+      "path": "resolved-scenarios/single-tool.json",
+      "sha256": "c93b9e38c442161129d20fe9eef2448454be7628df94d4f4b6230e505d56f635"
+    },
+    {
+      "path": "resolved-scenarios/multi-tool.json",
+      "sha256": "bc92f130f5bbb0e7c9f2ce9f2065268f11d17db693895a15e3f2b57e1e88909d"
+    },
+    {
+      "path": "resolved-scenarios/workflow.json",
+      "sha256": "9b0fb3d3da5923935817a5d9af2184e96552275ca92684a95fdb5ec70b2f3d42"
+    },
+    {
+      "path": "runtime-manifest.json",
+      "sha256": "83b0cd3fba8ec62463c67ccd98832366902308c800ebb26af96af4c89914502f"
+    },
+    {
+      "path": "review-fixtures.json",
+      "sha256": "feb689c7d590e6802bfd4fc6641ccc22ccbcb1fd6612bad74cf77675b4bfe1dd"
+    },
+    {
+      "path": "setup-runtime.py",
+      "sha256": "cffed0623161c9b3594fb680379866473fbe02b3246446a13d66feaa5e63f6ad"
+    },
+    {
+      "path": "setup-review-fixtures.mts",
+      "sha256": "999c443a7788cb2d83c508b48ee346fa63828f41af41f123b752ec24b929c7af"
+    },
+    {
+      "path": "runtime/bar-chart.png",
+      "sha256": "08d3f417f85f139a7280e98e9b6c0d403d59094efd1e687a1dd1b452cae5554a"
+    },
+    {
+      "path": "runtime/pipeline-source.csv",
+      "sha256": "542dfd1bdaf0ceb81162f4717d195cb0784e0630e278dde5c72baa5a9f9c1e5c"
+    },
+    {
+      "path": "runtime/approved-contract.json",
+      "sha256": "dfab773fdcc785ef0e12c67be0bcca8cbfe24654b6d67960c3de2ea555890c36"
+    },
+    {
+      "path": "runtime/unapproved-contract.json",
+      "sha256": "b0ef41bbc698b991b413c191e39a82cf92de73829aebbc34110ce468ecbde414"
+    }
+  ]
+}

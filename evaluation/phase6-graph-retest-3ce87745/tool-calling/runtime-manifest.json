@@ -1,0 +1,25 @@
+{
+  "chart": {
+    "path": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase6-graph-retest-3ce87745/tool-calling/runtime/bar-chart.png",
+    "sha256": "08d3f417f85f139a7280e98e9b6c0d403d59094efd1e687a1dd1b452cae5554a"
+  },
+  "commitSha": "92cb4346ac5f0b4edc3eefcdcb81978e570fd220",
+  "gatewayCatalogSha256": "44cacfde64b1f3a7c8f4ea8c91e437cf8bd5a536832032a905a1cfa08b48f49a",
+  "gatewayWarehouse": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase6-graph-retest-3ce87745/tool-calling/runtime/gateway-warehouse",
+  "hashes": {
+    "approvedContract": "32dc0d8dbf79694406a49ce3896b30c39810e5f183bda8afaf775b0b3a32247f",
+    "approvedLedger": "1559efb790778856859ca625f2a44cfcc570a8140748a417725a091b8f699a3a",
+    "source": "542dfd1bdaf0ceb81162f4717d195cb0784e0630e278dde5c72baa5a9f9c1e5c",
+    "unapprovedContract": "4a72234423e25cc62ceaa42c32cb7e623e66ab3fa10e9a7a9e3c1e97f2babc56"
+  },
+  "home": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase6-graph-retest-3ce87745/tool-calling/runtime/home",
+  "pipeline": {
+    "approvedContract": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase6-graph-retest-3ce87745/tool-calling/runtime/approved-contract.json",
+    "approvedGovernanceRoot": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase6-graph-retest-3ce87745/tool-calling/runtime/approved-governance",
+    "pipelineWarehouse": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase6-graph-retest-3ce87745/tool-calling/runtime/pipeline-warehouse",
+    "source": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase6-graph-retest-3ce87745/tool-calling/runtime/pipeline-source.csv",
+    "unapprovedContract": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase6-graph-retest-3ce87745/tool-calling/runtime/unapproved-contract.json",
+    "unapprovedGovernanceRoot": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase6-graph-retest-3ce87745/tool-calling/runtime/unapproved-governance"
+  },
+  "runtimeRoot": "/Users/zhanhuilin/Documents/Analytica/evaluation/phase6-graph-retest-3ce87745/tool-calling/runtime"
+}
